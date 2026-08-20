@@ -1,0 +1,10 @@
+@media(min-width:901px){
+  .workflow-map .gate{grid-column:5;grid-row:3}
+  .workflow-map .automate{grid-column:3;grid-row:3}
+  .workflow-map .verify{grid-column:1;grid-row:3}
+  .workflow-map .to-automate{grid-column:4;grid-row:3}
+  .workflow-map .to-verify{grid-column:2;grid-row:3}
+  .workflow-map .to-finish{grid-column:1/6;grid-row:4;min-height:55px}
+  .workflow-map .finish{grid-column:1/6;grid-row:5}
+  .workflow-map .flow-return{grid-column:1/6;grid-row:6}
+}
