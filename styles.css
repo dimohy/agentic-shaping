@@ -7,6 +7,7 @@
   --green: #1f6e57;
   --lime: #d9f057;
   --white: #fffdf7;
+  --header-height: 70px;
   --mono: "DM Mono", monospace;
   --sans: "Noto Sans KR", sans-serif;
 }
@@ -93,13 +94,39 @@ footer > b {
 }
 .hero {
   max-width: 1180px;
-  min-height: 700px;
+  min-height: calc(100svh - var(--header-height));
   margin: auto;
-  padding: 100px 24px 80px;
+  padding: clamp(62px, 7vh, 88px) 24px 28px;
   display: grid;
   grid-template-columns: 1.1fr 0.9fr;
-  gap: 75px;
+  grid-template-rows: minmax(0, 1fr) auto;
+  column-gap: 75px;
+  row-gap: 24px;
   align-items: center;
+}
+.hero-next {
+  grid-column: 1 / -1;
+  justify-self: center;
+  display: inline-flex;
+  gap: 12px;
+  align-items: center;
+  color: var(--muted);
+  font: 500 10px var(--mono);
+  letter-spacing: 0.08em;
+  text-decoration: none;
+  transition:
+    color 0.2s,
+    transform 0.2s;
+}
+.hero-next span {
+  color: var(--orange);
+}
+.hero-next strong {
+  font-weight: 500;
+}
+.hero-next:hover {
+  color: var(--ink);
+  transform: translateY(3px);
 }
 .eyebrow,
 .no {
@@ -516,6 +543,7 @@ h2 {
   max-width: 1180px;
   margin: 0 auto 90px;
   padding: 0 24px;
+  scroll-margin-top: calc(var(--header-height) + 20px);
 }
 .visual img {
   display: block;
@@ -672,7 +700,14 @@ footer p {
     grid-template-columns: 1fr;
   }
   .hero {
+    min-height: auto;
+    padding-top: 72px;
+    padding-bottom: 56px;
+    grid-template-rows: auto;
     gap: 55px;
+  }
+  .hero-next {
+    margin-top: 4px;
   }
   .steps,
   .memory-ladder,
