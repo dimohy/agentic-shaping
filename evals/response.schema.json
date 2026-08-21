@@ -1,0 +1,17 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["selectedActions", "reason", "completionEvidence"],
+  "properties": {
+    "selectedActions": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "reason": { "type": "string" },
+    "completionEvidence": {
+      "type": "array",
+      "items": { "type": "string" }
+    }
+  }
+}

@@ -1,10 +1,129 @@
-<!doctype html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Agentic Shaping — 스스로 발견하고, 내 방식으로 진화하는 AI 작업법</title><meta name="description" content="AI Agent가 암묵지와 데이터를 능동적으로 발견·정형화하고 쓸수록 내 방식으로 진화하는 Agentic Shaping 실전 가이드"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Noto+Sans+KR:wght@400;500;600;700;800;900&display=swap" rel="stylesheet"><link rel="stylesheet" href="styles.css"></head>
-<body><div class="progress"><span id="progressBar"></span></div><header><nav><a class="brand" href="#top"><b>AS</b> AGENTIC SHAPING</a><div><a href="#start">5분 시작</a><a href="#loop">작동 방식</a><a href="#prompts">프롬프트</a><a href="#examples">예시</a></div><a class="pill" href="#start">지금 시작 →</a></nav></header>
-<main id="top"><section class="hero"><div class="reveal"><p class="eyebrow">PROACTIVE AGENT EVOLUTION</p><h1>Agent가 먼저 발견하고,<br><em>내 방식으로 진화한다.</em></h1><p class="lead"><strong>Agentic Shaping</strong>은 AI Agent가 대화와 작업 속 암묵지·취향·실패·데이터를 기다리지 않고 발견하여 규칙·기억·스키마·템플릿·검증기·도구로 빚고, 다음 실행에서 스스로 먼저 적용하는 작업법입니다.</p><a class="button" href="#start">5분 안에 적용하기</a><p class="micro">코딩만이 아닙니다. 문서 · 분석 · 이미지 · 영상 · 배포까지 같은 방식으로 작동합니다.</p></div><div class="fit reveal"><article><small>SIGNALS</small><b>말투 · 취향 · 교정 · 실패</b><span>말하지 않아도 작업 속에서 능동적으로 감지</span></article><p>스스로 발견하고 구조화한다 ↓</p><article class="agent"><small>AGENT + SYSTEM</small><b>기억 → 규칙 → 도구 → 검증</b><span>다음 실행 전에 먼저 회상하고 적용</span></article><div class="meter"><span>첫 실행</span><i><b></b></i><strong>빠르고 정확한 진화</strong></div></div></section>
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>
+      Agentic Shaping — 스스로 발견하고, 내 방식으로 진화하는 AI 작업법
+    </title>
+    <meta
+      name="description"
+      content="AI Agent가 암묵지와 데이터를 능동적으로 발견·정형화하고 쓸수록 내 방식으로 진화하는 Agentic Shaping 실전 가이드"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Noto+Sans+KR:wght@400;500;600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="progress"><span id="progressBar"></span></div>
+    <header>
+      <nav>
+        <a class="brand" href="#top"><b>AS</b> AGENTIC SHAPING</a>
+        <div>
+          <a href="#start">5분 시작</a><a href="#loop">작동 방식</a
+          ><a href="#prompts">프롬프트</a><a href="#validation">검증</a>
+        </div>
+        <a class="pill" href="#start">지금 시작 →</a>
+      </nav>
+    </header>
+    <main id="top">
+      <section class="hero">
+        <div class="reveal">
+          <p class="eyebrow">PROACTIVE AGENT EVOLUTION</p>
+          <h1>Agent가 먼저 발견하고,<br /><em>내 방식으로 진화한다.</em></h1>
+          <p class="lead">
+            <strong>Agentic Shaping</strong>은 AI Agent가 대화와 작업 속
+            암묵지·취향·실패·데이터를 기다리지 않고 발견하여
+            규칙·기억·스키마·템플릿·검증기·도구로 빚고, 다음 실행에서 스스로
+            먼저 적용하는 작업법입니다.
+          </p>
+          <a class="button" href="#start">5분 안에 적용하기</a>
+          <p class="micro">
+            코딩만이 아닙니다. 문서 · 분석 · 이미지 · 영상 · 배포까지 같은
+            방식으로 작동합니다.
+          </p>
+        </div>
+        <div class="fit reveal">
+          <article>
+            <small>SIGNALS</small><b>말투 · 취향 · 교정 · 실패</b
+            ><span>말하지 않아도 작업 속에서 능동적으로 감지</span>
+          </article>
+          <p>스스로 발견하고 구조화한다 ↓</p>
+          <article class="agent">
+            <small>AGENT + SYSTEM</small><b>기억 → 규칙 → 도구 → 검증</b
+            ><span>다음 실행 전에 먼저 회상하고 적용</span>
+          </article>
+          <div class="meter">
+            <span>첫 실행</span><i><b></b></i
+            ><strong>빠르고 정확한 진화</strong>
+          </div>
+        </div>
+      </section>
 
-<section class="section"><p class="no">01 · WHY</p><div class="split"><h2>좋은 결과를 얻었는데,<br>왜 다음엔 또 처음부터 설명할까요?</h2><div class="prose"><p>AI와 일하다 보면 제법 괜찮은 결과가 나옵니다. 그런데 대화가 끝나면 제가 왜 그 선택을 좋아했는지, 어떤 실패를 싫어했는지, 무엇을 완료라고 보는지도 같이 사라지곤 했습니다.</p><p>그래서 생각을 바꿨습니다. Agent가 결과만 만들게 하지 말고, <strong>작업 속에서 저를 발견하고 다음 작업의 방식까지 스스로 바꾸게 하자.</strong> 이것이 Agentic Shaping의 출발점입니다.</p></div></div><div class="shift"><div><small>PASSIVE AGENT</small><b>요청 → 결과 → 망각</b></div><span>→</span><div><small>SHAPING AGENT</small><b>감지 → 정형화 → 적용 → 진화</b></div></div></section>
+      <figure class="visual hero-visual">
+        <img
+          src="assets/agentic-shaping-hero.jpg"
+          width="1536"
+          height="864"
+          alt="사람의 교정과 작업 흔적을 Agent가 재사용 가능한 카드와 규칙으로 능동적으로 조직하는 장면"
+        />
+        <figcaption>
+          <b>Agentic Shaping은 사람을 기계에 넣는 일이 아닙니다.</b>
+          Agent가 사람 곁에서 신호를 먼저 알아차리고, 다음 작업에 다시 쓰일
+          방식으로 빚는 일입니다.
+          <span>AI-generated visual · 2026</span>
+        </figcaption>
+      </figure>
 
-<section class="section" id="start"><p class="no">02 · START IN 5 MINUTES</p><div class="head"><h2>설명은 여기까지.<br>이 프롬프트부터 붙여 넣으세요.</h2><p>프로젝트 지침에 넣으면 가장 잘 작동합니다. 우선 한 번의 대화에서 시험해도 됩니다.</p></div><div class="prompt featured"><div><span>AGENTIC SHAPING · STARTER PROMPT</span><button data-copy="starter">복사</button></div><pre id="starter">이 작업에는 Agentic Shaping을 적용해줘.
+      <section class="section">
+        <p class="no">01 · WHY</p>
+        <div class="split">
+          <h2>좋은 결과를 얻었는데,<br />왜 다음엔 또 처음부터 설명할까요?</h2>
+          <div class="prose">
+            <p>
+              AI와 일하다 보면 제법 괜찮은 결과가 나옵니다. 그런데 대화가 끝나면
+              제가 왜 그 선택을 좋아했는지, 어떤 실패를 싫어했는지, 무엇을
+              완료라고 보는지도 같이 사라지곤 했습니다.
+            </p>
+            <p>
+              그래서 생각을 바꿨습니다. Agent가 결과만 만들게 하지 말고,
+              <strong
+                >작업 속에서 저를 발견하고 다음 작업의 방식까지 스스로 바꾸게
+                하자.</strong
+              >
+              이것이 Agentic Shaping의 출발점입니다.
+            </p>
+          </div>
+        </div>
+        <div class="shift">
+          <div><small>PASSIVE AGENT</small><b>요청 → 결과 → 망각</b></div>
+          <span>→</span>
+          <div>
+            <small>SHAPING AGENT</small><b>감지 → 정형화 → 적용 → 진화</b>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="start">
+        <p class="no">02 · START IN 5 MINUTES</p>
+        <div class="head">
+          <h2>설명은 여기까지.<br />이 프롬프트부터 붙여 넣으세요.</h2>
+          <p>
+            프로젝트 지침에 넣으면 가장 잘 작동합니다. 우선 한 번의 대화에서
+            시험해도 됩니다.
+          </p>
+        </div>
+        <div class="prompt featured">
+          <div>
+            <span>AGENTIC SHAPING · STARTER PROMPT</span
+            ><button type="button" data-copy="starter">복사</button>
+          </div>
+          <pre id="starter">
+이 작업에는 Agentic Shaping을 적용해줘.
 
 1. 시작 전에 관련된 내 과거 결정, 선호, 프로젝트 규칙을 먼저 찾아 실제 계획에 반영한다.
 2. 작업 중 내가 반복해서 설명한 것, 수정한 것, 싫어한 결과, 성공 조건, 자주 생기는 실패를 조용히 포착한다.
@@ -17,18 +136,310 @@
 5. 실제 파일·화면·런타임·배포 결과로 검증하고, 검증된 새 경로가 있으면 중복·임시·우회 경로를 정리한다.
 6. 완료할 때 이번 결과와 함께 다음 작업을 더 빠르고 정확하게 만들 재사용 자산이 무엇인지 알려준다.
 
-현재 요청과 권한을 넓히지는 말고, 저장할 가치가 없는 일회성 정보나 민감 정보는 남기지 마.</pre></div><div class="steps"><article><b>1</b><strong>붙여 넣기</strong><p>프롬프트 뒤에 평소처럼 오늘 할 일을 적습니다.</p></article><article><b>2</b><strong>한 번 교정하기</strong><p>“아니, 내가 원하는 건…”이라고 정확히 고쳐 말합니다.</p></article><article><b>3</b><strong>남은 자산 확인</strong><p>규칙·템플릿·테스트·기억 중 무엇이 남았는지 봅니다.</p></article><article><b>4</b><strong>다음 작업에서 확인</strong><p>같은 설명이 줄고 품질이 유지되는지 확인합니다.</p></article></div></section>
+현재 요청과 권한을 넓히지는 말고, 저장할 가치가 없는 일회성 정보나 민감 정보는 남기지 마.</pre
+          >
+        </div>
+        <div class="steps">
+          <article>
+            <b>1</b><strong>붙여 넣기</strong>
+            <p>프롬프트 뒤에 평소처럼 오늘 할 일을 적습니다.</p>
+          </article>
+          <article>
+            <b>2</b><strong>한 번 교정하기</strong>
+            <p>“아니, 내가 원하는 건…”이라고 정확히 고쳐 말합니다.</p>
+          </article>
+          <article>
+            <b>3</b><strong>남은 자산 확인</strong>
+            <p>규칙·템플릿·테스트·기억 중 무엇이 남았는지 봅니다.</p>
+          </article>
+          <article>
+            <b>4</b><strong>다음 작업에서 확인</strong>
+            <p>같은 설명이 줄고 품질이 유지되는지 확인합니다.</p>
+          </article>
+        </div>
+      </section>
 
-<section class="section" id="loop"><p class="no">03 · HOW IT WORKS</p><div class="head"><h2>결과뿐 아니라,<br>다음 결과를 만드는 방식도 다듬습니다.</h2><p>핵심은 피드백이 자산으로 돌아오는 닫힌 순환입니다.</p></div><div class="loop reveal"><article><small>01</small><b>감지</b><span>반복 설명·교정·실패</span></article><i>→</i><article><small>02</small><b>포착</b><span>원인·원한 방향·범위</span></article><i>→</i><article><small>03</small><b>정형화</b><span>기억·규칙·스키마</span></article><i>→</i><article><small>04</small><b>적용</b><span>권위 있는 경로에 통합</span></article><i>→</i><article><small>05</small><b>검증·정리</b><span>실제 증거·중복 제거</span></article><p>새 교정과 결과가 다시 첫 단계로 돌아갑니다 ↺</p></div><div class="boundary"><article><small>AGENT가 계속 맡을 것</small><b>의미 · 맥락 · 모호성 · 창의성</b><p>“왜 이게 좋은가?”처럼 해석이 필요한 판단</p></article><article><small>시스템으로 내릴 것</small><b>반복 · 형식 · 불변식 · 실행 순서</b><p>“이 조건이면 실패다”처럼 판정 가능한 판단</p></article></div></section>
+      <section class="section" id="loop">
+        <p class="no">03 · HOW IT WORKS</p>
+        <div class="head">
+          <h2>결과뿐 아니라,<br />다음 결과를 만드는 방식도 다듬습니다.</h2>
+          <p>핵심은 피드백이 자산으로 돌아오는 닫힌 순환입니다.</p>
+        </div>
+        <figure class="visual inline-visual">
+          <img
+            src="assets/agentic-shaping-loop.jpg"
+            width="1536"
+            height="864"
+            alt="사람의 신호가 구조화 자산과 실제 검증을 거쳐 다음 작업으로 돌아오는 순환"
+          />
+          <figcaption>
+            <b>신호가 한 바퀴 돌아 다음 실행의 기본값이 됩니다.</b>
+            그림 속 흐름의 정확한 단계는 아래 실행 가능한 구조로 고정합니다.
+          </figcaption>
+        </figure>
+        <div class="loop reveal">
+          <article>
+            <small>01</small><b>감지</b><span>반복 설명·교정·실패</span>
+          </article>
+          <i>→</i>
+          <article>
+            <small>02</small><b>포착</b><span>원인·원한 방향·범위</span>
+          </article>
+          <i>→</i>
+          <article>
+            <small>03</small><b>정형화</b><span>기억·규칙·스키마</span>
+          </article>
+          <i>→</i>
+          <article>
+            <small>04</small><b>적용</b><span>권위 있는 경로에 통합</span>
+          </article>
+          <i>→</i>
+          <article>
+            <small>05</small><b>검증·정리</b><span>실제 증거·중복 제거</span>
+          </article>
+          <p>새 교정과 결과가 다시 첫 단계로 돌아갑니다 ↺</p>
+        </div>
+        <div class="boundary">
+          <article>
+            <small>AGENT가 계속 맡을 것</small
+            ><b>의미 · 맥락 · 모호성 · 창의성</b>
+            <p>“왜 이게 좋은가?”처럼 해석이 필요한 판단</p>
+          </article>
+          <article>
+            <small>시스템으로 내릴 것</small
+            ><b>반복 · 형식 · 불변식 · 실행 순서</b>
+            <p>“이 조건이면 실패다”처럼 판정 가능한 판단</p>
+          </article>
+        </div>
+      </section>
 
-<section class="section"><p class="no">04 · WHERE TASTE LIVES</p><div class="head"><h2>‘내 스타일’은 말이 아니라<br>찾아 쓸 수 있는 자산에 삽니다.</h2><p>다음 Agent가 작업 전에 찾을 수 있는 권위 위치 하나를 정합니다.</p></div><div class="assets reveal"><div><small>작업 속 신호</small><span>“이 말투는 너무 보고서 같아”</span><span>“배포 성공이 아니라 실제 URL을 봐”</span><span>“이 오류는 다음엔 더 일찍 잡아”</span></div><b>TAILOR →</b><div class="boxes"><span><b>memory/</b> 선호·판단</span><span><b>rules/</b> 지침·루브릭</span><span><b>schemas/</b> 타입·계약</span><span><b>tests/</b> 실패·fixture</span><span><b>tools/</b> 명령·검증기</span></div></div></section>
+      <section class="section">
+        <p class="no">04 · WHERE TASTE LIVES</p>
+        <div class="head">
+          <h2>‘내 스타일’은 말이 아니라<br />찾아 쓸 수 있는 자산에 삽니다.</h2>
+          <p>다음 Agent가 작업 전에 찾을 수 있는 권위 위치 하나를 정합니다.</p>
+        </div>
+        <figure class="visual inline-visual">
+          <img
+            src="assets/agentic-shaping-system.jpg"
+            width="1536"
+            height="864"
+            alt="흩어진 암묵지가 능동적 패턴 감지를 거쳐 살아 있는 작업 시스템으로 정돈되는 장면"
+          />
+          <figcaption>
+            <b>왼쪽의 암묵지가 오른쪽의 살아 있는 시스템이 됩니다.</b>
+            가운데의 Agent는 결과만 만드는 대신 반복될 판단을 찾아 다음 실행
+            경로에 연결합니다.
+          </figcaption>
+        </figure>
+        <div class="assets reveal">
+          <div>
+            <small>작업 속 신호</small><span>“이 말투는 너무 보고서 같아”</span
+            ><span>“배포 성공이 아니라 실제 URL을 봐”</span
+            ><span>“이 오류는 다음엔 더 일찍 잡아”</span>
+          </div>
+          <b>SHAPE →</b>
+          <div class="boxes">
+            <span><b>memory/</b> 선호·판단</span
+            ><span><b>rules/</b> 지침·루브릭</span
+            ><span><b>schemas/</b> 타입·계약</span
+            ><span><b>tests/</b> 실패·fixture</span
+            ><span><b>tools/</b> 명령·검증기</span>
+          </div>
+        </div>
+      </section>
 
-<section class="section" id="prompts"><p class="no">05 · COPY & RUN</p><div class="head"><h2>막힌 지점에서<br>하나 골라 바로 씁니다.</h2><p>처음부터 거대한 시스템을 만들 필요는 없습니다.</p></div><div class="prompt-grid"><div class="prompt"><div><span>작업 시작</span><button data-copy="work">복사</button></div><pre id="work">이 작업을 완료해줘. 시작 전에 관련 기억과 프로젝트 규칙을 스스로 찾아 성공 조건과 실제 검증 방법을 잡아줘. 작업 속 반복 판단·교정·실패를 능동적으로 감지하면 Agentic Shaping 후보로 포착하고, 현재 범위 안에서 재사용 가능한 규칙·스키마·템플릿·테스트·도구로 승격해줘. 다음 실행에서는 그 자산을 먼저 적용하고, 무엇 때문에 더 빠르고 정확해졌는지도 보고해줘.</pre></div><div class="prompt"><div><span>문제 재발</span><button data-copy="repair">복사</button></div><pre id="repair">이 문제를 증상만 고치지 말고 Agentic Shaping 관점에서 진단해줘. 왜 Agent가 미리 발견하지 못하고 수동 판단이나 늦은 단계까지 남았는지 찾고, 다음부터 타입·스키마·불변식·조기 검증기·회귀 테스트 중 무엇이 먼저 발견하게 할지 구현해줘. 실제 검증 후 중복 fallback과 임시 경로도 정리해줘.</pre></div><div class="prompt"><div><span>작업 후 회고</span><button data-copy="retro">복사</button></div><pre id="retro">방금 작업을 Agentic Shaping 관점에서 회고해줘. ① 스스로 감지했어야 할 내 취향·판단 기준 ② 반복한 수동 판단 ③ 늦게 발견된 실패 ④ 이미 만든 재사용 자산 ⑤ 다음 정형화 후보를 구분해줘. 장기 가치가 있는 것만 적용 범위와 근거를 갖춰 권위 위치에 반영하고 다음 작업 전에 먼저 회상해줘.</pre></div></div></section>
+      <section class="section" id="prompts">
+        <p class="no">05 · COPY &amp; RUN</p>
+        <div class="head">
+          <h2>막힌 지점에서<br />하나 골라 바로 씁니다.</h2>
+          <p>처음부터 거대한 시스템을 만들 필요는 없습니다.</p>
+        </div>
+        <div class="prompt-grid">
+          <div class="prompt">
+            <div>
+              <span>작업 시작</span
+              ><button type="button" data-copy="work">복사</button>
+            </div>
+            <pre id="work">
+이 작업을 완료해줘. 시작 전에 관련 기억과 프로젝트 규칙을 스스로 찾아 성공 조건과 실제 검증 방법을 잡아줘. 작업 속 반복 판단·교정·실패를 능동적으로 감지하면 Agentic Shaping 후보로 포착하고, 현재 범위 안에서 재사용 가능한 규칙·스키마·템플릿·테스트·도구로 승격해줘. 다음 실행에서는 그 자산을 먼저 적용하고, 무엇 때문에 더 빠르고 정확해졌는지도 보고해줘.</pre
+            >
+          </div>
+          <div class="prompt">
+            <div>
+              <span>문제 재발</span
+              ><button type="button" data-copy="repair">복사</button>
+            </div>
+            <pre id="repair">
+이 문제를 증상만 고치지 말고 Agentic Shaping 관점에서 진단해줘. 왜 Agent가 미리 발견하지 못하고 수동 판단이나 늦은 단계까지 남았는지 찾고, 다음부터 타입·스키마·불변식·조기 검증기·회귀 테스트 중 무엇이 먼저 발견하게 할지 구현해줘. 실제 검증 후 중복 fallback과 임시 경로도 정리해줘.</pre
+            >
+          </div>
+          <div class="prompt">
+            <div>
+              <span>작업 후 회고</span
+              ><button type="button" data-copy="retro">복사</button>
+            </div>
+            <pre id="retro">
+방금 작업을 Agentic Shaping 관점에서 회고해줘. ① 스스로 감지했어야 할 내 취향·판단 기준 ② 반복한 수동 판단 ③ 늦게 발견된 실패 ④ 이미 만든 재사용 자산 ⑤ 다음 정형화 후보를 구분해줘. 장기 가치가 있는 것만 적용 범위와 근거를 갖춰 권위 위치에 반영하고 다음 작업 전에 먼저 회상해줘.</pre
+            >
+          </div>
+        </div>
+      </section>
 
-<section class="section" id="examples"><p class="no">06 · REAL EXAMPLES</p><h2>한 번의 교정이<br>다음 실행의 기본값이 됩니다.</h2><div class="examples"><article><small>DOCUMENT</small><p><b>“개념 설명 말고, 복사할 프롬프트와 시작 순서를 먼저 줘.”</b><br>→ 5분 시작 → 복사 프롬프트 → 입출력 → 사례 → 개념 순서가 문서 규칙으로 남습니다.</p></article><article><small>CODE</small><p><b>“Agent가 또 같은 버전 차이를 손으로 찾았어.”</b><br>→ 버전 매니페스트 + 호환성 검사 + 진단 + 회귀 테스트가 다음 업데이트 전에 잡습니다.</p></article><article><small>ANALYSIS</small><p><b>“결론은 맞는데 판단 경로를 재현할 수 없어.”</b><br>→ 입력 스키마 + 판단 루브릭 + 근거 + 계산 fixture가 결론의 경로까지 남깁니다.</p></article><article><small>MEDIA</small><p><b>“내 문체와 화면 스타일이 또 사라졌어.”</b><br>→ 스타일 기억 + 좋은/나쁜 예시 + 렌더링 체크가 생성 전에 적용됩니다.</p></article></div></section>
+      <section class="section" id="examples">
+        <p class="no">06 · REAL EXAMPLES</p>
+        <h2>한 번의 교정이<br />다음 실행의 기본값이 됩니다.</h2>
+        <div class="examples">
+          <article>
+            <small>DOCUMENT</small>
+            <p>
+              <b>“개념 설명 말고, 복사할 프롬프트와 시작 순서를 먼저 줘.”</b
+              ><br />→ 5분 시작 → 복사 프롬프트 → 입출력 → 사례 → 개념 순서가
+              문서 규칙으로 남습니다.
+            </p>
+          </article>
+          <article>
+            <small>CODE</small>
+            <p>
+              <b>“Agent가 또 같은 버전 차이를 손으로 찾았어.”</b><br />→ 버전
+              매니페스트 + 호환성 검사 + 진단 + 회귀 테스트가 다음 업데이트 전에
+              잡습니다.
+            </p>
+          </article>
+          <article>
+            <small>ANALYSIS</small>
+            <p>
+              <b>“결론은 맞는데 판단 경로를 재현할 수 없어.”</b><br />→ 입력
+              스키마 + 판단 루브릭 + 근거 + 계산 fixture가 결론의 경로까지
+              남깁니다.
+            </p>
+          </article>
+          <article>
+            <small>MEDIA</small>
+            <p>
+              <b>“내 문체와 화면 스타일이 또 사라졌어.”</b><br />→ 스타일 기억 +
+              좋은/나쁜 예시 + 렌더링 체크가 생성 전에 적용됩니다.
+            </p>
+          </article>
+        </div>
+      </section>
 
-<section class="score"><div><p class="no">07 · MEASURE</p><h2>“진화하고 있다”는 말은<br>다음 실행에서 증명합니다.</h2></div><div><p>재설명 <b>↓</b></p><p>수동 판단 <b>↓</b></p><p>늦은 실패와 재시도 <b>↓</b></p><p>시간과 비용 <b>↓</b></p><p>의도 적중률과 재현성 <b>↑</b></p></div></section>
+      <section class="score">
+        <div>
+          <p class="no">07 · MEASURE</p>
+          <h2>“진화하고 있다”는 말은<br />다음 실행에서 증명합니다.</h2>
+        </div>
+        <div>
+          <p>재설명 <b>↓</b></p>
+          <p>수동 판단 <b>↓</b></p>
+          <p>늦은 실패와 재시도 <b>↓</b></p>
+          <p>시간과 비용 <b>↓</b></p>
+          <p>의도 적중률과 재현성 <b>↑</b></p>
+        </div>
+      </section>
 
-<section class="section"><p class="no">08 · ORIGIN & DIFFERENCE</p><div class="split"><h2>Compound Engineering에서<br>이름만 바꾼 것은 아닙니다.</h2><div class="prose"><p>Compound Engineering의 “한 작업이 다음 작업을 더 쉽게 만든다”는 실행 구조는 좋은 참고가 됐습니다. 특히 계획·작업·검토·축적을 명령과 파일로 드러낸 방식은 이 가이드를 다시 만드는 데 직접 참고했습니다.</p><p>Agentic Shaping의 출발점은 사람과 Agent 사이에서 생기는 <strong>암묵지와 교정</strong>입니다. Agent는 지시를 기다리는 도구에 머물지 않고 작업 속 신호를 먼저 발견하여, 코딩·문서·분석·미디어 전반에서 다시 쓸 수 있는 구조로 바꾸고 다음 실행 자체를 개선합니다.</p><p class="note">Vibe Compiler는 정형화 수단이 목적처럼 보였고, Vibe Tailoring은 맞춤 결과만 강조해 Agent의 주체성이 약했습니다. Agentic Shaping은 스스로 행동하는 주체와 계속 빚어지는 시스템을 이름에 함께 둡니다.</p></div></div></section>
+      <section class="section validation" id="validation">
+        <p class="no">08 · BEHAVIORAL VALIDATION</p>
+        <div class="head">
+          <h2>정말 발동하느냐고요?<br />같은 과제로 비교했습니다.</h2>
+          <p>
+            프롬프트 문구가 존재하는지는 점수가 아닙니다. 독립된 Codex 실행에
+            정확한 공개 프롬프트를 넣었을 때 실제 선택과 파일 결과가 어떻게
+            달라지는지 채점했습니다.
+          </p>
+        </div>
+        <div class="eval-grid">
+          <article>
+            <small>ACTION SELECTION · 5 PAIRED SCENARIOS</small>
+            <strong>85% <i>→</i> 100%</strong>
+            <p>
+              문서 교정·버전 드리프트·분석 재현성·권위 문서·민감정보를 기본군과
+              적용군에 똑같이 제시했습니다. 적용군은 기대 행동 100%, 금지 행동
+              0건이었습니다.
+            </p>
+          </article>
+          <article>
+            <small>REAL FILE EXECUTION · 6 CHECKS</small>
+            <strong>83% <i>→</i> 100%</strong>
+            <p>
+              깨진 버전 선택 저장소를 실제로 수정하게 했습니다. 적용군만 세
+              실행기 성공, 정확 일치, 미지원 버전 조기 실패, 하드코딩 제거, 회귀
+              테스트를 모두 통과했습니다.
+            </p>
+          </article>
+        </div>
+        <div class="evidence">
+          <div>
+            <b>검증 원칙</b>
+            <p>
+              임시 CODEX_HOME · 사용자 설정 미사용 · 독립 작업공간 · 동일 과제 ·
+              구조화 출력 · 결정론적 채점
+            </p>
+          </div>
+          <div>
+            <b>실행 환경</b>
+            <p>Codex CLI 0.148.0-alpha.21 · gpt-5.6-sol · 2026-08-21</p>
+          </div>
+          <div>
+            <b>직접 재현</b>
+            <p>
+              <a href="evals/README.md">실행 방법</a> ·
+              <a href="evals/latest-results.json">행동 결과</a> ·
+              <a href="evals/latest-execution-results.json">파일 실행 결과</a>
+            </p>
+          </div>
+        </div>
+        <p class="note">
+          <b>검증 결론:</b> 이 공개 프롬프트는 시험한 Codex 환경에서 에이전틱
+          셰이핑 행동을 일관되게 발동했고, 기본군보다 누락을 줄였습니다. 다만
+          모든 모델·도구·권한 환경을 보장하는 마법 주문은 아닙니다. 그래서 공개
+          평가 자산을 남겨 프롬프트가 바뀔 때마다 같은 게이트를 다시 통과하게
+          합니다.
+        </p>
+      </section>
 
-<section class="cta"><p>오늘은 딱 하나만 해보세요.</p><h2>반복해서 설명한 한 문장을<br>Agent가 먼저 발견하고 적용할 규칙으로 남기기.</h2><a class="button" href="#start">시작 프롬프트 복사하러 가기 ↑</a></section></main><footer><b>AS</b><strong>AGENTIC SHAPING</strong><p>Agent가 먼저 발견하고, 내 방식으로 진화합니다.</p><a href="https://github.com/dimohy/vibe-compiler">GitHub ↗</a></footer><div id="toast">프롬프트를 복사했습니다.</div><script src="script.js"></script></body></html>
+      <section class="section">
+        <p class="no">09 · ORIGIN &amp; DIFFERENCE</p>
+        <div class="split">
+          <h2>Compound Engineering에서<br />이름만 바꾼 것은 아닙니다.</h2>
+          <div class="prose">
+            <p>
+              Compound Engineering의 “한 작업이 다음 작업을 더 쉽게 만든다”는
+              실행 구조는 좋은 참고가 됐습니다. 특히 계획·작업·검토·축적을
+              명령과 파일로 드러낸 방식은 이 가이드를 다시 만드는 데 직접
+              참고했습니다.
+            </p>
+            <p>
+              Agentic Shaping의 출발점은 사람과 Agent 사이에서 생기는
+              <strong>암묵지와 교정</strong>입니다. Agent는 지시를 기다리는
+              도구에 머물지 않고 작업 속 신호를 먼저 발견하여,
+              코딩·문서·분석·미디어 전반에서 다시 쓸 수 있는 구조로 바꾸고 다음
+              실행 자체를 개선합니다.
+            </p>
+            <p class="note">
+              Vibe Compiler는 정형화 수단이 목적처럼 보였고, Vibe Tailoring은
+              맞춤 결과만 강조해 Agent의 주체성이 약했습니다. Agentic Shaping은
+              스스로 행동하는 주체와 계속 빚어지는 시스템을 이름에 함께 둡니다.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section class="cta">
+        <p>오늘은 딱 하나만 해보세요.</p>
+        <h2>
+          반복해서 설명한 한 문장을<br />Agent가 먼저 발견하고 적용할 규칙으로
+          남기기.
+        </h2>
+        <a class="button" href="#start">시작 프롬프트 복사하러 가기 ↑</a>
+      </section>
+    </main>
+    <footer>
+      <b>AS</b><strong>AGENTIC SHAPING</strong>
+      <p>Agent가 먼저 발견하고, 내 방식으로 진화합니다.</p>
+      <a href="https://github.com/dimohy/vibe-compiler">GitHub ↗</a>
+    </footer>
+    <div id="toast">프롬프트를 복사했습니다.</div>
+    <script src="script.js"></script>
+  </body>
+</html>
