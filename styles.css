@@ -398,6 +398,56 @@ h2 {
   font: 500 11px var(--mono);
   color: var(--orange);
 }
+.memory-ladder {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  border: 1px solid var(--line);
+}
+.memory-ladder article {
+  min-height: 285px;
+  padding: 30px;
+  border-right: 1px solid var(--line);
+  display: flex;
+  flex-direction: column;
+}
+.memory-ladder article:last-child {
+  border-right: 0;
+}
+.memory-ladder small {
+  font: 500 10px var(--mono);
+  color: var(--orange);
+}
+.memory-ladder strong {
+  margin: 12px 0 18px;
+  font-size: 23px;
+}
+.memory-ladder p {
+  margin: 0;
+  color: var(--muted);
+}
+.memory-ladder .featured-memory {
+  background: var(--ink);
+  color: white;
+}
+.memory-ladder .featured-memory small {
+  color: var(--lime);
+}
+.memory-ladder .featured-memory p {
+  color: #d7dfda;
+}
+.memory-ladder a {
+  width: fit-content;
+  margin-top: auto;
+  padding-top: 24px;
+  color: var(--lime);
+  font-weight: 800;
+  text-decoration: none;
+}
+.memory-note {
+  margin: 22px 0 0;
+  color: var(--muted);
+  text-align: center;
+}
 .boxes {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -625,6 +675,7 @@ footer p {
     gap: 55px;
   }
   .steps,
+  .memory-ladder,
   .prompt-grid,
   .evidence {
     grid-template-columns: 1fr;
@@ -636,6 +687,14 @@ footer p {
   .steps article {
     border-right: 0;
     border-bottom: 1px solid var(--line);
+  }
+  .memory-ladder article {
+    min-height: auto;
+    border-right: 0;
+    border-bottom: 1px solid var(--line);
+  }
+  .memory-ladder article:last-child {
+    border-bottom: 0;
   }
   .loop {
     grid-template-columns: 1fr;
