@@ -94,7 +94,8 @@ footer > b {
 }
 .hero {
   max-width: 1180px;
-  min-height: calc(100svh - var(--header-height));
+  min-height: calc(100vh - var(--header-height));
+  min-height: calc(100dvh - var(--header-height));
   margin: auto;
   padding: clamp(62px, 7vh, 88px) 24px 28px;
   display: grid;
