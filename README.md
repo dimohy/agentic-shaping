@@ -1,14 +1,7 @@
-# Vibe Compiler
+# Agentic Shaping
 
-비정형 의도와 반복 판단을 타입, 스키마, 검증기, 테스트, 결정론적 파이프라인으로 컴파일하는 엔지니어링 기법을 설명하는 공개 가이드입니다.
+AI Agent가 작업 속 암묵지와 데이터를 기다리지 않고 발견·정형화하며, 다음 실행에 먼저 적용해 사용자의 방식으로 더 빠르고 정확하게 진화하는 작업법의 실전 가이드입니다.
 
-- Guide: https://vibe-compiler.slogs.dev
-- Author: [dimohy](https://github.com/dimohy)
-
-## Principle
-
-> AI Agent가 발견하되, 다음부터는 컴파일러가 발견하게 한다.
-
-`Explore → Capture → Structure → Automate → Integrate → Simplify → Optimize`
-
-이 저장소는 별도 빌드 단계가 없는 정적 GitHub Pages 사이트입니다.
+- Live: https://vibe-compiler.slogs.dev/
+- 5분 시작, 복사 가능한 프롬프트, 작동 루프, 자산 지도, 사례를 포함합니다.
+- 공개 링크 연속성을 위해 기존 저장소와 도메인을 유지합니다.
