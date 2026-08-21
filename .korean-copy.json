@@ -1,4 +1,4 @@
 {
-  "files": ["index.html"],
+  "files": ["index.html", "README.md"],
   "additionalForbiddenPhrases": []
 }
