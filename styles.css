@@ -23,6 +23,11 @@ body {
   font-family: var(--sans);
   line-height: 1.7;
 }
+html[lang="ko"] body {
+  /* Keep Korean words intact; wrap only at whitespace or explicit breaks. */
+  word-break: keep-all;
+  overflow-wrap: normal;
+}
 a {
   color: inherit;
 }
