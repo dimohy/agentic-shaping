@@ -8,7 +8,7 @@
     </title>
     <meta
       name="description"
-      content="AI Agent가 암묵지와 데이터를 능동적으로 발견·정형화하고 쓸수록 내 방식으로 진화하는 Agentic Shaping 실전 가이드"
+      content="AI Agent가 암묵지와 데이터를 능동적으로 발견·정형화하고, 커지는 문서와 소스코드를 분석 도구로 다루며 내 방식으로 진화하는 Agentic Shaping 실전 가이드"
     />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -16,7 +16,7 @@
       href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Noto+Sans+KR:wght@400;500;600;700;800;900&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="styles.css?v=20260821.1" />
+    <link rel="stylesheet" href="styles.css?v=20260825.1" />
   </head>
   <body>
     <div class="progress"><span id="progressBar"></span></div>
@@ -25,7 +25,7 @@
         <a class="brand" href="#top"><b>AS</b> AGENTIC SHAPING</a>
         <div>
           <a href="#start">5분 시작</a><a href="#loop">작동 방식</a
-          ><a href="#memory">기억</a><a href="#prompts">프롬프트</a
+          ><a href="#scale">분석 확장</a><a href="#memory">기억</a><a href="#prompts">프롬프트</a
           ><a href="#validation">검증</a>
         </div>
         <a class="pill" href="#start">지금 시작 →</a>
@@ -133,9 +133,10 @@
    - 반복 입력·데이터 → 스키마, 타입, enum, 매니페스트
    - 반복 작업 → 템플릿, 명령, 스크립트, API, 파이프라인
    - 반복 실패 → 불변식, 조기 검증기, 테스트 fixture
-4. 의미·모호성·창의성은 Agent가 판단하되, 기계적으로 판정 가능한 것은 코드와 계약이 판정하게 한다.
-5. 실제 파일·화면·런타임·배포 결과로 검증하고, 검증된 새 경로가 있으면 중복·임시·우회 경로를 정리한다.
-6. 완료할 때 이번 결과와 함께 다음 작업을 더 빠르고 정확하게 만들 재사용 자산이 무엇인지 알려준다.
+4. 문서·소스코드·로그가 커져 전체를 반복해서 읽거나 같은 탐색을 되풀이하게 되면, 원문을 권위로 보존한 채 기존 검색·파서·컴파일러·테스트를 먼저 활용하고 부족한 분석을 인벤토리·인덱스·심볼/의존 그래프·질의·검증기로 정형화한다. 분석 결과는 원문 위치와 버전/해시에 추적 가능하고 변경 시 갱신되게 하며, Agent에는 현재 과업에 필요한 작은 근거 묶음만 제공한다.
+5. 의미·모호성·창의성은 Agent가 판단하되, 기계적으로 판정 가능한 것은 코드와 계약이 판정하게 한다.
+6. 실제 파일·화면·런타임·배포 결과로 검증하고, 검증된 새 경로가 있으면 중복·임시·우회 경로를 정리한다.
+7. 완료할 때 이번 결과와 함께 다음 작업을 더 빠르고 정확하게 만들 재사용 자산이 무엇인지 알려준다.
 
 현재 요청과 권한을 넓히지는 말고, 저장할 가치가 없는 일회성 정보나 민감 정보는 남기지 마.</pre>
         </div>
@@ -213,8 +214,69 @@
         </div>
       </section>
 
+      <section class="section" id="scale">
+        <p class="no">04 · CONTEXT-SCALABLE ANALYSIS</p>
+        <div class="head">
+          <h2>커질수록 더 많이 읽게 하지 말고,<br />더 정확하게 질의하게 합니다.</h2>
+          <p>
+            Agentic Shaping으로 문서와 바이브 코딩 소스가 쌓이면, 전체 파일을
+            매번 비정형으로 다시 읽는 방식 자체가 다음 병목이 됩니다. 느려진 탐색,
+            반복되는 전체 스캔, 잘린 출력, 놓친 의존 관계는 분석 방법을 정형화할
+            신호입니다.
+          </p>
+        </div>
+        <div class="assets reveal">
+          <div>
+            <small>커지는 원문과 분석 부담</small>
+            <span>문서 · 소스코드 · 설정 · 로그</span>
+            <span>반복 전체 스캔 · 긴 도구 출력</span>
+            <span>컨텍스트 오염 · 느린 탐색 · 누락</span>
+          </div>
+          <b>STRUCTURE →</b>
+          <div class="boxes">
+            <span><b>inventory/</b> 파일·문서·소유권</span>
+            <span><b>index/</b> 제목·심볼·참조 위치</span>
+            <span><b>graph/</b> 호출·의존·영향 관계</span>
+            <span><b>queries/</b> 범위·필터·근거 묶음</span>
+            <span><b>gates/</b> 신선도·일관성·회귀</span>
+          </div>
+        </div>
+        <div class="boundary">
+          <article>
+            <small>분석 도구가 보장할 것</small>
+            <b>원문 추적 · 버전/해시 · 변경 시 갱신</b>
+            <p>
+              요약을 새 진실원으로 만들지 않습니다. 각 결과가 어느 원문에서
+              나왔는지 증명하고, 오래된 인덱스는 조용히 사용하지 않고 실패하게
+              합니다.
+            </p>
+          </article>
+          <article>
+            <small>AGENT가 사용할 방식</small>
+            <b>기존 도구 우선 · 작은 근거 묶음 · 의미 판단</b>
+            <p>
+              검색·파서·컴파일러·테스트로 답할 수 있으면 먼저 재사용합니다.
+              부족할 때만 통합 분석기를 만들고, 현재 질문에 필요한 증거만 읽어
+              해석합니다.
+            </p>
+          </article>
+        </div>
+        <p class="memory-note">
+          이 원칙은 긴 컨텍스트에서 관련 정보 활용이 약해질 수 있다는
+          <a href="https://arxiv.org/abs/2307.03172">Lost in the Middle 연구</a>,
+          토큰 효율적인 도구와 선별된 컨텍스트를 권하는
+          <a href="https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents">컨텍스트 엔지니어링 지침</a>,
+          반복 검색이 저장소 수준 코드 생성을 개선한
+          <a href="https://arxiv.org/abs/2303.12570">RepoCoder</a>, 구문 트리를
+          효율적으로 갱신·질의하는
+          <a href="https://tree-sitter.github.io/tree-sitter/">Tree-sitter</a>와
+          같은 근거 위에 있습니다. 핵심은 더 긴 프롬프트가 아니라 더 작은
+          고신호 분석 표면입니다.
+        </p>
+      </section>
+
       <section class="section">
-        <p class="no">04 · WHERE TASTE LIVES</p>
+        <p class="no">05 · WHERE TASTE LIVES</p>
         <div class="head">
           <h2>
             ‘내 스타일’은 말에 머물지 않고,<br />언제든 찾아 쓸 수 있는 자산에
@@ -256,7 +318,7 @@
       </section>
 
       <section class="section" id="memory">
-        <p class="no">05 · MEMORY MAKES IT STRONGER</p>
+        <p class="no">06 · MEMORY MAKES IT STRONGER</p>
         <div class="head">
           <h2>기억이 이어질수록,<br />Agentic Shaping은 더 잘 작동합니다.</h2>
           <p>
@@ -303,7 +365,7 @@
       </section>
 
       <section class="section" id="prompts">
-        <p class="no">06 · COPY &amp; RUN</p>
+        <p class="no">07 · COPY &amp; RUN</p>
         <div class="head">
           <h2>막힌 지점에서<br />하나 골라 바로 씁니다.</h2>
           <p>처음부터 거대한 시스템을 만들 필요는 없습니다.</p>
@@ -337,7 +399,7 @@
       </section>
 
       <section class="section" id="examples">
-        <p class="no">07 · REAL EXAMPLES</p>
+        <p class="no">08 · REAL EXAMPLES</p>
         <h2>한 번의 교정이<br />다음 실행의 기본값이 됩니다.</h2>
         <div class="examples">
           <article>
@@ -365,6 +427,14 @@
             </p>
           </article>
           <article>
+            <small>SCALE</small>
+            <p>
+              <b>“저장소가 커질수록 Agent가 매번 전부 읽고 더 느려져.”</b><br />→
+              원문 위치·버전이 추적되는 인벤토리 + 심볼/의존 그래프 + 범위 질의가
+              필요한 근거만 작은 묶음으로 제공합니다.
+            </p>
+          </article>
+          <article>
             <small>MEDIA</small>
             <p>
               <b>“내 문체와 화면 스타일이 또 사라졌어.”</b><br />→ 스타일 기억 +
@@ -376,7 +446,7 @@
 
       <section class="score">
         <div>
-          <p class="no">08 · MEASURE</p>
+          <p class="no">09 · MEASURE</p>
           <h2>“진화하고 있다”는 말은<br />다음 실행에서 증명합니다.</h2>
         </div>
         <div>
@@ -384,12 +454,13 @@
           <p>수동 판단 <b>↓</b></p>
           <p>늦은 실패와 재시도 <b>↓</b></p>
           <p>시간과 비용 <b>↓</b></p>
+          <p>전체 재분석과 컨텍스트 사용량 <b>↓</b></p>
           <p>의도 적중률과 재현성 <b>↑</b></p>
         </div>
       </section>
 
       <section class="section validation" id="validation">
-        <p class="no">09 · BEHAVIORAL VALIDATION</p>
+        <p class="no">10 · BEHAVIORAL VALIDATION</p>
         <div class="head">
           <h2>정말 발동하느냐고요?<br />같은 과제로 비교했습니다.</h2>
           <p>
@@ -400,21 +471,22 @@
         </div>
         <div class="eval-grid">
           <article>
-            <small>ACTION SELECTION · 5 PAIRED SCENARIOS</small>
-            <strong>85% <i>→</i> 100%</strong>
+            <small>ACTION SELECTION · 6 PAIRED SCENARIOS</small>
+            <strong>88% <i>→</i> 100%</strong>
             <p>
-              문서 교정·버전 드리프트·분석 재현성·권위 문서·민감정보를 기본군과
-              적용군에 똑같이 제시했습니다. 적용군은 기대 행동 100%, 금지 행동
-              0건이었습니다.
+              문서 교정·버전 드리프트·분석 재현성·분석 규모 증가·권위 문서·민감정보를
+              기본군과 적용군에 똑같이 제시했습니다. 적용군은 기대 행동 100%,
+              금지 행동 0건이었습니다.
             </p>
           </article>
           <article>
             <small>REAL FILE EXECUTION · 6 CHECKS</small>
-            <strong>83% <i>→</i> 100%</strong>
+            <strong>100% <i>↔</i> 100%</strong>
             <p>
-              깨진 버전 선택 저장소를 실제로 수정하게 했습니다. 적용군만 세
-              실행기 성공, 정확 일치, 미지원 버전 조기 실패, 하드코딩 제거, 회귀
-              테스트를 모두 통과했습니다.
+              깨진 버전 선택 저장소를 실제로 수정하게 했습니다. 이번 실행에서는
+              두 조건 모두 세 실행기 성공, 정확 일치, 미지원 버전 조기 실패,
+              하드코딩 제거, 회귀 테스트를 통과해 파일 회귀가 없음을 확인했습니다.
+              이 실행만으로 적용 프롬프트의 우위를 주장하지 않습니다.
             </p>
           </article>
         </div>
@@ -428,7 +500,7 @@
           </div>
           <div>
             <b>실행 환경</b>
-            <p>Codex CLI 0.148.0-alpha.21 · gpt-5.6-sol · 2026-08-21</p>
+            <p>Codex CLI 0.149.0-alpha.4.3 · 격리 실행 · 2026-08-25</p>
           </div>
           <div>
             <b>직접 재현</b>
@@ -449,7 +521,7 @@
       </section>
 
       <section class="section">
-        <p class="no">10 · ORIGIN &amp; DIFFERENCE</p>
+        <p class="no">11 · ORIGIN &amp; DIFFERENCE</p>
         <div class="split">
           <h2>Compound Engineering에서<br />이름만 바꾼 것은 아닙니다.</h2>
           <div class="prose">

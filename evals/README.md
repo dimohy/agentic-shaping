@@ -11,7 +11,7 @@ node .\evals\run-execution-eval.mjs
 ```
 
 The runner extracts `index.html#starter`, creates an isolated temporary Codex
-home, runs the same five scenarios with and without the prompt, validates every
+home, runs the same six scenarios with and without the prompt, validates every
 response against `response.schema.json`, and writes `latest-results.json`.
 
 Passing requires:
@@ -21,7 +21,8 @@ Passing requires:
 - no underperformance against the unshaped baseline.
 
 The scenarios cover correction/style capture, recurring version drift,
-reproducible analysis, canonical authority, and sensitive one-off information.
+reproducible analysis, context-scalable analysis surfaces, canonical authority,
+and sensitive one-off information.
 This is behavioral evidence for the tested Codex CLI/model environment, not a
 claim that every model and tool environment will behave identically.
 

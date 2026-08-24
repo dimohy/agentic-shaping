@@ -33,4 +33,22 @@ if (htmlPrompt !== readmePrompt) {
   );
 }
 
-console.log("README 적용 프롬프트 일치 검사 통과");
+const requiredAnalysisContracts = [
+  "CONTEXT-SCALABLE ANALYSIS",
+  "원문 위치와 버전/해시",
+  "작은 근거 묶음",
+  "오래된 인덱스는 조용히 사용하지 않고 실패",
+];
+for (const contract of requiredAnalysisContracts) {
+  if (!html.includes(contract)) {
+    throw new Error(`index.html에서 분석 확장 계약을 찾지 못했습니다: ${contract}`);
+  }
+}
+
+for (const contract of ["문서와 소스코드가 커지면 분석 방식도 진화합니다", "분석 표면"]) {
+  if (!readme.includes(contract)) {
+    throw new Error(`README.md에서 분석 확장 안내를 찾지 못했습니다: ${contract}`);
+  }
+}
+
+console.log("README 적용 프롬프트 및 분석 확장 계약 검사 통과");
