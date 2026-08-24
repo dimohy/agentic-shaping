@@ -73,6 +73,9 @@ nav a {
   font-weight: 700;
 }
 .brand {
+  display: flex;
+  align-items: center;
+  white-space: nowrap;
   font: 500 13px var(--mono);
 }
 .brand b,
@@ -85,6 +88,19 @@ footer > b {
   border-radius: 50%;
   background: var(--ink);
   color: var(--lime);
+}
+.site-version {
+  display: inline-flex;
+  align-items: center;
+  min-height: 22px;
+  margin-left: 8px;
+  padding: 2px 8px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: #e7e1d5;
+  color: var(--muted);
+  font: 500 10px var(--mono);
+  letter-spacing: 0.04em;
 }
 .pill {
   padding: 9px 15px;

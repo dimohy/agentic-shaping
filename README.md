@@ -4,6 +4,8 @@
 
 [공식 실전 가이드](https://agentic-shaping.slogs.dev/) · [dimohy의 배경 이야기](https://slogs.dev/@dimohy/vibe-compiler)
 
+현재 공개 버전: **v0.2**
+
 ![사람의 작업 흔적을 Agent가 재사용 가능한 규칙과 자산으로 조직하는 Agentic Shaping 장면](assets/agentic-shaping-hero.jpg)
 
 ## 왜 필요한가요?

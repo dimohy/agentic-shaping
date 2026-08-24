@@ -1,5 +1,15 @@
 const bar = document.querySelector("#progressBar"),
   toast = document.querySelector("#toast");
+const siteVersion = document.querySelector(
+  'meta[name="application-version"]',
+)?.content;
+if (!/^v\d+\.\d+$/.test(siteVersion ?? "")) {
+  throw new Error("올바른 Agentic Shaping 공개 버전을 찾지 못했습니다.");
+}
+document.querySelectorAll("[data-site-version]").forEach((element) => {
+  element.textContent = siteVersion;
+  element.setAttribute("aria-label", `현재 공개 버전 ${siteVersion}`);
+});
 addEventListener(
   "scroll",
   () => {

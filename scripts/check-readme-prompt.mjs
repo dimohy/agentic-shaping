@@ -5,6 +5,23 @@ const normalize = (value) => value.replaceAll("\r\n", "\n").trim();
 const html = readFileSync("index.html", "utf8");
 const readme = readFileSync("README.md", "utf8");
 
+const versionMatch = html.match(
+  /<meta\s+name="application-version"\s+content="(v\d+\.\d+)"\s*\/>/,
+);
+if (!versionMatch) {
+  throw new Error("index.html에서 공개 버전 메타를 찾지 못했습니다.");
+}
+const siteVersion = versionMatch[1];
+const readmeVersionMatch = readme.match(/현재 공개 버전:\s*\*\*(v\d+\.\d+)\*\*/);
+if (!readmeVersionMatch || readmeVersionMatch[1] !== siteVersion) {
+  throw new Error(
+    `README.md 공개 버전이 index.html과 다릅니다: ${readmeVersionMatch?.[1] ?? "없음"} != ${siteVersion}`,
+  );
+}
+if ((html.match(/data-site-version/g) ?? []).length < 2) {
+  throw new Error("홈페이지의 헤더와 푸터에 공개 버전 표시가 모두 필요합니다.");
+}
+
 const htmlMatch = html.match(/<pre id="starter">([\s\S]*?)<\/pre>/);
 if (!htmlMatch) {
   throw new Error("index.html에서 공개 적용 프롬프트를 찾지 못했습니다.");
@@ -51,4 +68,6 @@ for (const contract of ["문서와 소스코드가 커지면 분석 방식도 �
   }
 }
 
-console.log("README 적용 프롬프트 및 분석 확장 계약 검사 통과");
+console.log(
+  `README 적용 프롬프트, 분석 확장 계약 및 공개 버전 ${siteVersion} 검사 통과`,
+);
