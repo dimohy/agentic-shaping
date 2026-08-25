@@ -27,6 +27,7 @@ for (const page of pages) {
   if (!html.includes(`<body data-locale="${page.locale}">`)) fail(`${page.path}: data-locale 불일치`);
   if (!html.includes(`<meta name="site-root" content="${page.siteRoot}" />`)) fail(`${page.path}: site-root 불일치`);
   if (!html.includes(`<link rel="canonical" href="${page.canonical}" />`)) fail(`${page.path}: canonical 누락`);
+  if (!html.includes(`${page.siteRoot}styles.css?v=20260825.6`)) fail(`${page.path}: 최신 반응형 CSS 버전 누락`);
   for (const [lang, href] of alternates) {
     if (!html.includes(`hreflang="${lang}" href="${href}"`)) fail(`${page.path}: hreflang ${lang} 누락`);
   }
@@ -77,6 +78,8 @@ const css = read("styles.css");
 for (const contract of ['html[lang="ko"] body', "word-break: keep-all", "Noto Sans JP", "Noto Sans KR", "Noto Sans SC"]) {
   if (!css.includes(contract)) fail(`styles.css 다국어 계약 누락: ${contract}`);
 }
+if (!/\.language-switcher a\s*{[\s\S]*?white-space:\s*nowrap/.test(css)) fail("언어 선택기 한 줄 표시 계약 누락");
+if (!/@media \(max-width: 1100px\)[\s\S]*?\.pill\s*{\s*display:\s*none/.test(css)) fail("중간 폭 CTA 숨김 계약 누락");
 for (const url of pages.map(page => `<loc>${page.canonical}</loc>`)) {
   if (!read("sitemap.xml").includes(url)) fail(`sitemap.xml URL 누락: ${url}`);
 }
