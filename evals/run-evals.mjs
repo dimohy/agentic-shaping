@@ -38,9 +38,20 @@ if (evaluationCases.length === 0) throw new Error("Evaluation case filter select
 const html = readFileSync(join(root, "index.html"), "utf8");
 const starterMatch = html.match(/<pre id="starter">([\s\S]*?)<\/pre>/);
 if (!starterMatch) throw new Error("Public starter prompt was not found in index.html");
-const starter = starterMatch[1]
+const starterFromPage = starterMatch[1]
   .replaceAll("&lt;", "<").replaceAll("&gt;", ">").replaceAll("&amp;", "&")
   .replaceAll("&quot;", "\"").replaceAll("&#39;", "'").trim();
+const promptUrl = process.env.AGENTIC_SHAPING_EVAL_PROMPT_URL || "";
+if (promptUrl && !/^https:\/\/slogs\.dev\/prompts\/[a-z0-9._-]+$/i.test(promptUrl)) {
+  throw new Error("AGENTIC_SHAPING_EVAL_PROMPT_URL must be an official slogs.dev prompt URL");
+}
+const starter = promptUrl
+  ? await fetch(promptUrl).then(response => {
+      if (!response.ok) throw new Error(`Prompt fetch failed: ${response.status}`);
+      return response.text();
+    })
+  : starterFromPage;
+const promptSource = promptUrl || "index.html#starter";
 const runKey = createHash("sha256").update(JSON.stringify({
   suite: caseFileName,
   suiteVersion: cases.version,
@@ -48,6 +59,7 @@ const runKey = createHash("sha256").update(JSON.stringify({
   starter,
   evalModel,
   reasoningEffort,
+  promptSource,
 })).digest("hex");
 const checkpointPath = join(import.meta.dirname, `${resultFileName}.checkpoint.json`);
 
@@ -182,7 +194,7 @@ const report = {
   evalVersion: cases.version,
   generatedAt: new Date().toISOString(),
   runtime: { codexCli: spawnSync("codex", ["--version"], { encoding: "utf8" }).stdout.trim(), model: evalModel, reasoningEffort, isolation: "temporary CODEX_HOME; no user config; ephemeral sessions; read-only sandbox" },
-  promptSource: "index.html#starter",
+  promptSource,
   suiteSource: caseFileName,
   method: {
     design: "distinct paired scenarios; one independent baseline and shaped agent run per scenario",

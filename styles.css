@@ -660,6 +660,59 @@ h2 {
 .validation-evolution li span {
   font-size: 12px;
 }
+.policy-sync {
+  display: grid;
+  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+  gap: 26px;
+  margin-top: 24px;
+  padding: 24px;
+  background: var(--ink);
+  color: white;
+}
+.policy-sync small {
+  font: 500 10px var(--mono);
+  color: var(--lime);
+}
+.policy-sync strong {
+  display: block;
+  margin: 10px 0;
+  font: 500 clamp(24px, 3vw, 36px) var(--mono);
+}
+.policy-sync strong i {
+  font-style: normal;
+  color: var(--orange);
+}
+.policy-version {
+  display: block;
+  margin: -4px 0 12px;
+  font: 500 10px var(--mono);
+  color: #c5cdc9;
+}
+.policy-sync p {
+  margin: 0;
+  color: #c5cdc9;
+  font-size: 12px;
+}
+.policy-sync ul {
+  display: grid;
+  gap: 8px;
+  margin: 0;
+  padding-left: 18px;
+  font-size: 12px;
+}
+.policy-sync li {
+  display: list-item;
+  padding: 0;
+  background: transparent;
+  color: #f4f0e7;
+}
+.policy-sync a {
+  color: var(--lime);
+  font: 500 11px var(--mono);
+}
+.policy-sync a:last-child {
+  text-align: right;
+}
 .evidence {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -768,8 +821,15 @@ footer p {
   .prompt-grid,
   .eval-examples,
   .validation-evolution ol,
+  .policy-sync,
   .evidence {
     grid-template-columns: 1fr;
+  }
+  .policy-sync a {
+    grid-column: auto;
+  }
+  .policy-sync a:last-child {
+    text-align: left;
   }
   .eval-examples article {
     border-right: 0;

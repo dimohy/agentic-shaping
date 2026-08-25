@@ -187,11 +187,23 @@ Agentic Shaping v0.2
 - timeout을 프롬프트 실패와 분리하고 한 번만 재시도
 - `tests/` 아래의 통과 테스트를 놓친 채점기 결함을 보존하고 재귀 탐색으로 교정
 
+확인된 최종 프롬프트 행동 계약은 Slogs LLM Wiki 한국어·영어 런타임 정책에도 동기화했습니다. 최종 정책 버전은 `2026.08.25.3`이며 다음을 명시적으로 실행합니다.
+
+- 현재 결과 완성, 민감정보·권한·형식·범위 보호, durable 신호 기반 다음 실행 개선을 독립 확인
+- 명시적 일회성 작업에는 억지 기억·전역 규칙·재사용 자산을 만들지 않음
+- durable 신호는 원인·기준 포착, 권위 자산, 조기 검증·회귀, 실제 결과 확인까지 완주
+- 반복 버전·경로·설정은 단일 권위로 통합하고 관련 하드코딩을 모두 교체
+
+[Slogs LLM Wiki 최종 한국어 정책](https://slogs.dev/prompts/slogs-mcp.ko.md)과 [버전 endpoint](https://slogs.dev/prompts/slogs-mcp.version)에서 동기화 상태를 확인할 수 있습니다.
+
+문구 포함만 확인하지 않고 라이브 정책 URL을 직접 Luna Max에 주입해 5개 짝 회귀·10회 Agent 실행을 수행했습니다. 고유 행동은 기본군 18/20(90%)에서 정책 적용군 20/20(100%)로 개선됐고 금지 행동은 양쪽 0건이었습니다. 이 사례는 이미 공개된 회귀 세트이며 새로운 미공개 holdout으로 해석하지 않습니다. 원본은 `evals/slogs-policy-smoke-luna-max.json`에 보존됩니다.
+
 이 결과는 GPT-5.6 Luna Max의 고정 세트 단일 실행에서 얻은 기술 통계이지 모집단 추정이나 모든 모델·도구 환경의 보장이 아닙니다. 적용군도 버전 드리프트에서 한 행동을 놓쳤습니다. 프롬프트가 바뀌면 같은 평가와 실제 실행 게이트를 다시 실행해야 합니다.
 
 ```powershell
 node .\scripts\check-readme-prompt.mjs
 node .\scripts\check-eval-report.mjs
+node .\scripts\check-slogs-policy-sync.mjs
 node .\evals\run-evals.mjs
 node .\evals\run-execution-eval.mjs
 ```

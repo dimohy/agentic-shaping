@@ -7,6 +7,7 @@ const readme = readFileSync(join(root, "README.md"), "utf8");
 const activation = JSON.parse(readFileSync(join(root, "evals", "activation-latest-results.json"), "utf8"));
 const regression = JSON.parse(readFileSync(join(root, "evals", "latest-results.json"), "utf8"));
 const execution = JSON.parse(readFileSync(join(root, "evals", "latest-execution-results.json"), "utf8"));
+const policy = JSON.parse(readFileSync(join(root, "evals", "slogs-policy-smoke-luna-max.json"), "utf8"));
 const fail = message => { throw new Error(message); };
 
 if (!activation.passed) fail("최신 Agentic Shaping 차별 평가가 통과하지 않았습니다.");
@@ -59,6 +60,9 @@ const requiredHtml = [
   "82/105(78.1%) → 104/105(99.0%)",
   "27/27 <i>↔</i> 27/27",
   "프롬프트뿐 아니라,<br />검증 시스템도 진화합니다.",
+  "90% <i>→</i> 100%",
+  "HOMEPAGE v0.2 ↔ SLOGS 2026.08.25.3",
+  "현재 결과 완성 · 안전 경계 · durable 개선을 독립 실행",
 ];
 for (const fragment of requiredHtml) if (!html.includes(fragment)) fail(`index.html 공개 평가 문구 누락: ${fragment}`);
 const requiredReadme = [
@@ -67,6 +71,8 @@ const requiredReadme = [
   "기본군 3/5(60%), 적용군 5/5(100%)",
   "양쪽 27/27, 금지 행동: 양쪽 0건",
   "기본군 94/98(95.9%), 적용군 96/98(98.0%), 금지 행동 0건",
+  "최종 정책 버전은 `2026.08.25.3`",
+  "기본군 18/20(90%)에서 정책 적용군 20/20(100%)",
 ];
 for (const fragment of requiredReadme) if (!readme.includes(fragment)) fail(`README 공개 평가 문구 누락: ${fragment}`);
 const regressionBaseline = regression.summary.find(row => row.variant === "baseline");
@@ -81,4 +87,13 @@ if (!execution.complete || !execution.passed
   || execution.variants.some(variant => variant.checks.length !== 6 || !variant.passed)) {
   fail("실제 파일 실행 회귀 평가가 양쪽 6/6을 통과하지 않았습니다.");
 }
-process.stdout.write("공개 차별 평가, 최종 holdout, 일반 회귀, 작업·안전 게이트 및 실제 실행 결과 동기화 검사 통과\n");
+const policyBaseline = policy.summary.find(row => row.variant === "baseline");
+const policyShaped = policy.summary.find(row => row.variant === "shaped");
+if (!policy.passed || policy.promptSource !== "https://slogs.dev/prompts/slogs-mcp.ko.md"
+  || policy.method.caseCount !== 5 || policy.method.agentRunCount !== 10
+  || policyBaseline.hits !== 18 || policyBaseline.expected !== 20
+  || policyShaped.hits !== 20 || policyShaped.expected !== 20
+  || policyBaseline.forbidden !== 0 || policyShaped.forbidden !== 0) {
+  fail("라이브 Slogs LLM Wiki 최종 정책 행동 회귀가 공개 계약과 다릅니다.");
+}
+process.stdout.write("공개 차별 평가, 최종 holdout, 일반 회귀, 라이브 정책 회귀, 작업·안전 게이트 및 실제 실행 결과 동기화 검사 통과\n");

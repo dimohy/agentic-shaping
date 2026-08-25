@@ -13,6 +13,12 @@ Remove-Item Env:AGENTIC_SHAPING_EVAL_SUITE,Env:AGENTIC_SHAPING_EVAL_RESULT
 
 node .\evals\run-evals.mjs
 node .\evals\run-execution-eval.mjs
+
+$env:AGENTIC_SHAPING_EVAL_SUITE='activation-cases.json'
+$env:AGENTIC_SHAPING_EVAL_RESULT='slogs-policy-smoke-luna-max.json'
+$env:AGENTIC_SHAPING_EVAL_PROMPT_URL='https://slogs.dev/prompts/slogs-mcp.ko.md'
+$env:AGENTIC_SHAPING_EVAL_CASES='activation-config-schema-drift,activation-deployment-rollback,activation-transcript-speakers,activation-accessibility-regression,activation-policy-sync'
+node .\evals\run-evals.mjs
 ```
 
 The first command runs the Agentic Shaping activation suite. It contains 26
@@ -23,6 +29,17 @@ current-task completion criteria, and 52 forbidden behaviors. Its result is
 The second `run-evals` command runs the broader 25-scenario quality and safety
 regression suite and writes `latest-results.json`. The third command performs an
 actual file-editing execution test.
+
+The final block is a focused regression of the live Slogs LLM Wiki Korean
+runtime policy. It fetches the authoritative public policy URL and records that
+URL in the run hash and result, so the homepage cannot claim policy sync from a
+local text copy alone. These five cases are a revealed regression set, not a new
+unseen holdout.
+
+For policy version `2026.08.25.3`, this live-policy regression passed with
+18/20 (90%) baseline activation actions and 20/20 (100%) shaped activation
+actions, with no forbidden selections in either condition. The raw result is
+`slogs-policy-smoke-luna-max.json`.
 
 The runner extracts `index.html#starter`, creates an isolated temporary Codex
 home, explicitly uses GPT-5.6 Luna at max reasoning effort, validates every

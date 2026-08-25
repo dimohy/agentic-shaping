@@ -21,7 +21,7 @@
       href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Noto+Sans+KR:wght@400;500;600;700;800;900&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="styles.css?v=20260825.2" />
+    <link rel="stylesheet" href="styles.css?v=20260825.3" />
   </head>
   <body>
     <div class="progress"><span id="progressBar"></span></div>
@@ -565,6 +565,26 @@ Agentic Shaping v0.2
             <li><b>Verify early</b><span>실패 사례만 먼저 재생한 뒤 전체 회귀</span></li>
             <li><b>Integrate</b><span>동일 해시 checkpoint와 재현 가능한 결과 자산</span></li>
           </ol>
+          <div class="policy-sync">
+            <div>
+              <small>CONFIRMED FINAL POLICY SYNC</small>
+              <strong>90% <i>→</i> 100%</strong>
+              <span class="policy-version">HOMEPAGE v0.2 ↔ SLOGS 2026.08.25.3</span>
+              <p>
+                홈페이지 최종 프롬프트의 확인된 행동 계약을 Slogs LLM Wiki 한국어·영어
+                런타임 정책에 동기화했습니다. 라이브 정책 5개 짝 회귀·10회 Luna Max
+                실행에서 고유 행동 18/20 → 20/20, 금지 행동 0건을 확인했습니다.
+              </p>
+            </div>
+            <ul>
+              <li>현재 결과 완성 · 안전 경계 · durable 개선을 독립 실행</li>
+              <li>일회성 작업에는 억지 기억·전역 규칙을 만들지 않음</li>
+              <li>durable 신호는 권위 자산 · 조기 검증 · 회귀까지 완주</li>
+              <li>반복 버전·경로·설정은 단일 권위로 통합하고 관련 하드코딩 전부 교체</li>
+            </ul>
+            <a href="evals/slogs-policy-smoke-luna-max.json">정책 행동 결과</a>
+            <a href="https://slogs.dev/prompts/slogs-mcp.ko.md">최종 한국어 정책 확인 →</a>
+          </div>
         </div>
         <div class="evidence">
           <div>
@@ -642,6 +662,6 @@ Agentic Shaping v0.2
       <a href="https://github.com/dimohy/vibe-compiler">GitHub ↗</a>
     </footer>
     <div id="toast">프롬프트를 복사했습니다.</div>
-    <script src="script.js?v=20260825.2"></script>
+    <script src="script.js?v=20260825.3"></script>
   </body>
 </html>
