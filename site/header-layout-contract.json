@@ -2,15 +2,21 @@
   "version": 1,
   "headerHeightPx": 70,
   "locales": ["en", "ko", "ja", "zh"],
-  "viewportWidthsPx": [320, 360, 390, 404, 600, 607, 768, 850, 960, 1100, 1101, 1279, 1280, 1281, 1366, 1440],
+  "viewportWidthsPx": [320, 340, 350, 360, 390, 400, 410, 420, 480, 600, 607, 768, 850, 960, 1100, 1101, 1279, 1280, 1281, 1366, 1440],
   "compactMaxWidthPx": 1280,
   "mobileMaxWidthPx": 600,
-  "tinyMaxWidthPx": 360,
+  "brandTitleCssMaxWidthPx": 350,
+  "brandTitleHiddenMaxTestWidthPx": 340,
+  "brandTitleVisibleMinWidthPx": 360,
+  "versionCssMaxWidthPx": 410,
+  "versionHiddenMaxTestWidthPx": 400,
+  "versionVisibleMinWidthPx": 420,
   "invariants": {
     "documentHorizontalOverflowMaxPx": 1,
     "navHorizontalOverflowMaxPx": 1,
     "visibleTextLineCount": 1,
     "allowTopLevelOverlap": false,
+    "compactBrandPriority": ["mark", "title", "version"],
     "compactVisibleItems": ["brand", "language-switcher"],
     "desktopVisibleItems": ["brand", "main-menu", "language-switcher", "cta"]
   }

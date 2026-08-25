@@ -30,7 +30,11 @@ for (const [kind, sourcePath] of [["styles", "styles.css"], ["script", "script.j
   if (generated !== source || assetManifest[kind].sha256 !== sha256(source)) fail(`${kind} 해시 자산 동기화 실패`);
 }
 if (headerContract.locales.join(",") !== "en,ko,ja,zh") fail("헤더 계약의 언어 행렬 불일치");
-if (headerContract.viewportWidthsPx.length !== 16 || !headerContract.viewportWidthsPx.includes(320)
+if (headerContract.viewportWidthsPx.length !== 21 || !headerContract.viewportWidthsPx.includes(320)
+  || !headerContract.viewportWidthsPx.includes(headerContract.brandTitleHiddenMaxTestWidthPx)
+  || !headerContract.viewportWidthsPx.includes(headerContract.brandTitleVisibleMinWidthPx)
+  || !headerContract.viewportWidthsPx.includes(headerContract.versionHiddenMaxTestWidthPx)
+  || !headerContract.viewportWidthsPx.includes(headerContract.versionVisibleMinWidthPx)
   || !headerContract.viewportWidthsPx.includes(1281) || !headerContract.viewportWidthsPx.includes(1440)) {
   fail("헤더 계약의 화면 폭 행렬 불일치");
 }
@@ -97,8 +101,11 @@ if (!/\.language-switcher a\s*{[\s\S]*?white-space:\s*nowrap/.test(css)) fail("�
 if (!/nav a\s*{[\s\S]*?white-space:\s*nowrap/.test(css)) fail("전체 헤더 링크 한 줄 표시 계약 누락");
 const compactPattern = new RegExp(`@media \\(max-width: ${headerContract.compactMaxWidthPx}px\\)[\\s\\S]*?\\.pill\\s*{\\s*display:\\s*none`);
 if (!compactPattern.test(css)) fail("중간 폭 CTA 숨김 계약 누락");
-const tinyPattern = new RegExp(`@media \\(max-width: ${headerContract.tinyMaxWidthPx}px\\)[\\s\\S]*?\\.brand \\.site-version\\s*{\\s*display:\\s*none`);
-if (!tinyPattern.test(css)) fail("초소형 폭 버전 축약 계약 누락");
+const versionPattern = new RegExp(`@media \\(max-width: ${headerContract.versionCssMaxWidthPx}px\\)[\\s\\S]*?\\.brand \\.site-version\\s*{\\s*display:\\s*none`);
+if (!versionPattern.test(css)) fail("좁은 폭에서 제목보다 버전을 먼저 축약하는 계약 누락");
+const titlePattern = new RegExp(`@media \\(max-width: ${headerContract.brandTitleCssMaxWidthPx}px\\)[\\s\\S]*?\\.brand > span:not\\(\\.site-version\\)\\s*{\\s*display:\\s*none`);
+if (!titlePattern.test(css)) fail("실제 공간이 부족한 초소형 폭에서만 브랜드 제목을 축약하는 계약 누락");
+if (headerContract.invariants.compactBrandPriority.join(",") !== "mark,title,version") fail("compact 헤더 브랜드 우선순위 계약 불일치");
 for (const url of pages.map(page => `<loc>${page.canonical}</loc>`)) {
   if (!read("sitemap.xml").includes(url)) fail(`sitemap.xml URL 누락: ${url}`);
 }
