@@ -1,4 +1,5 @@
 import { existsSync, mkdirSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from "node:fs";
+import { createHash } from "node:crypto";
 import { tmpdir } from "node:os";
 import { dirname, join, resolve } from "node:path";
 import { spawnSync } from "node:child_process";
@@ -8,6 +9,13 @@ const siteDir = join(root, "site");
 const localeDir = join(siteDir, "locales");
 const htmlSource = readFileSync(join(siteDir, "index.ko.source.html"), "utf8");
 const readmeSource = readFileSync(join(siteDir, "README.ko.source.md"), "utf8");
+const stylesSource = readFileSync(join(root, "styles.css"), "utf8");
+const scriptSource = readFileSync(join(root, "script.js"), "utf8");
+const digest = content => createHash("sha256").update(content).digest("hex");
+const stylesHash = digest(stylesSource);
+const scriptHash = digest(scriptSource);
+const stylesAsset = `styles.${stylesHash.slice(0, 12)}.css`;
+const scriptAsset = `script.${scriptHash.slice(0, 12)}.js`;
 const refresh = process.argv.includes("--refresh");
 const check = process.argv.includes("--check");
 const hasHangul = value => /[가-힣]/.test(value);
@@ -125,8 +133,8 @@ const buildHtml = (locale, catalog) => {
     "zh-CN": "Agentic Shaping — 主动发现并持续进化的 AI 工作方法",
   };
   output = output.replace(/<title>[\s\S]*?<\/title>/, `<title>${titles[locale.code]}</title>`);
-  output = output.replaceAll("styles.css?v=20260825.3", `${locale.rootHref}styles.css?v=20260825.7`);
-  output = output.replaceAll("script.js?v=20260825.3", `${locale.rootHref}script.js?v=20260825.4`);
+  output = output.replaceAll("styles.css?v=20260825.3", `${locale.rootHref}site-assets/${stylesAsset}`);
+  output = output.replaceAll("script.js?v=20260825.3", `${locale.rootHref}site-assets/${scriptAsset}`);
   output = output.replaceAll('src="assets/', `src="${locale.rootHref}assets/`);
   output = output.replaceAll('href="evals/', `href="${locale.rootHref}evals/`);
   return output.replace(/[ \t]+(?=\r?$)/gm, "");
@@ -143,6 +151,12 @@ const emit = (path, content) => {
   mkdirSync(dirname(path), { recursive: true });
   writeFileSync(path, content);
 };
+emit(join(root, "site-assets", stylesAsset), stylesSource);
+emit(join(root, "site-assets", scriptAsset), scriptSource);
+emit(join(root, "site-assets", "manifest.json"), `${JSON.stringify({
+  styles: { file: stylesAsset, sha256: stylesHash },
+  script: { file: scriptAsset, sha256: scriptHash },
+}, null, 2)}\n`);
 for (const locale of [locales[0], koreanLocale, locales[1], locales[2]]) {
   const outputPath = locale.directory ? join(root, locale.directory, "index.html") : join(root, "index.html");
   emit(outputPath, buildHtml(locale, catalogs[locale.code] || {}));
@@ -158,4 +172,4 @@ emit(join(root, "README.ko.md"), buildReadme(null));
 emit(join(root, "README.ja.md"), buildReadme(catalogs.ja));
 emit(join(root, "README.zh-CN.md"), buildReadme(catalogs["zh-CN"]));
 
-process.stdout.write(`${check ? "Verified" : "Generated"} 4 homepages and 4 READMEs from ${units.size} localized source units.\n`);
+process.stdout.write(`${check ? "Verified" : "Generated"} hashed site assets, 4 homepages, and 4 READMEs from ${units.size} localized source units.\n`);

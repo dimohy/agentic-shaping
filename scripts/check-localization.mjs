@@ -1,4 +1,5 @@
 import { readFileSync } from "node:fs";
+import { createHash } from "node:crypto";
 import { join, resolve } from "node:path";
 import { spawnSync } from "node:child_process";
 
@@ -21,6 +22,13 @@ const alternates = [
 const sectionIds = ["start", "loop", "scale", "memory", "prompts", "validation"];
 const languageLinks = "[English](README.md) | [한국어](README.ko.md) | [日本語](README.ja.md) | [简体中文](README.zh-CN.md)";
 const headerContract = JSON.parse(read("site/header-layout-contract.json"));
+const assetManifest = JSON.parse(read("site-assets/manifest.json"));
+const sha256 = content => createHash("sha256").update(content).digest("hex");
+for (const [kind, sourcePath] of [["styles", "styles.css"], ["script", "script.js"]]) {
+  const source = read(sourcePath);
+  const generated = read(`site-assets/${assetManifest[kind].file}`);
+  if (generated !== source || assetManifest[kind].sha256 !== sha256(source)) fail(`${kind} 해시 자산 동기화 실패`);
+}
 if (headerContract.locales.join(",") !== "en,ko,ja,zh") fail("헤더 계약의 언어 행렬 불일치");
 if (headerContract.viewportWidthsPx.length !== 16 || !headerContract.viewportWidthsPx.includes(320)
   || !headerContract.viewportWidthsPx.includes(1281) || !headerContract.viewportWidthsPx.includes(1440)) {
@@ -33,7 +41,8 @@ for (const page of pages) {
   if (!html.includes(`<body data-locale="${page.locale}">`)) fail(`${page.path}: data-locale 불일치`);
   if (!html.includes(`<meta name="site-root" content="${page.siteRoot}" />`)) fail(`${page.path}: site-root 불일치`);
   if (!html.includes(`<link rel="canonical" href="${page.canonical}" />`)) fail(`${page.path}: canonical 누락`);
-  if (!html.includes(`${page.siteRoot}styles.css?v=20260825.7`)) fail(`${page.path}: 최신 반응형 CSS 버전 누락`);
+  if (!html.includes(`${page.siteRoot}site-assets/${assetManifest.styles.file}`)) fail(`${page.path}: 해시 CSS 자산 누락`);
+  if (!html.includes(`${page.siteRoot}site-assets/${assetManifest.script.file}`)) fail(`${page.path}: 해시 JavaScript 자산 누락`);
   for (const [lang, href] of alternates) {
     if (!html.includes(`hreflang="${lang}" href="${href}"`)) fail(`${page.path}: hreflang ${lang} 누락`);
   }
@@ -44,11 +53,11 @@ for (const page of pages) {
   if (html.includes("github.com/dimohy/vibe-compiler")) fail(`${page.path}: 폐기된 GitHub 저장소 링크 잔류`);
   if (/\b(?:undefined|null|\[object Object\])\b/.test(html)) fail(`${page.path}: 미해결 생성 값 발견`);
   if (page.locale === "en") {
-    for (const path of ["./styles.css", "./script.js", 'src="./assets/', 'href="./evals/']) {
+    for (const path of ['src="./assets/', 'href="./evals/']) {
       if (!html.includes(path)) fail(`${page.path}: 루트 자산 경로 누락 ${path}`);
     }
   } else {
-    for (const path of ["../styles.css", "../script.js", 'src="../assets/', 'href="../evals/']) {
+    for (const path of ['src="../assets/', 'href="../evals/']) {
       if (!html.includes(path)) fail(`${page.path}: 지역 자산 경로 누락 ${path}`);
     }
   }
