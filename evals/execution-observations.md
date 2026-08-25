@@ -32,3 +32,13 @@ isolated rerun scored 6/6 (100%) for both baseline and shaped variants. This run
 confirms no execution regression; equal scores do not establish prompt
 superiority. See `latest-execution-results.json` for the current individual
 checks and final messages.
+
+During the final Luna Max rerun, the shaped agent placed its passing PowerShell
+test under `tests/`, while the grader only searched the repository root and
+incorrectly reported `no PowerShell test file`. That invalid grader result is
+preserved in `execution-grader-v1-luna-max.json`. Test discovery is now recursive,
+so file organization cannot change the score. The corrected grader retained the
+already verified 6/6 baseline and independently reran the shaped variant, which
+also passed 6/6. A Codex timeout or nonzero exit is recorded separately from the
+artifact score and is accepted only when all six independent artifact checks
+pass.

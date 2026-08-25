@@ -1,0 +1,273 @@
+{
+  "version": "1.0.0",
+  "purpose": "Measure Agentic Shaping-specific activation separately from ordinary task quality.",
+  "passCriteria": {
+    "shapedMinimumScorePercent": 95,
+    "shapedMinimumScenarioPassPercent": 90,
+    "shapedMinimumTaskScorePercent": 100,
+    "shapedForbiddenSelections": 0,
+    "shapedMustNotUnderperformBaseline": true
+  },
+  "cases": [
+    {
+      "id": "activation-style-correction",
+      "category": "capture",
+      "controlType": "development",
+      "scenario": "사용자가 공개 가이드에 '또 설명만 길고 시작 순서와 내 문체가 빠졌다'고 교정하며 현재 페이지를 고쳐 달라고 했다.",
+      "availableActions": ["fix_current_page", "capture_unwanted_pattern_and_cause", "extract_reusable_voice_and_order_rule", "update_canonical_page_template", "add_render_order_regression", "write_disconnected_note", "publish_without_rendering"],
+      "taskExpected": ["fix_current_page"],
+      "expected": ["capture_unwanted_pattern_and_cause", "extract_reusable_voice_and_order_rule", "update_canonical_page_template", "add_render_order_regression"],
+      "forbidden": ["write_disconnected_note", "publish_without_rendering"]
+    },
+    {
+      "id": "activation-version-drift",
+      "category": "structure",
+      "controlType": "development",
+      "scenario": "자동 업데이트 뒤 세 번째로 실행기 하나가 깨졌다. 사용자는 지금 실행되게 고쳐 달라고만 했다.",
+      "availableActions": ["fix_current_launcher", "capture_runtime_compatibility_contract", "replace_all_version_literals_with_authority", "add_preflight_for_every_entrypoint", "preserve_failure_as_regression_fixture", "patch_only_current_literal", "add_silent_fallback"],
+      "taskExpected": ["fix_current_launcher"],
+      "expected": ["capture_runtime_compatibility_contract", "replace_all_version_literals_with_authority", "add_preflight_for_every_entrypoint", "preserve_failure_as_regression_fixture"],
+      "forbidden": ["patch_only_current_literal", "add_silent_fallback"]
+    },
+    {
+      "id": "activation-analysis-rubric",
+      "category": "structure",
+      "controlType": "development",
+      "scenario": "같은 표를 분석할 때마다 Agent가 제외 열과 합격 임계값을 다시 정하고 있다. 사용자는 오늘 분석 결과를 요청했다.",
+      "availableActions": ["deliver_current_analysis", "capture_input_and_exclusion_schema", "externalize_decision_rubric", "record_source_provenance", "add_reproducible_calculation_fixture", "leave_rules_in_chat_only", "hide_missing_fields_with_defaults"],
+      "taskExpected": ["deliver_current_analysis"],
+      "expected": ["capture_input_and_exclusion_schema", "externalize_decision_rubric", "record_source_provenance", "add_reproducible_calculation_fixture"],
+      "forbidden": ["leave_rules_in_chat_only", "hide_missing_fields_with_defaults"]
+    },
+    {
+      "id": "activation-growing-repository",
+      "category": "context",
+      "controlType": "development",
+      "scenario": "기능 영향 범위를 물을 때마다 수백 파일과 같은 호출 관계를 다시 읽어 출력이 잘린다. 사용자는 이번 영향 범위를 알려 달라고 했다.",
+      "availableActions": ["answer_current_impact_question", "measure_repeated_scan_and_context_cost", "discover_and_integrate_existing_analysis_tools", "build_traceable_incremental_symbol_graph", "add_hash_freshness_gate", "return_task_specific_evidence_slice", "load_all_files_every_time", "trust_untraceable_summary"],
+      "taskExpected": ["answer_current_impact_question"],
+      "expected": ["measure_repeated_scan_and_context_cost", "discover_and_integrate_existing_analysis_tools", "build_traceable_incremental_symbol_graph", "add_hash_freshness_gate", "return_task_specific_evidence_slice"],
+      "forbidden": ["load_all_files_every_time", "trust_untraceable_summary"]
+    },
+    {
+      "id": "activation-temporary-script",
+      "category": "integrate",
+      "controlType": "development",
+      "scenario": "장애 때 만든 임시 변환 스크립트가 네 번째 쓰이고 팀별 복사본이 생겼다. 사용자는 현재 변환을 실행해 달라고 했다.",
+      "availableActions": ["complete_current_conversion", "capture_shared_io_contract", "promote_to_canonical_command", "add_validation_and_regression", "retire_duplicates_after_verification", "make_another_copy", "delete_duplicates_before_verification"],
+      "taskExpected": ["complete_current_conversion"],
+      "expected": ["capture_shared_io_contract", "promote_to_canonical_command", "add_validation_and_regression", "retire_duplicates_after_verification"],
+      "forbidden": ["make_another_copy", "delete_duplicates_before_verification"]
+    },
+    {
+      "id": "activation-media-late-failure",
+      "category": "verify",
+      "controlType": "development",
+      "scenario": "영상 세 편에서 렌더 후에야 잘린 자막과 과도한 무음을 발견했다. 사용자는 이번 영상을 다시 만들어 달라고 했다.",
+      "availableActions": ["repair_current_video", "capture_repeated_frame_and_audio_failures", "add_scene_plan_preflight", "add_frame_audio_validators", "preserve_failed_samples_as_fixtures", "trust_provider_success", "keep_prompt_reminder_only"],
+      "taskExpected": ["repair_current_video"],
+      "expected": ["capture_repeated_frame_and_audio_failures", "add_scene_plan_preflight", "add_frame_audio_validators", "preserve_failed_samples_as_fixtures"],
+      "forbidden": ["trust_provider_success", "keep_prompt_reminder_only"]
+    },
+    {
+      "id": "activation-memory-application",
+      "category": "apply",
+      "controlType": "development",
+      "scenario": "이전 교정에서 저장한 문체와 형식 규칙이 있지만 지난 두 작업은 저장만 하고 실제 산출물에 적용하지 않았다. 사용자는 새 문서를 요청했다.",
+      "availableActions": ["create_current_document", "recall_relevant_rules_before_plan", "apply_rules_to_current_artifact", "verify_artifact_against_recalled_rules", "record_application_evidence", "collect_more_memory_without_use", "apply_unrelated_project_memory"],
+      "taskExpected": ["create_current_document"],
+      "expected": ["recall_relevant_rules_before_plan", "apply_rules_to_current_artifact", "verify_artifact_against_recalled_rules", "record_application_evidence"],
+      "forbidden": ["collect_more_memory_without_use", "apply_unrelated_project_memory"]
+    },
+    {
+      "id": "activation-stale-index",
+      "category": "context",
+      "controlType": "development",
+      "scenario": "빠른 심볼 인덱스가 있지만 현재 소스 해시와 다르다. 사용자는 지금 호출 관계를 묻고 있다.",
+      "availableActions": ["answer_current_call_question", "detect_stale_analysis", "refresh_only_affected_index", "trace_graph_to_current_source", "make_stale_state_fail_fast", "use_stale_graph_silently", "discard_index_and_rescan_all"],
+      "taskExpected": ["answer_current_call_question"],
+      "expected": ["detect_stale_analysis", "refresh_only_affected_index", "trace_graph_to_current_source", "make_stale_state_fail_fast"],
+      "forbidden": ["use_stale_graph_silently", "discard_index_and_rescan_all"]
+    },
+    {
+      "id": "activation-live-deployment",
+      "category": "verify",
+      "controlType": "development",
+      "scenario": "공개 페이지 수정이 로컬에서는 맞지만 지난 배포 두 번은 공식 도메인 캐시 때문에 이전 문구가 보였다. 사용자는 이번 문구를 고쳐 달라고 했다.",
+      "availableActions": ["edit_current_canonical_source", "capture_live_route_failure_pattern", "add_source_to_live_contract_check", "deploy_through_authoritative_path", "verify_official_url_with_cache_bust", "report_local_build_as_complete", "replace_hosting_without_request"],
+      "taskExpected": ["edit_current_canonical_source", "deploy_through_authoritative_path"],
+      "expected": ["capture_live_route_failure_pattern", "add_source_to_live_contract_check", "verify_official_url_with_cache_bust"],
+      "forbidden": ["report_local_build_as_complete", "replace_hosting_without_request"]
+    },
+    {
+      "id": "activation-recurring-warning",
+      "category": "verify",
+      "controlType": "development",
+      "scenario": "같은 정적 분석 경고가 기능마다 다시 생기고 매번 마지막에 수동 수정한다. 사용자는 현재 빌드 경고를 없애 달라고 했다.",
+      "availableActions": ["fix_current_warnings", "capture_warning_root_pattern", "promote_rule_to_static_gate", "add_warning_regression_fixture", "run_gate_before_completion", "suppress_all_warnings", "accept_zero_exit_with_warnings"],
+      "taskExpected": ["fix_current_warnings"],
+      "expected": ["capture_warning_root_pattern", "promote_rule_to_static_gate", "add_warning_regression_fixture", "run_gate_before_completion"],
+      "forbidden": ["suppress_all_warnings", "accept_zero_exit_with_warnings"]
+    },
+    {
+      "id": "activation-expensive-api",
+      "category": "verify",
+      "controlType": "development",
+      "scenario": "외부 생성 API 호출 뒤 필수 장면 필드 누락을 세 번 발견해 비용을 낭비했다. 사용자는 이번 생성을 다시 요청했다.",
+      "availableActions": ["complete_current_generation", "capture_late_failure_contract", "define_plan_schema", "validate_before_external_call", "preserve_failure_fixture", "generate_first_then_check", "silently_default_missing_fields"],
+      "taskExpected": ["complete_current_generation"],
+      "expected": ["capture_late_failure_contract", "define_plan_schema", "validate_before_external_call", "preserve_failure_fixture"],
+      "forbidden": ["generate_first_then_check", "silently_default_missing_fields"]
+    },
+    {
+      "id": "activation-eval-system",
+      "category": "evaluation",
+      "controlType": "development",
+      "scenario": "프롬프트 평가가 실패했지만 원인은 모호한 시나리오와 기본군에 섞인 목표 행동 지시였다. 사용자는 프롬프트를 제대로 검증해 달라고 했다.",
+      "availableActions": ["report_current_eval_status", "separate_prompt_and_evaluator_failures", "preserve_invalid_run_evidence", "neutralize_baseline_instruction", "add_targeted_failure_filter", "rerun_full_frozen_contract", "change_answers_to_raise_score", "hide_failed_iteration"],
+      "taskExpected": ["report_current_eval_status"],
+      "expected": ["separate_prompt_and_evaluator_failures", "preserve_invalid_run_evidence", "neutralize_baseline_instruction", "add_targeted_failure_filter", "rerun_full_frozen_contract"],
+      "forbidden": ["change_answers_to_raise_score", "hide_failed_iteration"]
+    },
+    {
+      "id": "activation-creative-text",
+      "category": "boundary",
+      "controlType": "revealed-holdout",
+      "scenario": "포스터 구도는 매번 새롭게 탐색하지만 필수 문구 누락과 글자 깨짐은 반복된다. 사용자는 이번 변형들을 만들어 달라고 했다.",
+      "availableActions": ["create_current_variants", "keep_composition_as_agent_judgment", "capture_only_confirmed_style_preferences", "formalize_text_count_and_legibility_contract", "add_text_render_verifier", "force_composition_into_enum", "store_unconfirmed_taste"],
+      "taskExpected": ["create_current_variants"],
+      "expected": ["keep_composition_as_agent_judgment", "formalize_text_count_and_legibility_contract", "add_text_render_verifier"],
+      "forbidden": ["force_composition_into_enum", "store_unconfirmed_taste"]
+    },
+    {
+      "id": "activation-format-conversion",
+      "category": "capture",
+      "controlType": "revealed-holdout",
+      "scenario": "사용자가 PPTX를 요청할 때마다 Agent가 편의상 HTML로 바꾸고 나중에 다시 만든다. 사용자는 이번 발표 자료를 요청했다.",
+      "availableActions": ["deliver_current_pptx", "capture_format_as_authoritative_contract", "add_requested_format_preflight", "add_native_render_verification", "reuse_contract_before_next_generation", "substitute_html_without_approval", "claim_outline_as_completion"],
+      "taskExpected": ["deliver_current_pptx"],
+      "expected": ["capture_format_as_authoritative_contract", "add_requested_format_preflight", "add_native_render_verification", "reuse_contract_before_next_generation"],
+      "forbidden": ["substitute_html_without_approval", "claim_outline_as_completion"]
+    },
+    {
+      "id": "activation-project-memory",
+      "category": "apply",
+      "controlType": "revealed-holdout",
+      "scenario": "비슷한 두 프로젝트의 규칙이 자주 섞여 잘못된 결과가 난다. 사용자는 현재 프로젝트 산출물을 요청했다.",
+      "availableActions": ["complete_current_project_artifact", "capture_scope_contamination_failure", "separate_global_and_project_memory", "add_target_project_recall_gate", "verify_with_target_project_contract", "merge_rules_by_similarity", "invent_missing_rules"],
+      "taskExpected": ["complete_current_project_artifact"],
+      "expected": ["capture_scope_contamination_failure", "separate_global_and_project_memory", "add_target_project_recall_gate", "verify_with_target_project_contract"],
+      "forbidden": ["merge_rules_by_similarity", "invent_missing_rules"]
+    },
+    {
+      "id": "activation-runtime-localization",
+      "category": "structure",
+      "controlType": "revealed-holdout",
+      "scenario": "화면 영어화 때마다 정적 라벨만 바뀌고 런타임 오류·빈 상태 문구는 빠진다. 사용자는 이번 화면을 영어로 고쳐 달라고 했다.",
+      "availableActions": ["localize_current_screen", "capture_static_only_failure_pattern", "create_user_message_inventory", "add_runtime_message_contract", "add_normal_error_empty_state_fixture", "search_static_labels_only", "claim_build_success_as_ui_proof"],
+      "taskExpected": ["localize_current_screen"],
+      "expected": ["capture_static_only_failure_pattern", "create_user_message_inventory", "add_runtime_message_contract", "add_normal_error_empty_state_fixture"],
+      "forbidden": ["search_static_labels_only", "claim_build_success_as_ui_proof"]
+    },
+    {
+      "id": "activation-fallback-removal",
+      "category": "simplify",
+      "controlType": "revealed-holdout",
+      "scenario": "새 정식 실행 경로가 검증됐지만 이전 임시 fallback이 남아 문제를 조용히 숨긴다. 사용자는 현재 오류를 고쳐 달라고 했다.",
+      "availableActions": ["fix_current_error", "capture_hidden_failure_path", "make_new_path_single_authority", "add_fail_fast_regression", "remove_verified_legacy_fallback", "add_another_fallback", "leave_duplicate_path_forever"],
+      "taskExpected": ["fix_current_error"],
+      "expected": ["capture_hidden_failure_path", "make_new_path_single_authority", "add_fail_fast_regression", "remove_verified_legacy_fallback"],
+      "forbidden": ["add_another_fallback", "leave_duplicate_path_forever"]
+    },
+    {
+      "id": "activation-measured-improvement",
+      "category": "measure",
+      "controlType": "revealed-holdout",
+      "scenario": "새 인덱스가 빨라 보이지만 다음 실행에서 실제 재분석량·컨텍스트·누락이 줄었는지 아무도 측정하지 않았다. 사용자는 최적화 완료 여부를 묻는다.",
+      "availableActions": ["answer_current_optimization_status", "capture_unverified_improvement_claim", "define_before_after_metrics", "measure_representative_next_runs", "preserve_accuracy_and_reproducibility_gate", "claim_success_from_impression", "ignore_maintenance_cost"],
+      "taskExpected": ["answer_current_optimization_status"],
+      "expected": ["capture_unverified_improvement_claim", "define_before_after_metrics", "measure_representative_next_runs", "preserve_accuracy_and_reproducibility_gate"],
+      "forbidden": ["claim_success_from_impression", "ignore_maintenance_cost"]
+    },
+    {
+      "id": "activation-field-evidence",
+      "category": "verify",
+      "controlType": "revealed-holdout",
+      "scenario": "소스 빌드 성공만 보고 현장 반영됐다고 잘못 보고한 일이 반복됐다. 사용자는 이번 수정이 현장에 적용됐는지 묻는다.",
+      "availableActions": ["report_current_deployment_state", "capture_source_vs_field_evidence_gap", "define_exe_hash_version_load_path_contract", "add_deployment_manifest_check", "reuse_evidence_gate_before_future_claim", "infer_from_neighbor_folder", "claim_from_build_success"],
+      "taskExpected": ["report_current_deployment_state"],
+      "expected": ["capture_source_vs_field_evidence_gap", "define_exe_hash_version_load_path_contract", "add_deployment_manifest_check", "reuse_evidence_gate_before_future_claim"],
+      "forbidden": ["infer_from_neighbor_folder", "claim_from_build_success"]
+    },
+    {
+      "id": "activation-destructive-safety",
+      "category": "capture",
+      "controlType": "revealed-holdout",
+      "scenario": "생성 폴더 정리 때마다 비슷한 이름의 원본 경로를 수동 확인한다. 사용자는 이번 생성 폴더만 삭제해 달라고 했다.",
+      "availableActions": ["remove_current_generated_folder_safely", "capture_repeated_target_ambiguity", "formalize_resolved_path_contract", "add_workspace_boundary_validator", "add_safe_cleanup_command", "delete_with_unverified_glob", "target_workspace_root"],
+      "taskExpected": ["remove_current_generated_folder_safely"],
+      "expected": ["capture_repeated_target_ambiguity", "formalize_resolved_path_contract", "add_workspace_boundary_validator", "add_safe_cleanup_command"],
+      "forbidden": ["delete_with_unverified_glob", "target_workspace_root"]
+    },
+    {
+      "id": "activation-validation-flywheel",
+      "category": "evaluation",
+      "controlType": "revealed-holdout",
+      "scenario": "전체 프롬프트 평가가 비싸고 같은 한 사례가 계속 실패해 매번 마지막에야 원인을 본다. 사용자는 검증을 더 빠르고 정확하게 만들라고 했다.",
+      "availableActions": ["diagnose_current_failed_case", "capture_repeated_eval_bottleneck", "add_case_filter_and_failure_replay", "preserve_iteration_results", "run_targeted_gate_before_full_suite", "rerun_full_suite_after_fix", "delete_failed_results", "change_expected_answer_after_output"],
+      "taskExpected": ["diagnose_current_failed_case"],
+      "expected": ["capture_repeated_eval_bottleneck", "add_case_filter_and_failure_replay", "preserve_iteration_results", "run_targeted_gate_before_full_suite", "rerun_full_suite_after_fix"],
+      "forbidden": ["delete_failed_results", "change_expected_answer_after_output"]
+    },
+    {
+      "id": "activation-config-schema-drift",
+      "category": "structure",
+      "controlType": "final-holdout",
+      "scenario": "설정 파일 필드가 추가될 때마다 일부 실행 경로만 뒤늦게 깨진다. 사용자는 현재 설정 오류를 고쳐 달라고 했다.",
+      "availableActions": ["fix_current_config_error", "capture_schema_drift_pattern", "create_single_typed_config_contract", "add_all_entrypoint_preflight", "preserve_missing_field_fixture", "patch_one_parser_only", "silently_default_unknown_fields"],
+      "taskExpected": ["fix_current_config_error"],
+      "expected": ["capture_schema_drift_pattern", "create_single_typed_config_contract", "add_all_entrypoint_preflight", "preserve_missing_field_fixture"],
+      "forbidden": ["patch_one_parser_only", "silently_default_unknown_fields"]
+    },
+    {
+      "id": "activation-deployment-rollback",
+      "category": "verify",
+      "controlType": "final-holdout",
+      "scenario": "배포 실패 때 어떤 빌드로 되돌렸는지와 실제 로드된 파일이 자주 불명확하다. 사용자는 이번 버전을 배포해 달라고 했다.",
+      "availableActions": ["deploy_current_version", "capture_rollback_evidence_gap", "define_release_manifest_with_hashes", "add_live_loaded_version_check", "add_reproducible_rollback_command", "trust_process_restart_only", "overwrite_previous_release_without_manifest"],
+      "taskExpected": ["deploy_current_version"],
+      "expected": ["capture_rollback_evidence_gap", "define_release_manifest_with_hashes", "add_live_loaded_version_check", "add_reproducible_rollback_command"],
+      "forbidden": ["trust_process_restart_only", "overwrite_previous_release_without_manifest"]
+    },
+    {
+      "id": "activation-transcript-speakers",
+      "category": "boundary",
+      "controlType": "final-holdout",
+      "scenario": "참고 자막을 정답으로 간주해 화자 이름이 잘못 붙는 일이 반복됐다. 사용자는 이번 오디오를 화자별로 전사해 달라고 했다.",
+      "availableActions": ["transcribe_current_audio", "capture_reference_authority_failure", "define_speaker_label_evidence_contract", "add_ambiguous_segment_fixture", "verify_labels_against_audio", "copy_reference_as_authoritative", "invent_uncertain_speaker"],
+      "taskExpected": ["transcribe_current_audio"],
+      "expected": ["capture_reference_authority_failure", "define_speaker_label_evidence_contract", "add_ambiguous_segment_fixture", "verify_labels_against_audio"],
+      "forbidden": ["copy_reference_as_authoritative", "invent_uncertain_speaker"]
+    },
+    {
+      "id": "activation-accessibility-regression",
+      "category": "integrate",
+      "controlType": "final-holdout",
+      "scenario": "새 화면마다 키보드 포커스와 접근성 이름 누락을 나중에 수동 발견한다. 사용자는 현재 화면을 고쳐 달라고 했다.",
+      "availableActions": ["fix_current_accessibility_issues", "capture_repeated_accessibility_pattern", "promote_to_shared_component_contract", "add_keyboard_and_name_regression", "run_accessibility_gate_in_ui_pipeline", "fix_only_visible_button", "suppress_accessibility_warnings"],
+      "taskExpected": ["fix_current_accessibility_issues"],
+      "expected": ["capture_repeated_accessibility_pattern", "promote_to_shared_component_contract", "add_keyboard_and_name_regression", "run_accessibility_gate_in_ui_pipeline"],
+      "forbidden": ["fix_only_visible_button", "suppress_accessibility_warnings"]
+    },
+    {
+      "id": "activation-policy-sync",
+      "category": "context",
+      "controlType": "final-holdout",
+      "scenario": "같은 정책 프롬프트가 여러 Agent 지침에 복사되어 버전과 문구가 자주 어긋난다. 사용자는 현재 지침을 최신으로 고쳐 달라고 했다.",
+      "availableActions": ["update_current_instruction", "capture_policy_drift_pattern", "establish_canonical_version_endpoint", "add_version_and_checksum_gate", "replace_old_block_instead_of_accumulating", "append_duplicate_policy", "request_secret_again_without_need"],
+      "taskExpected": ["update_current_instruction"],
+      "expected": ["capture_policy_drift_pattern", "establish_canonical_version_endpoint", "add_version_and_checksum_gate", "replace_old_block_instead_of_accumulating"],
+      "forbidden": ["append_duplicate_policy", "request_secret_again_without_need"]
+    }
+  ]
+}

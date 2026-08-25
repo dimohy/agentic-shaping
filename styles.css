@@ -575,6 +575,9 @@ h2 {
   background: var(--ink);
   color: white;
 }
+.eval-grid .activation-result {
+  grid-column: 1 / -1;
+}
 .eval-grid small {
   font: 500 10px var(--mono);
   color: var(--lime);
@@ -591,6 +594,71 @@ h2 {
 .eval-grid p {
   color: #c5cdc9;
   font-size: 13px;
+}
+.eval-examples {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  margin-top: 20px;
+  border: 1px solid var(--line);
+}
+.eval-examples article {
+  padding: 22px;
+  border-right: 1px solid var(--line);
+}
+.eval-examples article:last-child {
+  border: 0;
+}
+.eval-examples small,
+.validation-evolution > small {
+  font: 500 10px var(--mono);
+  color: var(--orange);
+}
+.eval-examples b {
+  display: block;
+  margin: 8px 0;
+  font: 500 26px var(--mono);
+}
+.eval-examples p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 12px;
+}
+.validation-evolution {
+  margin-top: 24px;
+  padding: clamp(24px, 4vw, 44px);
+  background: var(--white);
+  border: 1px solid var(--line);
+}
+.validation-evolution h3 {
+  margin: 10px 0 14px;
+  font-size: clamp(28px, 4vw, 46px);
+  line-height: 1.05;
+}
+.validation-evolution > p {
+  max-width: 900px;
+  color: var(--muted);
+}
+.validation-evolution ol {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1px;
+  margin: 24px 0 0;
+  padding: 1px;
+  list-style: none;
+  background: var(--line);
+}
+.validation-evolution li {
+  display: grid;
+  gap: 7px;
+  padding: 18px;
+  background: var(--paper);
+}
+.validation-evolution li b {
+  font: 500 11px var(--mono);
+  color: var(--green);
+}
+.validation-evolution li span {
+  font-size: 12px;
 }
 .evidence {
   display: grid;
@@ -698,8 +766,14 @@ footer p {
   .steps,
   .memory-ladder,
   .prompt-grid,
+  .eval-examples,
+  .validation-evolution ol,
   .evidence {
     grid-template-columns: 1fr;
+  }
+  .eval-examples article {
+    border-right: 0;
+    border-bottom: 1px solid var(--line);
   }
   .evidence div {
     border-right: 0;

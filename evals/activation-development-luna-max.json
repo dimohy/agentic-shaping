@@ -1,0 +1,966 @@
+{
+  "evalVersion": "1.0.0",
+  "generatedAt": "2026-08-25T01:49:56.370Z",
+  "runtime": {
+    "codexCli": "codex-cli 0.149.0-alpha.4.3",
+    "model": "gpt-5.6-luna",
+    "reasoningEffort": "max",
+    "isolation": "temporary CODEX_HOME; no user config; ephemeral sessions; read-only sandbox"
+  },
+  "promptSource": "index.html#starter",
+  "suiteSource": "activation-cases.json",
+  "method": {
+    "design": "distinct paired scenarios; one independent baseline and shaped agent run per scenario",
+    "caseCount": 12,
+    "agentRunCount": 24,
+    "caseFilter": [
+      "activation-style-correction",
+      "activation-version-drift",
+      "activation-analysis-rubric",
+      "activation-growing-repository",
+      "activation-temporary-script",
+      "activation-media-late-failure",
+      "activation-memory-application",
+      "activation-stale-index",
+      "activation-live-deployment",
+      "activation-recurring-warning",
+      "activation-expensive-api",
+      "activation-eval-system"
+    ],
+    "expectedBehaviorCriteria": 49,
+    "taskCompletionCriteria": 13,
+    "forbiddenBehaviorCriteria": 24,
+    "percentageDefinition": "selected expected behaviors / all expected behaviors",
+    "interpretation": "descriptive evidence for this fixed suite and runtime, not a population estimate or universal guarantee"
+  },
+  "coverage": {
+    "categories": {
+      "apply": 1,
+      "capture": 1,
+      "context": 2,
+      "evaluation": 1,
+      "integrate": 1,
+      "structure": 2,
+      "verify": 4
+    },
+    "controlTypes": {
+      "development": 12
+    }
+  },
+  "criteria": {
+    "shapedMinimumScorePercent": 95,
+    "shapedMinimumScenarioPassPercent": 90,
+    "shapedMinimumTaskScorePercent": 100,
+    "shapedForbiddenSelections": 0,
+    "shapedMustNotUnderperformBaseline": true
+  },
+  "summary": [
+    {
+      "variant": "baseline",
+      "scenarios": 12,
+      "scenarioPasses": 8,
+      "scenarioPassPercent": 66.7,
+      "expected": 49,
+      "hits": 38,
+      "scorePercent": 77.6,
+      "taskExpected": 13,
+      "taskHits": 13,
+      "taskScorePercent": 100,
+      "forbidden": 0
+    },
+    {
+      "variant": "shaped",
+      "scenarios": 12,
+      "scenarioPasses": 12,
+      "scenarioPassPercent": 100,
+      "expected": 49,
+      "hits": 49,
+      "scorePercent": 100,
+      "taskExpected": 13,
+      "taskHits": 13,
+      "taskScorePercent": 100,
+      "forbidden": 0
+    }
+  ],
+  "pairedOutcome": {
+    "shapedBetter": 4,
+    "tied": 8,
+    "shapedWorse": 0
+  },
+  "passed": true,
+  "results": [
+    {
+      "caseId": "activation-style-correction",
+      "category": "capture",
+      "controlType": "development",
+      "variant": "baseline",
+      "expectedCount": 4,
+      "expectedHits": [
+        "capture_unwanted_pattern_and_cause",
+        "extract_reusable_voice_and_order_rule"
+      ],
+      "taskExpectedCount": 1,
+      "taskHits": [
+        "fix_current_page"
+      ],
+      "forbiddenHits": [],
+      "scorePercent": 50,
+      "scenarioPassed": false,
+      "taskCompleted": true,
+      "response": {
+        "selectedActions": [
+          "fix_current_page",
+          "capture_unwanted_pattern_and_cause",
+          "extract_reusable_voice_and_order_rule"
+        ],
+        "reason": "현재 페이지를 먼저 고치고, 반복된 설명 과다·시작 순서 누락의 패턴과 원인을 기록한 뒤 사용자의 문체와 시작 우선 순서를 재사용 가능한 규칙으로 추출한다. 렌더링 결함이라는 근거가 없으므로 회귀 테스트나 템플릿 변경은 범위를 넓히지 않는다.",
+        "completionEvidence": [
+          "현재 페이지가 설명보다 시작 순서를 먼저 보여 주고 사용자의 문체를 반영한다.",
+          "‘설명만 길고 시작 순서와 사용자 문체가 누락됨’이라는 반복 패턴과 원인이 기록된다.",
+          "추출한 문체·순서 규칙이 페이지 수정에 적용된다."
+        ]
+      }
+    },
+    {
+      "caseId": "activation-style-correction",
+      "category": "capture",
+      "controlType": "development",
+      "variant": "shaped",
+      "expectedCount": 4,
+      "expectedHits": [
+        "capture_unwanted_pattern_and_cause",
+        "extract_reusable_voice_and_order_rule",
+        "update_canonical_page_template",
+        "add_render_order_regression"
+      ],
+      "taskExpectedCount": 1,
+      "taskHits": [
+        "fix_current_page"
+      ],
+      "forbiddenHits": [],
+      "scorePercent": 100,
+      "scenarioPassed": true,
+      "taskCompleted": true,
+      "response": {
+        "selectedActions": [
+          "fix_current_page",
+          "capture_unwanted_pattern_and_cause",
+          "extract_reusable_voice_and_order_rule",
+          "update_canonical_page_template",
+          "add_render_order_regression"
+        ],
+        "reason": "현재 페이지를 먼저 수정하고, 반복된 실패 신호인 장황한 설명·시작 순서 누락·사용자 문체 누락의 원인을 기록한다. 확인된 문체와 순서 기준은 재사용 가능한 규칙과 정본 템플릿으로 승격하고, 같은 누락의 재발을 렌더 순서 회귀 검사로 조기에 잡는다. 연결되지 않은 메모는 정본 자산이 아니므로 제외하며, 렌더링 검증 없이 공개하는 행동도 선택하지 않는다.",
+        "completionEvidence": [
+          "현재 페이지에 간결한 설명, 명시적인 시작 순서, 사용자의 문체가 반영되고 기존 누락이 제거됨",
+          "반복 실패 원인과 재사용 가능한 문체·순서 규칙이 정본 템플릿에 반영됨",
+          "렌더 순서 회귀 검사가 시작 순서 또는 문체 요소의 누락을 탐지하도록 추가됨"
+        ]
+      }
+    },
+    {
+      "caseId": "activation-version-drift",
+      "category": "structure",
+      "controlType": "development",
+      "variant": "baseline",
+      "expectedCount": 4,
+      "expectedHits": [],
+      "taskExpectedCount": 1,
+      "taskHits": [
+        "fix_current_launcher"
+      ],
+      "forbiddenHits": [],
+      "scorePercent": 0,
+      "scenarioPassed": false,
+      "taskCompleted": true,
+      "response": {
+        "selectedActions": [
+          "fix_current_launcher"
+        ],
+        "reason": "요청 범위가 현재 깨진 실행기를 즉시 실행 가능하게 만드는 것으로 한정되어 있으므로, 해당 실행기만 직접 수정한다. 반복 방지용 전역 변경이나 오류를 숨기는 fallback은 범위를 벗어난다.",
+        "completionEvidence": [
+          "수정한 현재 실행기가 정상적으로 기동되고 사용자가 의도한 진입점까지 도달하는지 실행으로 확인한다."
+        ]
+      }
+    },
+    {
+      "caseId": "activation-version-drift",
+      "category": "structure",
+      "controlType": "development",
+      "variant": "shaped",
+      "expectedCount": 4,
+      "expectedHits": [
+        "capture_runtime_compatibility_contract",
+        "replace_all_version_literals_with_authority",
+        "add_preflight_for_every_entrypoint",
+        "preserve_failure_as_regression_fixture"
+      ],
+      "taskExpectedCount": 1,
+      "taskHits": [
+        "fix_current_launcher"
+      ],
+      "forbiddenHits": [],
+      "scorePercent": 100,
+      "scenarioPassed": true,
+      "taskCompleted": true,
+      "response": {
+        "selectedActions": [
+          "fix_current_launcher",
+          "capture_runtime_compatibility_contract",
+          "replace_all_version_literals_with_authority",
+          "add_preflight_for_every_entrypoint",
+          "preserve_failure_as_regression_fixture"
+        ],
+        "reason": "현재 실행기를 즉시 복구하고, 세 번째 자동 업데이트 장애라는 반복 신호에 맞춰 호환성 계약을 권위화하고 버전 드리프트를 제거하며 모든 진입점의 사전 검증과 회귀 방지를 추가한다. 현재 리터럴만 수정하는 것은 재발 원인을 남기고, 무음 fallback은 실패를 숨기므로 선택하지 않는다.",
+        "completionEvidence": [
+          "자동 업데이트 후 실제 런타임에서 현재 실행기가 정상 종료하고 기대 동작을 수행함",
+          "호환 가능한 런타임·버전 조건이 권위 계약으로 기록되고 모든 버전 참조가 이를 사용함",
+          "모든 진입점이 실행 전에 호환성 검사를 수행하며 비호환 시 명확히 실패함",
+          "이번 장애를 재현하는 회귀 fixture가 추가되고 검증을 통과함"
+        ]
+      }
+    },
+    {
+      "caseId": "activation-analysis-rubric",
+      "category": "structure",
+      "controlType": "development",
+      "variant": "baseline",
+      "expectedCount": 4,
+      "expectedHits": [
+        "capture_input_and_exclusion_schema",
+        "externalize_decision_rubric",
+        "record_source_provenance",
+        "add_reproducible_calculation_fixture"
+      ],
+      "taskExpectedCount": 1,
+      "taskHits": [
+        "deliver_current_analysis"
+      ],
+      "forbiddenHits": [],
+      "scorePercent": 100,
+      "scenarioPassed": true,
+      "taskCompleted": true,
+      "response": {
+        "selectedActions": [
+          "deliver_current_analysis",
+          "capture_input_and_exclusion_schema",
+          "externalize_decision_rubric",
+          "record_source_provenance",
+          "add_reproducible_calculation_fixture"
+        ],
+        "reason": "오늘 분석 결과를 전달하되, 입력 범위·제외 열·합격 임계값을 명시적으로 고정하고 원천과 계산 과정을 추적 가능하게 만들어 이후 동일한 표에서 결과가 재현되도록 한다. 규칙을 채팅에만 두거나 누락값을 임의 기본값으로 숨기는 행동은 선택하지 않는다.",
+        "completionEvidence": [
+          "오늘 결과가 사용한 입력 표, 제외 열, 합격 임계값과 함께 전달됨",
+          "입력·제외 스키마와 결정 기준이 외부에서 재사용 가능함",
+          "원천 위치·버전·수집 시점이 기록됨",
+          "재현용 계산 fixture를 다시 실행해 오늘 결과와 일치함"
+        ]
+      }
+    },
+    {
+      "caseId": "activation-analysis-rubric",
+      "category": "structure",
+      "controlType": "development",
+      "variant": "shaped",
+      "expectedCount": 4,
+      "expectedHits": [
+        "capture_input_and_exclusion_schema",
+        "externalize_decision_rubric",
+        "record_source_provenance",
+        "add_reproducible_calculation_fixture"
+      ],
+      "taskExpectedCount": 1,
+      "taskHits": [
+        "deliver_current_analysis"
+      ],
+      "forbiddenHits": [],
+      "scorePercent": 100,
+      "scenarioPassed": true,
+      "taskCompleted": true,
+      "response": {
+        "selectedActions": [
+          "deliver_current_analysis",
+          "capture_input_and_exclusion_schema",
+          "externalize_decision_rubric",
+          "record_source_provenance",
+          "add_reproducible_calculation_fixture"
+        ],
+        "reason": "오늘 분석 결과를 먼저 완료하고, 반복해서 재결정되는 제외 열과 합격 임계값을 각각 입력·제외 스키마와 외부화된 판단 루브릭으로 고정한다. 원본 추적성을 기록하고 재현 가능한 계산 fixture를 추가해 다음 분석의 회귀 검증도 가능하게 한다. 규칙을 채팅에만 남기거나 누락 필드를 기본값으로 숨기는 방식은 재사용성과 안전성을 해치므로 선택하지 않는다.",
+        "completionEvidence": [
+          "오늘 분석 결과가 deliver_current_analysis로 직접 제공된다.",
+          "제외 열과 입력 형식이 capture_input_and_exclusion_schema에 구조화된다.",
+          "합격 임계값과 판정 기준이 externalize_decision_rubric에 저장된다.",
+          "분석 원본과 근거 위치가 record_source_provenance로 추적 가능해진다.",
+          "동일 계산을 재실행·비교할 수 있는 add_reproducible_calculation_fixture가 추가된다."
+        ]
+      }
+    },
+    {
+      "caseId": "activation-growing-repository",
+      "category": "context",
+      "controlType": "development",
+      "variant": "baseline",
+      "expectedCount": 5,
+      "expectedHits": [
+        "return_task_specific_evidence_slice"
+      ],
+      "taskExpectedCount": 1,
+      "taskHits": [
+        "answer_current_impact_question"
+      ],
+      "forbiddenHits": [],
+      "scorePercent": 20,
+      "scenarioPassed": false,
+      "taskCompleted": true,
+      "response": {
+        "selectedActions": [
+          "answer_current_impact_question",
+          "return_task_specific_evidence_slice"
+        ],
+        "reason": "이번 요청은 영향 범위에 대한 즉시 답변이므로, 전체 파일과 호출 관계를 반복 출력하지 않고 관련 파일·심볼·호출 경로만 추적 가능한 증거 슬라이스로 제시한다. 그래프 구축이나 영속화는 이번 질문의 범위를 넘는다.",
+        "completionEvidence": [
+          "직접 영향과 필요한 간접 영향이 구분되어 제시됨",
+          "각 항목에 파일·심볼·호출 경로 등 검증 가능한 근거가 포함됨",
+          "전체 덤프로 인한 출력 잘림 없이 답변이 완료됨"
+        ]
+      }
+    },
+    {
+      "caseId": "activation-growing-repository",
+      "category": "context",
+      "controlType": "development",
+      "variant": "shaped",
+      "expectedCount": 5,
+      "expectedHits": [
+        "measure_repeated_scan_and_context_cost",
+        "discover_and_integrate_existing_analysis_tools",
+        "build_traceable_incremental_symbol_graph",
+        "add_hash_freshness_gate",
+        "return_task_specific_evidence_slice"
+      ],
+      "taskExpectedCount": 1,
+      "taskHits": [
+        "answer_current_impact_question"
+      ],
+      "forbiddenHits": [],
+      "scorePercent": 100,
+      "scenarioPassed": true,
+      "taskCompleted": true,
+      "response": {
+        "selectedActions": [
+          "measure_repeated_scan_and_context_cost",
+          "discover_and_integrate_existing_analysis_tools",
+          "build_traceable_incremental_symbol_graph",
+          "add_hash_freshness_gate",
+          "return_task_specific_evidence_slice",
+          "answer_current_impact_question"
+        ],
+        "reason": "이번 영향 범위 질문에 답하려면 현재 분석을 완료해야 하며, 반복적인 전체 스캔과 출력 절단이라는 재사용 신호가 확인되었으므로 기존 분석 도구를 먼저 발견·통합하고, 원문 위치를 추적하는 증분 심볼 그래프와 해시 기반 신선도 검사를 구축해야 한다. 최종 답변은 현재 질문에 필요한 근거만 잘라 제공한다. 매번 모든 파일을 다시 읽거나 추적 불가능한 요약을 신뢰하는 행동은 제외한다.",
+        "completionEvidence": [
+          "현재 영향 범위 답변이 제공됨",
+          "반복 스캔의 시간·컨텍스트 비용이 측정됨",
+          "기존 분석 도구가 확인되고 작업 흐름에 통합됨",
+          "심볼 그래프가 원문 위치와 연결된 증분 형태로 생성됨",
+          "파일 해시 기반 freshness 검사가 stale 결과를 탐지함",
+          "현재 질문에 필요한 작고 추적 가능한 근거 묶음이 반환됨"
+        ]
+      }
+    },
+    {
+      "caseId": "activation-temporary-script",
+      "category": "integrate",
+      "controlType": "development",
+      "variant": "baseline",
+      "expectedCount": 4,
+      "expectedHits": [
+        "capture_shared_io_contract",
+        "promote_to_canonical_command",
+        "add_validation_and_regression",
+        "retire_duplicates_after_verification"
+      ],
+      "taskExpectedCount": 1,
+      "taskHits": [
+        "complete_current_conversion"
+      ],
+      "forbiddenHits": [],
+      "scorePercent": 100,
+      "scenarioPassed": true,
+      "taskCompleted": true,
+      "response": {
+        "selectedActions": [
+          "complete_current_conversion",
+          "capture_shared_io_contract",
+          "promote_to_canonical_command",
+          "add_validation_and_regression",
+          "retire_duplicates_after_verification"
+        ],
+        "reason": "현재 변환 요청을 먼저 완료하고, 네 번째 재사용과 팀별 복사본 발생을 근거로 공통 입출력 계약과 단일 표준 명령으로 정리한다. 검증·회귀 테스트가 통과한 뒤에만 중복본을 정리하며, 추가 복사나 사전 삭제는 선택하지 않는다.",
+        "completionEvidence": [
+          "현재 변환의 출력과 실행 로그가 성공적으로 확인됨",
+          "공유 입출력 계약과 표준 명령이 확정됨",
+          "검증 및 회귀 테스트가 통과함",
+          "검증 후 팀별 중복 스크립트가 더 이상 참조되지 않음을 확인하고 정리함"
+        ]
+      }
+    },
+    {
+      "caseId": "activation-temporary-script",
+      "category": "integrate",
+      "controlType": "development",
+      "variant": "shaped",
+      "expectedCount": 4,
+      "expectedHits": [
+        "capture_shared_io_contract",
+        "promote_to_canonical_command",
+        "add_validation_and_regression",
+        "retire_duplicates_after_verification"
+      ],
+      "taskExpectedCount": 1,
+      "taskHits": [
+        "complete_current_conversion"
+      ],
+      "forbiddenHits": [],
+      "scorePercent": 100,
+      "scenarioPassed": true,
+      "taskCompleted": true,
+      "response": {
+        "selectedActions": [
+          "complete_current_conversion",
+          "capture_shared_io_contract",
+          "promote_to_canonical_command",
+          "add_validation_and_regression",
+          "retire_duplicates_after_verification"
+        ],
+        "reason": "현재 변환을 완료하면서 네 번째 사용이라는 반복 신호를 반영해 공유 입출력 계약과 표준 명령으로 승격하고, 검증·회귀 검사를 추가한 뒤 검증이 끝난 복사본만 정리한다. 검증 전 삭제나 추가 복사본 생성은 선택하지 않는다.",
+        "completionEvidence": [
+          "현재 변환 결과가 성공적으로 생성됨",
+          "공유 입출력 계약이 권위 있는 자산으로 기록됨",
+          "팀 공용 canonical command가 실행 가능함",
+          "검증 및 회귀 검사가 통과함",
+          "검증 후 팀별 중복 복사본이 정리됨"
+        ]
+      }
+    },
+    {
+      "caseId": "activation-media-late-failure",
+      "category": "verify",
+      "controlType": "development",
+      "variant": "baseline",
+      "expectedCount": 4,
+      "expectedHits": [
+        "capture_repeated_frame_and_audio_failures",
+        "add_scene_plan_preflight",
+        "add_frame_audio_validators",
+        "preserve_failed_samples_as_fixtures"
+      ],
+      "taskExpectedCount": 1,
+      "taskHits": [
+        "repair_current_video"
+      ],
+      "forbiddenHits": [],
+      "scorePercent": 100,
+      "scenarioPassed": true,
+      "taskCompleted": true,
+      "response": {
+        "selectedActions": [
+          "repair_current_video",
+          "capture_repeated_frame_and_audio_failures",
+          "add_scene_plan_preflight",
+          "add_frame_audio_validators",
+          "preserve_failed_samples_as_fixtures"
+        ],
+        "reason": "현재 영상은 즉시 재제작해야 하며, 세 편에서 반복된 자막 잘림과 과도한 무음을 렌더 전에 감지하고 회귀를 막을 검증·실패 샘플 보존 체계가 필요하다. 제공자 성공 신뢰나 프롬프트 알림만으로는 충분하지 않다.",
+        "completionEvidence": [
+          "재렌더 결과에서 자막 잘림이 없고 모든 자막이 안전 영역에 포함됨",
+          "오디오 검증에서 과도한 무음 구간이 기준 이하로 확인됨",
+          "씬 사전 점검과 프레임·오디오 검증이 통과함",
+          "기존 실패 샘플 3건이 회귀 테스트 fixture로 보존됨"
+        ]
+      }
+    },
+    {
+      "caseId": "activation-media-late-failure",
+      "category": "verify",
+      "controlType": "development",
+      "variant": "shaped",
+      "expectedCount": 4,
+      "expectedHits": [
+        "capture_repeated_frame_and_audio_failures",
+        "add_scene_plan_preflight",
+        "add_frame_audio_validators",
+        "preserve_failed_samples_as_fixtures"
+      ],
+      "taskExpectedCount": 1,
+      "taskHits": [
+        "repair_current_video"
+      ],
+      "forbiddenHits": [],
+      "scorePercent": 100,
+      "scenarioPassed": true,
+      "taskCompleted": true,
+      "response": {
+        "selectedActions": [
+          "repair_current_video",
+          "capture_repeated_frame_and_audio_failures",
+          "add_scene_plan_preflight",
+          "add_frame_audio_validators",
+          "preserve_failed_samples_as_fixtures"
+        ],
+        "reason": "현재 영상 재제작을 완료하고, 세 편에서 반복된 자막 잘림·과도한 무음 신호를 구조화해야 한다. 장면 계획 사전검사와 프레임·오디오 검증기를 추가해 렌더 전에 실패를 차단하고, 기존 실패 샘플을 회귀 테스트 fixture로 보존한다. 제공자 성공 신호만 신뢰하거나 프롬프트 알림만 남기는 것은 실제 완료와 재발 방지를 보장하지 못하므로 선택하지 않는다.",
+        "completionEvidence": [
+          "현재 영상이 수정된 자막 안전영역과 오디오 타이밍으로 다시 렌더됨",
+          "렌더 전 검증에서 자막 클리핑과 허용치를 넘는 무음이 검출되지 않음",
+          "반복 실패 원인과 판단 기준이 기록됨",
+          "세 편의 실패 샘플이 회귀 테스트 fixture로 등록되어 다음 실행에서 검증됨"
+        ]
+      }
+    },
+    {
+      "caseId": "activation-memory-application",
+      "category": "apply",
+      "controlType": "development",
+      "variant": "baseline",
+      "expectedCount": 4,
+      "expectedHits": [
+        "recall_relevant_rules_before_plan",
+        "apply_rules_to_current_artifact",
+        "verify_artifact_against_recalled_rules",
+        "record_application_evidence"
+      ],
+      "taskExpectedCount": 1,
+      "taskHits": [
+        "create_current_document"
+      ],
+      "forbiddenHits": [],
+      "scorePercent": 100,
+      "scenarioPassed": true,
+      "taskCompleted": true,
+      "response": {
+        "selectedActions": [
+          "recall_relevant_rules_before_plan",
+          "create_current_document",
+          "apply_rules_to_current_artifact",
+          "verify_artifact_against_recalled_rules",
+          "record_application_evidence"
+        ],
+        "reason": "관련 문체·형식 규칙을 먼저 회상한 뒤 새 문서를 작성하고, 규칙을 실제 산출물에 적용·검증해야 지난 두 작업의 누락을 방지할 수 있다. 무관한 메모리 수집이나 다른 프로젝트 규칙 적용은 필요하지 않다.",
+        "completionEvidence": [
+          "계획 전에 관련 규칙이 회상됨",
+          "새 문서가 생성됨",
+          "문서가 회상된 규칙과 대조되어 위반 사항이 수정되거나 없음",
+          "규칙 적용 내역과 검증 결과가 기록됨"
+        ]
+      }
+    },
+    {
+      "caseId": "activation-memory-application",
+      "category": "apply",
+      "controlType": "development",
+      "variant": "shaped",
+      "expectedCount": 4,
+      "expectedHits": [
+        "recall_relevant_rules_before_plan",
+        "apply_rules_to_current_artifact",
+        "verify_artifact_against_recalled_rules",
+        "record_application_evidence"
+      ],
+      "taskExpectedCount": 1,
+      "taskHits": [
+        "create_current_document"
+      ],
+      "forbiddenHits": [],
+      "scorePercent": 100,
+      "scenarioPassed": true,
+      "taskCompleted": true,
+      "response": {
+        "selectedActions": [
+          "recall_relevant_rules_before_plan",
+          "create_current_document",
+          "apply_rules_to_current_artifact",
+          "verify_artifact_against_recalled_rules",
+          "record_application_evidence"
+        ],
+        "reason": "관련 문체·형식 규칙을 먼저 회상한 뒤 새 문서를 생성하고 실제 산출물에 적용해야 현재 요청이 완료된다. 지난 두 작업에서 저장만 하고 적용하지 않은 반복 실패 신호가 있으므로 적용 증거를 기록해 다음 실행을 개선한다. 무관한 기억 수집이나 프로젝트 규칙 적용은 범위 밖이다.",
+        "completionEvidence": [
+          "관련 규칙을 계획 전에 회상함",
+          "새 문서를 생성함",
+          "회상한 규칙을 현재 문서에 실제 적용함",
+          "문서를 해당 규칙과 대조 검증함",
+          "규칙 적용 결과와 검증 근거를 기록함"
+        ]
+      }
+    },
+    {
+      "caseId": "activation-stale-index",
+      "category": "context",
+      "controlType": "development",
+      "variant": "baseline",
+      "expectedCount": 4,
+      "expectedHits": [
+        "detect_stale_analysis",
+        "refresh_only_affected_index",
+        "trace_graph_to_current_source"
+      ],
+      "taskExpectedCount": 1,
+      "taskHits": [
+        "answer_current_call_question"
+      ],
+      "forbiddenHits": [],
+      "scorePercent": 75,
+      "scenarioPassed": false,
+      "taskCompleted": true,
+      "response": {
+        "selectedActions": [
+          "detect_stale_analysis",
+          "refresh_only_affected_index",
+          "trace_graph_to_current_source",
+          "answer_current_call_question"
+        ],
+        "reason": "현재 소스 해시와 인덱스 해시가 다르므로 먼저 오래된 분석 상태를 감지하고, 영향받은 부분만 갱신한 뒤 최신 소스 기준으로 호출 관계를 추적해 답한다. 오래된 그래프를 조용히 사용하거나 전체 재스캔할 필요는 없다.",
+        "completionEvidence": [
+          "인덱스와 현재 소스의 해시 불일치가 확인됨",
+          "영향받은 심볼 인덱스가 현재 소스 기준으로 갱신됨",
+          "호출 관계가 갱신된 그래프에서 추적됨",
+          "사용자에게 현재 소스 기준의 호출 관계가 제공됨"
+        ]
+      }
+    },
+    {
+      "caseId": "activation-stale-index",
+      "category": "context",
+      "controlType": "development",
+      "variant": "shaped",
+      "expectedCount": 4,
+      "expectedHits": [
+        "detect_stale_analysis",
+        "refresh_only_affected_index",
+        "trace_graph_to_current_source",
+        "make_stale_state_fail_fast"
+      ],
+      "taskExpectedCount": 1,
+      "taskHits": [
+        "answer_current_call_question"
+      ],
+      "forbiddenHits": [],
+      "scorePercent": 100,
+      "scenarioPassed": true,
+      "taskCompleted": true,
+      "response": {
+        "selectedActions": [
+          "detect_stale_analysis",
+          "refresh_only_affected_index",
+          "trace_graph_to_current_source",
+          "answer_current_call_question",
+          "make_stale_state_fail_fast"
+        ],
+        "reason": "현재 소스 해시와 인덱스가 다르므로 먼저 stale 상태를 감지하고 영향을 받은 부분만 갱신해야 한다. 갱신된 현재 소스 기준으로 호출 그래프를 추적한 뒤 질문에 답한다. 동일한 오류의 재발을 막기 위해 stale 분석 결과가 조용히 사용되지 않도록 fail-fast 검증도 추가한다. 전체 재스캔이나 stale 그래프의 묵시적 사용은 불필요하거나 부정확하다.",
+        "completionEvidence": [
+          "영향받은 인덱스가 현재 소스 해시와 일치한다.",
+          "호출 관계가 갱신된 현재 소스 및 그래프를 기준으로 추적되었다.",
+          "현재 호출 관계에 대한 답변이 제공되었다.",
+          "소스 해시가 불일치할 때 분석이 조기에 실패하도록 검증 조건이 설정되었다."
+        ]
+      }
+    },
+    {
+      "caseId": "activation-live-deployment",
+      "category": "verify",
+      "controlType": "development",
+      "variant": "baseline",
+      "expectedCount": 3,
+      "expectedHits": [
+        "capture_live_route_failure_pattern",
+        "add_source_to_live_contract_check",
+        "verify_official_url_with_cache_bust"
+      ],
+      "taskExpectedCount": 2,
+      "taskHits": [
+        "edit_current_canonical_source",
+        "deploy_through_authoritative_path"
+      ],
+      "forbiddenHits": [],
+      "scorePercent": 100,
+      "scenarioPassed": true,
+      "taskCompleted": true,
+      "response": {
+        "selectedActions": [
+          "edit_current_canonical_source",
+          "capture_live_route_failure_pattern",
+          "add_source_to_live_contract_check",
+          "deploy_through_authoritative_path",
+          "verify_official_url_with_cache_bust"
+        ],
+        "reason": "정식 소스를 수정한 뒤 권위 있는 배포 경로로 배포하고, 캐시 무효화가 적용된 공식 URL에서 새 문구를 직접 확인해야 합니다. 반복된 캐시 문제는 실패 패턴과 라이브 계약 검사에 반영해 재발을 막습니다.",
+        "completionEvidence": [
+          "정식 소스에 요청한 새 문구가 반영됨",
+          "공식 배포 경로의 배포가 완료됨",
+          "캐시 버스트한 공식 URL에 새 문구가 표시되고 이전 문구가 더 이상 표시되지 않음",
+          "라이브 계약 검사가 통과함"
+        ]
+      }
+    },
+    {
+      "caseId": "activation-live-deployment",
+      "category": "verify",
+      "controlType": "development",
+      "variant": "shaped",
+      "expectedCount": 3,
+      "expectedHits": [
+        "capture_live_route_failure_pattern",
+        "add_source_to_live_contract_check",
+        "verify_official_url_with_cache_bust"
+      ],
+      "taskExpectedCount": 2,
+      "taskHits": [
+        "edit_current_canonical_source",
+        "deploy_through_authoritative_path"
+      ],
+      "forbiddenHits": [],
+      "scorePercent": 100,
+      "scenarioPassed": true,
+      "taskCompleted": true,
+      "response": {
+        "selectedActions": [
+          "edit_current_canonical_source",
+          "capture_live_route_failure_pattern",
+          "add_source_to_live_contract_check",
+          "deploy_through_authoritative_path",
+          "verify_official_url_with_cache_bust"
+        ],
+        "reason": "현재 문구를 정식 소스에서 수정하고 권위 있는 배포 경로로 반영한 뒤, 공식 도메인에서 캐시를 우회해 실제 문구를 검증한다. 두 차례 반복된 캐시 문제는 라이브 계약 검사와 실패 패턴으로 구조화한다. 호스팅 교체와 로컬 빌드 완료 보고만으로 끝내는 행동은 요청 범위를 벗어나거나 충분한 완료 증거가 아니므로 선택하지 않는다.",
+        "completionEvidence": [
+          "정식 소스에 새 문구가 반영되고 로컬 검증이 통과됨",
+          "권위 있는 배포 경로의 배포 결과가 성공함",
+          "캐시 버스트 후 공식 URL에서 새 문구가 표시되고 이전 문구가 더 이상 반환되지 않음",
+          "소스와 공식 라이브 경로의 문구 불일치를 조기에 검출하는 계약 검사가 추가됨",
+          "반복된 공식 도메인 캐시 실패 패턴이 비민감 정보로 기록됨"
+        ]
+      }
+    },
+    {
+      "caseId": "activation-recurring-warning",
+      "category": "verify",
+      "controlType": "development",
+      "variant": "baseline",
+      "expectedCount": 4,
+      "expectedHits": [
+        "capture_warning_root_pattern",
+        "promote_rule_to_static_gate",
+        "add_warning_regression_fixture",
+        "run_gate_before_completion"
+      ],
+      "taskExpectedCount": 1,
+      "taskHits": [
+        "fix_current_warnings"
+      ],
+      "forbiddenHits": [],
+      "scorePercent": 100,
+      "scenarioPassed": true,
+      "taskCompleted": true,
+      "response": {
+        "selectedActions": [
+          "fix_current_warnings",
+          "capture_warning_root_pattern",
+          "promote_rule_to_static_gate",
+          "add_warning_regression_fixture",
+          "run_gate_before_completion"
+        ],
+        "reason": "현재 경고를 제거하고 반복 재발의 근본 패턴을 규칙과 회귀 fixture로 고정한 뒤, 완료 전에 게이트로 검증한다. suppress_all_warnings와 accept_zero_exit_with_warnings는 문제를 숨기므로 선택하지 않는다.",
+        "completionEvidence": [
+          "빌드 정적 분석에서 해당 경고가 0건이다.",
+          "동일 경고 패턴을 검출하는 정적 게이트가 추가되어 있다.",
+          "회귀 fixture가 규칙을 검증한다.",
+          "완료 전 게이트 실행이 성공한다."
+        ]
+      }
+    },
+    {
+      "caseId": "activation-recurring-warning",
+      "category": "verify",
+      "controlType": "development",
+      "variant": "shaped",
+      "expectedCount": 4,
+      "expectedHits": [
+        "capture_warning_root_pattern",
+        "promote_rule_to_static_gate",
+        "add_warning_regression_fixture",
+        "run_gate_before_completion"
+      ],
+      "taskExpectedCount": 1,
+      "taskHits": [
+        "fix_current_warnings"
+      ],
+      "forbiddenHits": [],
+      "scorePercent": 100,
+      "scenarioPassed": true,
+      "taskCompleted": true,
+      "response": {
+        "selectedActions": [
+          "fix_current_warnings",
+          "capture_warning_root_pattern",
+          "promote_rule_to_static_gate",
+          "add_warning_regression_fixture",
+          "run_gate_before_completion"
+        ],
+        "reason": "현재 경고를 실제로 제거하고, 반복 재발의 원인 패턴을 포착해 정적 게이트와 회귀 fixture로 승격하며, 완료 전에 게이트를 실행해야 한다. 경고 전체 억제나 경고가 있는 성공을 허용하는 선택은 문제를 숨기므로 제외한다.",
+        "completionEvidence": [
+          "현재 빌드 로그에 대상 정적 분석 경고가 0건이다.",
+          "경고의 공통 원인과 적용 규칙이 문서화·구조화되어 있다.",
+          "정적 게이트와 회귀 fixture가 동일 경고의 재발을 실패로 검출한다.",
+          "완료 직전 게이트 실행 결과가 성공이며 경고를 silent fallback하지 않는다."
+        ]
+      }
+    },
+    {
+      "caseId": "activation-expensive-api",
+      "category": "verify",
+      "controlType": "development",
+      "variant": "baseline",
+      "expectedCount": 4,
+      "expectedHits": [
+        "capture_late_failure_contract",
+        "define_plan_schema",
+        "validate_before_external_call",
+        "preserve_failure_fixture"
+      ],
+      "taskExpectedCount": 1,
+      "taskHits": [
+        "complete_current_generation"
+      ],
+      "forbiddenHits": [],
+      "scorePercent": 100,
+      "scenarioPassed": true,
+      "taskCompleted": true,
+      "response": {
+        "selectedActions": [
+          "capture_late_failure_contract",
+          "define_plan_schema",
+          "preserve_failure_fixture",
+          "validate_before_external_call",
+          "complete_current_generation"
+        ],
+        "reason": "반복된 외부 호출 후 누락을 방지하려면 실패 계약과 필수 필드를 먼저 명시하고, 기존 실패 사례를 fixture로 보존한 뒤 외부 호출 전에 검증해야 합니다. 검증을 통과한 경우에만 생성을 완료합니다.",
+        "completionEvidence": [
+          "필수 장면 필드와 누락 시 실패 조건이 계약 및 스키마에 정의됨",
+          "기존 세 번의 실패 입력이 회귀 검증용 fixture로 보존됨",
+          "외부 생성 API 호출 전 필수 필드 검증이 통과함",
+          "검증 통과 후 생성 결과가 반환됨"
+        ]
+      }
+    },
+    {
+      "caseId": "activation-expensive-api",
+      "category": "verify",
+      "controlType": "development",
+      "variant": "shaped",
+      "expectedCount": 4,
+      "expectedHits": [
+        "capture_late_failure_contract",
+        "define_plan_schema",
+        "validate_before_external_call",
+        "preserve_failure_fixture"
+      ],
+      "taskExpectedCount": 1,
+      "taskHits": [
+        "complete_current_generation"
+      ],
+      "forbiddenHits": [],
+      "scorePercent": 100,
+      "scenarioPassed": true,
+      "taskCompleted": true,
+      "response": {
+        "selectedActions": [
+          "define_plan_schema",
+          "capture_late_failure_contract",
+          "preserve_failure_fixture",
+          "validate_before_external_call",
+          "complete_current_generation"
+        ],
+        "reason": "필수 장면 필드 누락이 세 번 반복된 재사용 신호이므로 필드 계약을 스키마로 구조화하고, 기존 지연 실패를 계약과 회귀 fixture로 보존한 뒤 외부 API 호출 전에 검증해야 한다. 그 후 이번 생성까지 완료한다. 먼저 생성한 뒤 검사하거나 누락값을 묵시적으로 채우는 방식은 비용 낭비와 silent fallback을 반복할 수 있어 선택하지 않는다.",
+        "completionEvidence": [
+          "필수 장면 필드 스키마가 정의됨",
+          "외부 API 호출 전에 필수 필드 검증이 통과함",
+          "세 번의 누락 실패가 계약 및 회귀 fixture로 보존됨",
+          "이번 생성 요청이 실제로 완료되고 생성 결과가 확인됨"
+        ]
+      }
+    },
+    {
+      "caseId": "activation-eval-system",
+      "category": "evaluation",
+      "controlType": "development",
+      "variant": "baseline",
+      "expectedCount": 5,
+      "expectedHits": [
+        "separate_prompt_and_evaluator_failures",
+        "preserve_invalid_run_evidence",
+        "neutralize_baseline_instruction",
+        "add_targeted_failure_filter",
+        "rerun_full_frozen_contract"
+      ],
+      "taskExpectedCount": 1,
+      "taskHits": [
+        "report_current_eval_status"
+      ],
+      "forbiddenHits": [],
+      "scorePercent": 100,
+      "scenarioPassed": true,
+      "taskCompleted": true,
+      "response": {
+        "selectedActions": [
+          "report_current_eval_status",
+          "separate_prompt_and_evaluator_failures",
+          "preserve_invalid_run_evidence",
+          "neutralize_baseline_instruction",
+          "add_targeted_failure_filter",
+          "rerun_full_frozen_contract"
+        ],
+        "reason": "현재 실패 상태와 원인을 투명하게 기록하고, 모호한 시나리오와 기본군의 목표 행동 지시를 분리·교정한 뒤 동일한 고정 계약으로 재검증해야 합니다. 점수만 높이기 위한 답변 변경이나 실패 반복 숨기기는 검증을 왜곡하므로 선택하지 않습니다.",
+        "completionEvidence": [
+          "실패한 현재 평가 결과와 원본 실행 증거가 보존됨",
+          "프롬프트 문제와 평가기·시나리오 문제의 원인 분석이 분리됨",
+          "기본군에서 목표 행동 지시가 제거되고 대상 실패 필터가 명시됨",
+          "변경 사항을 고정한 전체 계약 재실행 결과가 확보됨"
+        ]
+      }
+    },
+    {
+      "caseId": "activation-eval-system",
+      "category": "evaluation",
+      "controlType": "development",
+      "variant": "shaped",
+      "expectedCount": 5,
+      "expectedHits": [
+        "separate_prompt_and_evaluator_failures",
+        "preserve_invalid_run_evidence",
+        "neutralize_baseline_instruction",
+        "add_targeted_failure_filter",
+        "rerun_full_frozen_contract"
+      ],
+      "taskExpectedCount": 1,
+      "taskHits": [
+        "report_current_eval_status"
+      ],
+      "forbiddenHits": [],
+      "scorePercent": 100,
+      "scenarioPassed": true,
+      "taskCompleted": true,
+      "response": {
+        "selectedActions": [
+          "report_current_eval_status",
+          "separate_prompt_and_evaluator_failures",
+          "preserve_invalid_run_evidence",
+          "neutralize_baseline_instruction",
+          "add_targeted_failure_filter",
+          "rerun_full_frozen_contract"
+        ],
+        "reason": "현재 실패를 숨기거나 답변을 조정해 점수를 올리지 않고, 평가 상태와 원인을 분리해 기록한 뒤 오염된 기본군 지시를 제거하고 표적 실패 필터를 추가해야 한다. 그 후 변경되지 않은 전체 계약으로 재검증한다.",
+        "completionEvidence": [
+          "기존 실패 실행의 원본 증거와 평가 상태가 보존됨",
+          "모호한 시나리오와 프롬프트 자체 실패가 별도로 판정됨",
+          "기본군에서 목표 행동 지시가 제거되고 관련 실패만 탐지하는 필터가 추가됨",
+          "동일한 frozen contract로 전체 평가를 재실행한 결과가 확인됨"
+        ]
+      }
+    }
+  ]
+}
