@@ -49,6 +49,11 @@ if (htmlPrompt !== readmePrompt) {
     "README.md의 적용 프롬프트가 index.html의 공개 프롬프트와 다릅니다.",
   );
 }
+if (!htmlPrompt.startsWith(`Agentic Shaping ${siteVersion}\n\n`)) {
+  throw new Error(
+    `공개 적용 프롬프트 첫 줄에 현재 버전 Agentic Shaping ${siteVersion}이 필요합니다.`,
+  );
+}
 
 const requiredAnalysisContracts = [
   "CONTEXT-SCALABLE ANALYSIS",

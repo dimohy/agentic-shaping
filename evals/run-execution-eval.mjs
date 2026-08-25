@@ -27,8 +27,17 @@ const grade = work => {
   const missing = runPwsh(work, ["-File", "code.ps1"]);
   checks.push({ id: "missing-runtime-fails-fast", pass: missing.status !== 0, detail: (missing.stdout + missing.stderr).trim() });
   writeFileSync(statePath, originalState);
-  const sources = readdirSync(work).filter(x => /\.ps1$/i.test(x)).map(x => readFileSync(join(work, x), "utf8")).join("\n");
-  checks.push({ id: "old-hardcode-removed", pass: !sources.includes("26.814.41407"), detail: "search source files" });
+  const productionSourceFiles = ["Prepare.ps1", "code.ps1", "code-a.ps1", "code-b.ps1"];
+  const oldHardcodeFiles = productionSourceFiles.filter(name =>
+    readFileSync(join(work, name), "utf8").includes("26.814.41407"),
+  );
+  checks.push({
+    id: "old-hardcode-removed",
+    pass: oldHardcodeFiles.length === 0,
+    detail: oldHardcodeFiles.length === 0
+      ? `production sources checked: ${productionSourceFiles.join(", ")}`
+      : `old hardcode remains in production sources: ${oldHardcodeFiles.join(", ")}`,
+  });
   const testFiles = readdirSync(work).filter(x => /test/i.test(x) && x.endsWith(".ps1"));
   let testPassed = false, testDetail = "no PowerShell test file";
   for (const test of testFiles) {
