@@ -2,8 +2,8 @@ import { readFileSync } from "node:fs";
 import { resolve, join } from "node:path";
 
 const root = resolve(import.meta.dirname, "..");
-const html = readFileSync(join(root, "index.html"), "utf8");
-const readme = readFileSync(join(root, "README.md"), "utf8");
+const html = readFileSync(join(root, "ko", "index.html"), "utf8");
+const readme = readFileSync(join(root, "README.ko.md"), "utf8");
 const activation = JSON.parse(readFileSync(join(root, "evals", "activation-latest-results.json"), "utf8"));
 const regression = JSON.parse(readFileSync(join(root, "evals", "latest-results.json"), "utf8"));
 const execution = JSON.parse(readFileSync(join(root, "evals", "latest-execution-results.json"), "utf8"));
@@ -75,6 +75,12 @@ const requiredReadme = [
   "기본군 18/20(90%)에서 정책 적용군 20/20(100%)",
 ];
 for (const fragment of requiredReadme) if (!readme.includes(fragment)) fail(`README 공개 평가 문구 누락: ${fragment}`);
+for (const pagePath of ["index.html", join("ko", "index.html"), join("ja", "index.html"), join("zh", "index.html")]) {
+  const page = readFileSync(join(root, pagePath), "utf8");
+  for (const invariant of ["61.5%", "96.2%", "82/105", "104/105", "90%", "100%", "SLOGS 2026.08.25.3"]) {
+    if (!page.includes(invariant)) fail(`${pagePath} 평가 불변값 누락: ${invariant}`);
+  }
+}
 const regressionBaseline = regression.summary.find(row => row.variant === "baseline");
 const regressionShaped = regression.summary.find(row => row.variant === "shaped");
 if (!regression.passed || regressionBaseline.hits !== 94 || regressionShaped.hits !== 96

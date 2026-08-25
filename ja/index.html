@@ -1,0 +1,650 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="site-root" content="../" />
+    <link rel="canonical" href="https://agentic-shaping.slogs.dev/ja/" />
+    <link rel="alternate" hreflang="en" href="https://agentic-shaping.slogs.dev/" />
+    <link rel="alternate" hreflang="ko" href="https://agentic-shaping.slogs.dev/ko/" />
+    <link rel="alternate" hreflang="ja" href="https://agentic-shaping.slogs.dev/ja/" />
+    <link rel="alternate" hreflang="zh-Hans" href="https://agentic-shaping.slogs.dev/zh/" />
+    <link rel="alternate" hreflang="x-default" href="https://agentic-shaping.slogs.dev/" />
+    <meta name="application-version" content="v0.2" />
+    <title>Agentic Shaping — 自ら発見し進化するAIワークメソッド</title>
+    <meta
+      name="description"
+      content="AI Agentが暗黙知とデータを能動的に発見・構造化し、成長する文書とソースコードを分析ツールで扱いながら、私のやり方で進化するAgentic Shaping実践ガイド"
+    />
+    <link
+      rel="icon"
+      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%2317201d'/%3E%3Ctext x='32' y='41' text-anchor='middle' font-family='Arial' font-size='25' font-weight='700' fill='%23f4f0e7'%3EAS%3C/text%3E%3C/svg%3E"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Noto+Sans+JP:wght@400;500;600;700;800;900&family=Noto+Sans+KR:wght@400;500;600;700;800;900&family=Noto+Sans+SC:wght@400;500;600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../styles.css?v=20260825.4" />
+  </head>
+  <body data-locale="ja">
+    <div class="progress"><span id="progressBar"></span></div>
+    <header>
+      <nav>
+        <a class="brand" href="#top"
+          ><b>AS</b><span>AGENTIC SHAPING</span
+          ><span class="site-version" data-site-version></span
+        ></a>
+        <div>
+          <a href="#start">5分で始める</a><a href="#loop">仕組み</a
+          ><a href="#scale">分析を拡張する</a><a href="#memory">記憶</a><a href="#prompts">プロンプト</a
+          ><a href="#validation">検証</a>
+        </div>
+        <div class="language-switcher" data-language-switcher role="group" aria-label="Language">
+          <a data-language="en" href="#">EN</a>
+          <a data-language="ko" href="#">한국어</a>
+          <a data-language="ja" href="#">日本語</a>
+          <a data-language="zh" href="#">中文</a>
+        </div>
+        <a class="pill" href="#start">今すぐ始める →</a>
+      </nav>
+    </header>
+    <main id="top">
+      <section class="hero">
+        <div class="reveal">
+          <p class="eyebrow">PROACTIVE AGENT EVOLUTION</p>
+          <h1>Agentが先に発見し、<br /><em>自分のやり方で進化する。</em></h1>
+          <p class="lead">
+            <strong>Agentic Shaping</strong>とは、AI Agentが会話や作業の中にある暗黙知・好み・失敗・データを待つことなく発見し、ルール・記憶・スキーマ・テンプレート・検証器・ツールへと形にし、次の実行で自ら先に適用する仕事術です。
+          </p>
+          <a class="button" href="#start">5分で適用する</a>
+          <p class="micro">
+            コーディングだけではありません。ドキュメント・分析・画像・動画・デプロイまで同じ方法で機能します。
+          </p>
+        </div>
+        <div class="fit reveal">
+          <article>
+            <small>SIGNALS</small><b>語り口・好み・修正・失敗</b
+            ><span>言われなくても作業中に能動的に検知</span>
+          </article>
+          <p>自ら発見し、構造化する ↓</p>
+          <article class="agent">
+            <small>AGENT + SYSTEM</small><b>記憶 → ルール → ツール → 検証</b
+            ><span>次の実行前に先に想起して適用</span>
+          </article>
+          <div class="meter">
+            <span>最初の実行</span><i><b></b></i
+            ><strong>速く正確な進化</strong>
+          </div>
+        </div>
+      </section>
+
+      <figure class="visual hero-visual">
+        <img
+          src="../assets/agentic-shaping-hero.jpg"
+          width="1536"
+          height="864"
+          alt="人の修正と作業の痕跡を、Agentが再利用可能なカードとルールとして能動的に整理する場面"
+        />
+        <figcaption>
+          <b>Agentic Shapingは、人の思考を機械的な枠に閉じ込めません。</b>
+          Agentが人のそばで小さなシグナルを先に察知し、次の作業でも取り出して使える資産へと磨き上げることです。
+          <span>AI-generated visual · 2026</span>
+        </figcaption>
+      </figure>
+
+      <section class="section">
+        <p class="no">01 · WHY</p>
+        <div class="split">
+          <h2>良い結果が得られたのに、<br />なぜ次はまた最初から説明するのでしょうか？</h2>
+          <div class="prose">
+            <p>
+              AIと仕事をしていると、かなり良い結果が出ることがあります。しかし会話が終わると、なぜその選択を好んだのか、どんな失敗を嫌ったのか、何を完了とみなすのかまで一緒に消えてしまいがちでした。
+            </p>
+            <p>
+              そこで考え方を変えました。Agentに結果だけを作らせるのではなく、
+              <strong
+                >作業の中から私を発見し、次の作業の進め方まで自ら変えさせよう。</strong
+              >
+              これがAgentic Shapingの出発点です。
+            </p>
+          </div>
+        </div>
+        <div class="shift">
+          <div><small>PASSIVE AGENT</small><b>依頼 → 結果 → 忘却</b></div>
+          <span>→</span>
+          <div>
+            <small>SHAPING AGENT</small><b>検知 → 構造化 → 適用 → 進化</b>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="start">
+        <p class="no">02 · START IN 5 MINUTES</p>
+        <div class="head">
+          <h2>説明はここまでです。<br />このプロンプトをまず貼り付けてください。</h2>
+          <p>
+            プロジェクトの指示に入れると最もよく機能します。まずは1回の会話で試しても構いません。
+          </p>
+        </div>
+        <div class="prompt featured">
+          <div>
+            <span>AGENTIC SHAPING · STARTER PROMPT</span
+            ><button type="button" data-copy="starter">コピー</button>
+          </div>
+          <pre id="starter">
+Agentic Shaping v0.2
+
+この作業にAgentic Shapingを適用してください。
+
+説明や提案だけで終わらせず、現在の依頼を完了させる行動は必ず実行し、再利用価値が確認されたシグナルがある場合は、次の実行を改善する行動も併せて実行する。複数の段階が必要な場合は、都合のよい一部だけを選ばず、完了に必要な経路全体を実行する。
+
+作業を計画したり行動を選択したりするときは、①現在の依頼の結果を実際に完成させる行動、②機密情報・権限・形式などの安全境界を守る行動、③再利用価値が確認された場合にのみ次の実行を改善する行動を、それぞれ独立して確認し、該当する行動をすべて明示的に実行する。1つを実行したからといって、別の1つも暗黙のうちに完了したとみなさない。
+
+ユーザーが明示的に一回限りで再利用不要とした情報・状態・作業については、現在の依頼だけを完了し、必要な秘密情報の除去・安全処理を行う。Agentic Shapingを適用するという理由で、無理に記憶・グローバルルール・再利用資産を作らない。また、保存しないと判断したことが、現在の依頼の完了に取って代わることもない。
+
+1. 範囲・記憶ゲート
+   - 開始前に関連する自分の過去の決定、好み、プロジェクトルール、権威ある資料を探し、実際の計画と成果物に反映する。
+   - 現在の明示的な依頼が過去の記憶に優先する。
+   - ①依頼された成果物を現在の範囲内で完了し、②関連する非機密の好み・スタイルを実際の成果物に適用し、③除外した無関係なプロジェクトルール・別アカウントの権限・認証情報は範囲外として区別する。3項目は互いに代替できない。
+2. シグナル検知
+   - 私が繰り返し説明したこと、修正したこと、嫌った結果、成功条件、繰り返す失敗、手動判断、高コストな再実行、根拠なく成功・最適化したと主張することを、別途指示がなくても捉える。
+3. 現在の解決 + 次の実行の構造化
+   - シグナルがあれば、現在の結果だけを直して止まらない。現在の作業を完了 → 原因・判断基準を捉える → 権威ある資産を更新する → 早期検証・回帰テスト → 実際の結果を確認する、という必要な経路全体を実行する。
+   - 適用範囲に応じて、次の形へ昇格させる。
+   - 好み・判断基準 → 記憶、チェックリスト、ルーブリック
+   - 繰り返し入力・データ → スキーマ、型、enum、マニフェスト
+   - 繰り返し作業 → テンプレート、コマンド、スクリプト、API、パイプライン
+   - 繰り返す失敗 → 不変条件、早期検証器、テストfixture
+   - 繰り返されるバージョン・パス・設定定数 → 単一の権威ある値に統合し、関連するすべてのハードコードを置き換える
+4. コンテキスト拡張ゲート
+   - ドキュメント・ソース・ログが大きくなり、全体読み込みや同じ探索が繰り返される場合は、既存の検索・パーサー・コンパイラー・テストを先に見つけて検証し、作業フローに統合する。不足する分析だけをインベントリ・インデックス・シンボル/依存関係グラフ・範囲クエリ・検証器として構造化する。
+   - 原文を権威として保持し、分析結果を原文の位置とバージョン/ハッシュに追跡可能にする。staleな結果は更新するか失敗させ、Agentには現在の質問に必要な小さな根拠のまとまりだけを提供する。
+5. 判断の境界
+   - 意味・曖昧さ・創造性はAgentが判断し、依頼された創作のバリエーションは実際に作る。再利用する好みは、ユーザーに確認されたものだけを捉え、確認されたものがないという判断も明示し、一回限りの選択を恒久的なルールにしない。
+   - 創作作業でも、明示されたテキスト数・可読性・出力形式・パスを個別に検証する。それ以外の不変条件・失敗条件のように機械で判定可能なものは、コードと契約によって検証する。
+6. 実行前・実行後の検証
+   - 高コスト・破壊的・デプロイ作業では、入力契約、正確な対象、権限、失敗条件を先に検証する。警告やsilent fallbackを成功として隠さない。
+   - 実際のファイル・画面・ランタイム・公式URL・デプロイ状態で完了を確認する。検証済みの新しい経路があれば、重複・一時的・迂回経路を整理し、改善効果を時間・コンテキスト・欠落・再試行の変化で測定する。
+7. 完了報告
+   - 現在の依頼の結果、適用した過去の決定、新たに捉えて構造化した再利用資産、実行した検証、残る制約を分けて伝える。
+
+現在の依頼と権限を広げず、機密情報・一回限りの状態・検証されていない推測は保存しないでください。</pre>
+        </div>
+        <div class="steps">
+          <article>
+            <b>1</b><strong>貼り付ける</strong>
+            <p>プロンプトの後に、いつものように今日やることを書きます。</p>
+          </article>
+          <article>
+            <b>2</b><strong>一度修正する</strong>
+            <p>「違う、私が望んでいるのは…」と正確に言い直します。</p>
+          </article>
+          <article>
+            <b>3</b><strong>残った資産を確認する</strong>
+            <p>ルール・テンプレート・テスト・記憶のうち、何が残ったかを確認します。</p>
+          </article>
+          <article>
+            <b>4</b><strong>次の作業で確認する</strong>
+            <p>同じ説明が減り、品質が維持されているかを確認します。</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="section" id="loop">
+        <p class="no">03 · HOW IT WORKS</p>
+        <div class="head">
+          <h2>結果だけでなく、<br />次の結果を生み出す方法も磨きます。</h2>
+          <p>核心は、フィードバックが次の作業の資産へつながる循環です。</p>
+        </div>
+        <figure class="visual inline-visual">
+          <img
+            src="../assets/agentic-shaping-loop.jpg"
+            width="1536"
+            height="864"
+            alt="人のシグナルが構造化アセットと実際の検証を経て、次の作業へ戻ってくる循環"
+          />
+          <figcaption>
+            <b>一度気づいたシグナルは、次の作業の土台になります。</b>
+            その流れを、以下の段階に明確に整理しました。
+          </figcaption>
+        </figure>
+        <div class="loop reveal">
+          <article>
+            <small>01</small><b>検知</b><span>繰り返される説明・修正・失敗</span>
+          </article>
+          <i>→</i>
+          <article>
+            <small>02</small><b>捉える</b><span>原因・望んだ方向・範囲</span>
+          </article>
+          <i>→</i>
+          <article>
+            <small>03</small><b>構造化</b><span>記憶・ルール・スキーマ</span>
+          </article>
+          <i>→</i>
+          <article>
+            <small>04</small><b>適用</b><span>権威ある経路に統合</span>
+          </article>
+          <i>→</i>
+          <article>
+            <small>05</small><b>検証・整理</b><span>実際の証拠・重複の除去</span>
+          </article>
+          <p>新しい修正と結果が再び最初の段階に戻ります ↺</p>
+        </div>
+        <div class="boundary">
+          <article>
+            <small>AGENTが担い続けること</small
+            ><b>意味・コンテキスト・曖昧さ・創造性</b>
+            <p>「なぜこれが良いのか？」のように解釈が必要な判断</p>
+          </article>
+          <article>
+            <small>システムに任せること</small
+            ><b>反復・形式・不変条件・実行順序</b>
+            <p>「この条件なら失敗だ」のように判定可能な判断</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="section" id="scale">
+        <p class="no">04 · CONTEXT-SCALABLE ANALYSIS</p>
+        <div class="head">
+          <h2>大きくなるほど多く読ませるのではなく、<br />より正確にクエリさせます。</h2>
+          <p>
+            Agentic Shapingによってドキュメントやバイブコーディングのソースが蓄積すると、毎回ファイル全体を非構造的に読み直す方法自体が次のボトルネックになります。遅くなる探索、繰り返される全体スキャン、途中で切れる出力、見落とされる依存関係は、分析方法を構造化すべきシグナルです。
+          </p>
+        </div>
+        <div class="assets reveal">
+          <div>
+            <small>増大する原文と分析負荷</small>
+            <span>ドキュメント・ソースコード・設定・ログ</span>
+            <span>繰り返される全体スキャン・長いツール出力</span>
+            <span>コンテキスト汚染・遅い探索・欠落</span>
+          </div>
+          <b>STRUCTURE →</b>
+          <div class="boxes">
+            <span><b>inventory/</b> ファイル・ドキュメント・所有権</span>
+            <span><b>index/</b> タイトル・シンボル・参照位置</span>
+            <span><b>graph/</b> 呼び出し・依存・影響関係</span>
+            <span><b>queries/</b> 範囲・フィルター・根拠のまとまり</span>
+            <span><b>gates/</b> 鮮度・一貫性・回帰</span>
+          </div>
+        </div>
+        <div class="boundary">
+          <article>
+            <small>分析ツールが保証すること</small>
+            <b>原文追跡・バージョン/ハッシュ・変更時の更新</b>
+            <p>
+              要約を新たな真実の源にはしません。各結果がどの原文から導かれたのかを証明し、古いインデックスは黙って使わず、失敗させます。
+            </p>
+          </article>
+          <article>
+            <small>AGENTが使用する方法</small>
+            <b>既存ツールを優先・小さな根拠のまとまり・意味の判断</b>
+            <p>
+              検索・パーサー・コンパイラー・テストで答えられるなら、まず再利用します。不足する場合にのみ統合分析器を作り、現在の質問に必要な証拠だけを読んで解釈します。
+            </p>
+          </article>
+        </div>
+        <p class="memory-note">
+          この原則は、長いコンテキストでは関連情報の活用が弱くなる可能性があるという
+          <a href="https://arxiv.org/abs/2307.03172">Lost in the Middle研究</a>,
+          トークン効率の高いツールと選別されたコンテキストを推奨する
+          <a href="https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents">コンテキストエンジニアリングの指針</a>,
+          反復検索がリポジトリレベルのコード生成を改善した
+          <a href="https://arxiv.org/abs/2303.12570">RepoCoder</a>, 構文木を
+          効率的に更新・クエリする
+          <a href="https://tree-sitter.github.io/tree-sitter/">Tree-sitter</a>ものなどの根拠に基づいています。核心は、より長いプロンプトではなく、より小さく高シグナルな分析サーフェスです。
+        </p>
+      </section>
+
+      <section class="section">
+        <p class="no">05 · WHERE TASTE LIVES</p>
+        <div class="head">
+          <h2>
+            「自分のスタイル」は言葉だけにとどまらず、<br />いつでも探して使える資産の中に
+            あります。
+          </h2>
+          <p>
+            次のAgentが作業前に探せるよう、基準となる場所を1つ定めます。
+          </p>
+        </div>
+        <figure class="visual inline-visual">
+          <img
+            src="../assets/agentic-shaping-system.jpg"
+            width="1536"
+            height="864"
+            alt="散在する暗黙知が能動的なパターン検出を経て、生きた作業システムへと整えられる場面"
+          />
+          <figcaption>
+            <b>散在していた暗黙知が、継続的に磨かれる作業体系へとつながります。</b>
+            Agentは結果を作るだけにとどまらず、繰り返される判断を見つけ、次の作業でも活用できるようにつなぎます。
+          </figcaption>
+        </figure>
+        <div class="assets reveal">
+          <div>
+            <small>作業中のシグナル</small><span>「この語り口はレポートっぽすぎる」</span
+            ><span>「デプロイ成功ではなく、実際のURLを見て」</span
+            ><span>「このエラーは次からもっと早く検出して」</span>
+          </div>
+          <b>SHAPE →</b>
+          <div class="boxes">
+            <span><b>memory/</b> 好み・判断</span
+            ><span><b>rules/</b> 指示・ルーブリック</span
+            ><span><b>schemas/</b> 型・契約</span
+            ><span><b>tests/</b> 失敗・fixture</span
+            ><span><b>tools/</b> コマンド・検証器</span>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="memory">
+        <p class="no">06 · MEMORY MAKES IT STRONGER</p>
+        <div class="head">
+          <h2>記憶がつながるほど、<br />Agentic Shapingはよりよく機能します。</h2>
+          <p>
+            記憶ツールがなくても始められます。しかし、作業中に気づいた修正や判断基準を次の作業の前に再び見つけられるようになると、Agentは初めてユーザーのやり方に継続的に合わせられるようになります。
+          </p>
+        </div>
+        <div class="memory-ladder reveal">
+          <article>
+            <small>すぐに始める</small>
+            <strong>Agentic Shaping</strong>
+            <p>
+              現在の会話とプロジェクトの指示の中からシグナルを探して適用します。会話が途切れると、それまでに蓄積されたコンテキストも失われる可能性があります。
+            </p>
+          </article>
+          <article>
+            <small>よりよく機能する</small>
+            <strong>+ LLM Wiki</strong>
+            <p>
+              修正や好み、判断基準を長く残し、次の作業の前に再び取り出して使えます。だからAgentic Shapingはよりよく機能します。
+            </p>
+          </article>
+          <article class="featured-memory">
+            <small>もう一段よく機能する</small>
+            <strong>+ Slogs LLM Wiki</strong>
+            <p>
+              関連する記憶を作業前に先に呼び出し、ユーザーの修正を意図の補正シグナルとして捉え、グローバル範囲とプロジェクト範囲を分けて記憶を更新します。だからAgentic Shapingは、より速く安定してユーザーのやり方に合わせられます。
+            </p>
+            <a href="https://slogs.dev/me/llm-wiki"
+              >Slogs LLM Wikiを始める →</a
+            >
+          </article>
+        </div>
+        <p class="memory-note">
+          記憶は集めるだけでは終わりません。次の作業の前に探し出し、実際の計画と結果に適用して初めて力を発揮します。
+        </p>
+      </section>
+
+      <section class="section" id="prompts">
+        <p class="no">07 · COPY &amp; RUN</p>
+        <div class="head">
+          <h2>行き詰まったところで<br />1つ選んですぐに使います。</h2>
+          <p>最初から巨大なシステムを作る必要はありません。</p>
+        </div>
+        <div class="prompt-grid">
+          <div class="prompt">
+            <div>
+              <span>作業を開始する</span
+              ><button type="button" data-copy="work">コピー</button>
+            </div>
+            <pre id="work">
+この作業を完了してください。開始前に関連する記憶とプロジェクトルールを自ら探し、成功条件と実際の検証方法を定めてください。作業中に繰り返される判断・修正・失敗を能動的に検知したら、Agentic Shapingの候補として捉え、現在の範囲内で再利用可能なルール・スキーマ・テンプレート・テスト・ツールへ昇格させてください。次の実行ではその資産を先に適用し、何によってより速く正確になったのかも報告してください。</pre>
+          </div>
+          <div class="prompt">
+            <div>
+              <span>問題の再発</span
+              ><button type="button" data-copy="repair">コピー</button>
+            </div>
+            <pre id="repair">
+この問題を症状だけ直すのではなく、Agentic Shapingの観点から診断してください。なぜAgentが事前に発見できず、手動判断や遅い段階まで残ってしまったのかを突き止め、次回から型・スキーマ・不変条件・早期検証器・回帰テストのうち、どれによって先に発見できるようにするかを実装してください。実際に検証した後、重複するfallbackと一時的な経路も整理してください。</pre>
+          </div>
+          <div class="prompt">
+            <div>
+              <span>作業後の振り返り</span
+              ><button type="button" data-copy="retro">コピー</button>
+            </div>
+            <pre id="retro">
+今行った作業をAgentic Shapingの観点から振り返ってください。①自ら検知すべきだった私の好み・判断基準 ②繰り返した手動判断 ③遅れて発見された失敗 ④すでに作成した再利用資産 ⑤次の構造化候補を区別してください。長期的な価値があるものだけを、適用範囲と根拠を整えて基準となるリポジトリに反映し、次の作業の前に先に想起してください。</pre>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="examples">
+        <p class="no">08 · REAL EXAMPLES</p>
+        <h2>一度の修正が<br />次の実行のデフォルトになります。</h2>
+        <div class="examples">
+          <article>
+            <small>DOCUMENT</small>
+            <p>
+              <b>「概念の説明ではなく、コピーできるプロンプトと開始手順を先にください。」</b
+              ><br />→ 5分で始める → コピー用プロンプト → 入出力 → 事例 → 概念の順序が
+              ドキュメントのルールとして残ります。
+            </p>
+          </article>
+          <article>
+            <small>CODE</small>
+            <p>
+              <b>「Agentがまた同じバージョン差分を手作業で探していた。」</b><br />→ バージョン
+              マニフェスト + 互換性チェック + 診断 + 回帰テストが次の更新前に
+              検出します。
+            </p>
+          </article>
+          <article>
+            <small>ANALYSIS</small>
+            <p>
+              <b>「結論は正しいのに、判断の経路を再現できない。」</b><br />→ 入力
+              スキーマ + 判断ルーブリック + 根拠 + 計算用fixtureが結論に至る経路まで
+              残します。
+            </p>
+          </article>
+          <article>
+            <small>SCALE</small>
+            <p>
+              <b>「リポジトリが大きくなるほど、Agentが毎回すべて読んで遅くなる。」</b><br />→
+              原文位置・バージョンを追跡できるインベントリ + シンボル/依存関係グラフ + 範囲クエリが
+              必要な証拠だけを小さなまとまりで提供します。
+            </p>
+          </article>
+          <article>
+            <small>MEDIA</small>
+            <p>
+              <b>「私の文体と画面スタイルがまた消えてしまった。」</b><br />→ スタイルの記憶 +
+              良い/悪い例 + レンダリングチェックが生成前に適用されます。
+            </p>
+          </article>
+        </div>
+      </section>
+
+      <section class="score">
+        <div>
+          <p class="no">09 · MEASURE</p>
+          <h2>「進化している」という言葉は<br />次の実行で証明します。</h2>
+        </div>
+        <div>
+          <p>再説明 <b>↓</b></p>
+          <p>手動判断 <b>↓</b></p>
+          <p>遅い失敗と再試行 <b>↓</b></p>
+          <p>時間とコスト <b>↓</b></p>
+          <p>全体の再分析とコンテキスト使用量 <b>↓</b></p>
+          <p>意図の的中率と再現性 <b>↑</b></p>
+        </div>
+      </section>
+
+      <section class="section validation" id="validation">
+        <p class="no">10 · BEHAVIORAL VALIDATION</p>
+        <div class="head">
+          <h2>本当に発動するのかって？<br />同じ課題で比較しました。</h2>
+          <p>
+            一般的な作業能力とAgentic Shapingの発動を混同しませんでした。両群に
+            同じ現在の課題を与え、適用群にのみ正確な公開プロンプトを入れました。
+            現在の作業完了と安全は別ゲートで守ったまま、シグナルの捕捉・構造化・次回
+            実行の改善が実際に追加されるかを採点しました。
+          </p>
+        </div>
+        <div class="eval-grid">
+          <article class="activation-result">
+            <small>AGENTIC SHAPING ACTIVATION · 26 PAIRED SCENARIOS · 52 AGENT RUNS</small>
+            <strong>61.5% <i>→</i> 96.2%</strong>
+            <p>
+              固有の行動をすべて実行したシナリオは16/26 → 25/26でした。
+              詳細な行動は82/105（78.1%）→ 104/105（99.0%）、適用群優位10 ·
+              同率16 · 劣位0でした。初見の最終holdout 5件も
+              3/5（60%）→ 5/5（100%）でした。
+            </p>
+          </article>
+          <article>
+            <small>CURRENT TASK &amp; SAFETY GUARD</small>
+            <strong>27/27 <i>↔</i> 27/27</strong>
+            <p>
+              基本群と適用群の両方で、現在のリクエスト完了基準をすべて選択し、52件の禁止
+              行動では選択が0件でした。スコア差を広げるために、現在の作業や
+              安全を犠牲にはしていません。
+            </p>
+          </article>
+          <article>
+            <small>REAL FILE EXECUTION · 1 TASK · 6 CHECKS</small>
+            <strong>6/6 <i>↔</i> 6/6</strong>
+            <p>
+              壊れたバージョン選択リポジトリを実際に修正させた回帰ゲートです。この一つの
+              課題は両条件とも合格したため、プロンプトの優位性ではなく、実際のファイル
+              実行に回帰がないことの証拠としてのみ使用します。
+            </p>
+          </article>
+        </div>
+        <div class="eval-examples" role="group" aria-label="Agentic Shapingの差別化事例">
+          <article>
+            <small>CONTEXT-SCALABLE ANALYSIS</small>
+            <b>1/5 → 5/5</b>
+            <p>全体の再読から、測定・既存ツールの統合・増分グラフ・鮮度ゲートへ。</p>
+          </article>
+          <article>
+            <small>TEMPORARY SCRIPT</small>
+            <b>0/4 → 4/4</b>
+            <p>現在の変換から、共通契約・正式なコマンド・回帰・検証後の重複整理へ。</p>
+          </article>
+          <article>
+            <small>FINAL HOLDOUT · CONFIG DRIFT</small>
+            <b>1/4 → 4/4</b>
+            <p>一つの設定修正から、型契約・すべてのエントリーポイントのpreflight・fixtureへ。</p>
+          </article>
+        </div>
+        <div class="validation-evolution">
+          <small>VALIDATION SHAPES TOO</small>
+          <h3>プロンプトだけでなく、<br />検証システムも進化します。</h3>
+          <p>
+            今回の検証も最初から完成していたわけではありません。少ないサンプル、基本群に混在した
+            目標行動、曖昧なケース、繰り返される一つのケースの失敗、長時間実行のtimeoutを
+            shapingシグナルとして捉えました。これを26件の差別化シナリオと個別の作業・安全
+            ゲート、開発/holdoutの分離、失敗ケースの早期フィルター、反復結果の保存、
+            ハッシュ一致checkpoint・resume・timeout再試行へと昇格させました。最後には
+            <code>tests/</code> 下記の合格テストを見つけられなかった採点器まで発見し、再帰
+            探索で修正しました。
+          </p>
+          <ol>
+            <li><b>Detect</b><span>誇張されたパーセンテージ・評価汚染・反復失敗の検出</span></li>
+            <li><b>Structure</b><span>差別化スコアと一般品質の回帰を分離</span></li>
+            <li><b>Verify early</b><span>失敗ケースだけを先に再生してから全体回帰</span></li>
+            <li><b>Integrate</b><span>同一ハッシュのcheckpointと再現可能な結果アセット</span></li>
+          </ol>
+          <div class="policy-sync">
+            <div>
+              <small>CONFIRMED FINAL POLICY SYNC</small>
+              <strong>90% <i>→</i> 100%</strong>
+              <span class="policy-version">HOMEPAGE v0.2 ↔ SLOGS 2026.08.25.3</span>
+              <p>
+                ホームページ最終プロンプトの確認済み行動契約を、Slogs LLM Wikiの韓国語・英語
+                ランタイムポリシーに同期しました。ライブポリシー5組の回帰・10回のLuna Max
+                実行で、固有の行動18/20 → 20/20、禁止行動0件を確認しました。
+              </p>
+            </div>
+            <ul>
+              <li>現在の結果の完成・安全境界・durableな改善を独立して実行</li>
+              <li>一回限りの作業には無理に記憶やグローバルルールを作らない</li>
+              <li>durableなシグナルは権威あるアセット・早期検証・回帰まで完遂</li>
+              <li>繰り返されるバージョン・パス・設定を単一の権威に統合し、関連するハードコーディングをすべて置き換える</li>
+            </ul>
+            <a href="../evals/slogs-policy-smoke-luna-max.json">ポリシー行動の結果</a>
+            <a href="https://slogs.dev/prompts/slogs-mcp.ko.md">最終韓国語ポリシーを確認 →</a>
+          </div>
+        </div>
+        <div class="evidence">
+          <div>
+            <b>サンプルとスコアの定義</b>
+            <p>
+              26件のペアシナリオ · 52回のAgent実行 · 固有行動105件 · パーセントは
+              固定セットを完全に通過したシナリオの割合
+            </p>
+          </div>
+          <div>
+            <b>実行環境</b>
+            <p>GPT-5.6 Luna · Max · Codex CLI 0.149.0-alpha.4.3 · 分離実行 · 2026-08-25</p>
+          </div>
+          <div>
+            <b>直接再現</b>
+            <p>
+              <a href="../evals/README.md">実行方法</a> ·
+              <a href="../evals/activation-latest-results.json">差別化の結果</a> ·
+              <a href="../evals/latest-execution-results.json">ファイル実行の結果</a> ·
+              <a href="https://openai.com/index/evals-drive-next-chapter-of-ai/">評価設計の参考</a>
+            </p>
+          </div>
+        </div>
+        <p class="note">
+          <b>検証の結論：</b> この固定セットでのLuna Max単一実行では、Agentic
+          Shaping固有の行動が明確に増加し、現在の作業・安全の回帰はありませんでした。
+          適用群も、バージョンドリフトにおける「すべてのハードコーディングを置き換える」という
+          一つの行動を見落としました。この数値は母集団の推定でも、すべてのモデル・ツール環境の
+          保証でもありません。そのため、分子・分母・同率・欠落・失敗履歴を公開し、プロンプトと
+          検証器をともに継続的にshapingします。
+        </p>
+      </section>
+
+      <section class="section">
+        <p class="no">11 · ORIGIN &amp; DIFFERENCE</p>
+        <div class="split">
+          <h2>Compound Engineeringで<br />名前だけを変えたのではありません。</h2>
+          <div class="prose">
+            <p>
+              Compound Engineeringの「一つの作業が次の作業を容易にする」という
+              実行構造は、良い参考になりました。特に、計画・作業・レビュー・蓄積を
+              コマンドとファイルで可視化した方法は、このガイドを作り直す際に直接
+              参考にしました。
+            </p>
+            <p>
+              Agentic Shapingの出発点は、人とAgentの間で生まれる
+              <strong>暗黙知と修正</strong>です。Agentは指示を待つ
+              ツールにとどまらず、作業中のシグナルを先に発見し、
+              コーディング・文書・分析・メディア全般で再利用できる構造に変え、次の
+              実行そのものを改善します。
+            </p>
+            <p class="note">
+              Vibe Compilerは構造化の手段が目的のように見え、Vibe Tailoringは
+              カスタマイズされた結果だけを強調することでAgentの主体性が弱くなっていました。Agentic
+              Shapingという名前には、自ら行動するAgentとともに磨かれていく
+              作業体系を込めました。
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section class="cta">
+        <p>今日は一つだけ試してみてください。</p>
+        <h2>
+          繰り返し説明していた一つの文を<br />Agentが先に気づき、次回も守る
+          ルールとして残してみましょう。
+        </h2>
+        <a class="button" href="#start">開始プロンプトをコピーしに行く ↑</a>
+      </section>
+    </main>
+    <footer>
+      <b>AS</b><strong>AGENTIC SHAPING</strong
+      ><span class="site-version" data-site-version></span>
+      <p>Agentが先に発見し、私のやり方で進化します。</p>
+      <a href="https://github.com/dimohy/agentic-shaping">GitHub ↗</a>
+    </footer>
+    <div id="toast">プロンプトをコピーしました。</div>
+    <script src="../script.js?v=20260825.4"></script>
+  </body>
+</html>

@@ -9,7 +9,16 @@
   --white: #fffdf7;
   --header-height: 70px;
   --mono: "DM Mono", monospace;
-  --sans: "Noto Sans KR", sans-serif;
+  --sans: "Noto Sans KR", "Noto Sans JP", "Noto Sans SC", sans-serif;
+}
+html[lang="en"] {
+  --sans: system-ui, -apple-system, "Segoe UI", sans-serif;
+}
+html[lang="ja"] {
+  --sans: "Noto Sans JP", "Noto Sans KR", sans-serif;
+}
+html[lang="zh-Hans"] {
+  --sans: "Noto Sans SC", "Noto Sans KR", sans-serif;
 }
 * {
   box-sizing: border-box;
@@ -66,6 +75,26 @@ nav > div {
   display: flex;
   gap: 24px;
   margin-left: auto;
+}
+.language-switcher {
+  gap: 4px;
+  margin-left: 0;
+  padding: 3px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: var(--white);
+}
+.language-switcher a {
+  min-width: 28px;
+  padding: 3px 6px;
+  border-radius: 999px;
+  text-align: center;
+  font: 500 9px var(--mono);
+  color: var(--muted);
+}
+.language-switcher a.active {
+  background: var(--ink);
+  color: var(--lime);
 }
 nav a {
   text-decoration: none;
@@ -797,11 +826,17 @@ footer p {
   transform: none;
 }
 @media (max-width: 850px) {
-  nav > div {
+  nav > div:not(.language-switcher) {
     display: none;
   }
-  .pill {
+  nav {
+    gap: 10px;
+  }
+  .language-switcher {
     margin-left: auto;
+  }
+  .pill {
+    margin-left: 0;
   }
   .hero,
   .split,
@@ -871,6 +906,16 @@ footer p {
   .visual figcaption span {
     display: block;
     margin-top: 7px;
+  }
+}
+@media (max-width: 600px) {
+  .brand > span:not(.site-version),
+  .pill {
+    display: none;
+  }
+  .language-switcher a {
+    min-width: 25px;
+    padding-inline: 4px;
   }
 }
 @media (max-width: 560px) {

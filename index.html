@@ -1,15 +1,20 @@
 <!doctype html>
-<html lang="ko">
+<html lang="en">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="site-root" content="./" />
+    <link rel="canonical" href="https://agentic-shaping.slogs.dev/" />
+    <link rel="alternate" hreflang="en" href="https://agentic-shaping.slogs.dev/" />
+    <link rel="alternate" hreflang="ko" href="https://agentic-shaping.slogs.dev/ko/" />
+    <link rel="alternate" hreflang="ja" href="https://agentic-shaping.slogs.dev/ja/" />
+    <link rel="alternate" hreflang="zh-Hans" href="https://agentic-shaping.slogs.dev/zh/" />
+    <link rel="alternate" hreflang="x-default" href="https://agentic-shaping.slogs.dev/" />
     <meta name="application-version" content="v0.2" />
-    <title>
-      Agentic Shaping — 스스로 발견하고, 내 방식으로 진화하는 AI 작업법
-    </title>
+    <title>Agentic Shaping — An AI Work Method That Evolves</title>
     <meta
       name="description"
-      content="AI Agent가 암묵지와 데이터를 능동적으로 발견·정형화하고, 커지는 문서와 소스코드를 분석 도구로 다루며 내 방식으로 진화하는 Agentic Shaping 실전 가이드"
+      content="A practical guide to Agentic Shaping, where an AI Agent actively discovers and formalizes tacit knowledge and data, handles growing documents and source code with analysis tools, and evolves in my way"
     />
     <link
       rel="icon"
@@ -18,12 +23,12 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Noto+Sans+KR:wght@400;500;600;700;800;900&display=swap"
+      href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Noto+Sans+JP:wght@400;500;600;700;800;900&family=Noto+Sans+KR:wght@400;500;600;700;800;900&family=Noto+Sans+SC:wght@400;500;600;700;800;900&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="styles.css?v=20260825.3" />
+    <link rel="stylesheet" href="./styles.css?v=20260825.4" />
   </head>
-  <body>
+  <body data-locale="en">
     <div class="progress"><span id="progressBar"></span></div>
     <header>
       <nav>
@@ -32,58 +37,59 @@
           ><span class="site-version" data-site-version></span
         ></a>
         <div>
-          <a href="#start">5분 시작</a><a href="#loop">작동 방식</a
-          ><a href="#scale">분석 확장</a><a href="#memory">기억</a><a href="#prompts">프롬프트</a
-          ><a href="#validation">검증</a>
+          <a href="#start">Start in 5 minutes</a><a href="#loop">How it works</a
+          ><a href="#scale">Scaling analysis</a><a href="#memory">Memory</a><a href="#prompts">Prompt</a
+          ><a href="#validation">Verification</a>
         </div>
-        <a class="pill" href="#start">지금 시작 →</a>
+        <div class="language-switcher" data-language-switcher role="group" aria-label="Language">
+          <a data-language="en" href="#">EN</a>
+          <a data-language="ko" href="#">한국어</a>
+          <a data-language="ja" href="#">日本語</a>
+          <a data-language="zh" href="#">中文</a>
+        </div>
+        <a class="pill" href="#start">Start now →</a>
       </nav>
     </header>
     <main id="top">
       <section class="hero">
         <div class="reveal">
           <p class="eyebrow">PROACTIVE AGENT EVOLUTION</p>
-          <h1>Agent가 먼저 발견하고,<br /><em>내 방식으로 진화한다.</em></h1>
+          <h1>The Agent discovers it first,<br /><em>and evolves in my way.</em></h1>
           <p class="lead">
-            <strong>Agentic Shaping</strong>은 AI Agent가 대화와 작업 속
-            암묵지·취향·실패·데이터를 기다리지 않고 발견하여
-            규칙·기억·스키마·템플릿·검증기·도구로 빚고, 다음 실행에서 스스로
-            먼저 적용하는 작업법입니다.
+            <strong>Agentic Shaping</strong>is a way of working in which an AI Agent discovers tacit knowledge, preferences, failures, and data in conversations and tasks without waiting for them to be pointed out, shapes them into rules, memories, schemas, templates, validators, and tools, and applies them first on its own in the next execution.
           </p>
-          <a class="button" href="#start">5분 안에 적용하기</a>
+          <a class="button" href="#start">Apply it in 5 minutes</a>
           <p class="micro">
-            코딩만이 아닙니다. 문서 · 분석 · 이미지 · 영상 · 배포까지 같은
-            방식으로 작동합니다.
+            It is not just for coding. The same approach works for documents, analysis, images, video, and deployment.
           </p>
         </div>
         <div class="fit reveal">
           <article>
-            <small>SIGNALS</small><b>말투 · 취향 · 교정 · 실패</b
-            ><span>말하지 않아도 작업 속에서 능동적으로 감지</span>
+            <small>SIGNALS</small><b>Tone · preferences · corrections · failures</b
+            ><span>Actively detected during work without being explicitly stated</span>
           </article>
-          <p>스스로 발견하고 구조화한다 ↓</p>
+          <p>Discover and structure it yourself ↓</p>
           <article class="agent">
-            <small>AGENT + SYSTEM</small><b>기억 → 규칙 → 도구 → 검증</b
-            ><span>다음 실행 전에 먼저 회상하고 적용</span>
+            <small>AGENT + SYSTEM</small><b>Memory → Rules → Tools → Verification</b
+            ><span>Recall and apply it before the next execution</span>
           </article>
           <div class="meter">
-            <span>첫 실행</span><i><b></b></i
-            ><strong>빠르고 정확한 진화</strong>
+            <span>First execution</span><i><b></b></i
+            ><strong>Fast, accurate evolution</strong>
           </div>
         </div>
       </section>
 
       <figure class="visual hero-visual">
         <img
-          src="assets/agentic-shaping-hero.jpg"
+          src="./assets/agentic-shaping-hero.jpg"
           width="1536"
           height="864"
-          alt="사람의 교정과 작업 흔적을 Agent가 재사용 가능한 카드와 규칙으로 능동적으로 조직하는 장면"
+          alt="A scene where an Agent actively organizes human corrections and traces of work into reusable cards and rules"
         />
         <figcaption>
-          <b>Agentic Shaping은 사람의 생각을 기계적인 틀에 가두지 않습니다.</b>
-          Agent가 사람 곁에서 작은 신호를 먼저 알아차리고, 다음 작업에서도 꺼내
-          쓸 수 있는 자산으로 다듬는 일입니다.
+          <b>Agentic Shaping does not confine human thought within mechanical frameworks.</b>
+          It means the Agent notices small signals alongside people and refines them into assets that can be retrieved and used in future work.
           <span>AI-generated visual · 2026</span>
         </figcaption>
       </figure>
@@ -91,28 +97,25 @@
       <section class="section">
         <p class="no">01 · WHY</p>
         <div class="split">
-          <h2>좋은 결과를 얻었는데,<br />왜 다음엔 또 처음부터 설명할까요?</h2>
+          <h2>You got a good result, but<br />why do you have to explain everything from scratch next time?</h2>
           <div class="prose">
             <p>
-              AI와 일하다 보면 제법 괜찮은 결과가 나옵니다. 그런데 대화가 끝나면
-              제가 왜 그 선택을 좋아했는지, 어떤 실패를 싫어했는지, 무엇을
-              완료라고 보는지도 같이 사라지곤 했습니다.
+              When working with AI, you can get fairly good results. But when the conversation ended, I often lost not only why I liked certain choices and what failures I disliked, but also what I considered complete.
             </p>
             <p>
-              그래서 생각을 바꿨습니다. Agent가 결과만 만들게 하지 말고,
+              So I changed the way I thought about it. Instead of having the Agent only produce results,
               <strong
-                >작업 속에서 저를 발견하고 다음 작업의 방식까지 스스로 바꾸게
-                하자.</strong
+                >I wanted it to discover me through the work and change the way it approached future work on its own.</strong
               >
-              이것이 Agentic Shaping의 출발점입니다.
+              This is where Agentic Shaping begins.
             </p>
           </div>
         </div>
         <div class="shift">
-          <div><small>PASSIVE AGENT</small><b>요청 → 결과 → 망각</b></div>
+          <div><small>PASSIVE AGENT</small><b>Request → Result → Forgetting</b></div>
           <span>→</span>
           <div>
-            <small>SHAPING AGENT</small><b>감지 → 정형화 → 적용 → 진화</b>
+            <small>SHAPING AGENT</small><b>Detect → Structure → Apply → Evolve</b>
           </div>
         </div>
       </section>
@@ -120,72 +123,71 @@
       <section class="section" id="start">
         <p class="no">02 · START IN 5 MINUTES</p>
         <div class="head">
-          <h2>설명은 여기까지.<br />이 프롬프트부터 붙여 넣으세요.</h2>
+          <h2>That is enough explanation.<br />Paste this prompt first.</h2>
           <p>
-            프로젝트 지침에 넣으면 가장 잘 작동합니다. 우선 한 번의 대화에서
-            시험해도 됩니다.
+            It works best when added to your project instructions. You can also try it in a single conversation first.
           </p>
         </div>
         <div class="prompt featured">
           <div>
             <span>AGENTIC SHAPING · STARTER PROMPT</span
-            ><button type="button" data-copy="starter">복사</button>
+            ><button type="button" data-copy="starter">Copy</button>
           </div>
           <pre id="starter">
 Agentic Shaping v0.2
 
-이 작업에는 Agentic Shaping을 적용해줘.
+Apply Agentic Shaping to this task.
 
-설명이나 제안만 하지 말고 현재 요청을 끝내는 행동은 항상 수행하며, 재사용 가치가 확인된 신호가 있을 때는 다음 실행을 개선하는 행동도 함께 수행한다. 여러 단계가 필요하면 편한 일부만 고르지 말고 완료에 필요한 전체 경로를 실행한다.
+Do not merely explain or make suggestions. Always perform the actions that actually complete the current request, and when you identify a signal with reuse value, also take the actions that improve the next execution. If multiple steps are required, execute the entire path needed for completion instead of choosing only the convenient parts.
 
-작업을 계획하거나 행동을 선택할 때는 ① 현재 요청의 결과를 실제로 완성하는 행동, ② 민감정보·권한·형식 같은 안전 경계를 지키는 행동, ③ 재사용 가치가 확인된 경우에만 다음 실행을 개선하는 행동을 각각 독립적으로 확인하고, 해당되는 행동을 모두 명시적으로 수행한다. 하나를 수행했다는 이유로 다른 하나가 암묵적으로 끝났다고 간주하지 않는다.
+When planning the task or choosing actions, independently verify ① the actions that actually complete the current request, ② the actions that maintain safety boundaries such as sensitive information, permissions, and format, and ③ the actions that improve the next execution only when reuse value has been confirmed. Explicitly perform every applicable action. Do not assume that completing one means another is implicitly complete.
 
-사용자가 명시적으로 일회성이고 재사용할 필요가 없다고 한 정보·상태·작업은 현재 요청만 완료하고 필요한 비밀 제거·안전 처리를 수행한다. Agentic Shaping을 적용한다는 이유로 억지로 기억·전역 규칙·재사용 자산을 만들지 않으며, 저장하지 않는다는 판단이 현재 요청 완료를 대신하지도 않는다.
+When the user explicitly says that information, state, or work is one-off and does not need to be reused, complete only the current request and perform any necessary secret removal and safety handling. Do not force memory, global rules, or reusable assets into existence merely because Agentic Shaping is being applied, and do not let the decision not to save anything substitute for completing the current request.
 
-1. 범위·기억 게이트
-   - 시작 전에 관련된 내 과거 결정, 선호, 프로젝트 규칙과 권위 자료를 찾아 실제 계획과 산출물에 반영한다.
-   - 현재의 명시적 요청이 과거 기억보다 우선한다.
-   - ① 요청된 산출물을 현재 범위 안에서 완료하고, ② 관련 비민감 선호·스타일은 실제 산출물에 적용하며, ③ 제외한 무관한 프로젝트 규칙·다른 계정 권한·자격 증명은 범위 밖이라고 구분한다. 세 항목은 서로 대신할 수 없다.
-2. 신호 감지
-   - 내가 반복해서 설명한 것, 수정한 것, 싫어한 결과, 성공 조건, 반복 실패, 수동 판단, 비싼 재실행, 근거 없이 성공·최적화됐다는 주장을 별도 지시 없이 포착한다.
-3. 현재 해결 + 다음 실행 구조화
-   - 신호가 있으면 현재 결과만 고치고 멈추지 않는다. 현재 작업 완료 → 원인·판단 기준 포착 → 권위 자산 갱신 → 조기 검증·회귀 검사 → 실제 결과 확인까지 필요한 전체 경로를 수행한다.
-   - 적용 범위에 맞춰 다음 형태로 승격한다.
-   - 취향·판단 기준 → 기억, 체크리스트, 루브릭
-   - 반복 입력·데이터 → 스키마, 타입, enum, 매니페스트
-   - 반복 작업 → 템플릿, 명령, 스크립트, API, 파이프라인
-   - 반복 실패 → 불변식, 조기 검증기, 테스트 fixture
-   - 반복되는 버전·경로·설정 상수 → 단일 권위 값으로 통합하고 관련된 모든 하드코딩을 교체
-4. 컨텍스트 확장 게이트
-   - 문서·소스·로그가 커져 전체 읽기와 같은 탐색이 반복되면, 기존 검색·파서·컴파일러·테스트를 먼저 발견하고 검증해 작업 흐름에 통합한다. 부족한 분석만 인벤토리·인덱스·심볼/의존 그래프·범위 질의·검증기로 정형화한다.
-   - 원문을 권위로 보존하고 분석 결과를 원문 위치와 버전/해시에 추적 가능하게 한다. stale 결과는 갱신하거나 실패시키며, Agent에는 현재 질문에 필요한 작은 근거 묶음만 제공한다.
-5. 판단 경계
-   - 의미·모호성·창의성은 Agent가 판단하고 요청된 창작 변형은 실제로 만든다. 재사용 취향은 사용자에게 확인된 것만 포착하며, 확인된 것이 없다는 판단도 명시하고 일회성 선택을 영구 규칙으로 만들지 않는다.
-   - 창작 작업에서도 명시된 텍스트 수·가독성·출력 형식·경로를 별도로 검증한다. 그 밖의 불변식·실패 조건처럼 기계 판정 가능한 것은 코드와 계약으로 검증한다.
-6. 실행 전·후 검증
-   - 고비용·파괴적·배포 작업은 입력 계약, 정확한 대상, 권한, 실패 조건을 먼저 검증한다. 경고와 silent fallback을 성공으로 숨기지 않는다.
-   - 실제 파일·화면·런타임·공식 URL·배포 상태로 완료를 확인한다. 검증된 새 경로가 있으면 중복·임시·우회 경로를 정리하고, 개선 효과는 시간·컨텍스트·누락·재시도 변화로 측정한다.
-7. 완료 보고
-   - 현재 요청의 결과, 적용한 과거 결정, 새로 포착·구조화한 재사용 자산, 실행한 검증, 남은 한계를 구분해 알려준다.
+1. Scope and memory gate
+   - Before starting, find relevant past decisions, preferences, project rules, and authoritative sources, and reflect them in the actual plan and deliverables.
+   - The current explicit request takes precedence over past memories.
+   - Distinguish ① completing the requested deliverable within the current scope, ② applying relevant non-sensitive preferences and style to the actual deliverable, and ③ treating unrelated project rules, permissions for other accounts, and credentials that were excluded as out of scope. None of these three can substitute for another.
+2. Signal detection
+   - Without requiring separate instructions, capture what I have explained repeatedly, corrected, disliked, or defined as a success condition, along with recurring failures, manual judgments, expensive reruns, and unsupported claims of success or optimization.
+3. Current solution + next-execution structure
+   - When there is a signal, do not stop after fixing only the current result. Execute the entire path required: complete the current task → capture the causes and decision criteria → update the authoritative assets → add early validation and regression checks → confirm the actual result.
+   - Promote signals into the following forms according to their scope of application.
+   - Preferences and decision criteria → memories, checklists, rubrics
+   - Repeated inputs and data → schemas, types, enum, manifests
+   - Repeated tasks → templates, commands, scripts, APIs, pipelines
+   - Recurring failures → invariants, early validators, test fixtures
+   - Repeated version, path, and configuration constants → consolidate them into single authoritative values and replace all related hardcoding
+4. Context expansion gate
+   - When documents, source code, or logs grow large enough that full reads and repeated exploration become a bottleneck, first discover, verify, and integrate existing search tools, parsers, compilers, and tests into the workflow. Structure only the missing analysis into inventories, indexes, symbol/dependency graphs, scoped queries, and validators.
+   - Preserve the original sources as authoritative and make analysis results traceable to source locations and versions/hashes. Refresh stale results or fail, and provide the Agent only with the small evidence bundle needed for the current question.
+5. Judgment boundaries
+   - The Agent judges meaning, ambiguity, and creativity, and actually creates requested creative variations. Capture reusable preferences only after they have been confirmed by the user, explicitly state when nothing has been confirmed, and do not turn one-off choices into permanent rules.
+   - Even in creative work, separately verify the specified text count, readability, output format, and path. Validate other machine-checkable properties, such as invariants and failure conditions, through code and contracts.
+6. Pre- and post-execution verification
+   - For high-cost, destructive, or deployment operations, verify the input contract, exact target, permissions, and failure conditions first. Do not hide warnings or silent fallback as success.
+   - Confirm completion using actual files, screens, runtime behavior, official URLs, and deployment status. When a verified new path exists, remove duplicate, temporary, and workaround paths, and measure improvement through changes in time, context usage, omissions, and retries.
+7. Completion report
+   - Distinguish and report the result of the current request, past decisions applied, newly captured and structured reusable assets, verification performed, and remaining limitations.
 
-현재 요청과 권한을 넓히지 말고, 민감 정보·일회성 상태·검증되지 않은 추측은 저장하지 마.</pre>
+Do not expand the current request or permissions, and do not save sensitive information, one-off state, or unverified speculation.</pre>
         </div>
         <div class="steps">
           <article>
-            <b>1</b><strong>붙여 넣기</strong>
-            <p>프롬프트 뒤에 평소처럼 오늘 할 일을 적습니다.</p>
+            <b>1</b><strong>Paste it</strong>
+            <p>Write what you usually need to do today after the prompt.</p>
           </article>
           <article>
-            <b>2</b><strong>한 번 교정하기</strong>
-            <p>“아니, 내가 원하는 건…”이라고 정확히 고쳐 말합니다.</p>
+            <b>2</b><strong>Make one correction</strong>
+            <p>Correct it precisely by saying, “No, what I want is…”</p>
           </article>
           <article>
-            <b>3</b><strong>남은 자산 확인</strong>
-            <p>규칙·템플릿·테스트·기억 중 무엇이 남았는지 봅니다.</p>
+            <b>3</b><strong>Check the remaining assets</strong>
+            <p>See what remains among the rules, templates, tests, and memories.</p>
           </article>
           <article>
-            <b>4</b><strong>다음 작업에서 확인</strong>
-            <p>같은 설명이 줄고 품질이 유지되는지 확인합니다.</p>
+            <b>4</b><strong>Verify it in the next task</strong>
+            <p>Check whether you need to explain less while maintaining quality.</p>
           </article>
         </div>
       </section>
@@ -193,53 +195,53 @@ Agentic Shaping v0.2
       <section class="section" id="loop">
         <p class="no">03 · HOW IT WORKS</p>
         <div class="head">
-          <h2>결과뿐 아니라,<br />다음 결과를 만드는 방식도 다듬습니다.</h2>
-          <p>핵심은 피드백이 다음 작업의 자산으로 이어지는 순환입니다.</p>
+          <h2>Not only the result,<br />but also the way future results are produced.</h2>
+          <p>The key is a cycle in which feedback becomes an asset for the next task.</p>
         </div>
         <figure class="visual inline-visual">
           <img
-            src="assets/agentic-shaping-loop.jpg"
+            src="./assets/agentic-shaping-loop.jpg"
             width="1536"
             height="864"
-            alt="사람의 신호가 구조화 자산과 실제 검증을 거쳐 다음 작업으로 돌아오는 순환"
+            alt="A cycle in which human signals pass through structured assets and real verification before returning to the next task"
           />
           <figcaption>
-            <b>한 번 알아챈 신호는 다음 작업의 밑바탕이 됩니다.</b>
-            그 흐름을 아래 단계에 또렷하게 정리했습니다.
+            <b>Once a signal is noticed, it becomes the foundation for the next task.</b>
+            The flow is laid out clearly in the steps below.
           </figcaption>
         </figure>
         <div class="loop reveal">
           <article>
-            <small>01</small><b>감지</b><span>반복 설명·교정·실패</span>
+            <small>01</small><b>Detect</b><span>Repeated explanations · corrections · failures</span>
           </article>
           <i>→</i>
           <article>
-            <small>02</small><b>포착</b><span>원인·원한 방향·범위</span>
+            <small>02</small><b>Capture</b><span>Cause · desired direction · scope</span>
           </article>
           <i>→</i>
           <article>
-            <small>03</small><b>정형화</b><span>기억·규칙·스키마</span>
+            <small>03</small><b>Structure</b><span>Memory · rules · schemas</span>
           </article>
           <i>→</i>
           <article>
-            <small>04</small><b>적용</b><span>권위 있는 경로에 통합</span>
+            <small>04</small><b>Apply</b><span>Integrate into the authoritative path</span>
           </article>
           <i>→</i>
           <article>
-            <small>05</small><b>검증·정리</b><span>실제 증거·중복 제거</span>
+            <small>05</small><b>Verify · simplify</b><span>Actual evidence · remove duplication</span>
           </article>
-          <p>새 교정과 결과가 다시 첫 단계로 돌아갑니다 ↺</p>
+          <p>New corrections and results return to the first step ↺</p>
         </div>
         <div class="boundary">
           <article>
-            <small>AGENT가 계속 맡을 것</small
-            ><b>의미 · 맥락 · 모호성 · 창의성</b>
-            <p>“왜 이게 좋은가?”처럼 해석이 필요한 판단</p>
+            <small>What the AGENT continues to handle</small
+            ><b>Meaning · context · ambiguity · creativity</b>
+            <p>Judgments that require interpretation, such as “Why is this good?”</p>
           </article>
           <article>
-            <small>시스템으로 내릴 것</small
-            ><b>반복 · 형식 · 불변식 · 실행 순서</b>
-            <p>“이 조건이면 실패다”처럼 판정 가능한 판단</p>
+            <small>What to move into the system</small
+            ><b>Repetition · format · invariants · execution order</b>
+            <p>Judgments that can be determined, such as “This condition means failure.”</p>
           </article>
         </div>
       </section>
@@ -247,61 +249,49 @@ Agentic Shaping v0.2
       <section class="section" id="scale">
         <p class="no">04 · CONTEXT-SCALABLE ANALYSIS</p>
         <div class="head">
-          <h2>커질수록 더 많이 읽게 하지 말고,<br />더 정확하게 질의하게 합니다.</h2>
+          <h2>As things grow, do not make it read more,<br />make it query more precisely.</h2>
           <p>
-            Agentic Shaping으로 문서와 바이브 코딩 소스가 쌓이면, 전체 파일을
-            매번 비정형으로 다시 읽는 방식 자체가 다음 병목이 됩니다. 느려진 탐색,
-            반복되는 전체 스캔, 잘린 출력, 놓친 의존 관계는 분석 방법을 정형화할
-            신호입니다.
+            As documents and vibe-coding source code accumulate through Agentic Shaping, repeatedly rereading every file in an unstructured way becomes the next bottleneck. Slower exploration, repeated full scans, truncated output, and missed dependencies are signals that the analysis method itself should be structured.
           </p>
         </div>
         <div class="assets reveal">
           <div>
-            <small>커지는 원문과 분석 부담</small>
-            <span>문서 · 소스코드 · 설정 · 로그</span>
-            <span>반복 전체 스캔 · 긴 도구 출력</span>
-            <span>컨텍스트 오염 · 느린 탐색 · 누락</span>
+            <small>Growing sources and analysis burden</small>
+            <span>Documents · source code · configuration · logs</span>
+            <span>Repeated full scans · long tool output</span>
+            <span>Context pollution · slow exploration · omissions</span>
           </div>
           <b>STRUCTURE →</b>
           <div class="boxes">
-            <span><b>inventory/</b> 파일·문서·소유권</span>
-            <span><b>index/</b> 제목·심볼·참조 위치</span>
-            <span><b>graph/</b> 호출·의존·영향 관계</span>
-            <span><b>queries/</b> 범위·필터·근거 묶음</span>
-            <span><b>gates/</b> 신선도·일관성·회귀</span>
+            <span><b>inventory/</b> Files · documents · ownership</span>
+            <span><b>index/</b> Titles · symbols · reference locations</span>
+            <span><b>graph/</b> Calls · dependencies · impact relationships</span>
+            <span><b>queries/</b> Scope · filters · evidence bundles</span>
+            <span><b>gates/</b> Freshness · consistency · regression</span>
           </div>
         </div>
         <div class="boundary">
           <article>
-            <small>분석 도구가 보장할 것</small>
-            <b>원문 추적 · 버전/해시 · 변경 시 갱신</b>
+            <small>What the analysis tools should guarantee</small>
+            <b>Source tracing · version/hash · refresh on change</b>
             <p>
-              요약을 새 진실원으로 만들지 않습니다. 각 결과가 어느 원문에서
-              나왔는지 증명하고, 오래된 인덱스는 조용히 사용하지 않고 실패하게
-              합니다.
+              Do not turn summaries into a new source of truth. Prove which original source each result came from, and make stale indexes fail instead of using them silently.
             </p>
           </article>
           <article>
-            <small>AGENT가 사용할 방식</small>
-            <b>기존 도구 우선 · 작은 근거 묶음 · 의미 판단</b>
+            <small>How the AGENT will work</small>
+            <b>Existing tools first · small evidence bundles · semantic judgment</b>
             <p>
-              검색·파서·컴파일러·테스트로 답할 수 있으면 먼저 재사용합니다.
-              부족할 때만 통합 분석기를 만들고, 현재 질문에 필요한 증거만 읽어
-              해석합니다.
+              If search, parsers, compilers, or tests can answer the question, reuse them first. Build an integrated analyzer only when they are insufficient, and read only the evidence needed for the current question before interpreting it.
             </p>
           </article>
         </div>
         <p class="memory-note">
-          이 원칙은 긴 컨텍스트에서 관련 정보 활용이 약해질 수 있다는
-          <a href="https://arxiv.org/abs/2307.03172">Lost in the Middle 연구</a>,
-          토큰 효율적인 도구와 선별된 컨텍스트를 권하는
-          <a href="https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents">컨텍스트 엔지니어링 지침</a>,
-          반복 검색이 저장소 수준 코드 생성을 개선한
-          <a href="https://arxiv.org/abs/2303.12570">RepoCoder</a>, 구문 트리를
-          효율적으로 갱신·질의하는
-          <a href="https://tree-sitter.github.io/tree-sitter/">Tree-sitter</a>와
-          같은 근거 위에 있습니다. 핵심은 더 긴 프롬프트가 아니라 더 작은
-          고신호 분석 표면입니다.
+          This principle is grounded in
+          <a href="https://arxiv.org/abs/2307.03172">Lost in the Middle research</a>, which recommends token-efficient tools and curated context
+          <a href="https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents">context engineering guidance</a>, research showing that repeated search improved repository-level code generation
+          <a href="https://arxiv.org/abs/2303.12570">RepoCoder</a>, and work on efficiently updating and querying
+          <a href="https://tree-sitter.github.io/tree-sitter/">Tree-sitter</a>syntax trees. The key is not a longer prompt, but a smaller, high-signal analysis surface.
         </p>
       </section>
 
@@ -309,40 +299,37 @@ Agentic Shaping v0.2
         <p class="no">05 · WHERE TASTE LIVES</p>
         <div class="head">
           <h2>
-            ‘내 스타일’은 말에 머물지 않고,<br />언제든 찾아 쓸 수 있는 자산에
-            살고 있습니다.
+            “My style” does not remain only in words;<br />it lives in assets that can be found and used at any time.
           </h2>
           <p>
-            다음 Agent가 작업 전에 찾아볼 수 있도록, 기준이 되는 자리를 하나
-            정합니다.
+            Choose a single authoritative place that the next Agent can consult before working.
           </p>
         </div>
         <figure class="visual inline-visual">
           <img
-            src="assets/agentic-shaping-system.jpg"
+            src="./assets/agentic-shaping-system.jpg"
             width="1536"
             height="864"
-            alt="흩어진 암묵지가 능동적 패턴 감지를 거쳐 살아 있는 작업 시스템으로 정돈되는 장면"
+            alt="A scene where scattered tacit knowledge is organized into a living work system through active pattern detection"
           />
           <figcaption>
-            <b>흩어져 있던 암묵지가 계속 다듬어지는 작업 체계로 이어집니다.</b>
-            Agent는 결과만 만드는 데 그치지 않고, 되풀이되는 판단을 찾아 다음
-            작업에서도 활용할 수 있게 연결합니다.
+            <b>Scattered tacit knowledge becomes a continuously refined working system.</b>
+            The Agent does more than produce results: it identifies recurring judgments and connects them so they can be used in future work.
           </figcaption>
         </figure>
         <div class="assets reveal">
           <div>
-            <small>작업 속 신호</small><span>“이 말투는 너무 보고서 같아”</span
-            ><span>“배포 성공이 아니라 실제 URL을 봐”</span
-            ><span>“이 오류는 다음엔 더 일찍 잡아”</span>
+            <small>Signals in the work</small><span>“This tone sounds too much like a report.”</span
+            ><span>“Don’t just check deployment success—look at the actual URL.”</span
+            ><span>“Catch this error earlier next time.”</span>
           </div>
           <b>SHAPE →</b>
           <div class="boxes">
-            <span><b>memory/</b> 선호·판단</span
-            ><span><b>rules/</b> 지침·루브릭</span
-            ><span><b>schemas/</b> 타입·계약</span
-            ><span><b>tests/</b> 실패·fixture</span
-            ><span><b>tools/</b> 명령·검증기</span>
+            <span><b>memory/</b> Preferences · judgments</span
+            ><span><b>rules/</b> Instructions · rubrics</span
+            ><span><b>schemas/</b> Types · contracts</span
+            ><span><b>tests/</b> Failures · fixture</span
+            ><span><b>tools/</b> Commands · validators</span>
           </div>
         </div>
       </section>
@@ -350,125 +337,109 @@ Agentic Shaping v0.2
       <section class="section" id="memory">
         <p class="no">06 · MEMORY MAKES IT STRONGER</p>
         <div class="head">
-          <h2>기억이 이어질수록,<br />Agentic Shaping은 더 잘 작동합니다.</h2>
+          <h2>The more memory carries forward,<br />the better Agentic Shaping works.</h2>
           <p>
-            기억 도구가 없어도 시작할 수 있습니다. 하지만 작업에서 알아챈 교정과
-            판단 기준을 다음 작업 전에 다시 찾을 수 있을 때, Agent는 비로소
-            사용자의 방식에 꾸준히 맞춰집니다.
+            You can start without a memory tool. But when the corrections and decision criteria noticed during work can be found again before the next task, the Agent can finally align consistently with the user’s way of working.
           </p>
         </div>
         <div class="memory-ladder reveal">
           <article>
-            <small>바로 시작</small>
+            <small>Start right away</small>
             <strong>Agentic Shaping</strong>
             <p>
-              현재 대화와 프로젝트 지침 안에서 신호를 찾아 적용합니다. 대화가
-              끊기면 그동안 쌓인 맥락도 함께 사라질 수 있습니다.
+              Find and apply signals within the current conversation and project instructions. If the conversation ends, the context built up along the way may disappear with it.
             </p>
           </article>
           <article>
-            <small>더 잘 작동</small>
+            <small>Works better</small>
             <strong>+ LLM Wiki</strong>
             <p>
-              교정과 취향, 판단 기준을 오래 남기고 다음 작업 전에 다시 꺼내 쓸
-              수 있습니다. 그래서 Agentic Shaping이 더 잘 작동합니다.
+              Keep corrections, preferences, and decision criteria over time and retrieve them before the next task. That is why Agentic Shaping works better.
             </p>
           </article>
           <article class="featured-memory">
-            <small>한 단계 더 잘 작동</small>
+            <small>Works better still</small>
             <strong>+ Slogs LLM Wiki</strong>
             <p>
-              관련 기억을 작업 전에 먼저 불러오고, 사용자 교정을 의도 보정
-              신호로 포착하며, 전역과 프로젝트 범위를 나누어 기억을 갱신합니다.
-              그래서 Agentic Shaping이 더 빠르고 안정적으로 사용자 방식에
-              맞춰집니다.
+              Recall relevant memories before starting the task, capture user corrections as intent-correction signals, and update memories by separating global and project scopes. This makes Agentic Shaping align with the user’s way of working faster and more reliably.
             </p>
             <a href="https://slogs.dev/me/llm-wiki"
-              >Slogs LLM Wiki 시작하기 →</a
+              >Get started with Slogs LLM Wiki →</a
             >
           </article>
         </div>
         <p class="memory-note">
-          기억은 모으는 데서 끝나지 않습니다. 다음 작업 전에 찾아 실제 계획과
-          결과에 적용할 때 비로소 힘을 발휘합니다.
+          Memory is not complete when it is merely collected. It becomes powerful when it is found before the next task and applied to the actual plan and result.
         </p>
       </section>
 
       <section class="section" id="prompts">
         <p class="no">07 · COPY &amp; RUN</p>
         <div class="head">
-          <h2>막힌 지점에서<br />하나 골라 바로 씁니다.</h2>
-          <p>처음부터 거대한 시스템을 만들 필요는 없습니다.</p>
+          <h2>When you are stuck,<br />pick one and use it right away.</h2>
+          <p>You do not need to build a massive system from the start.</p>
         </div>
         <div class="prompt-grid">
           <div class="prompt">
             <div>
-              <span>작업 시작</span
-              ><button type="button" data-copy="work">복사</button>
+              <span>Start a task</span
+              ><button type="button" data-copy="work">Copy</button>
             </div>
             <pre id="work">
-이 작업을 완료해줘. 시작 전에 관련 기억과 프로젝트 규칙을 스스로 찾아 성공 조건과 실제 검증 방법을 잡아줘. 작업 속 반복 판단·교정·실패를 능동적으로 감지하면 Agentic Shaping 후보로 포착하고, 현재 범위 안에서 재사용 가능한 규칙·스키마·템플릿·테스트·도구로 승격해줘. 다음 실행에서는 그 자산을 먼저 적용하고, 무엇 때문에 더 빠르고 정확해졌는지도 보고해줘.</pre>
+Complete this task. Before starting, find relevant memories and project rules on your own, and establish the success criteria and how to verify the actual result. When you actively detect recurring judgments, corrections, and failures in the work, capture them as Agentic Shaping candidates and promote them within the current scope into reusable rules, schemas, templates, tests, and tools. In the next execution, apply those assets first and report what made the process faster and more accurate.</pre>
           </div>
           <div class="prompt">
             <div>
-              <span>문제 재발</span
-              ><button type="button" data-copy="repair">복사</button>
+              <span>Problem recurrence</span
+              ><button type="button" data-copy="repair">Copy</button>
             </div>
             <pre id="repair">
-이 문제를 증상만 고치지 말고 Agentic Shaping 관점에서 진단해줘. 왜 Agent가 미리 발견하지 못하고 수동 판단이나 늦은 단계까지 남았는지 찾고, 다음부터 타입·스키마·불변식·조기 검증기·회귀 테스트 중 무엇이 먼저 발견하게 할지 구현해줘. 실제 검증 후 중복 fallback과 임시 경로도 정리해줘.</pre>
+Diagnose this problem from an Agentic Shaping perspective instead of fixing only the symptom. Find out why the Agent failed to discover it in advance and why it remained until manual judgment or a late stage, then implement whichever of types, schemas, invariants, early validators, and regression tests will make it discover the problem earlier next time. After verifying the result, clean up duplicate fallbacks and temporary paths as well.</pre>
           </div>
           <div class="prompt">
             <div>
-              <span>작업 후 회고</span
-              ><button type="button" data-copy="retro">복사</button>
+              <span>Retrospect after the task</span
+              ><button type="button" data-copy="retro">Copy</button>
             </div>
             <pre id="retro">
-방금 작업을 Agentic Shaping 관점에서 회고해줘. ① 스스로 감지했어야 할 내 취향·판단 기준 ② 반복한 수동 판단 ③ 늦게 발견된 실패 ④ 이미 만든 재사용 자산 ⑤ 다음 정형화 후보를 구분해줘. 장기 가치가 있는 것만 적용 범위와 근거를 갖춰 기준이 되는 저장소에 반영하고 다음 작업 전에 먼저 회상해줘.</pre>
+Review the task just completed from an Agentic Shaping perspective. Distinguish ① my preferences and decision criteria you should have detected on your own, ② repeated manual judgments, ③ failures discovered late, ④ reusable assets already created, and ⑤ the next candidates for structuring. Apply only what has long-term value to the authoritative repository with its scope and evidence, and recall it before the next task.</pre>
           </div>
         </div>
       </section>
 
       <section class="section" id="examples">
         <p class="no">08 · REAL EXAMPLES</p>
-        <h2>한 번의 교정이<br />다음 실행의 기본값이 됩니다.</h2>
+        <h2>One correction<br />becomes the default for the next execution.</h2>
         <div class="examples">
           <article>
             <small>DOCUMENT</small>
             <p>
-              <b>“개념 설명 말고, 복사할 프롬프트와 시작 순서를 먼저 줘.”</b
-              ><br />→ 5분 시작 → 복사 프롬프트 → 입출력 → 사례 → 개념 순서가
-              문서 규칙으로 남습니다.
+              <b>“Give me the copyable prompt and the starting order first, not a conceptual explanation.”</b
+              ><br />→ The order of 5-minute start → copy prompt → inputs/outputs → examples → concepts remains as a documentation rule.
             </p>
           </article>
           <article>
             <small>CODE</small>
             <p>
-              <b>“Agent가 또 같은 버전 차이를 손으로 찾았어.”</b><br />→ 버전
-              매니페스트 + 호환성 검사 + 진단 + 회귀 테스트가 다음 업데이트 전에
-              잡습니다.
+              <b>“The Agent had to find the same version difference manually again.”</b><br />→ A version manifest + compatibility check + diagnostics + regression tests catch it before the next update.
             </p>
           </article>
           <article>
             <small>ANALYSIS</small>
             <p>
-              <b>“결론은 맞는데 판단 경로를 재현할 수 없어.”</b><br />→ 입력
-              스키마 + 판단 루브릭 + 근거 + 계산 fixture가 결론의 경로까지
-              남깁니다.
+              <b>“The conclusion is correct, but the reasoning path cannot be reproduced.”</b><br />→ An input schema + decision rubric + evidence + calculation fixture preserves the path to the conclusion.
             </p>
           </article>
           <article>
             <small>SCALE</small>
             <p>
-              <b>“저장소가 커질수록 Agent가 매번 전부 읽고 더 느려져.”</b><br />→
-              원문 위치·버전이 추적되는 인벤토리 + 심볼/의존 그래프 + 범위 질의가
-              필요한 근거만 작은 묶음으로 제공합니다.
+              <b>“As the repository grows, the Agent reads everything every time and gets slower.”</b><br />→ An inventory tracking source locations and versions + a symbol/dependency graph + scoped queries provide only the necessary evidence in small bundles.
             </p>
           </article>
           <article>
             <small>MEDIA</small>
             <p>
-              <b>“내 문체와 화면 스타일이 또 사라졌어.”</b><br />→ 스타일 기억 +
-              좋은/나쁜 예시 + 렌더링 체크가 생성 전에 적용됩니다.
+              <b>“My writing style and screen style disappeared again.”</b><br />→ Style memory + good/bad examples + rendering checks are applied before generation.
             </p>
           </article>
         </div>
@@ -477,27 +448,24 @@ Agentic Shaping v0.2
       <section class="score">
         <div>
           <p class="no">09 · MEASURE</p>
-          <h2>“진화하고 있다”는 말은<br />다음 실행에서 증명합니다.</h2>
+          <h2>The words “it is evolving”<br />are proven in the next execution.</h2>
         </div>
         <div>
-          <p>재설명 <b>↓</b></p>
-          <p>수동 판단 <b>↓</b></p>
-          <p>늦은 실패와 재시도 <b>↓</b></p>
-          <p>시간과 비용 <b>↓</b></p>
-          <p>전체 재분석과 컨텍스트 사용량 <b>↓</b></p>
-          <p>의도 적중률과 재현성 <b>↑</b></p>
+          <p>Re-explanation <b>↓</b></p>
+          <p>Manual judgment <b>↓</b></p>
+          <p>Late failures and retries <b>↓</b></p>
+          <p>Time and cost <b>↓</b></p>
+          <p>Full reanalysis and context usage <b>↓</b></p>
+          <p>Intent alignment and reproducibility <b>↑</b></p>
         </div>
       </section>
 
       <section class="section validation" id="validation">
         <p class="no">10 · BEHAVIORAL VALIDATION</p>
         <div class="head">
-          <h2>정말 발동하느냐고요?<br />같은 과제로 비교했습니다.</h2>
+          <h2>Does it really trigger?<br />We compared them using the same task.</h2>
           <p>
-            일반 작업 능력과 Agentic Shaping의 발동을 섞지 않았습니다. 양쪽에
-            같은 현재 과제를 주고, 적용군에만 정확한 공개 프롬프트를 넣었습니다.
-            현재 작업 완료와 안전은 별도 게이트로 지킨 채, 신호 포착·정형화·다음
-            실행 개선이 실제로 추가되는지를 채점했습니다.
+            We did not mix general task capability with the triggering of Agentic Shaping. We gave both groups the same current task and included the exact public prompt only in the treatment group. With current-task completion and safety protected by separate gates, we scored whether signal capture, formalization, and improvement of the next execution were actually added.
           </p>
         </div>
         <div class="eval-grid">
@@ -505,65 +473,53 @@ Agentic Shaping v0.2
             <small>AGENTIC SHAPING ACTIVATION · 26 PAIRED SCENARIOS · 52 AGENT RUNS</small>
             <strong>61.5% <i>→</i> 96.2%</strong>
             <p>
-              고유 행동을 빠짐없이 수행한 시나리오는 16/26 → 25/26이었습니다.
-              세부 행동은 82/105(78.1%) → 104/105(99.0%), 적용군 우세 10 ·
-              동률 16 · 열세 0이었습니다. 처음 보는 최종 holdout 5개도
-              3/5(60%) → 5/5(100%)였습니다.
+              Scenarios that performed every distinctive behavior were 16/26 → 25/26. Detailed behaviors were 82/105 (78.1%) → 104/105 (99.0%), with the treatment group ahead in 10 · tied in 16 · behind in 0. The five completely unseen final holdouts also improved from 3/5 (60%) → 5/5 (100%).
             </p>
           </article>
           <article>
             <small>CURRENT TASK &amp; SAFETY GUARD</small>
             <strong>27/27 <i>↔</i> 27/27</strong>
             <p>
-              기본군과 적용군 모두 현재 요청 완료 기준을 전부 선택했고, 52개 금지
-              행동에서는 선택 0건이었습니다. 점수 차이를 키우려고 현재 작업이나
-              안전을 희생하지 않았습니다.
+              Both the baseline and treatment groups selected all current-request completion criteria, and made 0 selections across 52 prohibited behaviors. We did not sacrifice current-task completion or safety to widen the score gap.
             </p>
           </article>
           <article>
             <small>REAL FILE EXECUTION · 1 TASK · 6 CHECKS</small>
             <strong>6/6 <i>↔</i> 6/6</strong>
             <p>
-              깨진 버전 선택 저장소를 실제로 수정하게 한 회귀 게이트입니다. 이 한
-              과제는 두 조건 모두 통과했으므로 프롬프트 우위가 아니라 실제 파일
-              실행 회귀가 없다는 증거로만 사용합니다.
+              This is a regression gate that actually modified a broken version-selection repository. Because both conditions passed this task, we use it only as evidence that there was no actual file-execution regression—not as evidence of prompt superiority.
             </p>
           </article>
         </div>
-        <div class="eval-examples" aria-label="Agentic Shaping 차별 사례">
+        <div class="eval-examples" role="group" aria-label="Agentic Shaping differentiation examples">
           <article>
             <small>CONTEXT-SCALABLE ANALYSIS</small>
             <b>1/5 → 5/5</b>
-            <p>전체 재읽기에서 측정·기존 도구 통합·증분 그래프·신선도 게이트로.</p>
+            <p>From full rereads to measurement, integration with existing tools, incremental graphs, and freshness gates.</p>
           </article>
           <article>
             <small>TEMPORARY SCRIPT</small>
             <b>0/4 → 4/4</b>
-            <p>현재 변환에서 공통 계약·정식 명령·회귀·검증 후 중복 정리로.</p>
+            <p>From the current conversion to a common contract, canonical commands, regression tests, and deduplication after verification.</p>
           </article>
           <article>
             <small>FINAL HOLDOUT · CONFIG DRIFT</small>
             <b>1/4 → 4/4</b>
-            <p>한 설정 수정에서 타입 계약·모든 진입점 preflight·fixture로.</p>
+            <p>From a single configuration change to type contracts, preflight checks at every entry point, and fixtures.</p>
           </article>
         </div>
         <div class="validation-evolution">
           <small>VALIDATION SHAPES TOO</small>
-          <h3>프롬프트뿐 아니라,<br />검증 시스템도 진화합니다.</h3>
+          <h3>Not just the prompt,<br />the verification system evolves too.</h3>
           <p>
-            이번 검증도 처음부터 완성돼 있지 않았습니다. 적은 표본, 기본군에 섞인
-            목표 행동, 모호한 사례, 반복되는 한 사례 실패, 장시간 실행 timeout을
-            shaping 신호로 포착했습니다. 이를 26개 차별 시나리오와 별도 작업·안전
-            게이트, 개발/holdout 분리, 실패 사례 조기 필터, 반복 결과 보존,
-            해시 일치 checkpoint·resume·timeout 재시도로 승격했습니다. 마지막에는
-            <code>tests/</code> 아래의 통과 테스트를 못 찾던 채점기까지 발견해 재귀
-            탐색으로 고쳤습니다.
+            This verification was not complete from the start. We captured small samples, target behaviors mixed into the baseline group, ambiguous cases, repeated single-case failures, and long-running execution timeouts as shaping signals. We promoted them into 26 discriminating scenarios; separate task and safety gates; development/holdout separation; an early filter for failure cases; preservation of repeated results; and hash-matched checkpoints, resume, and timeout retries. In the end,
+            <code>tests/</code> we even found that the evaluator could not locate the passing tests below and fixed it with recursive discovery.
           </p>
           <ol>
-            <li><b>Detect</b><span>과장된 백분율·평가기 오염·반복 실패 감지</span></li>
-            <li><b>Structure</b><span>차별 점수와 일반 품질 회귀를 분리</span></li>
-            <li><b>Verify early</b><span>실패 사례만 먼저 재생한 뒤 전체 회귀</span></li>
-            <li><b>Integrate</b><span>동일 해시 checkpoint와 재현 가능한 결과 자산</span></li>
+            <li><b>Detect</b><span>Detection of inflated percentages, evaluator contamination, and repeated failures</span></li>
+            <li><b>Structure</b><span>Separate discriminating scores from general quality regressions</span></li>
+            <li><b>Verify early</b><span>Replay only failure cases first, then run the full regression</span></li>
+            <li><b>Integrate</b><span>Identical-hash checkpoints and reproducible result assets</span></li>
           </ol>
           <div class="policy-sync">
             <div>
@@ -571,97 +527,79 @@ Agentic Shaping v0.2
               <strong>90% <i>→</i> 100%</strong>
               <span class="policy-version">HOMEPAGE v0.2 ↔ SLOGS 2026.08.25.3</span>
               <p>
-                홈페이지 최종 프롬프트의 확인된 행동 계약을 Slogs LLM Wiki 한국어·영어
-                런타임 정책에 동기화했습니다. 라이브 정책 5개 짝 회귀·10회 Luna Max
-                실행에서 고유 행동 18/20 → 20/20, 금지 행동 0건을 확인했습니다.
+                We synchronized the confirmed behavioral contract from the homepage’s final prompt with the Korean and English Slogs LLM Wiki runtime policies. Across five live-policy pair regressions and 10 Luna Max runs, distinctive behaviors improved from 18/20 → 20/20, with 0 prohibited behaviors.
               </p>
             </div>
             <ul>
-              <li>현재 결과 완성 · 안전 경계 · durable 개선을 독립 실행</li>
-              <li>일회성 작업에는 억지 기억·전역 규칙을 만들지 않음</li>
-              <li>durable 신호는 권위 자산 · 조기 검증 · 회귀까지 완주</li>
-              <li>반복 버전·경로·설정은 단일 권위로 통합하고 관련 하드코딩 전부 교체</li>
+              <li>Independently execute current-result completion · safety boundaries · durable improvements</li>
+              <li>Do not force memories or global rules onto one-off tasks</li>
+              <li>Carry durable signals through authoritative assets · early validation · regression tests</li>
+              <li>Consolidate repeated versions, paths, and configurations into a single authority and replace all related hardcoding</li>
             </ul>
-            <a href="evals/slogs-policy-smoke-luna-max.json">정책 행동 결과</a>
-            <a href="https://slogs.dev/prompts/slogs-mcp.ko.md">최종 한국어 정책 확인 →</a>
+            <a href="./evals/slogs-policy-smoke-luna-max.json">Policy behavior results</a>
+            <a href="https://slogs.dev/prompts/slogs-mcp.ko.md">Confirm the final Korean policy →</a>
           </div>
         </div>
         <div class="evidence">
           <div>
-            <b>표본과 점수 정의</b>
+            <b>Sample and score definitions</b>
             <p>
-              26개 짝 시나리오 · 52회 Agent 실행 · 고유 행동 105개 · 퍼센트는
-              고정 세트의 완전 통과 시나리오 비율
+              26 paired scenarios · 52 Agent runs · 105 distinctive behaviors · percentages are the proportion of scenarios with a complete pass in the fixed set
             </p>
           </div>
           <div>
-            <b>실행 환경</b>
-            <p>GPT-5.6 Luna · Max · Codex CLI 0.149.0-alpha.4.3 · 격리 실행 · 2026-08-25</p>
+            <b>Execution environment</b>
+            <p>GPT-5.6 Luna · Max · Codex CLI 0.149.0-alpha.4.3 · isolated execution · 2026-08-25</p>
           </div>
           <div>
-            <b>직접 재현</b>
+            <b>Reproduce directly</b>
             <p>
-              <a href="evals/README.md">실행 방법</a> ·
-              <a href="evals/activation-latest-results.json">차별 결과</a> ·
-              <a href="evals/latest-execution-results.json">파일 실행 결과</a> ·
-              <a href="https://openai.com/index/evals-drive-next-chapter-of-ai/">평가 설계 참고</a>
+              <a href="./evals/README.md">How to run</a> ·
+              <a href="./evals/activation-latest-results.json">Discriminating results</a> ·
+              <a href="./evals/latest-execution-results.json">File execution results</a> ·
+              <a href="https://openai.com/index/evals-drive-next-chapter-of-ai/">Evaluation design notes</a>
             </p>
           </div>
         </div>
         <p class="note">
-          <b>검증 결론:</b> 이 고정 세트의 Luna Max 단일 실행에서는 Agentic
-          Shaping 고유 행동이 뚜렷하게 증가했고 현재 작업·안전 회귀는 없었습니다.
-          적용군도 버전 드리프트의 “모든 하드코딩 교체” 한 행동을 놓쳤습니다.
-          이 수치는 모집단 추정이나 모든 모델·도구 환경의 보장이 아닙니다. 그래서
-          분자·분모·동률·누락·실패 이력을 공개하고 프롬프트와 검증기를 함께
-          계속 shaping합니다.
+          <b>Verification conclusion:</b> In a single Luna Max run on this fixed set, Agentic Shaping’s distinctive behaviors increased clearly, with no regressions in current-task completion or safety. The treatment group also missed one behavior: “replace all hardcoding” for version drift. These figures are not population estimates or guarantees across all model and tool environments. We therefore continue shaping the prompt and evaluator together while publishing the numerators, denominators, ties, omissions, and failure history.
         </p>
       </section>
 
       <section class="section">
         <p class="no">11 · ORIGIN &amp; DIFFERENCE</p>
         <div class="split">
-          <h2>Compound Engineering에서<br />이름만 바꾼 것은 아닙니다.</h2>
+          <h2>From Compound Engineering<br />This is not just a name change.</h2>
           <div class="prose">
             <p>
-              Compound Engineering의 “한 작업이 다음 작업을 더 쉽게 만든다”는
-              실행 구조는 좋은 참고가 됐습니다. 특히 계획·작업·검토·축적을
-              명령과 파일로 드러낸 방식은 이 가이드를 다시 만드는 데 직접
-              참고했습니다.
+              Compound Engineering’s execution structure—“one task makes the next task easier”—was a valuable reference. In particular, its approach of exposing planning, work, review, and accumulation through commands and files directly informed the rebuilding of this guide.
             </p>
             <p>
-              Agentic Shaping의 출발점은 사람과 Agent 사이에서 생기는
-              <strong>암묵지와 교정</strong>입니다. Agent는 지시를 기다리는
-              도구에 머물지 않고 작업 속 신호를 먼저 발견하여,
-              코딩·문서·분석·미디어 전반에서 다시 쓸 수 있는 구조로 바꾸고 다음
-              실행 자체를 개선합니다.
+              Agentic Shaping starts with what emerges between people and Agents:
+              <strong>tacit knowledge and corrections</strong>. An Agent does not remain a tool that waits for instructions; it first discovers signals in the work, turns them into structures reusable across coding, documentation, analysis, and media, and improves the next execution itself.
             </p>
             <p class="note">
-              Vibe Compiler는 정형화 수단이 목적처럼 보였고, Vibe Tailoring은
-              맞춤 결과만 강조해 Agent의 주체성이 약했습니다. Agentic
-              Shaping이라는 이름에는 스스로 행동하는 Agent와 함께 다듬어지는
-              작업 체계를 담았습니다.
+              Vibe Compiler made formalization look like the goal, while Vibe Tailoring emphasized only customized results and weakened the Agent’s agency. The name Agentic Shaping captures a working system refined together with an Agent that acts on its own.
             </p>
           </div>
         </div>
       </section>
 
       <section class="cta">
-        <p>오늘은 딱 하나만 해보세요.</p>
+        <p>Try just one thing today.</p>
         <h2>
-          반복해서 설명하던 한 문장을<br />Agent가 먼저 알아차리고 다음에도 지킬
-          규칙으로 남겨 보세요.
+          Take one sentence you keep explaining<br />and have the Agent notice it first and preserve it as a rule for next time.
         </h2>
-        <a class="button" href="#start">시작 프롬프트 복사하러 가기 ↑</a>
+        <a class="button" href="#start">Go copy the starter prompt ↑</a>
       </section>
     </main>
     <footer>
       <b>AS</b><strong>AGENTIC SHAPING</strong
       ><span class="site-version" data-site-version></span>
-      <p>Agent가 먼저 발견하고, 내 방식으로 진화합니다.</p>
-      <a href="https://github.com/dimohy/vibe-compiler">GitHub ↗</a>
+      <p>The Agent discovers it first and evolves in my way.</p>
+      <a href="https://github.com/dimohy/agentic-shaping">GitHub ↗</a>
     </footer>
-    <div id="toast">프롬프트를 복사했습니다.</div>
-    <script src="script.js?v=20260825.3"></script>
+    <div id="toast">Prompt copied.</div>
+    <script src="./script.js?v=20260825.4"></script>
   </body>
 </html>
