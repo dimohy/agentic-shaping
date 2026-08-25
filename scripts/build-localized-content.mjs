@@ -125,7 +125,7 @@ const buildHtml = (locale, catalog) => {
     "zh-CN": "Agentic Shaping — 主动发现并持续进化的 AI 工作方法",
   };
   output = output.replace(/<title>[\s\S]*?<\/title>/, `<title>${titles[locale.code]}</title>`);
-  output = output.replaceAll("styles.css?v=20260825.3", `${locale.rootHref}styles.css?v=20260825.6`);
+  output = output.replaceAll("styles.css?v=20260825.3", `${locale.rootHref}styles.css?v=20260825.7`);
   output = output.replaceAll("script.js?v=20260825.3", `${locale.rootHref}script.js?v=20260825.4`);
   output = output.replaceAll('src="assets/', `src="${locale.rootHref}assets/`);
   output = output.replaceAll('href="evals/', `href="${locale.rootHref}evals/`);

@@ -20,6 +20,12 @@ const alternates = [
 ];
 const sectionIds = ["start", "loop", "scale", "memory", "prompts", "validation"];
 const languageLinks = "[English](README.md) | [한국어](README.ko.md) | [日本語](README.ja.md) | [简体中文](README.zh-CN.md)";
+const headerContract = JSON.parse(read("site/header-layout-contract.json"));
+if (headerContract.locales.join(",") !== "en,ko,ja,zh") fail("헤더 계약의 언어 행렬 불일치");
+if (headerContract.viewportWidthsPx.length !== 16 || !headerContract.viewportWidthsPx.includes(320)
+  || !headerContract.viewportWidthsPx.includes(1281) || !headerContract.viewportWidthsPx.includes(1440)) {
+  fail("헤더 계약의 화면 폭 행렬 불일치");
+}
 
 for (const page of pages) {
   const html = read(page.path);
@@ -27,7 +33,7 @@ for (const page of pages) {
   if (!html.includes(`<body data-locale="${page.locale}">`)) fail(`${page.path}: data-locale 불일치`);
   if (!html.includes(`<meta name="site-root" content="${page.siteRoot}" />`)) fail(`${page.path}: site-root 불일치`);
   if (!html.includes(`<link rel="canonical" href="${page.canonical}" />`)) fail(`${page.path}: canonical 누락`);
-  if (!html.includes(`${page.siteRoot}styles.css?v=20260825.6`)) fail(`${page.path}: 최신 반응형 CSS 버전 누락`);
+  if (!html.includes(`${page.siteRoot}styles.css?v=20260825.7`)) fail(`${page.path}: 최신 반응형 CSS 버전 누락`);
   for (const [lang, href] of alternates) {
     if (!html.includes(`hreflang="${lang}" href="${href}"`)) fail(`${page.path}: hreflang ${lang} 누락`);
   }
@@ -79,7 +85,11 @@ for (const contract of ['html[lang="ko"] body', "word-break: keep-all", "Noto Sa
   if (!css.includes(contract)) fail(`styles.css 다국어 계약 누락: ${contract}`);
 }
 if (!/\.language-switcher a\s*{[\s\S]*?white-space:\s*nowrap/.test(css)) fail("언어 선택기 한 줄 표시 계약 누락");
-if (!/@media \(max-width: 1100px\)[\s\S]*?\.pill\s*{\s*display:\s*none/.test(css)) fail("중간 폭 CTA 숨김 계약 누락");
+if (!/nav a\s*{[\s\S]*?white-space:\s*nowrap/.test(css)) fail("전체 헤더 링크 한 줄 표시 계약 누락");
+const compactPattern = new RegExp(`@media \\(max-width: ${headerContract.compactMaxWidthPx}px\\)[\\s\\S]*?\\.pill\\s*{\\s*display:\\s*none`);
+if (!compactPattern.test(css)) fail("중간 폭 CTA 숨김 계약 누락");
+const tinyPattern = new RegExp(`@media \\(max-width: ${headerContract.tinyMaxWidthPx}px\\)[\\s\\S]*?\\.brand \\.site-version\\s*{\\s*display:\\s*none`);
+if (!tinyPattern.test(css)) fail("초소형 폭 버전 축약 계약 누락");
 for (const url of pages.map(page => `<loc>${page.canonical}</loc>`)) {
   if (!read("sitemap.xml").includes(url)) fail(`sitemap.xml URL 누락: ${url}`);
 }
