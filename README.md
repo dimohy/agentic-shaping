@@ -2,7 +2,7 @@
 
 [English](README.md) | [한국어](README.ko.md) | [日本語](README.ja.md) | [简体中文](README.zh-CN.md)
 
-<!-- AS-PS-001;version=0.3.0;policy=2026.09.04.2;AS-SA-001=25/25;status=structured-and-applied;limitation=operational-slogs-mcp-not-deployed -->
+<!-- AS-PS-001;version=0.3.0;policy=2026.09.04.2;AS-SA-001=25/25;status=live-registry-verified;limitation=first-use-scope-decision-pending -->
 
 > An AI work method that actively discovers tacit knowledge, preferences, corrections, and failures, then shapes them into reusable memories, rules, tools, and verifiers so the system evolves with the user’s way of working.
 
@@ -224,13 +224,13 @@ For failures that route a collaboration target to memory, the repository provide
 
 - Discover methods from recurring corrections, failures, and successes that can be reused across other tasks.
 - Keep project-specific information within its original scope, and safely generalize only methods that are sufficiently universal.
-- After passing validation, generalized methods can be automatically submitted as review candidates for Slogs Skills.
+- Generalized methods may be automatically retained as review candidates in Slogs Skills after passing validation.
 - When using a skill for the first time, choose whether it applies to the current project, globally, or not at all; afterward, receive the latest validated compatible version.
 - Policies, evaluations, the homepage in four languages, the README, and version history are updated together in a single public release.
 
 ### v0.3 Technical notes
 
-`AS-SA-001` first classifies the abstraction level of a recurring signal as `local`, `project`, `cross-project`, or `general-method`. It blocks shared registration for `local` and `project`, and synthesizes only sufficiently verified `cross-project` and `general-method` signals into a general-purpose skill package with project identifiers and personal references removed. It fails closed on all of the following: personal information, project-confidential information, credentials, secrets, unsafe paths, insufficient generalization, and missing normal, boundary, or negative evaluations. The current abstraction and safety checks passed 25/25 and match the `skill_registry_submit_candidate` input and `validated-candidate` status in Slogs Skills. However, it has not yet been deployed to the production Slogs MCP, so actual candidate registration has not been executed; accordingly, the current status is `structured-and-applied`, and it is not described as operational deployment complete or as an improvement in effectiveness.
+`AS-SA-001` first classifies the abstraction level of a recurring signal as `local`, `project`, `cross-project`, or `general-method`. `local` and `project` block shared registration; only `cross-project` and `general-method`, for which sufficiently broad applicability across distinct scopes has been confirmed, are synthesized into general-purpose skill packages with project identifiers and personal references removed. It fails closed on all of the following: personal information, project-confidential information, credentials, secrets, unsafe paths, insufficient generalization, and missing normal, boundary, or negative evaluations. The current abstraction and safety checks passed 25/25. In the production Slogs MCP, we also confirmed that six registry tools are exposed, the `korean-software-terminology` 1.0.0 candidate was stored, `@dimohy` reviewed and approved it, the body is not exposed while the state is unselected, and an initial scope selection is required. The current status is `live-registry-verified`; remaining limitations are that the initial scope among `project`, `global`, and `disabled` has not yet been selected, this package has been validated only on Windows, and the server does not retrieve external evidence locators to recalculate their hashes.
 
 `AS-PS-001` handles public synchronization of important policy and evaluation changes. It updates the policy and evaluations, homepages in four languages, READMEs in four languages, and `CHANGELOG.md` together under a single authoritative version, failing before push and deployment if versions, numbers, contracts, or generated results diverge. Wording and compatibility bug fixes are `patch`, backward-compatible feature additions are `minor`, and changes that break existing public contracts are `major`. This skill discovery and Slogs candidate integration is a backward-compatible feature addition, so it was recorded as `0.2.0 → 0.3.0`.
 

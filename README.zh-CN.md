@@ -2,7 +2,7 @@
 
 [English](README.md) | [한국어](README.ko.md) | [日本語](README.ja.md) | [简体中文](README.zh-CN.md)
 
-<!-- AS-PS-001;version=0.3.0;policy=2026.09.04.2;AS-SA-001=25/25;status=structured-and-applied;limitation=operational-slogs-mcp-not-deployed -->
+<!-- AS-PS-001;version=0.3.0;policy=2026.09.04.2;AS-SA-001=25/25;status=live-registry-verified;limitation=first-use-scope-decision-pending -->
 
 > 这是让 AI Agent 先发现工作中的隐性知识·偏好·纠正·失败，并将其塑造成可在下一次执行中复用的记忆·规则·工具·验证器，与用户一起按用户的方式进化的工作方法。
 
@@ -224,13 +224,13 @@ Agentic Shaping v0.3
 
 - 从重复出现的修正、失败和成功模式中，发现可用于其他工作的通用方法。
 - 仅适用于项目的信息保留在项目范围内，只有足够通用的方法才会被安全地泛化。
-- 泛化后的方法通过验证后，可以自动提交为 Slogs Skills 的评审候选项。
+- 通用化的方法通过验证后，可以自动保存为 Slogs Skills 的审查候选项。
 - 首次使用技能时，可以选择应用范围为当前项目、全局或停用；之后可以获取经过验证的最新兼容版本。
 - 政策、评估、四种语言的主页、README 和版本历史记录，会在同一个公开版本中一并更新。
 
 ### v0.3 技术备忘录
 
-`AS-SA-001` 会先将重复信号的抽象层级判定为 `local`、`project`、`cross-project` 或 `general-method`。`local` 和 `project` 会阻止共享登记；只有在充分确认适用于不同范围的 `cross-project` 和 `general-method`，才会移除项目标识符与个人引用，并合成为通用技能包。对于个人信息、项目机密、凭据、秘密信息、不安全路径、泛化不足，以及缺少正常、边界和负向评估的情况，检查均会按故障安全方式判定失败。当前抽象化与安全性检查已通过 25/25，并与 Slogs Skills 的 `skill_registry_submit_candidate` 输入及 `validated-candidate` 状态一致。不过，由于尚未部署到生产 Slogs MCP，尚未执行实际候选登记；因此当前状态为 `structured-and-applied`，不会将其表述为已完成生产环境应用或实现效果改善。
+`AS-SA-001` 首先将重复信号的抽象层级判定为 `local`、`project`、`cross-project` 或 `general-method`。`local` 和 `project` 会阻止共享注册；只有在充分确认适用于不同应用范围的 `cross-project` 和 `general-method`，才会合成为移除项目标识符和个人引用的通用技能包。个人信息、项目机密、凭据、机密信息、不安全路径、泛化不足，以及缺少正常、边界和负向评估，均会导致流程以 fail-closed 方式失败。当前抽象化和安全性检查已通过 25/25。我们还在运营 Slogs MCP 中确认了 6 个注册表工具已暴露、`korean-software-terminology` 1.0.0 候选项已保存、`@dimohy` 已完成审查和批准、未选择状态下正文不暴露，以及要求先选择首次应用范围。当前状态为 `live-registry-verified`；剩余限制是 `project`、`global` 和 `disabled` 中的首次范围选择尚未完成，该包仅在 Windows 上经过验证，并且服务器不会重新获取外部依据 locator 来计算哈希。
 
 `AS-PS-001` 负责重要政策·评估变更的公开同步。在单一权威版本中同时更新政策·评估、4 种语言的主页、4 种语言的 README 和 `CHANGELOG.md`；如果版本·数值·契约·生成结果不一致，会在 push 和部署前失败。文字·兼容性 bug 修复为 `patch`，向后兼容的功能添加为 `minor`，破坏现有公开契约的变更为 `major`。本次技能发现·Slogs 候选关联属于向后兼容的功能添加，因此记录为 `0.2.0 → 0.3.0`。
 

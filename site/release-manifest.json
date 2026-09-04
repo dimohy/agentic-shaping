@@ -11,8 +11,8 @@
     "ruleId": "AS-SA-001",
     "passed": 25,
     "total": 25,
-    "status": "structured-and-applied",
-    "limitation": "operational-slogs-mcp-not-deployed"
+    "status": "live-registry-verified",
+    "limitation": "first-use-scope-decision-pending"
   },
   "authoritativeFiles": [
     "site/index.ko.source.html",
