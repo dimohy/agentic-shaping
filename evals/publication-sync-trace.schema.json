@@ -1,0 +1,93 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://agentic-shaping.dev/schemas/publication-sync-trace.schema.json",
+  "title": "AS-PS-001 policy and publication synchronization trace",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["ruleId", "traceAuthority", "change", "authority", "syncExecution", "surfaces", "changelog", "staticRegression", "forbiddenActions"],
+  "properties": {
+    "ruleId": { "const": "AS-PS-001" },
+    "traceAuthority": { "const": "orchestrator" },
+    "change": {
+      "type": "object", "additionalProperties": false,
+      "required": ["level", "previousVersion", "nextVersion", "policyChanged", "evaluationChanged"],
+      "properties": {
+        "level": { "enum": ["patch", "minor", "major"] },
+        "previousVersion": { "$ref": "#/$defs/version" },
+        "nextVersion": { "$ref": "#/$defs/version" },
+        "policyChanged": { "const": true },
+        "evaluationChanged": { "const": true }
+      }
+    },
+    "authority": {
+      "type": "object", "additionalProperties": false,
+      "required": ["policyVersion", "ruleId", "passed", "total", "status", "limitation", "manifestEvidence", "evaluationEvidence"],
+      "properties": {
+        "policyVersion": { "type": "string", "minLength": 1 },
+        "ruleId": { "type": "string", "minLength": 1 },
+        "passed": { "type": "integer", "minimum": 1 },
+        "total": { "type": "integer", "minimum": 1 },
+        "status": { "type": "string", "minLength": 1 },
+        "limitation": { "type": "string", "minLength": 1 },
+        "manifestEvidence": { "$ref": "#/$defs/evidenceList" },
+        "evaluationEvidence": { "$ref": "#/$defs/evidenceList" }
+      }
+    },
+    "syncExecution": {
+      "type": "object", "additionalProperties": false,
+      "required": ["mode", "branches", "evidence"],
+      "properties": {
+        "mode": { "const": "parallel-independent" },
+        "branches": { "type": "array", "minItems": 10, "maxItems": 10, "uniqueItems": true, "items": { "type": "string", "minLength": 1 } },
+        "evidence": { "$ref": "#/$defs/evidenceList" }
+      }
+    },
+    "surfaces": {
+      "type": "array", "minItems": 8, "maxItems": 8,
+      "items": {
+        "type": "object", "additionalProperties": false,
+        "required": ["kind", "locale", "path", "version", "policyVersion", "ruleId", "passed", "total", "status", "limitation", "contentSha256"],
+        "properties": {
+          "kind": { "enum": ["homepage", "readme"] },
+          "locale": { "enum": ["en", "ko", "ja", "zh"] },
+          "path": { "type": "string", "minLength": 1 },
+          "version": { "$ref": "#/$defs/version" },
+          "policyVersion": { "type": "string", "minLength": 1 },
+          "ruleId": { "type": "string", "minLength": 1 },
+          "passed": { "type": "integer", "minimum": 1 },
+          "total": { "type": "integer", "minimum": 1 },
+          "status": { "type": "string", "minLength": 1 },
+          "limitation": { "type": "string", "minLength": 1 },
+          "contentSha256": { "type": "string", "pattern": "^[A-Fa-f0-9]{64}$" }
+        }
+      }
+    },
+    "changelog": {
+      "type": "object", "additionalProperties": false,
+      "required": ["version", "date", "userChangeBullets", "technicalNoteKinds", "evidence"],
+      "properties": {
+        "version": { "$ref": "#/$defs/version" },
+        "date": { "type": "string", "format": "date" },
+        "userChangeBullets": { "type": "integer", "minimum": 4, "maximum": 6 },
+        "technicalNoteKinds": { "type": "array", "uniqueItems": true, "items": { "enum": ["compatibility", "contracts", "verification", "known-limitation"] } },
+        "evidence": { "$ref": "#/$defs/evidenceList" }
+      }
+    },
+    "staticRegression": {
+      "type": "object", "additionalProperties": false,
+      "required": ["generation", "links", "localization", "contracts", "evidence"],
+      "properties": {
+        "generation": { "const": true },
+        "links": { "const": true },
+        "localization": { "const": true },
+        "contracts": { "const": true },
+        "evidence": { "$ref": "#/$defs/evidenceList" }
+      }
+    },
+    "forbiddenActions": { "type": "array", "maxItems": 0 }
+  },
+  "$defs": {
+    "version": { "type": "string", "pattern": "^(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)$" },
+    "evidenceList": { "type": "array", "minItems": 1, "items": { "type": "string", "minLength": 1 } }
+  }
+}

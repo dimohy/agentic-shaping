@@ -2,13 +2,15 @@ import { existsSync, mkdirSync, mkdtempSync, readFileSync, rmSync, writeFileSync
 import { createHash } from "node:crypto";
 import { tmpdir } from "node:os";
 import { dirname, join, resolve } from "node:path";
-import { spawnSync } from "node:child_process";
+import { spawn } from "node:child_process";
 
 const root = resolve(import.meta.dirname, "..");
 const siteDir = join(root, "site");
 const localeDir = join(siteDir, "locales");
-const htmlSource = readFileSync(join(siteDir, "index.ko.source.html"), "utf8");
-const readmeSource = readFileSync(join(siteDir, "README.ko.source.md"), "utf8");
+const release = JSON.parse(readFileSync(join(siteDir, "release-manifest.json"), "utf8"));
+const applyRelease = source => source.replaceAll("{{PUBLIC_VERSION}}", release.displayVersion);
+const htmlSource = applyRelease(readFileSync(join(siteDir, "index.ko.source.html"), "utf8"));
+const readmeSource = applyRelease(readFileSync(join(siteDir, "README.ko.source.md"), "utf8"));
 const stylesSource = readFileSync(join(root, "styles.css"), "utf8");
 const scriptSource = readFileSync(join(root, "script.js"), "utf8");
 const digest = content => createHash("sha256").update(content).digest("hex");
@@ -52,7 +54,19 @@ const schema = {
   additionalProperties: false,
 };
 
-const translate = (items, locale) => {
+const runCodex = (args, cwd) => new Promise(resolveRun => {
+  const child = spawn("codex", args, { cwd, stdio: ["ignore", "pipe", "pipe"] });
+  let stdout = "", stderr = "", timedOut = false;
+  child.stdout.on("data", chunk => { stdout += chunk; });
+  child.stderr.on("data", chunk => { stderr += chunk; });
+  const timer = setTimeout(() => { timedOut = true; child.kill(); }, 300000);
+  child.on("close", status => {
+    clearTimeout(timer);
+    resolveRun({ status: timedOut ? null : status, stdout, stderr: timedOut ? `${stderr}\ntranslation timed out` : stderr });
+  });
+});
+
+const translate = async (items, locale) => {
   const catalogPath = join(localeDir, `${locale.code}.json`);
   const existing = existsSync(catalogPath) ? JSON.parse(readFileSync(catalogPath, "utf8")) : {};
   const translated = refresh ? {} : { ...existing };
@@ -74,15 +88,10 @@ const translate = (items, locale) => {
   try {
     const schemaPath = join(temp, "schema.json");
     writeFileSync(schemaPath, JSON.stringify(schema));
-    batches.forEach((current, batchIndex) => {
+    for (const [batchIndex, current] of batches.entries()) {
       const outputPath = join(temp, `output-${batchIndex}.json`);
       const prompt = `Translate every item from Korean into ${locale.name}. Return exactly one translation for every id.\n\nRules:\n- Preserve Agentic Shaping, Slogs LLM Wiki, GPT-5.6 Luna, Codex CLI, URLs, code spans, file paths, version strings, action IDs, and Markdown/HTML entities.\n- Keep Markdown structure, list markers, table pipes, emphasis, and links unchanged for markdown-line items. For code-line items, translate only natural-language prose while preserving indentation, identifiers, punctuation, and code tokens.\n- Use natural public technical-documentation language, not literal word order.\n- Do not add explanations.\n\nItems:\n${JSON.stringify(current)}`;
-      const proc = spawnSync("codex", ["exec", "--ephemeral", "--ignore-user-config", "--strict-config", "--skip-git-repo-check", "--sandbox", "read-only", "-m", "gpt-5.6-luna", "-c", 'model_reasoning_effort="high"', "--output-schema", schemaPath, "-o", outputPath, prompt], {
-        cwd: temp,
-        encoding: "utf8",
-        timeout: 300000,
-        stdio: ["ignore", "pipe", "pipe"],
-      });
+      const proc = await runCodex(["exec", "--ephemeral", "--ignore-user-config", "--strict-config", "--skip-git-repo-check", "--sandbox", "read-only", "-m", "gpt-5.6-luna", "-c", 'model_reasoning_effort="high"', "--output-schema", schemaPath, "-o", outputPath, prompt], temp);
       if (proc.status !== 0) throw new Error(`${locale.code} batch ${batchIndex + 1} failed: ${proc.stderr.slice(-4000)}`);
       const response = JSON.parse(readFileSync(outputPath, "utf8"));
       if (response.translations.length !== current.length) throw new Error(`${locale.code} batch ${batchIndex + 1} returned ${response.translations.length}/${current.length}`);
@@ -92,7 +101,7 @@ const translate = (items, locale) => {
         translated[source] = row.text.trim();
       }
       process.stdout.write(`${locale.code}: batch ${batchIndex + 1}/${batches.length}\n`);
-    });
+    }
   } finally {
     rmSync(temp, { recursive: true, force: true });
   }
@@ -105,7 +114,7 @@ const locales = [
   { code: "ja", name: "Japanese", htmlLang: "ja", directory: "ja", rootHref: "../" },
   { code: "zh-CN", name: "Simplified Chinese", htmlLang: "zh-Hans", directory: "zh", rootHref: "../" },
 ];
-const catalogs = Object.fromEntries(locales.map(locale => [locale.code, translate(units, locale)]));
+const catalogs = Object.fromEntries(await Promise.all(locales.map(async locale => [locale.code, await translate(units, locale)])));
 
 const replaceCatalog = (source, catalog) => Object.entries(catalog)
   .sort((a, b) => b[0].length - a[0].length)
@@ -122,7 +131,7 @@ const buildHtml = (locale, catalog) => {
   let output = locale.code === "ko" ? htmlSource : replaceCatalog(htmlSource, catalog);
   output = output.replace('<html lang="ko">', `<html lang="${locale.htmlLang}">`);
   output = output.replace("<body>", `<body data-locale="${locale.code === "zh-CN" ? "zh" : locale.code}">`);
-  output = output.replace('<meta name="viewport" content="width=device-width,initial-scale=1" />', `<meta name="viewport" content="width=device-width,initial-scale=1" />\n    <meta name="site-root" content="${locale.rootHref}" />\n    <link rel="alternate" hreflang="en" href="https://agentic-shaping.slogs.dev/" />\n    <link rel="alternate" hreflang="ko" href="https://agentic-shaping.slogs.dev/ko/" />\n    <link rel="alternate" hreflang="ja" href="https://agentic-shaping.slogs.dev/ja/" />\n    <link rel="alternate" hreflang="zh-Hans" href="https://agentic-shaping.slogs.dev/zh/" />\n    <link rel="alternate" hreflang="x-default" href="https://agentic-shaping.slogs.dev/" />`);
+  output = output.replace('<meta name="viewport" content="width=device-width,initial-scale=1" />', `<meta name="viewport" content="width=device-width,initial-scale=1" />\n    <meta name="publication-contract" content="${release.contractId};version=${release.version};policy=${release.policyVersion};${release.feature.ruleId}=${release.feature.passed}/${release.feature.total};status=${release.feature.status};limitation=${release.feature.limitation}" />\n    <meta name="site-root" content="${locale.rootHref}" />\n    <link rel="alternate" hreflang="en" href="https://agentic-shaping.slogs.dev/" />\n    <link rel="alternate" hreflang="ko" href="https://agentic-shaping.slogs.dev/ko/" />\n    <link rel="alternate" hreflang="ja" href="https://agentic-shaping.slogs.dev/ja/" />\n    <link rel="alternate" hreflang="zh-Hans" href="https://agentic-shaping.slogs.dev/zh/" />\n    <link rel="alternate" hreflang="x-default" href="https://agentic-shaping.slogs.dev/" />`);
   const canonicalPath = locale.directory ? `${locale.directory}/` : "";
   output = output.replace('<link rel="alternate" hreflang="en"', `<link rel="canonical" href="https://agentic-shaping.slogs.dev/${canonicalPath}" />\n    <link rel="alternate" hreflang="en"`);
   output = output.replace('<a class="pill" href="#start">', `${languageLinks}\n        <a class="pill" href="#start">`);
@@ -165,7 +174,7 @@ for (const locale of [locales[0], koreanLocale, locales[1], locales[2]]) {
 const readmeLinks = "[English](README.md) | [한국어](README.ko.md) | [日本語](README.ja.md) | [简体中文](README.zh-CN.md)";
 const buildReadme = catalog => {
   let output = catalog ? replaceCatalog(readmeSource, catalog) : readmeSource;
-  return output.replace("# Agentic Shaping", `# Agentic Shaping\n\n${readmeLinks}`);
+  return output.replace("# Agentic Shaping", `# Agentic Shaping\n\n${readmeLinks}\n\n<!-- ${release.contractId};version=${release.version};policy=${release.policyVersion};${release.feature.ruleId}=${release.feature.passed}/${release.feature.total};status=${release.feature.status};limitation=${release.feature.limitation} -->`);
 };
 emit(join(root, "README.md"), buildReadme(catalogs.en));
 emit(join(root, "README.ko.md"), buildReadme(null));

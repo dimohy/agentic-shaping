@@ -1,5 +1,6 @@
 import { readFileSync } from "node:fs";
 import { resolve, join } from "node:path";
+import { spawnSync } from "node:child_process";
 
 const root = resolve(import.meta.dirname, "..");
 const html = readFileSync(join(root, "ko", "index.html"), "utf8");
@@ -8,7 +9,31 @@ const activation = JSON.parse(readFileSync(join(root, "evals", "activation-lates
 const regression = JSON.parse(readFileSync(join(root, "evals", "latest-results.json"), "utf8"));
 const execution = JSON.parse(readFileSync(join(root, "evals", "latest-execution-results.json"), "utf8"));
 const policy = JSON.parse(readFileSync(join(root, "evals", "slogs-policy-smoke-luna-max.json"), "utf8"));
+const release = JSON.parse(readFileSync(join(root, "site", "release-manifest.json"), "utf8"));
 const fail = message => { throw new Error(message); };
+const structuredGate = spawnSync(process.execPath, [join(root, "evals", "verify-unstructured-to-structured.mjs")], { encoding: "utf8" });
+if (structuredGate.status !== 0) fail(`AS-US-001 gate failed: ${structuredGate.stderr || structuredGate.stdout}`);
+const structuredActivation = spawnSync(process.execPath, [join(root, "evals", "verify-unstructured-to-structured-activation.mjs")], { encoding: "utf8" });
+if (structuredActivation.status !== 0) fail(`AS-US-001 activation evidence failed: ${structuredActivation.stderr || structuredActivation.stdout}`);
+for (const [name, script] of [
+  ["skill abstraction", "verify-skill-abstraction.mjs"],
+  ["skill lifecycle", "verify-skill-lifecycle.mjs"],
+  ["publication sync", "verify-publication-sync.mjs"],
+]) {
+  const check = spawnSync(process.execPath, [join(root, "evals", script)], { encoding: "utf8" });
+  if (check.status !== 0) fail(`${name} contract failed: ${check.stderr || check.stdout}`);
+}
+for (const [name, script, args = []] of [
+  ["prompt snapshot", "verify-prompt-snapshot.mjs"],
+  ["run identity", "verify-run-identity.mjs"],
+  ["historical sidecar", "verify-eval-provenance.mjs"],
+  ["completed provenance", "verify-completed-eval-provenance.mjs"],
+]) {
+  const check = spawnSync(process.execPath, [join(root, "evals", script), ...args], { encoding: "utf8" });
+  if (check.status !== 0) fail(`${name} gate failed: ${check.stderr || check.stdout}`);
+}
+const policyVersion = html.match(/HOMEPAGE v[0-9.]+ ↔ SLOGS ([0-9.]+)/)?.[1];
+if (!policyVersion) fail("공개 페이지에서 현재 Slogs 정책 버전을 찾지 못했습니다.");
 
 if (!activation.passed) fail("최신 Agentic Shaping 차별 평가가 통과하지 않았습니다.");
 if (activation.suiteSource !== "activation-cases.json") fail("차별 평가 suite 출처가 다릅니다.");
@@ -61,7 +86,7 @@ const requiredHtml = [
   "27/27 <i>↔</i> 27/27",
   "프롬프트뿐 아니라,<br />검증 시스템도 진화합니다.",
   "90% <i>→</i> 100%",
-  "HOMEPAGE v0.2 ↔ SLOGS 2026.08.25.3",
+  `HOMEPAGE ${release.displayVersion} ↔ SLOGS ${policyVersion}`,
   "현재 결과 완성 · 안전 경계 · durable 개선을 독립 실행",
 ];
 for (const fragment of requiredHtml) if (!html.includes(fragment)) fail(`index.html 공개 평가 문구 누락: ${fragment}`);
@@ -71,13 +96,13 @@ const requiredReadme = [
   "기본군 3/5(60%), 적용군 5/5(100%)",
   "양쪽 27/27, 금지 행동: 양쪽 0건",
   "기본군 94/98(95.9%), 적용군 96/98(98.0%), 금지 행동 0건",
-  "최종 정책 버전은 `2026.08.25.3`",
+  `현재 정책 버전은 \`${policyVersion}\``,
   "기본군 18/20(90%)에서 정책 적용군 20/20(100%)",
 ];
 for (const fragment of requiredReadme) if (!readme.includes(fragment)) fail(`README 공개 평가 문구 누락: ${fragment}`);
 for (const pagePath of ["index.html", join("ko", "index.html"), join("ja", "index.html"), join("zh", "index.html")]) {
   const page = readFileSync(join(root, pagePath), "utf8");
-  for (const invariant of ["61.5%", "96.2%", "82/105", "104/105", "90%", "100%", "SLOGS 2026.08.25.3"]) {
+  for (const invariant of ["61.5%", "96.2%", "82/105", "104/105", "90%", "100%", `SLOGS ${policyVersion}`]) {
     if (!page.includes(invariant)) fail(`${pagePath} 평가 불변값 누락: ${invariant}`);
   }
 }

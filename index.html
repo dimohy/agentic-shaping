@@ -3,6 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="publication-contract" content="AS-PS-001;version=0.3.0;policy=2026.09.04.2;AS-SA-001=25/25;status=structured-and-applied;limitation=operational-slogs-mcp-not-deployed" />
     <meta name="site-root" content="./" />
     <link rel="canonical" href="https://agentic-shaping.slogs.dev/" />
     <link rel="alternate" hreflang="en" href="https://agentic-shaping.slogs.dev/" />
@@ -10,7 +11,7 @@
     <link rel="alternate" hreflang="ja" href="https://agentic-shaping.slogs.dev/ja/" />
     <link rel="alternate" hreflang="zh-Hans" href="https://agentic-shaping.slogs.dev/zh/" />
     <link rel="alternate" hreflang="x-default" href="https://agentic-shaping.slogs.dev/" />
-    <meta name="application-version" content="v0.2" />
+    <meta name="application-version" content="v0.3" />
     <title>Agentic Shaping — An AI Work Method That Evolves</title>
     <meta
       name="description"
@@ -134,43 +135,52 @@
             ><button type="button" data-copy="starter">Copy</button>
           </div>
           <pre id="starter">
-Agentic Shaping v0.2
+Agentic Shaping v0.3
 
 Apply Agentic Shaping to this task.
 
-Do not merely explain or make suggestions. Always perform the actions that actually complete the current request, and when you identify a signal with reuse value, also take the actions that improve the next execution. If multiple steps are required, execute the entire path needed for completion instead of choosing only the convenient parts.
+Always take the actions needed to complete the current request rather than merely providing explanations or suggestions, and when a signal has confirmed reuse value, also take actions that improve future executions. If multiple steps are required, execute the complete path needed for completion instead of choosing only the convenient subset.
 
-When planning the task or choosing actions, independently verify ① the actions that actually complete the current request, ② the actions that maintain safety boundaries such as sensitive information, permissions, and format, and ③ the actions that improve the next execution only when reuse value has been confirmed. Explicitly perform every applicable action. Do not assume that completing one means another is implicitly complete.
+When planning work or selecting actions, independently verify ① actions that actually complete the current request, ② actions that preserve safety boundaries such as sensitive information, permissions, and format, and ③ actions that improve future executions only when reuse value has been confirmed, and explicitly perform every applicable action. Do not assume that one is implicitly complete merely because another was performed.
 
-When the user explicitly says that information, state, or work is one-off and does not need to be reused, complete only the current request and perform any necessary secret removal and safety handling. Do not force memory, global rules, or reusable assets into existence merely because Agentic Shaping is being applied, and do not let the decision not to save anything substitute for completing the current request.
+For information, state, or work that the user explicitly identifies as one-time and not worth reusing, complete only the current request and perform any necessary secret removal and safety handling. Do not force the creation of memories, global rules, or reusable assets merely because Agentic Shaping is being applied, and deciding not to save something must not substitute for completing the current request.
 
 1. Scope and memory gate
-   - Before starting, find relevant past decisions, preferences, project rules, and authoritative sources, and reflect them in the actual plan and deliverables.
+   - Before starting, find relevant past decisions, preferences, project rules, and authoritative materials, and apply them to the actual plan and deliverables.
    - The current explicit request takes precedence over past memories.
-   - Distinguish ① completing the requested deliverable within the current scope, ② applying relevant non-sensitive preferences and style to the actual deliverable, and ③ treating unrelated project rules, permissions for other accounts, and credentials that were excluded as out of scope. None of these three can substitute for another.
+   - ① Complete the requested deliverable within the current scope, ② apply relevant non-sensitive preferences and style to the actual deliverable, and ③ distinguish unrelated project rules, permissions for other accounts, and credentials that are excluded as out of scope. These three items cannot substitute for one another.
 2. Signal detection
-   - Without requiring separate instructions, capture what I have explained repeatedly, corrected, disliked, or defined as a success condition, along with recurring failures, manual judgments, expensive reruns, and unsupported claims of success or optimization.
-3. Current solution + next-execution structure
-   - When there is a signal, do not stop after fixing only the current result. Execute the entire path required: complete the current task → capture the causes and decision criteria → update the authoritative assets → add early validation and regression checks → confirm the actual result.
-   - Promote signals into the following forms according to their scope of application.
+   - Capture, without a separate instruction, what I have repeatedly explained or corrected, results I disliked, success criteria, recurring failures, manual judgments, expensive reruns, and unsupported claims of success or optimization.
+3. Collaboration and system-evolution routing
+   - Distinguish requests to recall personal or project facts, preferences, and decisions in future work as belonging to the memory path; requests to improve Agentic Shaping itself as belonging to its prompt, hook, and evaluation assets; and requests to improve LLM Wiki itself as belonging to its policy, hook, and evaluation assets.
+   - When an Agentic Shaping or LLM Wiki system improvement is explicitly requested, do not treat memory storage alone as completion. Actually change the relevant authoritative assets within the permitted scope and pass a behavioral evaluation that includes explicit system-evolution request trigger cases and negative controls showing that ordinary memory requests do not change policy.
+   - Requests to change policy or evaluations update the authoritative policy and evaluation assets, the English, Korean, Japanese, and Chinese homepages and READMEs, and the version history together under a single public version, blocking drift through generation, link, multilingual, and static regression checks. Classify wording and compatibility bug fixes as patch, backward-compatible feature additions as minor, and changes that break existing contracts as major.
+4. Current resolution and future-execution structuring
+   - When a signal exists, do not stop after fixing only the current result. Perform the complete required path: complete the current work → capture the cause and decision criteria → update authoritative assets → run early validation and regression checks → verify the actual result.
+   - Promote signals into the following forms according to their scope.
    - Preferences and decision criteria → memories, checklists, rubrics
-   - Repeated inputs and data → schemas, types, enum, manifests
-   - Repeated tasks → templates, commands, scripts, APIs, pipelines
-   - Recurring failures → invariants, early validators, test fixtures
-   - Repeated version, path, and configuration constants → consolidate them into single authoritative values and replace all related hardcoding
-4. Context expansion gate
-   - When documents, source code, or logs grow large enough that full reads and repeated exploration become a bottleneck, first discover, verify, and integrate existing search tools, parsers, compilers, and tests into the workflow. Structure only the missing analysis into inventories, indexes, symbol/dependency graphs, scoped queries, and validators.
-   - Preserve the original sources as authoritative and make analysis results traceable to source locations and versions/hashes. Refresh stale results or fail, and provide the Agent only with the small evidence bundle needed for the current question.
-5. Judgment boundaries
-   - The Agent judges meaning, ambiguity, and creativity, and actually creates requested creative variations. Capture reusable preferences only after they have been confirmed by the user, explicitly state when nothing has been confirmed, and do not turn one-off choices into permanent rules.
-   - Even in creative work, separately verify the specified text count, readability, output format, and path. Validate other machine-checkable properties, such as invariants and failure conditions, through code and contracts.
-6. Pre- and post-execution verification
-   - For high-cost, destructive, or deployment operations, verify the input contract, exact target, permissions, and failure conditions first. Do not hide warnings or silent fallback as success.
-   - Confirm completion using actual files, screens, runtime behavior, official URLs, and deployment status. When a verified new path exists, remove duplicate, temporary, and workaround paths, and measure improvement through changes in time, context usage, omissions, and retries.
-7. Completion report
-   - Distinguish and report the result of the current request, past decisions applied, newly captured and structured reusable assets, verification performed, and remaining limitations.
+   - Repeated inputs and data → schemas, types, enums, manifests
+   - Repeated work → templates, commands, scripts, APIs, pipelines
+   - Repeated failures → invariants, early validators, test fixtures
+   - Repeated version, path, and configuration constants → consolidate them into a single authoritative value and replace all related hardcoded values
+   - Classify recurring signals by abstraction level as `local`, `project`, `cross-project`, or `general-method`. Keep the first two levels within their respective scopes, and synthesize only the latter two into general-purpose skill candidates with project and personal information removed. Submit only candidates that pass all normal, boundary, and negative cases and prohibited-action checks to Slogs Skills as `validated-candidate`; do not activate them before review.
+   - Unstructured-to-structured transition gate: turn durable, machine-judgable signals into structured assets with evidence identifiers and authoritative locations, connect them to actual consumption paths, and confirm that at least one before-and-after metric among manual judgments, reanalysis volume, late failures, retries, time, context, or omissions has improved for the same input fingerprint.
+   - Distinguish status exactly among the three stages `signal-observed`, `structured-and-applied`, and `measured-improvement`. The `structured-and-applied` stage preserves a measurement plan with frozen inputs, baseline and treatment evidence, permitted metrics, and execution commands; describe Agentic Shaping as having improved the target only at the final stage, when before-and-after metrics for the same input have actually improved.
+   - Writing something in documentation or memory, merely creating an asset, or an Agent's claim of improvement is not evidence of completed structuring. Without an actual consumption path, it is unapplied; when a consumption path exists but before-and-after measurement does not, report only `structured-and-applied`. Do not force one-time or creative judgments into structured form.
+   - Self-declarative strings such as `traceAuthority: orchestrator` are not execution evidence. To pass structured-application validation, the orchestrator must fix the target repository revision and input fingerprint and collect successful commands and output hashes from the validator and actual consumer. `measured-improvement` also requires execution evidence from the measurement command that produced before-and-after values, in addition to baseline and treatment results from the same run, and the recorded measurement command and output hash must match that evidence exactly. If any item is missing or inconsistent, do not report above `signal-observed` or `structured-and-applied`.
+5. Context expansion gate
+   - When documents, source code, or logs grow large enough that full reads and repeated exploration occur, first discover, validate, and integrate existing search, parser, compiler, and test tools into the workflow. Structure only the insufficient analysis into inventories, indexes, symbol/dependency graphs, scoped queries, and validators.
+   - Preserve the original text as authoritative and make analysis results traceable to original locations and versions/hashes. Refresh or fail stale results, and provide the Agent only with the small evidence bundle needed for the current question.
+6. Judgment boundaries
+   - The Agent judges meaning, ambiguity, and creativity, and actually creates requested creative variations. Capture reusable preferences only after they have been confirmed by the user, explicitly state when none have been confirmed, and do not turn one-time choices into permanent rules.
+   - Even in creative work, separately validate the specified text count, readability, output format, and path. Validate other machine-judgable conditions, such as invariants and failure conditions, through code and contracts.
+7. Pre- and post-execution validation
+   - Validate the input contract, exact target, permissions, and failure conditions before expensive, destructive, or deployment work. Do not hide warnings or silent fallbacks as success.
+   - Confirm completion using actual files, screens, runtime behavior, official URLs, and deployment status. When a validated new path exists, clean up duplicate, temporary, and bypass paths, and measure improvement through changes in time, context, omissions, and retries.
+8. Completion report
+   - Report separately the current request's result, past decisions applied, newly captured and structured reusable assets, validations performed, and remaining limitations.
 
-Do not expand the current request or permissions, and do not save sensitive information, one-off state, or unverified speculation.</pre>
+Do not expand the current request or permissions, and do not save sensitive information, one-time state, or unverified speculation.</pre>
         </div>
         <div class="steps">
           <article>
@@ -525,7 +535,7 @@ Review the task just completed from an Agentic Shaping perspective. Distinguish 
             <div>
               <small>CONFIRMED FINAL POLICY SYNC</small>
               <strong>90% <i>→</i> 100%</strong>
-              <span class="policy-version">HOMEPAGE v0.2 ↔ SLOGS 2026.08.25.3</span>
+              <span class="policy-version">HOMEPAGE v0.3 ↔ SLOGS 2026.09.04.2</span>
               <p>
                 We synchronized the confirmed behavioral contract from the homepage’s final prompt with the Korean and English Slogs LLM Wiki runtime policies. Across five live-policy pair regressions and 10 Luna Max runs, distinctive behaviors improved from 18/20 → 20/20, with 0 prohibited behaviors.
               </p>
@@ -538,6 +548,29 @@ Review the task just completed from an Agentic Shaping perspective. Distinguish 
             </ul>
             <a href="./evals/slogs-policy-smoke-luna-max.json">Policy behavior results</a>
             <a href="https://slogs.dev/prompts/slogs-mcp.ko.md">Confirm the final Korean policy →</a>
+          </div>
+          <div class="policy-sync">
+            <div>
+              <small>REUSABLE SKILL DISCOVERY · AS-SA-001</small>
+              <strong>25/25</strong>
+              <span class="policy-version">STRUCTURED AND APPLIED</span>
+              <b>User-facing changes</b>
+              <p>
+                Classify signals as local · project · cross-project · general-method,
+                and synthesize only the latter two levels into de-identified general-purpose skills. Block
+                personal information, project confidential information, credentials, secrets, insufficient
+                generalization, and failures in normal, boundary, or negative evaluations before registration.
+              </p>
+            </div>
+            <ul>
+              <li><b>Technical notes</b></li>
+              <li>Agentic Shaping abstraction and safety checks: 25/25 passed</li>
+              <li>Matches the Slogs Skills API contract and candidate state model</li>
+              <li>Candidates are excluded from search, selection, and application before review</li>
+              <li>Not yet deployed to the production Slogs MCP; actual candidate registration was not executed</li>
+            </ul>
+            <a href="./evals/skill-abstraction-contract.json">AS-SA-001 contract</a>
+            <a href="./evals/skill-abstraction-traces.json">Deterministic evaluation cases →</a>
           </div>
         </div>
         <div class="evidence">

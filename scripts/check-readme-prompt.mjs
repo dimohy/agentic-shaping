@@ -52,5 +52,9 @@ for (const contract of [
 for (const contract of ["문서와 소스코드가 커지면 분석 방식도 진화합니다", "분석 표면"]) {
   if (!koreanReadme.includes(contract)) throw new Error(`한국어 README에서 분석 확장 안내를 찾지 못했습니다: ${contract}`);
 }
+for (const contract of ["비정형→정형 전환 게이트", "signal-observed", "structured-and-applied", "measured-improvement", "실제 소비 경로", "전후 지표", "자기 선언 문자열은 실행 증거가 아니다", "대상 저장소 revision", "출력 해시", "측정 명령", "정확히 일치"]) {
+  if (!koreanReadme.includes(contract)) throw new Error(`한국어 README에서 비정형→정형 계약을 찾지 못했습니다: ${contract}`);
+  if (!koreanHtml.includes(contract)) throw new Error(`한국어 홈페이지에서 비정형→정형 계약을 찾지 못했습니다: ${contract}`);
+}
 
 console.log(`4개 언어의 README 적용 프롬프트, 분석 확장 계약 및 공개 버전 ${sharedVersion} 검사 통과`);

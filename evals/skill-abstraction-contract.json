@@ -1,0 +1,17 @@
+{
+  "schemaVersion": 2,
+  "ruleId": "AS-SA-001",
+  "description": "Classify a shaping signal before reuse. Only cross-project and general-method signals may produce privacy-safe generalized packages and deterministic Slogs validated-candidate submissions.",
+  "traceSchema": "skill-abstraction-trace.schema.json",
+  "runtimeModule": "skill-abstraction.mjs",
+  "abstractionLevels": ["local", "project", "cross-project", "general-method"],
+  "shareableLevels": ["cross-project", "general-method"],
+  "minimumIndependentDomains": { "cross-project": 2, "general-method": 3 },
+  "synthesizer": "agentic-shaping-skill-synthesizer",
+  "submissionTool": "skill_registry_submit_candidate",
+  "submissionStatus": "validated-candidate",
+  "packageMetadata": ["license", "provenance", "registry-candidate visibility", "verified platforms"],
+  "approvalBoundary": "A candidate submission does not make a skill validated. The Slogs owner validation action is separate.",
+  "traceAuthority": "orchestrator",
+  "nonEvidence": ["memory-only", "description-match-only", "agent-authored-generality", "single-project-example", "privacy-claim-without-scan", "evaluation-without-negative-control"]
+}

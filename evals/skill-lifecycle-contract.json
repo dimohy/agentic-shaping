@@ -1,0 +1,16 @@
+{
+  "schemaVersion": 3,
+  "ruleId": "AS-SK-001",
+  "description": "A reusable shaping signal may become a shared skill only after privacy-safe generalization, frozen behavioral evaluation, validated registry publication, explicit first-use scope selection, and hash-bound version resolution.",
+  "traceSchema": "skill-lifecycle-trace.schema.json",
+  "runtimeModule": "skill-lifecycle.mjs",
+  "phases": ["discovery", "promotion", "resolution"],
+  "scopeKinds": ["project", "global", "disabled"],
+  "requiredCaseKinds": ["normal", "boundary", "negative-control"],
+  "registryName": "slogs-skill-registry",
+  "registryStatus": "validated",
+  "validationReportFields": ["suiteId", "evaluatorVersion", "passed", "total", "forbiddenActions", "artifactEvidence", "outputSha256"],
+  "privateSourceKinds": ["personal-memory", "project-confidential", "credential", "secret"],
+  "traceAuthority": "orchestrator",
+  "nonEvidence": ["memory-only", "agent-authored-claim", "description-match-only", "prompt-text-present", "unverified-package", "implicit-scope"]
+}

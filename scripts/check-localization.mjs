@@ -1,11 +1,12 @@
-import { readFileSync } from "node:fs";
+import { existsSync, readFileSync } from "node:fs";
 import { createHash } from "node:crypto";
-import { join, resolve } from "node:path";
+import { dirname, join, resolve } from "node:path";
 import { spawnSync } from "node:child_process";
 
 const root = resolve(import.meta.dirname, "..");
 const fail = message => { throw new Error(message); };
 const read = path => readFileSync(join(root, path), "utf8");
+const release = JSON.parse(read("site/release-manifest.json"));
 const pages = [
   { path: "index.html", locale: "en", lang: "en", siteRoot: "./", canonical: "https://agentic-shaping.slogs.dev/" },
   { path: "ko/index.html", locale: "ko", lang: "ko", siteRoot: "../", canonical: "https://agentic-shaping.slogs.dev/ko/" },
@@ -21,6 +22,8 @@ const alternates = [
 ];
 const sectionIds = ["start", "loop", "scale", "memory", "prompts", "validation"];
 const languageLinks = "[English](README.md) | [한국어](README.ko.md) | [日本語](README.ja.md) | [简体中文](README.zh-CN.md)";
+const policyVersion = read("site/index.ko.source.html").match(/HOMEPAGE \{\{PUBLIC_VERSION\}\} ↔ SLOGS ([0-9.]+)/)?.[1];
+if (!policyVersion) fail("한국어 홈페이지 권위 소스에서 Slogs 정책 버전을 찾지 못했습니다.");
 const headerContract = JSON.parse(read("site/header-layout-contract.json"));
 const assetManifest = JSON.parse(read("site-assets/manifest.json"));
 const sha256 = content => createHash("sha256").update(content).digest("hex");
@@ -52,7 +55,7 @@ for (const page of pages) {
   }
   if ((html.match(/data-language="(?:en|ko|ja|zh)"/g) ?? []).length !== 4) fail(`${page.path}: 언어 선택기 항목 수 불일치`);
   for (const id of sectionIds) if (!html.includes(`id="${id}"`)) fail(`${page.path}: 핵심 섹션 #${id} 누락`);
-  if (!html.includes("v0.2") || !html.includes("SLOGS 2026.08.25.3")) fail(`${page.path}: 공개 버전 계약 누락`);
+  if (!html.includes(release.displayVersion) || !html.includes(`SLOGS ${policyVersion}`)) fail(`${page.path}: 공개 버전 계약 누락`);
   if (!html.includes('href="https://github.com/dimohy/agentic-shaping"')) fail(`${page.path}: 현재 GitHub 저장소 링크 누락`);
   if (html.includes("github.com/dimohy/vibe-compiler")) fail(`${page.path}: 폐기된 GitHub 저장소 링크 잔류`);
   if (/\b(?:undefined|null|\[object Object\])\b/.test(html)) fail(`${page.path}: 미해결 생성 값 발견`);
@@ -68,20 +71,48 @@ for (const page of pages) {
   if (page.locale !== "ko" && /[가-힣]/.test(html.replaceAll("한국어", ""))) {
     fail(`${page.path}: 언어 선택기 밖의 한글 잔류`);
   }
+  for (const match of html.matchAll(/href="([^"]+)"/g)) {
+    const href = match[1].split(/[?#]/, 1)[0];
+    if (!href || /^(?:https?:|mailto:|tel:|data:)/.test(href)) continue;
+    const target = resolve(root, dirname(page.path), href);
+    const resolvedTarget = href.endsWith("/") ? join(target, "index.html") : target;
+    if (!existsSync(resolvedTarget)) fail(`${page.path}: 존재하지 않는 내부 링크 ${match[1]}`);
+  }
 }
 
 const readmes = ["README.md", "README.ko.md", "README.ja.md", "README.zh-CN.md"];
+const behavioralEvidenceKinds = [
+  "artifact",
+  "contract-review",
+  "fixture-design",
+  "inventory",
+  "low-load-analysis",
+  "verification",
+  "system-evolution-audit",
+  "system-evolution-contract",
+];
 for (const path of readmes) {
   const markdown = read(path);
   if (!markdown.includes(languageLinks)) fail(`${path}: README 언어 링크 누락`);
-  if (!markdown.includes("Agentic Shaping v0.2")) fail(`${path}: 버전이 표시된 프롬프트 누락`);
+  if (!markdown.includes(`Agentic Shaping ${release.displayVersion}`)) fail(`${path}: 버전이 표시된 프롬프트 누락`);
+  for (const evidenceKind of behavioralEvidenceKinds) {
+    if (!markdown.includes(`\`${evidenceKind}\``)) fail(`${path}: AS-BI-001 증거 enum 누락 ${evidenceKind}`);
+  }
   if (path !== "README.ko.md" && /[가-힣]/.test(markdown.replaceAll("한국어", ""))) fail(`${path}: 언어 링크 밖의 한글 잔류`);
+  for (const match of markdown.matchAll(/\[[^\]]*\]\(([^)]+)\)/g)) {
+    const href = match[1].split(/[?#]/, 1)[0];
+    if (!href || /^(?:https?:|mailto:|tel:)/.test(href)) continue;
+    if (!existsSync(resolve(root, dirname(path), href))) fail(`${path}: 존재하지 않는 내부 링크 ${match[1]}`);
+  }
 }
-if (!read("README.md").includes("## Language") || !read("README.md").includes("Current public version: **v0.2**")) {
+if (!read("README.md").includes("## Language") || !read("README.md").includes(`Current public version: **${release.displayVersion}**`)) {
   fail("README.md가 영어 기본 문서가 아닙니다.");
 }
 if (!/[ぁ-んァ-ヶ]/.test(read("ja/index.html"))) fail("일본어 홈페이지에 일본어 문자가 없습니다.");
 if (!/[\u4e00-\u9fff]/.test(read("zh/index.html"))) fail("중국어 홈페이지에 한자가 없습니다.");
+for (const path of ["ko/index.html", "README.ko.md"]) {
+  if (read(path).includes("관문")) fail(`${path}: 공개 한국어 표면에 금지 용어가 남아 있습니다.`);
+}
 
 const script = read("script.js");
 for (const contract of [

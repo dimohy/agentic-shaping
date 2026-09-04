@@ -1,0 +1,19 @@
+{
+  "ruleId": "AS-PS-001",
+  "cases": [
+    { "id": "minor-capability-release", "trace": { "template": "minor" }, "expected": { "allowed": true, "code": "AS-PS-001-SYNCHRONIZED" } },
+    { "id": "patch-compatible-correction", "trace": { "template": "patch" }, "expected": { "allowed": true, "code": "AS-PS-001-SYNCHRONIZED" } },
+    { "id": "major-breaking-contract", "trace": { "template": "major" }, "expected": { "allowed": true, "code": "AS-PS-001-SYNCHRONIZED" } },
+    { "id": "block-wrong-minor-version", "trace": { "template": "minor", "set": { "change.nextVersion": "0.2.1", "surfaces.*.version": "0.2.1", "changelog.version": "0.2.1" } }, "expected": { "allowed": false, "code": "AS-PS-001-SEMVER-MISMATCH" } },
+    { "id": "block-missing-localized-surface", "trace": { "template": "minor", "removeSurface": "readme:ja" }, "expected": { "allowed": false, "code": "AS-PS-001-SURFACE-MATRIX-MISSING" } },
+    { "id": "block-version-drift", "trace": { "template": "minor", "set": { "surfaces.0.version": "0.2.0" } }, "expected": { "allowed": false, "code": "AS-PS-001-PUBLICATION-DRIFT" } },
+    { "id": "block-result-drift", "trace": { "template": "minor", "set": { "surfaces.3.passed": 18 } }, "expected": { "allowed": false, "code": "AS-PS-001-PUBLICATION-DRIFT" } },
+    { "id": "block-policy-drift", "trace": { "template": "minor", "set": { "surfaces.5.policyVersion": "stale" } }, "expected": { "allowed": false, "code": "AS-PS-001-PUBLICATION-DRIFT" } },
+    { "id": "block-missing-limitation", "trace": { "template": "minor", "set": { "surfaces.7.limitation": "" } }, "expected": { "allowed": false, "code": "AS-PS-001-PUBLICATION-DRIFT" } },
+    { "id": "block-short-user-changelog", "trace": { "template": "minor", "set": { "changelog.userChangeBullets": 3 } }, "expected": { "allowed": false, "code": "AS-PS-001-CHANGELOG-INCOMPLETE" } },
+    { "id": "block-missing-technical-note", "trace": { "template": "minor", "set": { "changelog.technicalNoteKinds": ["compatibility", "contracts", "verification"] } }, "expected": { "allowed": false, "code": "AS-PS-001-CHANGELOG-INCOMPLETE" } },
+    { "id": "block-unchecked-generation", "trace": { "template": "minor", "set": { "staticRegression.generation": false } }, "expected": { "allowed": false, "code": "AS-PS-001-STATIC-REGRESSION-MISSING" } },
+    { "id": "block-sequential-only-sync", "trace": { "template": "minor", "set": { "syncExecution.mode": "sequential" } }, "expected": { "allowed": false, "code": "AS-PS-001-PARALLEL-SYNC-MISSING" } },
+    { "id": "block-forbidden-push", "trace": { "template": "minor", "set": { "forbiddenActions": ["push-before-regression"] } }, "expected": { "allowed": false, "code": "AS-PS-001-FORBIDDEN-ACTION" } }
+  ]
+}

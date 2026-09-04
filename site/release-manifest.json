@@ -1,0 +1,34 @@
+{
+  "schemaVersion": 1,
+  "contractId": "AS-PS-001",
+  "version": "0.3.0",
+  "displayVersion": "v0.3",
+  "previousVersion": "0.2.0",
+  "changeLevel": "minor",
+  "releaseDate": "2026-09-04",
+  "policyVersion": "2026.09.04.2",
+  "feature": {
+    "ruleId": "AS-SA-001",
+    "passed": 25,
+    "total": 25,
+    "status": "structured-and-applied",
+    "limitation": "operational-slogs-mcp-not-deployed"
+  },
+  "authoritativeFiles": [
+    "site/index.ko.source.html",
+    "site/README.ko.source.md",
+    "evals/skill-abstraction-contract.json",
+    "evals/skill-abstraction-traces.json",
+    "evals/verify-skill-abstraction.mjs"
+  ],
+  "generatedSurfaces": [
+    "index.html",
+    "ko/index.html",
+    "ja/index.html",
+    "zh/index.html",
+    "README.md",
+    "README.ko.md",
+    "README.ja.md",
+    "README.zh-CN.md"
+  ]
+}

@@ -1,0 +1,90 @@
+{
+  "ruleId": "AS-SK-001",
+  "cases": [
+    {
+      "id": "discover-reusable-generalized-candidate",
+      "trace": { "template": "discovery" },
+      "expected": { "allowed": true, "code": "AS-SK-001-CANDIDATE-DISCOVERED" }
+    },
+    {
+      "id": "block-private-memory-source",
+      "trace": { "template": "discovery", "set": { "privacy.containsPersonalMemory": true } },
+      "expected": { "allowed": false, "code": "AS-SK-001-PRIVATE-SOURCE-BLOCKED" }
+    },
+    {
+      "id": "block-discovery-that-releases-package",
+      "trace": { "template": "discovery", "set": { "packageContentReleased": true } },
+      "expected": { "allowed": false, "code": "AS-SK-001-DISCOVERY-SCOPE-EXPANDED" }
+    },
+    {
+      "id": "promote-after-complete-evaluation",
+      "trace": { "template": "promotion" },
+      "expected": { "allowed": true, "code": "AS-SK-001-PROMOTED" }
+    },
+    {
+      "id": "block-promotion-without-negative-control",
+      "trace": { "template": "promotion", "removeCaseKind": "negative-control" },
+      "expected": { "allowed": false, "code": "AS-SK-001-EVALUATION-FAILED" }
+    },
+    {
+      "id": "block-package-hash-mismatch",
+      "trace": { "template": "promotion", "set": { "publication.contentHash": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb" } },
+      "expected": { "allowed": false, "code": "AS-SK-001-PUBLICATION-MISMATCH" }
+    },
+    {
+      "id": "block-validation-report-hash-mismatch",
+      "trace": { "template": "promotion", "set": { "publication.validationReportHash": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb" } },
+      "expected": { "allowed": false, "code": "AS-SK-001-PUBLICATION-MISMATCH" }
+    },
+    {
+      "id": "require-first-use-decision-before-content",
+      "trace": { "template": "first-use" },
+      "expected": { "allowed": true, "code": "AS-SK-001-FIRST-USE-DECISION-REQUIRED" }
+    },
+    {
+      "id": "block-first-use-decision-bypass",
+      "trace": { "template": "first-use", "set": { "packageContentReleased": true } },
+      "expected": { "allowed": false, "code": "AS-SK-001-FIRST-USE-BYPASSED" }
+    },
+    {
+      "id": "resolve-latest-in-project-scope",
+      "trace": { "template": "project-latest" },
+      "expected": { "allowed": true, "code": "AS-SK-001-LATEST-RESOLVED" }
+    },
+    {
+      "id": "resolve-latest-in-global-scope",
+      "trace": { "template": "global-latest" },
+      "expected": { "allowed": true, "code": "AS-SK-001-LATEST-RESOLVED" }
+    },
+    {
+      "id": "block-project-scope-without-project-key",
+      "trace": { "template": "project-latest", "delete": "selection.projectKey" },
+      "expected": { "allowed": false, "code": "AS-SK-001-INVALID-SCOPE-SELECTION" }
+    },
+    {
+      "id": "block-stale-auto-update-resolution",
+      "trace": { "template": "project-latest", "set": { "resolution.resolvedVersion": "1.0.0" } },
+      "expected": { "allowed": false, "code": "AS-SK-001-STALE-OR-WRONG-VERSION" }
+    },
+    {
+      "id": "block-unvalidated-resolution",
+      "trace": { "template": "project-latest", "set": { "resolution.status": "draft" } },
+      "expected": { "allowed": false, "code": "AS-SK-001-INVALID-RESOLUTION" }
+    },
+    {
+      "id": "respect-explicit-version-pin",
+      "trace": { "template": "project-pinned" },
+      "expected": { "allowed": true, "code": "AS-SK-001-PINNED-RESOLVED" }
+    },
+    {
+      "id": "respect-disabled-choice",
+      "trace": { "template": "disabled" },
+      "expected": { "allowed": true, "code": "AS-SK-001-DISABLED" }
+    },
+    {
+      "id": "block-content-for-disabled-choice",
+      "trace": { "template": "disabled", "set": { "packageContentReleased": true } },
+      "expected": { "allowed": false, "code": "AS-SK-001-DISABLED-SKILL-RELEASED" }
+    }
+  ]
+}

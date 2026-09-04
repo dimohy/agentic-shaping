@@ -1,0 +1,21 @@
+{
+  "schemaVersion": 1,
+  "ruleId": "AS-PS-001",
+  "description": "Important policy and evaluation changes must use one semantic release version and synchronize the authoritative policy, evaluation result, four localized homepages, four localized GitHub READMEs, and two-layer changelog before push or deployment.",
+  "traceSchema": "publication-sync-trace.schema.json",
+  "runtimeModule": "publication-sync.mjs",
+  "changeLevels": {
+    "patch": "Compatible wording, documentation, or bug correction without a new capability.",
+    "minor": "Backward-compatible public capability or contract addition.",
+    "major": "Incompatible change to an existing public contract."
+  },
+  "locales": ["en", "ko", "ja", "zh"],
+  "surfaceKinds": ["homepage", "readme"],
+  "synchronizationMode": "parallel-independent",
+  "requiredParallelBranches": ["policy", "evaluation", "homepage:en", "homepage:ko", "homepage:ja", "homepage:zh", "readme:en", "readme:ko", "readme:ja", "readme:zh"],
+  "requiredUserChangeBulletsMinimum": 4,
+  "requiredUserChangeBulletsMaximum": 6,
+  "requiredTechnicalNoteKinds": ["compatibility", "contracts", "verification", "known-limitation"],
+  "traceAuthority": "orchestrator",
+  "nonEvidence": ["one-language-only", "generated-without-check", "version-text-only", "stale-evaluation-number", "missing-known-limitation", "push-without-static-regression"]
+}
