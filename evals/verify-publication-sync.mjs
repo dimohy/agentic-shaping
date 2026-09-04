@@ -89,6 +89,12 @@ const surfaceDefinitions = [
 const surfaces = surfaceDefinitions.map(([kind, locale, path]) => {
   const content = read(path);
   if (!content.includes(expectedMarker)) throw new Error(`${path}: publication marker drift`);
+  if (kind === "homepage") {
+    const visibleStatus = release.feature.status.toUpperCase().replaceAll("-", " ");
+    if (!content.includes(`<span class="policy-version">${visibleStatus}</span>`)) {
+      throw new Error(`${path}: visible publication status drift`);
+    }
+  }
   return {
     kind, locale, path, version: release.version, policyVersion: release.policyVersion,
     ruleId: release.feature.ruleId, passed: release.feature.passed, total: release.feature.total,
