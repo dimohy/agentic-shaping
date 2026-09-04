@@ -1,0 +1,14 @@
+{
+  "schemaVersion": 1,
+  "ruleId": "AS-PRG-001",
+  "description": "Long-running work reports every harness-declared goal axis independently with an exact completed/total percentage or an explicit unknown-denominator scope; it never hides an axis behind a single aggregate percentage.",
+  "traceSchema": "progress-report-trace.schema.json",
+  "runtimeModule": "progress-report.mjs",
+  "percentageDecimals": 1,
+  "requiredKnownFields": ["completed", "total", "percent"],
+  "requiredUnknownFields": ["scopeLabel", "unknownReason"],
+  "requiredStatusFields": ["failureGroups", "currentStage", "nextGate"],
+  "forbiddenTopLevelFields": ["overallPercent"],
+  "traceAuthority": "orchestrator",
+  "nonEvidence": ["agent-estimated-denominator", "single-axis-summary", "elapsed-time-only", "agent-authored-claim"]
+}

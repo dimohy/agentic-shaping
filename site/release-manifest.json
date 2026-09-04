@@ -1,10 +1,10 @@
 {
-  "schemaVersion": 1,
+  "schemaVersion": 2,
   "contractId": "AS-PS-001",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "displayVersion": "v0.3",
-  "previousVersion": "0.2.0",
-  "changeLevel": "minor",
+  "previousVersion": "0.3.0",
+  "changeLevel": "patch",
   "releaseDate": "2026-09-04",
   "policyVersion": "2026.09.04.2",
   "feature": {
@@ -15,11 +15,85 @@
     "limitation": "first-use-scope-decision-pending"
   },
   "authoritativeFiles": [
+    "CHANGELOG.md",
+    "site/release-manifest.json",
     "site/index.ko.source.html",
     "site/README.ko.source.md",
+    "evals/publication-sync-contract.json",
+    "evals/publication-sync-trace.schema.json",
+    "evals/publication-sync-traces.json",
+    "evals/publication-sync.mjs",
+    "evals/verify-publication-sync.mjs",
     "evals/skill-abstraction-contract.json",
     "evals/skill-abstraction-traces.json",
     "evals/verify-skill-abstraction.mjs"
+  ],
+  "publicCapabilities": [
+    {
+      "ruleId": "AS-PRG-001",
+      "verifier": "evals/verify-progress-report.mjs",
+      "expectedPasses": 11,
+      "files": [
+        "evals/progress-report-contract.json",
+        "evals/progress-report-trace.schema.json",
+        "evals/progress-report-traces.json",
+        "evals/progress-report.mjs",
+        "evals/verify-progress-report.mjs",
+        "evals/fixtures/progress-report/allowed.json",
+        "evals/fixtures/progress-report/blocked.json"
+      ]
+    },
+    {
+      "ruleId": "AS-BI-001",
+      "verifier": "evals/verify-behavioral-interlock.mjs",
+      "expectedPasses": 34,
+      "files": [
+        "evals/behavioral-interlock-contract.json",
+        "evals/behavioral-interlock-trace.schema.json",
+        "evals/behavioral-interlock-traces.json",
+        "evals/behavioral-interlock.mjs",
+        "evals/verify-behavioral-interlock.mjs",
+        "evals/fixtures/interlock/allowed.json",
+        "evals/fixtures/interlock/blocked.json"
+      ]
+    },
+    {
+      "ruleId": "AS-CR-001",
+      "verifier": "evals/verify-collaboration-routing.mjs",
+      "expectedPasses": 13,
+      "files": [
+        "evals/collaboration-routing-contract.json",
+        "evals/collaboration-routing-trace.schema.json",
+        "evals/collaboration-routing-traces.json",
+        "evals/collaboration-routing.mjs",
+        "evals/verify-collaboration-routing.mjs"
+      ]
+    },
+    {
+      "ruleId": "AS-EG-001",
+      "verifier": "evals/verify-expensive-gate.mjs",
+      "expectedPasses": 11,
+      "files": [
+        "evals/expensive-gate-contract.json",
+        "evals/expensive-gate-evidence.schema.json",
+        "evals/expensive-gate-cases.json",
+        "evals/expensive-gate.mjs",
+        "evals/verify-expensive-gate.mjs",
+        "evals/fixtures/expensive-gate/allowed.json",
+        "evals/fixtures/expensive-gate/blocked.json"
+      ]
+    },
+    {
+      "ruleId": "AS-BI-001-CODEX-ADAPTER",
+      "verifier": "evals/verify-codex-wait-hook.mjs",
+      "expectedPasses": 10,
+      "files": [
+        "hooks/codex-pretooluse-companion-queue.mjs",
+        "hooks/codex-hooks.example.json",
+        "hooks/README.md",
+        "evals/verify-codex-wait-hook.mjs"
+      ]
+    }
   ],
   "generatedSurfaces": [
     "index.html",

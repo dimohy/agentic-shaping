@@ -1,0 +1,79 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://agentic-shaping.slogs.dev/evals/expensive-gate-evidence.schema.json",
+  "title": "Agentic Shaping Expensive Gate Evidence",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "gateId",
+    "estimatedCostMs",
+    "evidenceSource",
+    "inputFingerprintBefore",
+    "inputFingerprintAfter",
+    "changedContracts",
+    "declaredConsumers",
+    "consumerAudits",
+    "probes"
+  ],
+  "properties": {
+    "gateId": { "type": "string", "minLength": 1 },
+    "estimatedCostMs": { "type": "integer", "minimum": 0 },
+    "evidenceSource": { "const": "harness-events" },
+    "inputFingerprintBefore": { "$ref": "#/$defs/sha256" },
+    "inputFingerprintAfter": { "$ref": "#/$defs/sha256" },
+    "changedContracts": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": { "type": "string", "minLength": 1 }
+    },
+    "declaredConsumers": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/consumer" }
+    },
+    "consumerAudits": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/audit" }
+    },
+    "probes": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/probe" }
+    }
+  },
+  "$defs": {
+    "sha256": {
+      "type": "string",
+      "pattern": "^[A-Fa-f0-9]{64}$"
+    },
+    "consumer": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["contractId", "consumerId"],
+      "properties": {
+        "contractId": { "type": "string", "minLength": 1 },
+        "consumerId": { "type": "string", "minLength": 1 }
+      }
+    },
+    "audit": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["contractId", "consumerId", "outcome", "evidenceId"],
+      "properties": {
+        "contractId": { "type": "string", "minLength": 1 },
+        "consumerId": { "type": "string", "minLength": 1 },
+        "outcome": { "enum": ["pass", "fail"] },
+        "evidenceId": { "type": "string", "minLength": 1 }
+      }
+    },
+    "probe": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["probeId", "kind", "outcome", "evidenceId"],
+      "properties": {
+        "probeId": { "type": "string", "minLength": 1 },
+        "kind": { "enum": ["positive", "negative"] },
+        "outcome": { "enum": ["pass", "fail"] },
+        "evidenceId": { "type": "string", "minLength": 1 }
+      }
+    }
+  }
+}

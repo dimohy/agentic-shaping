@@ -1,0 +1,6 @@
+{
+  "events": [
+    { "kind": "start", "runId": "runtime-blocked", "pendingSafeWork": 1, "nextActionId": "inventory" },
+    { "kind": "poll", "waitedMs": 1000 }
+  ]
+}

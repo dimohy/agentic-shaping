@@ -1,0 +1,12 @@
+{
+  "schemaVersion": 1,
+  "ruleId": "AS-EG-001",
+  "description": "Before a high-cost gate, every changed contract must have a harness-declared downstream consumer inventory, exact passing audits, positive and negative cheap probes, and stable active inputs.",
+  "minimumCostMs": 60000,
+  "evidenceSchema": "expensive-gate-evidence.schema.json",
+  "runtimeModule": "expensive-gate.mjs",
+  "evidenceAuthority": "harness-events",
+  "requiredProbeKinds": ["positive", "negative"],
+  "consumerCoverage": "exact-declared-set",
+  "inputPolicy": "fingerprint-stable-through-preflight"
+}

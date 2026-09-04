@@ -1,0 +1,7 @@
+{
+  "events": [
+    { "kind": "start", "runId": "runtime-allowed", "pendingSafeWork": 1, "nextActionId": "inventory" },
+    { "kind": "evidence", "evidenceKind": "inventory", "actionId": "inventory", "nextActionId": "", "conflictsActiveInputs": false, "competesHighLoad": false },
+    { "kind": "poll", "waitedMs": 1000 }
+  ]
+}

@@ -1,0 +1,202 @@
+{
+  "schemaVersion": 1,
+  "ruleId": "AS-CR-001",
+  "cases": [
+    {
+      "id": "dual-system-evolution",
+      "trace": {
+        "runId": "dual-1",
+        "phase": "final",
+        "requestTargets": ["agentic-shaping", "slogs-llm-wiki"],
+        "currentTaskComplete": true,
+        "forbiddenActions": [],
+        "actions": [
+          { "target": "agentic-shaping", "kind": "hook-change", "evidence": ["hook hash changed"] },
+          { "target": "agentic-shaping", "kind": "evaluation-contract", "evidence": ["AS-CR-001 frozen"] },
+          { "target": "agentic-shaping", "kind": "behavioral-verification", "evidence": ["deterministic cases passed"] },
+          { "target": "slogs-llm-wiki", "kind": "prompt-change", "evidence": ["server policy version advanced"] },
+          { "target": "slogs-llm-wiki", "kind": "evaluation-contract", "evidence": ["trigger and negative control declared"] },
+          { "target": "slogs-llm-wiki", "kind": "behavioral-verification", "evidence": ["live policy route verified"] }
+        ]
+      },
+      "expected": { "allowed": true, "code": "system-evolution-routed" }
+    },
+    {
+      "id": "ordinary-memory-isolated",
+      "trace": {
+        "runId": "memory-1",
+        "phase": "final",
+        "requestTargets": ["memory"],
+        "currentTaskComplete": true,
+        "forbiddenActions": [],
+        "actions": [
+          { "target": "memory", "kind": "capture-gate", "evidence": ["capture tool result"] },
+          { "target": "memory", "kind": "memory-write", "evidence": ["entry id"] }
+        ]
+      },
+      "expected": { "allowed": true, "code": "memory-route-isolated" }
+    },
+    {
+      "id": "ordinary-memory-must-not-mutate-policy",
+      "trace": {
+        "runId": "memory-negative-1",
+        "phase": "final",
+        "requestTargets": ["memory"],
+        "currentTaskComplete": true,
+        "forbiddenActions": [],
+        "actions": [
+          { "target": "slogs-llm-wiki", "kind": "prompt-change", "evidence": ["unexpected policy edit"] }
+        ]
+      },
+      "expected": { "allowed": false, "code": "ordinary-memory-mutated-system" }
+    },
+    {
+      "id": "memory-cannot-substitute-system-evolution",
+      "trace": {
+        "runId": "misroute-1",
+        "phase": "final",
+        "requestTargets": ["agentic-shaping", "slogs-llm-wiki"],
+        "currentTaskComplete": true,
+        "forbiddenActions": [],
+        "actions": [
+          { "target": "memory", "kind": "capture-gate", "evidence": ["capture completed"] },
+          { "target": "memory", "kind": "memory-write", "evidence": ["stored preference"] }
+        ]
+      },
+      "expected": { "allowed": false, "code": "system-evolution-replaced-by-memory" }
+    },
+    {
+      "id": "every-requested-system-target-is-required",
+      "trace": {
+        "runId": "partial-1",
+        "phase": "final",
+        "requestTargets": ["agentic-shaping", "slogs-llm-wiki"],
+        "currentTaskComplete": true,
+        "forbiddenActions": [],
+        "actions": [
+          { "target": "agentic-shaping", "kind": "hook-change", "evidence": ["hook changed"] },
+          { "target": "agentic-shaping", "kind": "evaluation-contract", "evidence": ["contract frozen"] },
+          { "target": "agentic-shaping", "kind": "behavioral-verification", "evidence": ["tests passed"] }
+        ]
+      },
+      "expected": { "allowed": false, "code": "requested-target-not-materialized" }
+    },
+    {
+      "id": "evaluation-contract-required",
+      "trace": {
+        "runId": "no-contract-1",
+        "phase": "final",
+        "requestTargets": ["agentic-shaping"],
+        "currentTaskComplete": true,
+        "forbiddenActions": [],
+        "actions": [
+          { "target": "agentic-shaping", "kind": "prompt-change", "evidence": ["prompt changed"] },
+          { "target": "agentic-shaping", "kind": "behavioral-verification", "evidence": ["ad hoc check"] }
+        ]
+      },
+      "expected": { "allowed": false, "code": "evaluation-contract-missing" }
+    },
+    {
+      "id": "behavioral-verification-required",
+      "trace": {
+        "runId": "no-behavior-1",
+        "phase": "final",
+        "requestTargets": ["slogs-llm-wiki"],
+        "currentTaskComplete": true,
+        "forbiddenActions": [],
+        "actions": [
+          { "target": "slogs-llm-wiki", "kind": "prompt-change", "evidence": ["policy changed"] },
+          { "target": "slogs-llm-wiki", "kind": "evaluation-contract", "evidence": ["contract frozen"] }
+        ]
+      },
+      "expected": { "allowed": false, "code": "behavioral-verification-missing" }
+    },
+    {
+      "id": "forbidden-action-is-independent",
+      "trace": {
+        "runId": "forbidden-1",
+        "phase": "final",
+        "requestTargets": ["agentic-shaping"],
+        "currentTaskComplete": true,
+        "forbiddenActions": ["stored secret in policy"],
+        "actions": []
+      },
+      "expected": { "allowed": false, "code": "forbidden-action" }
+    },
+    {
+      "id": "current-task-completion-is-independent",
+      "trace": {
+        "runId": "incomplete-1",
+        "phase": "final",
+        "requestTargets": ["agentic-shaping"],
+        "currentTaskComplete": false,
+        "forbiddenActions": [],
+        "actions": []
+      },
+      "expected": { "allowed": false, "code": "current-task-incomplete" }
+    },
+    {
+      "id": "dual-system-evolution-can-progress-before-primary-completion",
+      "trace": {
+        "runId": "progress-1",
+        "phase": "in-progress",
+        "requestTargets": ["agentic-shaping", "slogs-llm-wiki"],
+        "currentTaskComplete": false,
+        "forbiddenActions": [],
+        "actions": [
+          { "target": "agentic-shaping", "kind": "evaluation-contract", "evidence": ["AS-PRG-001 contract frozen before hook implementation"] },
+          { "target": "agentic-shaping", "kind": "audit", "evidence": ["AS-BI-001 and AS-CR-001 authority inspected"] },
+          { "target": "slogs-llm-wiki", "kind": "evaluation-contract", "evidence": ["normal edge and negative policy cases frozen"] },
+          { "target": "slogs-llm-wiki", "kind": "audit", "evidence": ["policy source service tests and checklist inspected"] }
+        ]
+      },
+      "expected": { "allowed": true, "code": "system-evolution-in-progress" }
+    },
+    {
+      "id": "wait-companion-collaboration-is-material-and-primary-remains-in-progress",
+      "trace": {
+        "runId": "wait-companion-1",
+        "phase": "in-progress",
+        "requestTargets": ["agentic-shaping", "slogs-llm-wiki"],
+        "currentTaskComplete": false,
+        "forbiddenActions": [],
+        "actions": [
+          { "target": "agentic-shaping", "kind": "evaluation-contract", "evidence": ["first-poll exception negative control added"] },
+          { "target": "agentic-shaping", "kind": "hook-change", "evidence": ["Codex wait hook now requires evidence before the first poll"] },
+          { "target": "agentic-shaping", "kind": "behavioral-verification", "evidence": ["hook 10/10 and interlock 34/34 passed"] },
+          { "target": "slogs-llm-wiki", "kind": "evaluation-contract", "evidence": ["policy test rejects orientation-poll exceptions"] },
+          { "target": "slogs-llm-wiki", "kind": "audit", "evidence": ["live 2026.09.03.1 policy requires evidence before the first poll"] },
+          { "target": "slogs-llm-wiki", "kind": "behavioral-verification", "evidence": ["focused policy tests 14/14 passed"] }
+        ]
+      },
+      "expected": { "allowed": true, "code": "system-evolution-in-progress" }
+    },
+    {
+      "id": "in-progress-requires-every-system-target",
+      "trace": {
+        "runId": "progress-2",
+        "phase": "in-progress",
+        "requestTargets": ["agentic-shaping", "slogs-llm-wiki"],
+        "currentTaskComplete": false,
+        "forbiddenActions": [],
+        "actions": [
+          { "target": "agentic-shaping", "kind": "evaluation-contract", "evidence": ["contract frozen"] },
+          { "target": "agentic-shaping", "kind": "audit", "evidence": ["authority inspected"] }
+        ]
+      },
+      "expected": { "allowed": false, "code": "evaluation-contract-missing" }
+    },
+    {
+      "id": "in-progress-cannot-claim-current-task-complete",
+      "trace": {
+        "runId": "progress-3",
+        "phase": "in-progress",
+        "requestTargets": ["agentic-shaping"],
+        "currentTaskComplete": true,
+        "forbiddenActions": [],
+        "actions": []
+      },
+      "expected": { "allowed": false, "code": "phase-completion-mismatch" }
+    }
+  ]
+}

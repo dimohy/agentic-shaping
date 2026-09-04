@@ -2,7 +2,7 @@
 
 [English](README.md) | [한국어](README.ko.md) | [日本語](README.ja.md) | [简体中文](README.zh-CN.md)
 
-<!-- AS-PS-001;version=0.3.0;policy=2026.09.04.2;AS-SA-001=25/25;status=live-registry-verified;limitation=first-use-scope-decision-pending -->
+<!-- AS-PS-001;version=0.3.1;policy=2026.09.04.2;AS-SA-001=25/25;status=live-registry-verified;limitation=first-use-scope-decision-pending -->
 
 > AI Agentが作業中の暗黙知・好み・修正・失敗を先に発見し、次の実行で再利用できる記憶・ルール・ツール・検証器へと磨き上げ、ユーザーのやり方でともに進化する作業法です。
 
@@ -218,7 +218,7 @@ Agentic Shaping v0.3
 
 高コストゲートの前に、変更した不変条件のdownstream consumerの一部だけを修正してしまう失敗に対して、`AS-EG-001`高コストゲート契約と参照hookを提供します。60,000ms以上と見積もられるゲートは、変更契約ごとにハーネスが宣言したconsumer集合を正確に網羅する合格監査、正・負のcheap probe、preflight前後で同一の入力SHA-256がある場合にのみ開始できます。モデル作成の証拠、consumerの欠落・重複、片側だけまたは失敗したprobe、入力drift、未知フィールドはfail closedになります。`node .\evals\verify-expensive-gate.mjs`で11ケースの決定論的ゲートを実行し、`--evidence`の許可exit 0・遮断exit 2をオーケストレーターへ接続できます。これは参照hookであり、ハード強制にはハーネスが権威イベントからconsumer・監査・probe証拠を構成する必要があります。
 
-協働対象を誤って記憶経路へ送る失敗に対し、`AS-CR-001`協働ルーティング契約と参照hookを提供します。個人・プロジェクト記憶、Agentic Shaping進化、Slogs LLM Wikiシステム進化を分離します。`in-progress`段階では主作業が未完了であることを保ちつつ、各システムに事前評価契約と監査または実変更証拠を要求し、`final`段階だけが現在作業の完了、実際のprompt/hook変更、行動検証を要求します。12件の対照を`node .\evals\verify-collaboration-routing.mjs`で実行できます。
+協働対象を誤って記憶経路へ送る失敗に対し、`AS-CR-001`協働ルーティング契約と参照hookを提供します。個人・プロジェクト記憶、Agentic Shaping進化、Slogs LLM Wikiシステム進化を分離します。`in-progress`段階では主作業が未完了であることを保ちつつ、各システムに事前評価契約と監査または実変更証拠を要求し、`final`段階だけが現在作業の完了、実際のprompt/hook変更、行動検証を要求します。13件の対照を`node .\evals\verify-collaboration-routing.mjs`で実行できます。
 
 ### v0.3 ユーザーの変化
 
@@ -230,7 +230,7 @@ Agentic Shaping v0.3
 
 ### v0.3 技術メモ
 
-`AS-SA-001`は、反復シグナルの抽象化レベルを`local`、`project`、`cross-project`、`general-method`のいずれかとして最初に判定します。`local`と`project`は共有登録をブロックし、適用領域が異なることを十分に確認できた`cross-project`と`general-method`だけを、プロジェクト識別子や個人への参照を除去した汎用スキルパッケージに合成します。個人情報、プロジェクト機密、認証情報、秘密情報、安全でないパス、不十分な一般化、正常・境界・否定評価の欠落が一つでもあれば、すべてクローズ状態で失敗させます。現在の抽象化・安全性検査は25/25に合格しました。運用中のSlogs MCPでも、レジストリツール6個の公開、`korean-software-terminology` 1.0.0候補の保存、`@dimohy`によるレビュー・承認、未選択状態では本文を公開せず、最初に適用範囲の選択を求めることを確認しました。また、`korean software terminology`のように自然に入力した検索語も、すべての主要語を順序に関係なく一致させ、広すぎる検索を制限する方式で発見されることを確認しました。Slogs集中検査は36/36、PostgreSQL統合は1/1、全体検査は251件合格・22件除外・失敗0件です。現在の状態は`live-registry-verified`であり、残る制限は、`project`・`global`・`disabled`のいずれかを最初に選択する必要があるものの、まだ範囲選択が行われていないこと、このパッケージはWindowsでのみ検証済みであること、そして外部根拠のlocatorをサーバーが再取得してハッシュを計算していないことです。
+`AS-SA-001`は、反復シグナルの抽象化レベルを`local`、`project`、`cross-project`、`general-method`の順に判定します。`local`と`project`は共有登録をブロックし、異なる適用領域が十分に確認された`cross-project`と`general-method`だけを、プロジェクト識別子と個人参照を除去した汎用スキルパッケージとして合成します。個人情報、プロジェクト機密、認証情報、秘密情報、安全でないパス、不十分な一般化、正常・境界・否定評価の欠落が一つでもあれば、すべてfail-closedで失敗させます。現在の抽象化・安全性チェックは25/25に合格しました。運用中のSlogs MCPでも、レジストリツール6個の公開、`korean-software-terminology` 1.0.1候補の保存、`@dimohy`によるレビュー・承認、未選択状態で本文を非表示にすること、初回適用範囲の選択を要求することを確認しました。英語の別名と2つの韓国語の別名では最新の1.0.1が見つかり、物理的なドア・空港・一般的な検査など無関係な検索結果は見つかりませんでした。実運用検索は正常系4/4・否定対照群6/6に合格し、本文の事前公開は0件でした。現在の状態は`live-registry-verified`で、残る制限は、`project`・`global`・`disabled`のいずれかを選ぶ初回範囲選択がまだ行われていないこと、このパッケージがWindowsでのみ検証されていること、外部根拠のlocatorをサーバーが再取得してハッシュを計算していないことです。
 
 `AS-PS-001`は重要なポリシー・評価変更の公開同期を担います。単一の権威あるバージョンでポリシー・評価、4言語のホームページ、4言語のREADME、`CHANGELOG.md`を併せて更新し、バージョン・数値・契約・生成結果に不一致があれば、pushとデプロイの前に失敗します。文言・互換性バグの修正は`patch`、後方互換性のある機能追加は`minor`、既存の公開契約を破る変更は`major`です。今回のスキル発見・Slogs候補連携は後方互換性のある機能追加であるため、`0.2.0 → 0.3.0`として記録しました。
 

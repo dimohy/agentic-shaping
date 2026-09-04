@@ -1,0 +1,51 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://agentic-shaping.slogs.dev/evals/progress-report-trace.schema.json",
+  "title": "Agentic Shaping Multi-axis Progress Report Trace",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["runId", "requiredAxisIds", "axes"],
+  "properties": {
+    "runId": { "type": "string", "minLength": 1, "maxLength": 128 },
+    "requiredAxisIds": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": { "type": "string", "minLength": 1, "maxLength": 64 }
+    },
+    "axes": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "label", "status", "denominatorKind", "failureGroups", "currentStage", "nextGate"],
+        "properties": {
+          "id": { "type": "string", "minLength": 1, "maxLength": 64 },
+          "label": { "type": "string", "minLength": 1, "maxLength": 128 },
+          "status": { "enum": ["active", "blocked", "complete"] },
+          "denominatorKind": { "enum": ["known", "unknown"] },
+          "completed": { "type": "integer", "minimum": 0 },
+          "total": { "type": "integer", "minimum": 1 },
+          "percent": { "type": "number", "minimum": 0, "maximum": 100 },
+          "scopeLabel": { "type": "string", "minLength": 1, "maxLength": 256 },
+          "unknownReason": { "type": "string", "minLength": 1, "maxLength": 512 },
+          "failureGroups": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["label", "count"],
+              "properties": {
+                "label": { "type": "string", "minLength": 1, "maxLength": 128 },
+                "count": { "type": "integer", "minimum": 1 }
+              }
+            }
+          },
+          "currentStage": { "type": "string", "minLength": 1, "maxLength": 256 },
+          "nextGate": { "type": "string", "minLength": 1, "maxLength": 256 }
+        }
+      }
+    }
+  }
+}

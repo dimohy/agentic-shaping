@@ -1,0 +1,17 @@
+{
+  "schemaVersion": 1,
+  "ruleId": "AS-EG-001",
+  "cases": [
+    { "id": "complete-preflight-allows-gate", "fixture": "valid", "expected": { "allowed": true, "code": "OK" } },
+    { "id": "cheap-gate-is-not-applicable", "fixture": "not-applicable", "expected": { "allowed": true, "code": "OK-NOT-APPLICABLE" } },
+    { "id": "input-drift-blocks-gate", "fixture": "input-drift", "expected": { "allowed": false, "code": "AS-EG-001-INPUT-DRIFT" } },
+    { "id": "empty-change-set-blocks-gate", "fixture": "no-change", "expected": { "allowed": false, "code": "AS-EG-001-NO-CHANGED-CONTRACT" } },
+    { "id": "missing-contract-consumer-blocks-gate", "fixture": "incomplete-map", "expected": { "allowed": false, "code": "AS-EG-001-INCOMPLETE-CONSUMER-MAP" } },
+    { "id": "missing-consumer-audit-blocks-gate", "fixture": "consumer-mismatch", "expected": { "allowed": false, "code": "AS-EG-001-CONSUMER-MISMATCH" } },
+    { "id": "failed-consumer-audit-blocks-gate", "fixture": "failed-audit", "expected": { "allowed": false, "code": "AS-EG-001-FAILED-AUDIT" } },
+    { "id": "one-sided-probes-block-gate", "fixture": "missing-negative", "expected": { "allowed": false, "code": "AS-EG-001-MISSING-CONTROL" } },
+    { "id": "failed-cheap-probe-blocks-gate", "fixture": "failed-probe", "expected": { "allowed": false, "code": "AS-EG-001-FAILED-PROBE" } },
+    { "id": "model-authored-evidence-blocks-gate", "fixture": "wrong-authority", "expected": { "allowed": false, "code": "AS-EG-001-INVALID-EVIDENCE" } },
+    { "id": "unknown-field-blocks-gate", "fixture": "unknown-field", "expected": { "allowed": false, "code": "AS-EG-001-INVALID-EVIDENCE" } }
+  ]
+}

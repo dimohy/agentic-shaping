@@ -2,7 +2,7 @@
 
 [English](README.md) | [한국어](README.ko.md) | [日本語](README.ja.md) | [简体中文](README.zh-CN.md)
 
-<!-- AS-PS-001;version=0.3.0;policy=2026.09.04.2;AS-SA-001=25/25;status=live-registry-verified;limitation=first-use-scope-decision-pending -->
+<!-- AS-PS-001;version=0.3.1;policy=2026.09.04.2;AS-SA-001=25/25;status=live-registry-verified;limitation=first-use-scope-decision-pending -->
 
 > 这是让 AI Agent 先发现工作中的隐性知识·偏好·纠正·失败，并将其塑造成可在下一次执行中复用的记忆·规则·工具·验证器，与用户一起按用户的方式进化的工作方法。
 
@@ -218,7 +218,7 @@ Agentic Shaping v0.3
 
 对于在高成本门禁前只修复变更不变量的部分 downstream consumer 的失败，仓库提供 `AS-EG-001` 高成本门禁契约和参考 hook。预计耗时60,000ms以上的门禁，只有在每个变更契约都具备与 harness 声明的 consumer 集合精确一致的通过审计、正负 cheap probe，以及 preflight 前后相同的输入 SHA-256 时才能启动。模型编写的证据、consumer 缺失或重复、单边或失败的 probe、输入 drift 和未知字段均 fail closed。运行 `node .\evals\verify-expensive-gate.mjs` 可执行11个确定性案例，并可通过 `--evidence` 将允许 exit 0 与阻止 exit 2 接入编排器。这是参考 hook；硬性强制要求 harness 从权威事件构造 consumer、审计和 probe 证据。
 
-对于错误地把协作目标路由到记忆路径的失败，仓库提供 `AS-CR-001` 协作路由契约和参考 hook。它区分个人/项目记忆、Agentic Shaping 演进和 Slogs LLM Wiki 系统演进。`in-progress` 阶段保留主任务未完成状态，同时要求每个系统具备预先评估契约及审计或实际变更证据；只有 `final` 阶段才要求当前任务完成、真实 prompt/hook 变更和行为验证。运行 `node .\evals\verify-collaboration-routing.mjs` 可执行12个对照案例。
+对于错误地把协作目标路由到记忆路径的失败，仓库提供 `AS-CR-001` 协作路由契约和参考 hook。它区分个人/项目记忆、Agentic Shaping 演进和 Slogs LLM Wiki 系统演进。`in-progress` 阶段保留主任务未完成状态，同时要求每个系统具备预先评估契约及审计或实际变更证据；只有 `final` 阶段才要求当前任务完成、真实 prompt/hook 变更和行为验证。运行 `node .\evals\verify-collaboration-routing.mjs` 可执行13个对照案例。
 
 ### v0.3 用户侧变化
 
@@ -230,7 +230,7 @@ Agentic Shaping v0.3
 
 ### v0.3 技术备忘录
 
-`AS-SA-001` 首先将重复信号的抽象层级判定为 `local`、`project`、`cross-project` 或 `general-method`。`local` 和 `project` 会阻止共享注册；只有在充分确认适用于不同范围的 `cross-project` 和 `general-method`，才会合成为移除项目标识符和个人引用的通用技能包。个人信息、项目机密、凭据、秘密信息、不安全路径、泛化不足，以及缺失正常、边界和负向评估，均会导致流程按 fail-closed 方式失败。当前抽象化与安全性检查已通过 25/25。我们还确认，在生产环境的 Slogs MCP 中已暴露 6 个注册表工具，已保存 `korean-software-terminology` 1.0.0 候选版本，已完成 `@dimohy` 审查与批准，并确认未选中状态下正文不会暴露，且必须先选择初始应用范围。我们还确认，像 `korean software terminology` 这样以自然语言输入的搜索词，也会以不受顺序影响的方式匹配所有核心词，并通过限制过于宽泛的搜索来实现发现。Slogs 专项检查为 36/36，PostgreSQL 集成为 1/1，全部检查结果为 251 项通过、22 项排除、0 项失败。当前状态为 `live-registry-verified`；剩余限制是：`project`、`global`、`disabled` 三者中的初始范围尚未选择；该软件包仅在 Windows 上完成验证；服务器不会重新获取外部依据 locator 并计算哈希。
+`AS-SA-001`首先将重复信号的抽象层级判定为 `local`、`project`、`cross-project` 或 `general-method`。`local` 和 `project` 会阻止共享注册；只有在充分确认适用于不同范围的 `cross-project` 和 `general-method` 后，才会移除项目标识符和个人引用，并将其合成为通用技能包。对于个人信息、项目机密、凭据、秘密信息、不安全路径、泛化不足，以及缺少正常、边界和负面对照评估的情况，均按失败关闭方式处理。当前抽象化和安全性检查已通过 25/25。我们还确认，在生产环境的 Slogs MCP 中已暴露 6 个注册表工具、已保存 `korean-software-terminology` 1.0.1 候选版本、已由 `@dimohy` 完成审查和批准，并且在未选定状态下不会暴露正文，同时要求先选择初始应用范围。英文别名和两个韩文别名均已找到最新的 1.0.1 版本；对于物理门、机场和普通检查等无关搜索，均未找到结果。实际生产搜索已通过正常对照 4/4 和负面对照 6/6，正文预先暴露次数为 0。当前状态为 `live-registry-verified`；剩余限制是：`project`、`global`、`disabled` 中的初始范围尚未选择；该软件包仅在 Windows 上完成验证；此外，服务器不会重新获取外部证据定位符并计算其哈希。
 
 `AS-PS-001` 负责重要政策·评估变更的公开同步。在单一权威版本中同时更新政策·评估、4 种语言的主页、4 种语言的 README 和 `CHANGELOG.md`；如果版本·数值·契约·生成结果不一致，会在 push 和部署前失败。文字·兼容性 bug 修复为 `patch`，向后兼容的功能添加为 `minor`，破坏现有公开契约的变更为 `major`。本次技能发现·Slogs 候选关联属于向后兼容的功能添加，因此记录为 `0.2.0 → 0.3.0`。
 

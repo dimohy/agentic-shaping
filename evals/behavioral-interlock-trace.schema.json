@@ -1,0 +1,73 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://agentic-shaping.slogs.dev/evals/behavioral-interlock-trace.schema.json",
+  "title": "Agentic Shaping Behavioral Interlock Trace",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["events"],
+  "properties": {
+    "events": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "oneOf": [
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["kind", "runId", "pendingSafeWork", "nextActionId"],
+            "properties": {
+              "kind": { "const": "start" },
+              "runId": { "type": "string", "minLength": 1 },
+              "pendingSafeWork": { "type": "integer", "minimum": 0 },
+              "nextActionId": { "type": "string" }
+            }
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["kind", "evidenceKind", "actionId", "nextActionId", "conflictsActiveInputs", "competesHighLoad"],
+            "properties": {
+              "kind": { "const": "evidence" },
+              "evidenceKind": { "type": "string" },
+              "actionId": { "type": "string", "minLength": 1 },
+              "nextActionId": { "type": "string" },
+              "conflictsActiveInputs": { "type": "boolean" },
+              "competesHighLoad": { "type": "boolean" },
+              "systemTarget": { "enum": ["agentic-shaping", "slogs-llm-wiki"] },
+              "artifactEvidence": {
+                "type": "array",
+                "minItems": 1,
+                "uniqueItems": true,
+                "items": { "type": "string", "minLength": 1, "maxLength": 512 }
+              }
+            }
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["kind", "reason"],
+            "properties": {
+              "kind": { "const": "queue-empty" },
+              "reason": { "type": "string", "minLength": 1 }
+            }
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["kind", "waitedMs"],
+            "properties": {
+              "kind": { "const": "poll" },
+              "waitedMs": { "type": "integer", "minimum": 0 }
+            }
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["kind"],
+            "properties": { "kind": { "const": "finish" } }
+          }
+        ]
+      }
+    }
+  }
+}

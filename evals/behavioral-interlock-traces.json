@@ -1,0 +1,255 @@
+{
+  "schemaVersion": 1,
+  "cases": [
+    {
+      "id": "evidence-before-every-poll",
+      "expected": { "allowed": true, "code": "OK" },
+      "events": [
+        { "kind": "start", "runId": "build-1", "pendingSafeWork": 2, "nextActionId": "inventory" },
+        { "kind": "evidence", "evidenceKind": "inventory", "actionId": "inventory", "nextActionId": "fixture-design", "conflictsActiveInputs": false, "competesHighLoad": false },
+        { "kind": "evidence", "evidenceKind": "fixture-design", "actionId": "fixture-design", "nextActionId": "", "conflictsActiveInputs": false, "competesHighLoad": false },
+        { "kind": "poll", "waitedMs": 1000 },
+        { "kind": "finish" }
+      ]
+    },
+    {
+      "id": "first-poll-with-safe-work-is-blocked",
+      "expected": { "allowed": false, "code": "AS-BI-001-IDLE-WAIT" },
+      "events": [
+        { "kind": "start", "runId": "build-2", "pendingSafeWork": 1, "nextActionId": "contract-review" },
+        { "kind": "poll", "waitedMs": 1000 }
+      ]
+    },
+    {
+      "id": "empty-safe-queue-allows-wait",
+      "expected": { "allowed": true, "code": "OK" },
+      "events": [
+        { "kind": "start", "runId": "build-3", "pendingSafeWork": 0, "nextActionId": "" },
+        { "kind": "queue-empty", "reason": "Every remaining action mutates the active compiler input snapshot." },
+        { "kind": "poll", "waitedMs": 120000 },
+        { "kind": "poll", "waitedMs": 180000 },
+        { "kind": "finish" }
+      ]
+    },
+    {
+      "id": "active-input-mutation-is-not-evidence",
+      "expected": { "allowed": false, "code": "AS-BI-001-INPUT-CONFLICT" },
+      "events": [
+        { "kind": "start", "runId": "build-4", "pendingSafeWork": 1, "nextActionId": "fixture-design" },
+        { "kind": "evidence", "evidenceKind": "fixture-design", "actionId": "fixture-design", "nextActionId": "", "conflictsActiveInputs": true, "competesHighLoad": false }
+      ]
+    },
+    {
+      "id": "competing-heavy-work-is-not-evidence",
+      "expected": { "allowed": false, "code": "AS-BI-001-RESOURCE-CONFLICT" },
+      "events": [
+        { "kind": "start", "runId": "build-5", "pendingSafeWork": 1, "nextActionId": "verification" },
+        { "kind": "evidence", "evidenceKind": "verification", "actionId": "verification", "nextActionId": "", "conflictsActiveInputs": false, "competesHighLoad": true }
+      ]
+    },
+    {
+      "id": "empty-queue-requires-reason",
+      "expected": { "allowed": false, "code": "AS-BI-001-EMPTY-REASON" },
+      "events": [
+        { "kind": "start", "runId": "build-6", "pendingSafeWork": 0, "nextActionId": "" },
+        { "kind": "queue-empty", "reason": "" }
+      ]
+    },
+    {
+      "id": "status-only-message-is-not-evidence",
+      "expected": { "allowed": false, "code": "AS-BI-001-INVALID-EVIDENCE" },
+      "events": [
+        { "kind": "start", "runId": "build-7", "pendingSafeWork": 1, "nextActionId": "inventory" },
+        { "kind": "evidence", "evidenceKind": "status-only-message", "actionId": "inventory", "nextActionId": "", "conflictsActiveInputs": false, "competesHighLoad": false }
+      ]
+    },
+    {
+      "id": "oversized-injected-state-is-rejected",
+      "expected": { "allowed": false, "code": "AS-BI-001-CONTEXT-BUDGET" },
+      "events": [
+        { "kind": "start", "runId": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx", "pendingSafeWork": 1, "nextActionId": "inventory" }
+      ]
+    },
+    {
+      "id": "negative-pending-work-is-invalid",
+      "expected": { "allowed": false, "code": "AS-BI-001-INVALID-START" },
+      "events": [
+        { "kind": "start", "runId": "build-8", "pendingSafeWork": -1, "nextActionId": "" }
+      ]
+    },
+    {
+      "id": "implicit-evidence-safety-is-invalid",
+      "expected": { "allowed": false, "code": "AS-BI-001-INVALID-EVIDENCE" },
+      "events": [
+        { "kind": "start", "runId": "build-9", "pendingSafeWork": 1, "nextActionId": "inventory" },
+        { "kind": "evidence", "evidenceKind": "inventory", "actionId": "inventory", "nextActionId": "" }
+      ]
+    },
+    {
+      "id": "agent-cannot-self-empty-authoritative-queue",
+      "expected": { "allowed": false, "code": "AS-BI-001-QUEUE-NOT-EMPTY" },
+      "events": [
+        { "kind": "start", "runId": "build-10", "pendingSafeWork": 1, "nextActionId": "inventory" },
+        { "kind": "queue-empty", "reason": "I prefer to wait." }
+      ]
+    },
+    {
+      "id": "zero-queue-must-be-explained-before-poll",
+      "expected": { "allowed": false, "code": "AS-BI-001-EMPTY-REASON" },
+      "events": [
+        { "kind": "start", "runId": "build-11", "pendingSafeWork": 0, "nextActionId": "" },
+        { "kind": "poll", "waitedMs": 1000 }
+      ]
+    },
+    {
+      "id": "fast-completion-needs-no-invented-companion-work",
+      "expected": { "allowed": true, "code": "OK" },
+      "events": [
+        { "kind": "start", "runId": "build-12", "pendingSafeWork": 1, "nextActionId": "inventory" },
+        { "kind": "finish" }
+      ]
+    },
+    {
+      "id": "evidence-must-match-harness-next-action",
+      "expected": { "allowed": false, "code": "AS-BI-001-WRONG-ACTION" },
+      "events": [
+        { "kind": "start", "runId": "build-13", "pendingSafeWork": 1, "nextActionId": "inventory" },
+        { "kind": "evidence", "evidenceKind": "contract-review", "actionId": "review", "nextActionId": "", "conflictsActiveInputs": false, "competesHighLoad": false }
+      ]
+    },
+    {
+      "id": "completed-evidence-cannot-be-replayed",
+      "expected": { "allowed": false, "code": "AS-BI-001-EVIDENCE-REPLAY" },
+      "events": [
+        { "kind": "start", "runId": "build-14", "pendingSafeWork": 2, "nextActionId": "inventory" },
+        { "kind": "evidence", "evidenceKind": "inventory", "actionId": "inventory", "nextActionId": "inventory", "conflictsActiveInputs": false, "competesHighLoad": false },
+        { "kind": "evidence", "evidenceKind": "inventory", "actionId": "inventory", "nextActionId": "", "conflictsActiveInputs": false, "competesHighLoad": false }
+      ]
+    },
+    {
+      "id": "transitioned-state-budget-is-enforced",
+      "expected": { "allowed": false, "code": "AS-BI-001-CONTEXT-BUDGET" },
+      "events": [
+        { "kind": "start", "runId": "build-15", "pendingSafeWork": 2, "nextActionId": "inventory" },
+        { "kind": "evidence", "evidenceKind": "inventory", "actionId": "inventory", "nextActionId": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx", "conflictsActiveInputs": false, "competesHighLoad": false }
+      ]
+    },
+    {
+      "id": "unknown-event-fields-are-rejected",
+      "expected": { "allowed": false, "code": "AS-BI-001-INVALID-EVENT" },
+      "events": [
+        { "kind": "start", "runId": "build-16", "pendingSafeWork": 1, "nextActionId": "inventory", "modelMayOverrideQueue": true }
+      ]
+    },
+    {
+      "id": "empty-trace-cannot-bypass-the-interlock",
+      "expected": { "allowed": false, "code": "AS-BI-001-INVALID-TRACE" },
+      "events": []
+    },
+    {
+      "id": "completed-evidence-is-isolated-per-run",
+      "expected": { "allowed": true, "code": "OK" },
+      "events": [
+        { "kind": "start", "runId": "build-17-a", "pendingSafeWork": 1, "nextActionId": "inventory" },
+        { "kind": "evidence", "evidenceKind": "inventory", "actionId": "inventory", "nextActionId": "", "conflictsActiveInputs": false, "competesHighLoad": false },
+        { "kind": "finish" },
+        { "kind": "start", "runId": "build-17-b", "pendingSafeWork": 1, "nextActionId": "inventory" },
+        { "kind": "evidence", "evidenceKind": "inventory", "actionId": "inventory", "nextActionId": "", "conflictsActiveInputs": false, "competesHighLoad": false },
+        { "kind": "finish" }
+      ]
+    },
+    {
+      "id": "first-poll-after-one-minute-with-safe-work-is-blocked",
+      "expected": { "allowed": false, "code": "AS-BI-001-WAIT-BUDGET" },
+      "events": [
+        { "kind": "start", "runId": "build-18", "pendingSafeWork": 1, "nextActionId": "contract-review" },
+        { "kind": "poll", "waitedMs": 60001 }
+      ]
+    },
+    {
+      "id": "exactly-one-minute-still-requires-evidence",
+      "expected": { "allowed": false, "code": "AS-BI-001-IDLE-WAIT" },
+      "events": [
+        { "kind": "start", "runId": "build-19", "pendingSafeWork": 1, "nextActionId": "contract-review" },
+        { "kind": "poll", "waitedMs": 60000 }
+      ]
+    },
+    {
+      "id": "companion-evidence-renews-idle-budget",
+      "expected": { "allowed": true, "code": "OK" },
+      "events": [
+        { "kind": "start", "runId": "build-20", "pendingSafeWork": 2, "nextActionId": "inventory" },
+        { "kind": "evidence", "evidenceKind": "inventory", "actionId": "inventory", "nextActionId": "fixture-design", "conflictsActiveInputs": false, "competesHighLoad": false },
+        { "kind": "poll", "waitedMs": 500 },
+        { "kind": "finish" }
+      ]
+    },
+    {
+      "id": "missing-harness-wait-time-is-invalid",
+      "expected": { "allowed": false, "code": "AS-BI-001-INVALID-POLL-TIME" },
+      "events": [
+        { "kind": "start", "runId": "build-21", "pendingSafeWork": 1, "nextActionId": "inventory" },
+        { "kind": "poll" }
+      ]
+    },
+    {
+      "id": "system-evolution-audit-is-real-companion-evidence",
+      "expected": { "allowed": true, "code": "OK" },
+      "events": [
+        { "kind": "start", "runId": "build-22", "pendingSafeWork": 1, "nextActionId": "audit-agentic-shaping" },
+        { "kind": "evidence", "evidenceKind": "system-evolution-audit", "systemTarget": "agentic-shaping", "artifactEvidence": ["AS-BI-001 contract and hook inspected"], "actionId": "audit-agentic-shaping", "nextActionId": "", "conflictsActiveInputs": false, "competesHighLoad": false },
+        { "kind": "poll", "waitedMs": 500 },
+        { "kind": "finish" }
+      ]
+    },
+    {
+      "id": "system-evolution-evidence-requires-target",
+      "expected": { "allowed": false, "code": "AS-BI-001-SYSTEM-EVIDENCE" },
+      "events": [
+        { "kind": "start", "runId": "build-23", "pendingSafeWork": 1, "nextActionId": "audit-slogs" },
+        { "kind": "evidence", "evidenceKind": "system-evolution-audit", "artifactEvidence": ["policy inspected"], "actionId": "audit-slogs", "nextActionId": "", "conflictsActiveInputs": false, "competesHighLoad": false }
+      ]
+    },
+    {
+      "id": "system-evolution-evidence-requires-artifact",
+      "expected": { "allowed": false, "code": "AS-BI-001-SYSTEM-EVIDENCE" },
+      "events": [
+        { "kind": "start", "runId": "build-24", "pendingSafeWork": 1, "nextActionId": "contract-slogs" },
+        { "kind": "evidence", "evidenceKind": "system-evolution-contract", "systemTarget": "slogs-llm-wiki", "actionId": "contract-slogs", "nextActionId": "", "conflictsActiveInputs": false, "competesHighLoad": false }
+      ]
+    },
+    {
+      "id": "progress-report-is-not-companion-evidence",
+      "expected": { "allowed": false, "code": "AS-BI-001-INVALID-EVIDENCE" },
+      "events": [
+        { "kind": "start", "runId": "build-25", "pendingSafeWork": 1, "nextActionId": "audit-agentic-shaping" },
+        { "kind": "evidence", "evidenceKind": "progress-report", "actionId": "audit-agentic-shaping", "nextActionId": "", "conflictsActiveInputs": false, "competesHighLoad": false }
+      ]
+    },
+    {
+      "id": "generic-artifact-evidence-may-name-its-artifact",
+      "expected": { "allowed": true, "code": "OK" },
+      "events": [
+        { "kind": "start", "runId": "build-25-artifact", "pendingSafeWork": 1, "nextActionId": "structure-resume-contract" },
+        { "kind": "evidence", "evidenceKind": "artifact", "artifactEvidence": ["artifacts/scratch/native-exact-resume-design.json"], "actionId": "structure-resume-contract", "nextActionId": "", "conflictsActiveInputs": false, "competesHighLoad": false },
+        { "kind": "poll", "waitedMs": 500 }
+      ]
+    },
+    {
+      "id": "generic-empty-artifact-evidence-is-rejected",
+      "expected": { "allowed": false, "code": "AS-BI-001-INVALID-EVIDENCE" },
+      "events": [
+        { "kind": "start", "runId": "build-25-empty-artifact", "pendingSafeWork": 1, "nextActionId": "structure-resume-contract" },
+        { "kind": "evidence", "evidenceKind": "artifact", "artifactEvidence": [], "actionId": "structure-resume-contract", "nextActionId": "", "conflictsActiveInputs": false, "competesHighLoad": false }
+      ]
+    },
+    {
+      "id": "memory-write-is-not-system-evolution-evidence",
+      "expected": { "allowed": false, "code": "AS-BI-001-INVALID-EVIDENCE" },
+      "events": [
+        { "kind": "start", "runId": "build-26", "pendingSafeWork": 1, "nextActionId": "contract-agentic-shaping" },
+        { "kind": "evidence", "evidenceKind": "memory-written", "actionId": "contract-agentic-shaping", "nextActionId": "", "conflictsActiveInputs": false, "competesHighLoad": false }
+      ]
+    }
+  ]
+}

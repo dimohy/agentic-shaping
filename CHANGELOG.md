@@ -2,6 +2,22 @@
 
 Agentic Shaping uses Semantic Versioning. Compatible wording and bug corrections increment `patch`, backward-compatible capabilities increment `minor`, and incompatible public-contract changes increment `major`.
 
+## [0.3.1] - 2026-09-04
+
+### What changed for users
+
+- The public evaluation commands documented in v0.3 are now included in the GitHub package and can be run from a clean checkout.
+- Korean and English searches now find the validated `korean-software-terminology` 1.0.1 skill before its first-use scope is chosen.
+- Release checks now stop publication when a documented capability is missing from the tracked package.
+- Published pass counts are checked against the verifier that actually runs.
+
+### Technical notes
+
+- Compatibility: this patch does not change the v0.3 policy or public behavior contracts.
+- Contracts: the release manifest now closes each public rule over its contract, schema, runtime, verifier, suite, fixtures, and adapter files.
+- Verification: every declared verifier must run from the staged Git snapshot and report its manifest-declared pass count; live skill search passed 4/4 positive and 6/6 negative queries with no body disclosure.
+- Known limitation: the Codex hook injects the contract only when a command starts; existing-session poll interception still depends on the runtime or orchestrator.
+
 ## [0.3.0] - 2026-09-04
 
 ### What changed for users

@@ -1,0 +1,17 @@
+{
+  "schemaVersion": 2,
+  "ruleId": "AS-CR-001",
+  "description": "Explicit Agentic Shaping or Slogs LLM Wiki system-evolution requests must reach their authoritative prompt, hook, or evaluation assets and cannot be completed by memory activity alone.",
+  "traceSchema": "collaboration-routing-trace.schema.json",
+  "runtimeModule": "collaboration-routing.mjs",
+  "requestTargets": ["memory", "agentic-shaping", "slogs-llm-wiki"],
+  "systemTargets": ["agentic-shaping", "slogs-llm-wiki"],
+  "materialActionKinds": ["prompt-change", "hook-change"],
+  "requiredSystemEvidenceKinds": ["evaluation-contract", "behavioral-verification"],
+  "forbiddenActionsMaximum": 0,
+  "phases": ["in-progress", "final"],
+  "inProgressActionKinds": ["audit", "prompt-change", "hook-change"],
+  "finalRequiresCurrentTaskComplete": true,
+  "traceAuthority": "orchestrator",
+  "nonEvidence": ["memory-captured", "memory-written", "prompt-text-present", "agent-authored-claim"]
+}

@@ -1,0 +1,50 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["runId", "phase", "requestTargets", "currentTaskComplete", "forbiddenActions", "actions"],
+  "properties": {
+    "runId": { "type": "string", "minLength": 1, "maxLength": 128 },
+    "phase": { "enum": ["in-progress", "final"] },
+    "requestTargets": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": { "enum": ["memory", "agentic-shaping", "slogs-llm-wiki"] }
+    },
+    "currentTaskComplete": { "type": "boolean" },
+    "forbiddenActions": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": { "type": "string", "minLength": 1, "maxLength": 256 }
+    },
+    "actions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["target", "kind", "evidence"],
+        "properties": {
+          "target": { "enum": ["memory", "agentic-shaping", "slogs-llm-wiki"] },
+          "kind": {
+            "enum": [
+              "capture-gate",
+              "memory-write",
+              "audit",
+              "prompt-change",
+              "hook-change",
+              "evaluation-contract",
+              "behavioral-verification"
+            ]
+          },
+          "evidence": {
+            "type": "array",
+            "minItems": 1,
+            "uniqueItems": true,
+            "items": { "type": "string", "minLength": 1, "maxLength": 512 }
+          }
+        }
+      }
+    }
+  }
+}

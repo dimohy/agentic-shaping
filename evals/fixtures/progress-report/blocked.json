@@ -1,0 +1,7 @@
+{
+  "runId": "fixture-progress-blocked",
+  "requiredAxisIds": ["compiler", "stdlib"],
+  "axes": [
+    { "id": "compiler", "label": "compiler batch", "status": "active", "denominatorKind": "known", "completed": 1, "total": 7, "percent": 14.3, "failureGroups": [], "currentStage": "focused repair", "nextGate": "7/7" }
+  ]
+}

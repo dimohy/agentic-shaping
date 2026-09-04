@@ -1,6 +1,7 @@
 import { createHash } from "node:crypto";
-import { readFileSync } from "node:fs";
+import { mkdirSync, mkdtempSync, readFileSync, rmSync } from "node:fs";
 import { spawnSync } from "node:child_process";
+import { tmpdir } from "node:os";
 import { join, resolve } from "node:path";
 import { evaluatePublicationSync } from "./publication-sync.mjs";
 
@@ -61,7 +62,7 @@ const setPath = (target, path, value) => {
 const suite = JSON.parse(readFileSync(new URL("./publication-sync-traces.json", import.meta.url), "utf8"));
 const contract = JSON.parse(readFileSync(new URL("./publication-sync-contract.json", import.meta.url), "utf8"));
 const schema = JSON.parse(readFileSync(new URL("./publication-sync-trace.schema.json", import.meta.url), "utf8"));
-if (suite.ruleId !== "AS-PS-001" || contract.ruleId !== suite.ruleId || contract.schemaVersion !== 1
+if (suite.ruleId !== "AS-PS-001" || contract.ruleId !== suite.ruleId || contract.schemaVersion !== 2
     || schema.properties?.ruleId?.const !== suite.ruleId) throw new Error("AS-PS-001 contract, schema, and suite mismatch");
 
 let passed = 0;
@@ -79,6 +80,44 @@ for (const testCase of suite.cases) {
 }
 
 const release = JSON.parse(read("site/release-manifest.json"));
+if (release.schemaVersion !== 2 || !Array.isArray(release.publicCapabilities) || release.publicCapabilities.length === 0) {
+  throw new Error("site/release-manifest.json: public capability closure is missing");
+}
+const packageFiles = [...new Set([
+  ...release.authoritativeFiles,
+  ...release.generatedSurfaces,
+  ...release.publicCapabilities.flatMap(capability => capability.files)
+])];
+for (const path of packageFiles) {
+  const tracked = spawnSync("git", ["ls-files", "--error-unmatch", "--", path], { cwd: root, encoding: "utf8" });
+  if (tracked.status !== 0) throw new Error(`${path}: public release asset is not tracked by Git`);
+}
+
+const snapshotParent = mkdtempSync(join(tmpdir(), "agentic-shaping-release-"));
+try {
+  const snapshotRoot = join(snapshotParent, "snapshot");
+  const archivePath = join(snapshotParent, "release.tar");
+  mkdirSync(snapshotRoot);
+  const tree = spawnSync("git", ["write-tree"], { cwd: root, encoding: "utf8" });
+  if (tree.status !== 0) throw new Error(`could not write staged Git tree: ${tree.stderr}`);
+  const archive = spawnSync("git", ["archive", "--format=tar", `--output=${archivePath}`, tree.stdout.trim()], { cwd: root, encoding: "utf8" });
+  if (archive.status !== 0) throw new Error(`could not archive staged Git tree: ${archive.stderr}`);
+  const extract = spawnSync("tar", ["-xf", archivePath, "-C", snapshotRoot], { encoding: "utf8" });
+  if (extract.status !== 0) throw new Error(`could not extract staged Git tree: ${extract.stderr}`);
+  for (const capability of release.publicCapabilities) {
+    if (!capability.ruleId || !capability.verifier || !Number.isInteger(capability.expectedPasses)) {
+      throw new Error("site/release-manifest.json: invalid public capability entry");
+    }
+    const run = spawnSync(process.execPath, [join(snapshotRoot, capability.verifier)], { cwd: snapshotRoot, encoding: "utf8" });
+    const output = run.stdout + run.stderr;
+    const expected = `PASS ${capability.expectedPasses}/${capability.expectedPasses}`;
+    if (run.status !== 0 || !output.includes(expected)) {
+      throw new Error(`${capability.ruleId}: staged snapshot verifier failed or reported a different denominator: ${output}`);
+    }
+  }
+} finally {
+  rmSync(snapshotParent, { recursive: true, force: true });
+}
 const expectedMarker = `${release.contractId};version=${release.version};policy=${release.policyVersion};${release.feature.ruleId}=${release.feature.passed}/${release.feature.total};status=${release.feature.status};limitation=${release.feature.limitation}`;
 const surfaceDefinitions = [
   ["homepage", "en", "index.html"], ["homepage", "ko", "ko/index.html"],
@@ -103,8 +142,9 @@ const surfaces = surfaceDefinitions.map(([kind, locale, path]) => {
 });
 
 const changelog = read("CHANGELOG.md");
-const releaseSection = changelog.match(/## \[0\.3\.0\][\s\S]*?(?=\n## \[|$)/)?.[0];
-if (!releaseSection) throw new Error("CHANGELOG.md: 0.3.0 release missing");
+const releaseVersionPattern = release.version.replaceAll(".", "\\.");
+const releaseSection = changelog.match(new RegExp(`## \\[${releaseVersionPattern}\\][\\s\\S]*?(?=\\n## \\[|$)`))?.[0];
+if (!releaseSection) throw new Error(`CHANGELOG.md: ${release.version} release missing`);
 const userSection = releaseSection.match(/### What changed for users\n\n([\s\S]*?)(?=\n### )/)?.[1] ?? "";
 const userBullets = (userSection.match(/^- /gm) ?? []).length;
 const technicalMap = [
@@ -147,7 +187,7 @@ const currentTrace = {
   surfaces,
   changelog: {
     version: release.version, date: release.releaseDate, userChangeBullets: userBullets, technicalNoteKinds,
-    evidence: ["CHANGELOG.md#0.3.0"]
+    evidence: [`CHANGELOG.md#${release.version}`]
   },
   staticRegression,
   forbiddenActions: []

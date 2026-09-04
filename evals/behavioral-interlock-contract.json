@@ -1,0 +1,25 @@
+{
+  "schemaVersion": 4,
+  "ruleId": "AS-BI-001",
+  "description": "While safe companion work remains, every wait or poll requires new non-conflicting evidence for the exact harness-selected action, including the first poll.",
+  "maxIdleWaitMs": 60000,
+  "maxConsecutivePollsWithoutEvidence": 1,
+  "maxInjectedStateBytes": 256,
+  "queueAuthority": "harness",
+  "timingAuthority": "harness-monotonic",
+  "pollElapsedField": "waitedMs",
+  "traceSchema": "behavioral-interlock-trace.schema.json",
+  "runtimeModule": "behavioral-interlock.mjs",
+  "directExecutionPolicy": "trace-required-fail-closed",
+  "missingTraceExitCode": 64,
+  "runtimeStateFields": ["runId", "pendingSafeWork", "pollsSinceEvidence", "nextActionId"],
+  "evidenceActionPolicy": "exact-next-action-once",
+  "evidenceKinds": ["artifact", "contract-review", "fixture-design", "inventory", "low-load-analysis", "verification"],
+  "systemEvolutionEvidenceKinds": ["system-evolution-audit", "system-evolution-contract"],
+  "systemEvolutionTargets": ["agentic-shaping", "slogs-llm-wiki"],
+  "systemEvolutionEvidencePolicy": "target-and-artifact-required",
+  "failureGuidance": {
+    "AS-BI-001-INVALID-EVIDENCE": "Use one declared evidenceKind, match actionId to the harness-selected nextActionId, and provide explicit conflict flags. System-evolution evidence also requires systemTarget and artifactEvidence."
+  },
+  "forbiddenEvidence": ["active-input-mutation", "competing-high-load-work", "status-only-message", "progress-report", "memory-captured", "memory-written"]
+}

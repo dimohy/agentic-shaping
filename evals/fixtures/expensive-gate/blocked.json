@@ -1,0 +1,19 @@
+{
+  "gateId": "sollang-stage2",
+  "estimatedCostMs": 700000,
+  "evidenceSource": "harness-events",
+  "inputFingerprintBefore": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+  "inputFingerprintAfter": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+  "changedContracts": ["partial-move-cleanup"],
+  "declaredConsumers": [
+    { "contractId": "partial-move-cleanup", "consumerId": "owned-drop-scan" },
+    { "contractId": "partial-move-cleanup", "consumerId": "field-drop-glue" }
+  ],
+  "consumerAudits": [
+    { "contractId": "partial-move-cleanup", "consumerId": "owned-drop-scan", "outcome": "pass", "evidenceId": "source:container-control" }
+  ],
+  "probes": [
+    { "probeId": "whole-drop-absent", "kind": "positive", "outcome": "pass", "evidenceId": "llvm:fixed" },
+    { "probeId": "old-whole-drop-detected", "kind": "negative", "outcome": "pass", "evidenceId": "llvm:broken" }
+  ]
+}

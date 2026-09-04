@@ -1,0 +1,19 @@
+{
+  "description": "Agentic Shaping wait-interlock context for long-running Codex shell work.",
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node hooks/codex-pretooluse-companion-queue.mjs",
+            "commandWindows": "node hooks\\codex-pretooluse-companion-queue.mjs",
+            "statusMessage": "Loading the Agentic Shaping wait interlock",
+            "additionalContextLimit": 1200
+          }
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,97 @@
+{
+  "schemaVersion": 1,
+  "ruleId": "AS-PRG-001",
+  "cases": [
+    {
+      "id": "compiler-and-stdlib-reported-independently",
+      "trace": {
+        "runId": "sollang-1",
+        "requiredAxisIds": ["compiler", "stdlib"],
+        "axes": [
+          { "id": "compiler", "label": "compiler failure batch", "status": "active", "denominatorKind": "known", "completed": 1, "total": 7, "percent": 14.3, "failureGroups": [{ "label": "undefined SSA", "count": 4 }, { "label": "other", "count": 2 }], "currentStage": "focused repair", "nextGate": "focused batch 7/7" },
+          { "id": "stdlib", "label": "stdlib roadmap", "status": "active", "denominatorKind": "known", "completed": 18, "total": 40, "percent": 45, "failureGroups": [], "currentStage": "network and compression", "nextGate": "module contract review" }
+        ]
+      },
+      "expected": { "allowed": true, "code": "multi-axis-progress-valid" }
+    },
+    {
+      "id": "missing-stdlib-axis",
+      "trace": {
+        "runId": "sollang-2",
+        "requiredAxisIds": ["compiler", "stdlib"],
+        "axes": [
+          { "id": "compiler", "label": "compiler", "status": "active", "denominatorKind": "known", "completed": 1, "total": 7, "percent": 14.3, "failureGroups": [], "currentStage": "repair", "nextGate": "batch zero" }
+        ]
+      },
+      "expected": { "allowed": false, "code": "required-axis-missing" }
+    },
+    {
+      "id": "wrong-percentage",
+      "trace": {
+        "runId": "sollang-3",
+        "requiredAxisIds": ["compiler"],
+        "axes": [
+          { "id": "compiler", "label": "compiler", "status": "active", "denominatorKind": "known", "completed": 1, "total": 7, "percent": 15, "failureGroups": [], "currentStage": "repair", "nextGate": "batch zero" }
+        ]
+      },
+      "expected": { "allowed": false, "code": "percentage-mismatch" }
+    },
+    {
+      "id": "unknown-project-denominator-is-scoped",
+      "trace": {
+        "runId": "sollang-4",
+        "requiredAxisIds": ["stdlib"],
+        "axes": [
+          { "id": "stdlib", "label": "stdlib", "status": "active", "denominatorKind": "unknown", "scopeLabel": "current approved module inventory", "unknownReason": "the roadmap is still being normalized into an authoritative manifest", "failureGroups": [], "currentStage": "inventory", "nextGate": "freeze module manifest" }
+        ]
+      },
+      "expected": { "allowed": true, "code": "multi-axis-progress-valid" }
+    },
+    {
+      "id": "unknown-denominator-cannot-carry-estimated-percent",
+      "trace": {
+        "runId": "sollang-5",
+        "requiredAxisIds": ["stdlib"],
+        "axes": [
+          { "id": "stdlib", "label": "stdlib", "status": "active", "denominatorKind": "unknown", "completed": 18, "total": 40, "percent": 45, "scopeLabel": "estimated roadmap", "unknownReason": "not authoritative", "failureGroups": [], "currentStage": "inventory", "nextGate": "freeze manifest" }
+        ]
+      },
+      "expected": { "allowed": false, "code": "invalid-unknown-denominator" }
+    },
+    {
+      "id": "known-axis-completion-must-match-status",
+      "trace": {
+        "runId": "sollang-6",
+        "requiredAxisIds": ["compiler"],
+        "axes": [
+          { "id": "compiler", "label": "compiler", "status": "active", "denominatorKind": "known", "completed": 7, "total": 7, "percent": 100, "failureGroups": [], "currentStage": "focused batch complete", "nextGate": "full fixed point" }
+        ]
+      },
+      "expected": { "allowed": false, "code": "complete-axis-not-marked-complete" }
+    },
+    {
+      "id": "undeclared-axis-is-rejected",
+      "trace": {
+        "runId": "sollang-7",
+        "requiredAxisIds": ["compiler"],
+        "axes": [
+          { "id": "compiler", "label": "compiler", "status": "active", "denominatorKind": "known", "completed": 1, "total": 2, "percent": 50, "failureGroups": [], "currentStage": "repair", "nextGate": "batch zero" },
+          { "id": "bonus", "label": "invented work", "status": "active", "denominatorKind": "unknown", "scopeLabel": "extra", "unknownReason": "not requested", "failureGroups": [], "currentStage": "none", "nextGate": "none" }
+        ]
+      },
+      "expected": { "allowed": false, "code": "undeclared-axis" }
+    },
+    {
+      "id": "overall-aggregate-is-forbidden",
+      "trace": {
+        "runId": "sollang-8",
+        "requiredAxisIds": ["compiler"],
+        "overallPercent": 50,
+        "axes": [
+          { "id": "compiler", "label": "compiler", "status": "active", "denominatorKind": "known", "completed": 1, "total": 2, "percent": 50, "failureGroups": [], "currentStage": "repair", "nextGate": "batch zero" }
+        ]
+      },
+      "expected": { "allowed": false, "code": "invalid-trace" }
+    }
+  ]
+}
