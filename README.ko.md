@@ -230,7 +230,7 @@ Agentic Shaping v0.3
 
 ### v0.3 기술 메모
 
-`AS-SA-001`은 반복 신호의 추상화 수준을 `local`, `project`, `cross-project`, `general-method`로 먼저 판정합니다. `local`과 `project`는 공유 등록을 차단하고, 서로 다른 적용 영역이 충분히 확인된 `cross-project`와 `general-method`만 프로젝트 식별자·개인 참조를 제거한 범용 스킬 패키지로 합성합니다. 개인정보, 프로젝트 기밀, 자격 증명, 비밀정보, 안전하지 않은 경로, 불충분한 일반화, 정상·경계·부정 평가 누락을 모두 닫힌 상태로 실패시킵니다. 현재 추상화·안전성 검사는 25/25를 통과했습니다. 운영 Slogs MCP에서도 레지스트리 도구 6개 노출, `korean-software-terminology` 1.0.0 후보 저장, `@dimohy` 검토·승인, 미선택 상태의 본문 비노출과 최초 적용 범위 선택 요구를 확인했습니다. 현재 상태는 `live-registry-verified`이며, 남은 제한은 `project`·`global`·`disabled` 중 최초 범위 선택이 아직 이뤄지지 않았고 이 패키지는 Windows에서만 검증됐으며 외부 근거 locator를 서버가 다시 가져와 해시를 계산하지 않는다는 점입니다.
+`AS-SA-001`은 반복 신호의 추상화 수준을 `local`, `project`, `cross-project`, `general-method`로 먼저 판정합니다. `local`과 `project`는 공유 등록을 차단하고, 서로 다른 적용 영역이 충분히 확인된 `cross-project`와 `general-method`만 프로젝트 식별자·개인 참조를 제거한 범용 스킬 패키지로 합성합니다. 개인정보, 프로젝트 기밀, 자격 증명, 비밀정보, 안전하지 않은 경로, 불충분한 일반화, 정상·경계·부정 평가 누락을 모두 닫힌 상태로 실패시킵니다. 현재 추상화·안전성 검사는 25/25를 통과했습니다. 운영 Slogs MCP에서도 레지스트리 도구 6개 노출, `korean-software-terminology` 1.0.0 후보 저장, `@dimohy` 검토·승인, 미선택 상태의 본문 비노출과 최초 적용 범위 선택 요구를 확인했습니다. 또한 `korean software terminology`처럼 자연스럽게 입력한 검색어도 모든 핵심 단어를 순서와 무관하게 일치시키고 지나치게 넓은 검색은 제한하는 방식으로 발견됨을 확인했습니다. Slogs 집중 검사는 36/36, PostgreSQL 통합은 1/1, 전체 검사는 251건 통과·22건 제외·실패 0건입니다. 현재 상태는 `live-registry-verified`이며, 남은 제한은 `project`·`global`·`disabled` 중 최초 범위 선택이 아직 이뤄지지 않았고 이 패키지는 Windows에서만 검증됐으며 외부 근거 locator를 서버가 다시 가져와 해시를 계산하지 않는다는 점입니다.
 
 `AS-PS-001`은 중요 정책·평가 변경의 공개 동기화를 담당합니다. 단일 권위 버전에서 정책·평가, 4개 언어 홈페이지, 4개 언어 README, `CHANGELOG.md`를 함께 갱신하며 버전·수치·계약·생성 결과가 어긋나면 push와 배포 전에 실패합니다. 문구·호환 버그 수정은 `patch`, 하위 호환 기능 추가는 `minor`, 기존 공개 계약을 깨는 변경은 `major`입니다. 이번 스킬 발견·Slogs 후보 연계는 하위 호환 기능 추가이므로 `0.2.0 → 0.3.0`으로 기록했습니다.
 
