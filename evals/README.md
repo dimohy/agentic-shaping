@@ -149,14 +149,31 @@ Sollang compiler and standard-library run where reporting only the current
 compiler failure batch hid the independently requested stdlib roadmap. The
 harness declares the exact required axis ids. Every known-denominator axis must
 report integer `completed` and `total`, the exactly recomputed one-decimal
-percentage, failure groups, current stage, and next gate. An unknown denominator
+percentage, failure groups, current stage, and next gate. Version 2 also requires
+explicit `passed`, `failed`, `processed`, `running`, and `pending` counts.
+`completed` equals `passed`; `processed` equals `passed + failed`;
+`total` equals `processed + running + pending`. Failure groups are disjoint
+current failures whose counts sum to `failed`. A terminal batch with 174 passes
+and 3 failures reports 174/177 (98.3%), even though 177 fixtures were processed.
+The former known-axis traces must supply these outcome counts; the evaluator
+does not infer them from an ordinal or silently migrate missing evidence.
+An unknown denominator
 must instead disclose a bounded scope label and reason and must not carry an
 estimated count or percentage. The contract rejects omitted or undeclared axes,
 miscomputed percentages, inconsistent completion states, and a top-level
 aggregate percentage that could hide incomparable denominators. Run
-`node .\evals\verify-progress-report.mjs` for eleven deterministic controls;
+`node .\evals\verify-progress-report.mjs` for twenty-five deterministic controls;
 the direct runtime hook fails closed without `--trace`, accepts the complete
-two-axis fixture, and blocks the fixture that omits stdlib.
+two-axis fixture, and blocks both a missing stdlib axis and an ordinal reported
+as successful completion. `progress-report-outcome-baseline.json` preserves the
+pre-change false acceptance and the frozen outcome-suite fingerprint.
+
+`llm-wiki-application-cases.json` version 0.2.1 adds development scenarios for
+terminal outcome reporting, recall without application, and missing downstream
+control consumers. Validate this nine-case contract with `run-evals.mjs` and
+`AGENTIC_SHAPING_EVAL_VALIDATE_ONLY=1` before a paired policy run. Contract
+validation and the deterministic application/routing checks do not constitute
+a new model behavioral result or a change to the public Slogs policy.
 
 `AS-EG-001` is the separate high-cost gate preflight extracted from a Sollang
 self-host repair that required roughly twelve minutes per compiler rebuild. A
@@ -165,17 +182,26 @@ drop glue; a second fix reached both consumers but still treated moves inside a
 returned expression as occurring after `return` because the AST start, not end,
 was used as the cutoff. The hook requires a harness-declared exact downstream
 consumer inventory for every changed contract, one passing audit per consumer,
-passing positive and negative cheap probes, and identical active-input SHA-256
-before and after preflight before a gate estimated at 60,000 ms or more may
-start. Model-authored evidence, missing consumers, failed or one-sided probes,
-input drift, duplicate maps, and unknown fields fail closed. Gates below the
-threshold return `OK-NOT-APPLICABLE` without inventing unnecessary process.
+passing positive and negative cheap probes, identical active-input SHA-256
+before and after preflight, and distinct durable-log and structured-completion-
+record paths before a gate estimated at 60,000 ms or more may start. The gate
+must run under a detached supervisor whose lifetime is independent of the
+observing session, survives observer disconnect, waits only for the supervised
+process rather than an inherited-handle process tree, and writes the structured
+completion record when the supervised process terminates. The completion-record
+contract must capture the authoritative process exit code and exact failure
+identifiers, require an empty failure-id set for a successful exit, and derive
+failure identifiers only from failure context. Model-authored evidence, missing consumers, failed or
+one-sided probes, input drift, unobservable outcomes, duplicate maps, and
+unknown fields fail closed. Gates below the threshold return
+`OK-NOT-APPLICABLE` without inventing unnecessary process.
 
-Run `node .\evals\verify-expensive-gate.mjs` for the eleven deterministic
+Run `node .\evals\verify-expensive-gate.mjs` for the twenty-two deterministic
 controls. The `--evidence` hook surface returns exit 0 for the schema-valid
 allowed fixture and exit 2 for the schema-valid missing-consumer fixture under
 `evals/fixtures/expensive-gate`. As with other runtime contracts, the harness
-must construct declared consumers, fingerprints, audits, and probe evidence
+must construct declared consumers, fingerprints, audits, probe evidence, and
+detached-supervisor durable log/completion record evidence
 from authoritative execution events; a model-written JSON file is not proof of
 integration. This focused hook does not alter the frozen public model-eval
 denominators or justify a public prompt change without a separately frozen
@@ -189,7 +215,7 @@ Slogs LLM Wiki system evolution as distinct targets. A system-evolution target
 requires a material prompt or hook change, a predeclared evaluation contract,
 and behavioral verification; memory capture or write evidence cannot substitute
 for them. The inverse negative control blocks an ordinary memory request from
-mutating system policy. The nine deterministic cases also cover partial target
+mutating system policy. The 17 deterministic cases also cover partial target
 completion, missing evaluation or verification, forbidden actions, and an
 incomplete current task. The optional `--trace` surface exits with code 2 when
 an orchestrator must block completion. As with the other hooks, a model-authored
@@ -201,7 +227,9 @@ audit or material action for every requested system target; only a final trace
 requires current-task completion, material prompt or hook changes, and
 behavioral verification. This prevents a long primary build from postponing
 system-evolution collaboration without falsely claiming that the primary task
-is done.
+is done. Version 4 requires a newly confirmed durable signal under standing
+authorization to open a new `evolutionCycle`; reusing a previously completed
+cycle is a blocking negative control.
 
 The focused live-policy model regression in
 `collaboration-routing-activation-latest-results.json` contains two paired

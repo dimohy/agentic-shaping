@@ -1,0 +1,51 @@
+{
+  "schemaVersion": 1,
+  "ruleId": "AS-PR-001",
+  "cases": [
+    {
+      "id": "production-route-acceptance",
+      "fixture": "valid",
+      "expected": { "allowed": true, "code": "OK" }
+    },
+    {
+      "id": "diagnostic-wrapper-is-not-acceptance",
+      "fixture": "diagnostic-wrapper",
+      "expected": { "allowed": true, "code": "OK-DIAGNOSTIC" }
+    },
+    {
+      "id": "sequential-wrapper-rejected-as-production",
+      "fixture": "route-mismatch",
+      "expected": { "allowed": false, "code": "AS-PR-001-ROUTE-MISMATCH" }
+    },
+    {
+      "id": "different-inputs-rejected",
+      "fixture": "input-mismatch",
+      "expected": { "allowed": false, "code": "AS-PR-001-INPUT-MISMATCH" }
+    },
+    {
+      "id": "different-outputs-rejected",
+      "fixture": "output-mismatch",
+      "expected": { "allowed": false, "code": "AS-PR-001-OUTPUT-MISMATCH" }
+    },
+    {
+      "id": "same-compiler-rejected",
+      "fixture": "same-compiler",
+      "expected": { "allowed": false, "code": "AS-PR-001-COMPILER-NOT-CHANGED" }
+    },
+    {
+      "id": "one-sample-rejected",
+      "fixture": "insufficient-samples",
+      "expected": { "allowed": false, "code": "AS-PR-001-INSUFFICIENT-SAMPLES" }
+    },
+    {
+      "id": "model-authored-source-rejected",
+      "fixture": "wrong-evidence-source",
+      "expected": { "allowed": false, "code": "AS-PR-001-INVALID-EVIDENCE" }
+    },
+    {
+      "id": "unknown-field-rejected",
+      "fixture": "unknown-field",
+      "expected": { "allowed": false, "code": "AS-PR-001-INVALID-EVIDENCE" }
+    }
+  ]
+}

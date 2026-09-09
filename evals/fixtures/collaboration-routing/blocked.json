@@ -1,0 +1,11 @@
+{
+  "runId": "fixture-blocked",
+  "phase": "final",
+  "requestTargets": ["agentic-shaping", "slogs-llm-wiki"],
+  "currentTaskComplete": true,
+  "forbiddenActions": [],
+  "actions": [
+    { "target": "memory", "kind": "capture-gate", "evidence": ["capture completed"] },
+    { "target": "memory", "kind": "memory-write", "evidence": ["memory id returned"] }
+  ]
+}

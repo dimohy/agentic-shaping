@@ -15,7 +15,10 @@ const structuredGate = spawnSync(process.execPath, [join(root, "evals", "verify-
 if (structuredGate.status !== 0) fail(`AS-US-001 gate failed: ${structuredGate.stderr || structuredGate.stdout}`);
 const structuredActivation = spawnSync(process.execPath, [join(root, "evals", "verify-unstructured-to-structured-activation.mjs")], { encoding: "utf8" });
 if (structuredActivation.status !== 0) fail(`AS-US-001 activation evidence failed: ${structuredActivation.stderr || structuredActivation.stdout}`);
+const traceCorpusCompatibility = spawnSync(process.execPath, [join(root, "evals", "verify-trace-corpus-compatibility.mjs")], { encoding: "utf8" });
+if (traceCorpusCompatibility.status !== 0) fail(`AS-US-COMPAT-001 gate failed: ${traceCorpusCompatibility.stderr || traceCorpusCompatibility.stdout}`);
 for (const [name, script] of [
+  ["cancellation terminal", "verify-cancellation-terminal.mjs"],
   ["skill abstraction", "verify-skill-abstraction.mjs"],
   ["skill lifecycle", "verify-skill-lifecycle.mjs"],
   ["publication sync", "verify-publication-sync.mjs"],

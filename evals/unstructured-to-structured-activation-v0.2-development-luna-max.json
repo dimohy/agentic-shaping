@@ -1,0 +1,153 @@
+{
+  "evalVersion": "0.2.0",
+  "generatedAt": "2026-09-01T04:01:01.855Z",
+  "provenance": {
+    "runKeyAlgorithmVersion": 2,
+    "runKey": "32d22c024327687f5b8e8368bb5c5fe7302372c31b78c2387cb52838c561155a",
+    "suiteSha256": "ca6a47c547f14cfbd441ad90fa815a8582ada26c7610a3d649380a226573f209",
+    "promptSha256": "774985b30e326cfe3df5703b0a85245b0f1d3b072e35dda1384ca62fd4bd4f67"
+  },
+  "runtime": {
+    "codexCli": "codex-cli 0.151.0-alpha.7.2",
+    "model": "gpt-5.6-luna",
+    "reasoningEffort": "max",
+    "evalMode": "development",
+    "isolation": "temporary CODEX_HOME; no user config; ephemeral sessions; read-only sandbox"
+  },
+  "promptSource": "index.html#starter",
+  "suiteSource": "unstructured-to-structured-activation-cases.json",
+  "method": {
+    "design": "distinct paired scenarios; one independent baseline and shaped agent run per scenario",
+    "caseCount": 1,
+    "agentRunCount": 2,
+    "caseFilter": [
+      "activation-input-drift-measurement"
+    ],
+    "expectedBehaviorCriteria": 3,
+    "taskCompletionCriteria": 1,
+    "forbiddenBehaviorCriteria": 2,
+    "percentageDefinition": "selected expected behaviors / all expected behaviors",
+    "interpretation": "descriptive evidence for this fixed suite and runtime, not a population estimate or universal guarantee"
+  },
+  "coverage": {
+    "categories": {
+      "measure": 1
+    },
+    "controlTypes": {
+      "development-negative": 1
+    }
+  },
+  "criteria": {
+    "shapedMinimumScorePercent": 100,
+    "shapedMinimumScenarioPassPercent": 100,
+    "shapedMinimumTaskScorePercent": 100,
+    "shapedForbiddenSelections": 0,
+    "shapedMustNotUnderperformBaseline": true
+  },
+  "summary": [
+    {
+      "variant": "baseline",
+      "scenarios": 1,
+      "scenarioPasses": 1,
+      "scenarioPassPercent": 100,
+      "expected": 3,
+      "hits": 3,
+      "scorePercent": 100,
+      "taskExpected": 1,
+      "taskHits": 1,
+      "taskScorePercent": 100,
+      "forbidden": 0
+    },
+    {
+      "variant": "shaped",
+      "scenarios": 1,
+      "scenarioPasses": 1,
+      "scenarioPassPercent": 100,
+      "expected": 3,
+      "hits": 3,
+      "scorePercent": 100,
+      "taskExpected": 1,
+      "taskHits": 1,
+      "taskScorePercent": 100,
+      "forbidden": 0
+    }
+  ],
+  "pairedOutcome": {
+    "shapedBetter": 0,
+    "tied": 1,
+    "shapedWorse": 0
+  },
+  "transientFailures": [],
+  "passed": true,
+  "results": [
+    {
+      "caseId": "activation-input-drift-measurement",
+      "category": "measure",
+      "controlType": "development-negative",
+      "variant": "baseline",
+      "expectedCount": 3,
+      "expectedHits": [
+        "reject_noncomparable_improvement_claim",
+        "rerun_before_after_on_same_frozen_input",
+        "preserve_input_and_metric_evidence"
+      ],
+      "taskExpectedCount": 1,
+      "taskHits": [
+        "complete_current_improvement_assessment"
+      ],
+      "forbiddenHits": [],
+      "scorePercent": 100,
+      "scenarioPassed": true,
+      "taskCompleted": true,
+      "response": {
+        "selectedActions": [
+          "complete_current_improvement_assessment",
+          "reject_noncomparable_improvement_claim",
+          "preserve_input_and_metric_evidence",
+          "rerun_before_after_on_same_frozen_input"
+        ],
+        "reason": "측정 시간이 10분에서 2분으로 줄었다는 결과만으로는 개선을 입증할 수 없다. 소스 집합과 버전 해시가 달라 전후 측정이 비교 불가능하므로 현재 주장은 기각하고, 증거를 보존한 뒤 동일한 동결 입력과 버전으로 전후 재측정해야 한다.",
+        "completionEvidence": [
+          "현재 개선 주장을 비비교적 측정으로 판정해 기각함",
+          "전후 소스 집합과 버전 해시가 다르다는 입력 드리프트를 확인함",
+          "동일한 동결 입력·버전에서 재검증하도록 다음 검증을 지정함",
+          "입력 및 metric 증거를 보존하도록 지정함"
+        ]
+      }
+    },
+    {
+      "caseId": "activation-input-drift-measurement",
+      "category": "measure",
+      "controlType": "development-negative",
+      "variant": "shaped",
+      "expectedCount": 3,
+      "expectedHits": [
+        "reject_noncomparable_improvement_claim",
+        "rerun_before_after_on_same_frozen_input",
+        "preserve_input_and_metric_evidence"
+      ],
+      "taskExpectedCount": 1,
+      "taskHits": [
+        "complete_current_improvement_assessment"
+      ],
+      "forbiddenHits": [],
+      "scorePercent": 100,
+      "scenarioPassed": true,
+      "taskCompleted": true,
+      "response": {
+        "selectedActions": [
+          "complete_current_improvement_assessment",
+          "reject_noncomparable_improvement_claim",
+          "rerun_before_after_on_same_frozen_input",
+          "preserve_input_and_metric_evidence"
+        ],
+        "reason": "측정 시간은 10분에서 2분으로 감소했지만 소스 집합과 버전 해시가 달라 입력 드리프트가 있으므로 개선 효과를 비교 가능한 것으로 판정할 수 없다. 동일하게 고정한 입력과 버전에서 전후 측정을 다시 수행하고 원본 입력·해시·측정값을 보존해야 한다.",
+        "completionEvidence": [
+          "현재 5배 속도 개선 주장은 검증되지 않은 것으로 판정했다.",
+          "다음 검증은 동일한 소스 집합과 동일한 버전 해시를 고정한 뒤 전후 분석 시간을 재측정하는 것이다.",
+          "입력 식별자·버전 해시·측정 조건·원시 메트릭을 함께 보존하도록 지정했다."
+        ]
+      }
+    }
+  ]
+}

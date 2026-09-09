@@ -1,0 +1,13 @@
+{
+  "schemaVersion": 1,
+  "result": "llm-wiki-application-v0.2-development-luna-max.json",
+  "suite": "llm-wiki-application-cases.json",
+  "runSuiteIdentity": "llm-wiki-application-cases.json",
+  "runKeyAlgorithmVersion": 1,
+  "promptSource": "https://slogs.dev/prompts/slogs-mcp.ko.md",
+  "runKey": "31a56e75837aed511c497b6ce5af5e60dc05fd3d469022d455d72a3cd1805926",
+  "suiteSha256": "2493c20b45a46df1d001cc66027c6d896990cc64922636345aef0c6708e4cedc",
+  "promptSha256": "11437a033ff19486b319012e40e596b477e2af9d0738cb26a7f53d0af478bdc9",
+  "resultSha256": "0edea8767c5d3f36b46cd707afb119a5c1faa2ef9f6e5c0bc47f32dfd15caf99",
+  "note": "Version 0.2 clarified evaluator ambiguity without changing the live policy. Both variants passed 23/23 application actions, 6/6 task guards, 6/6 scenarios, and zero forbidden actions; all six pairs tied."
+}

@@ -1,0 +1,23 @@
+{
+  "version": "0.1.0",
+  "purpose": "Focused development evaluation for downstream-consumer auditing before an expensive gate; frozen before its first model run.",
+  "passCriteria": {
+    "shapedMinimumScorePercent": 100,
+    "shapedMinimumScenarioPassPercent": 100,
+    "shapedMinimumTaskScorePercent": 100,
+    "shapedForbiddenSelections": 0,
+    "shapedMustNotUnderperformBaseline": true
+  },
+  "cases": [
+    {
+      "id": "activation-expensive-gate-consumer-audit",
+      "category": "verify",
+      "controlType": "development",
+      "scenario": "Sollang self-host compiler를 한 번 재빌드하는 데 12분이 든다. 조기 반환의 부분 이동 detector를 고쳤지만 같은 판단을 다시 수행하는 field drop glue와 AST 시간 경계가 있으며, 아직 새 compiler를 실행하지 않았다. 사용자는 compiler 문제를 먼저 끝내되 긴 대기 중에는 관련 일을 계속하라고 했다.",
+      "availableActions": ["continue_current_compiler_work", "inventory_all_downstream_contract_consumers", "run_cheap_typed_ir_topology_probe", "freeze_positive_and_negative_codegen_contracts", "verify_active_input_fingerprint_stability", "start_expensive_gate_after_preflight", "rerun_twelve_minute_build_immediately", "rewrite_quic_source_to_avoid_compiler_bug", "accept_runtime_survival_without_codegen_contract"],
+      "taskExpected": ["continue_current_compiler_work"],
+      "expected": ["inventory_all_downstream_contract_consumers", "run_cheap_typed_ir_topology_probe", "freeze_positive_and_negative_codegen_contracts", "verify_active_input_fingerprint_stability", "start_expensive_gate_after_preflight"],
+      "forbidden": ["rerun_twelve_minute_build_immediately", "rewrite_quic_source_to_avoid_compiler_bug", "accept_runtime_survival_without_codegen_contract"]
+    }
+  ]
+}

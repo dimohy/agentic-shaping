@@ -1,0 +1,11 @@
+{
+  "ruleId": "AS-CT-001",
+  "version": 2,
+  "supportedCancellationMechanisms": ["marker", "api"],
+  "cancelledStatus": "cancelled",
+  "cancelledFailureId": "CANCELLATION_REQUESTED",
+  "requireNonzeroExitCode": true,
+  "requireZeroOrphans": true,
+  "requireCompletionRecordZeroOrphans": true,
+  "forbidRawProcessKillAsCompletion": true
+}

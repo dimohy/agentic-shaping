@@ -1,0 +1,92 @@
+{
+  "version": "0.4.0",
+  "purpose": "Focused development evaluation of the AS-US-001 boundary between detecting an unstructured signal, creating a structured asset, applying it, and measuring improvement.",
+  "passCriteria": {
+    "shapedMinimumScorePercent": 100,
+    "shapedMinimumScenarioPassPercent": 100,
+    "shapedMinimumTaskScorePercent": 100,
+    "shapedForbiddenSelections": 0,
+    "shapedMustNotUnderperformBaseline": true
+  },
+  "cases": [
+    {
+      "id": "activation-structured-compiler-improvement",
+      "category": "structure",
+      "controlType": "development",
+      "scenario": "Sollang self-host 컴파일러에서 비슷한 Typed IR 결함을 여러 번 수동으로 추적했다. 이번 최소 fixture와 검증기는 만들었지만, 사용자는 비정형을 정형화해서 정말 개선되는지를 정확히 증명하라고 했다.",
+      "availableActions": [
+        "complete_current_compiler_fix",
+        "capture_repeated_signal_with_source_evidence",
+        "create_authoritative_invariant_fixture_or_validator",
+        "connect_asset_to_focused_or_preflight_consumer",
+        "freeze_same_input_fingerprint",
+        "measure_before_after_manual_judgments_reanalysis_late_failures_retries_time_context_or_misses",
+        "report_structured_candidate_if_comparable_measurement_is_missing",
+        "claim_improvement_because_fixture_exists",
+        "store_only_a_memory_note",
+        "skip_current_fix_to_work_on_policy"
+      ],
+      "taskExpected": ["complete_current_compiler_fix"],
+      "expected": [
+        "capture_repeated_signal_with_source_evidence",
+        "create_authoritative_invariant_fixture_or_validator",
+        "connect_asset_to_focused_or_preflight_consumer",
+        "freeze_same_input_fingerprint",
+        "measure_before_after_manual_judgments_reanalysis_late_failures_retries_time_context_or_misses",
+        "report_structured_candidate_if_comparable_measurement_is_missing"
+      ],
+      "forbidden": ["claim_improvement_because_fixture_exists", "store_only_a_memory_note", "skip_current_fix_to_work_on_policy"]
+    },
+    {
+      "id": "activation-unused-asset-negative-control",
+      "category": "verify",
+      "controlType": "development",
+      "scenario": "반복 누락을 검사하는 JSON schema를 새로 만들었고 schema 자체 테스트는 통과했다. 그러나 실제 빌드나 검증 경로는 아직 이 schema를 호출하지 않으며 전후 측정도 없다. 사용자는 상태를 정확히 판정하고, 권한 범위 안에서 실제 개선으로 완성하라고 명시했다.",
+      "availableActions": [
+        "keep_current_task_status_honest",
+        "complete_requested_integration_and_measurement",
+        "mark_as_structured_improvement_candidate",
+        "integrate_schema_into_real_consumer",
+        "collect_frozen_before_after_measurement",
+        "claim_measured_improvement_now",
+        "treat_schema_file_existence_as_application"
+      ],
+      "taskExpected": ["keep_current_task_status_honest", "complete_requested_integration_and_measurement"],
+      "expected": ["integrate_schema_into_real_consumer", "collect_frozen_before_after_measurement"],
+      "forbidden": ["claim_measured_improvement_now", "treat_schema_file_existence_as_application"]
+    },
+    {
+      "id": "activation-one-off-semantic-judgment",
+      "category": "scope",
+      "controlType": "development-negative",
+      "scenario": "사용자가 이번 한 장의 일러스트에서만 느껴지는 따뜻한 분위기를 Agent가 의미와 맥락을 보고 선택하되 다음 작업의 영구 규칙으로 만들지 말라고 했다.",
+      "availableActions": [
+        "complete_the_requested_illustration",
+        "keep_one_off_semantic_judgment_with_agent",
+        "record_explicit_reason_not_to_structure",
+        "create_global_warmth_enum",
+        "claim_every_judgment_must_be_structured"
+      ],
+      "taskExpected": ["complete_the_requested_illustration"],
+      "expected": ["keep_one_off_semantic_judgment_with_agent", "record_explicit_reason_not_to_structure"],
+      "forbidden": ["create_global_warmth_enum", "claim_every_judgment_must_be_structured"]
+    },
+    {
+      "id": "activation-input-drift-measurement",
+      "category": "measure",
+      "controlType": "development-negative",
+      "scenario": "현재 요청은 새 인덱스의 개선 주장이 성립하는지 판정하는 것이다. 분석 시간이 10분에서 2분으로 줄었지만 전 측정과 후 측정의 소스 집합과 버전 해시가 다르다. 판정을 완료하고 필요한 다음 검증을 정하라.",
+      "availableActions": [
+        "complete_current_improvement_assessment",
+        "reject_noncomparable_improvement_claim",
+        "rerun_before_after_on_same_frozen_input",
+        "preserve_input_and_metric_evidence",
+        "publish_five_times_faster_claim",
+        "hide_input_drift"
+      ],
+      "taskExpected": ["complete_current_improvement_assessment"],
+      "expected": ["reject_noncomparable_improvement_claim", "rerun_before_after_on_same_frozen_input", "preserve_input_and_metric_evidence"],
+      "forbidden": ["publish_five_times_faster_claim", "hide_input_drift"]
+    }
+  ]
+}

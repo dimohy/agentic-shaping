@@ -1,97 +1,768 @@
 {
-  "schemaVersion": 1,
+  "schemaVersion": 2,
   "ruleId": "AS-PRG-001",
   "cases": [
     {
       "id": "compiler-and-stdlib-reported-independently",
       "trace": {
         "runId": "sollang-1",
-        "requiredAxisIds": ["compiler", "stdlib"],
+        "requiredAxisIds": [
+          "compiler",
+          "stdlib"
+        ],
         "axes": [
-          { "id": "compiler", "label": "compiler failure batch", "status": "active", "denominatorKind": "known", "completed": 1, "total": 7, "percent": 14.3, "failureGroups": [{ "label": "undefined SSA", "count": 4 }, { "label": "other", "count": 2 }], "currentStage": "focused repair", "nextGate": "focused batch 7/7" },
-          { "id": "stdlib", "label": "stdlib roadmap", "status": "active", "denominatorKind": "known", "completed": 18, "total": 40, "percent": 45, "failureGroups": [], "currentStage": "network and compression", "nextGate": "module contract review" }
+          {
+            "id": "compiler",
+            "label": "compiler failure batch",
+            "status": "active",
+            "denominatorKind": "known",
+            "completed": 1,
+            "total": 7,
+            "percent": 14.3,
+            "failureGroups": [
+              {
+                "label": "undefined SSA",
+                "count": 4
+              },
+              {
+                "label": "other",
+                "count": 2
+              }
+            ],
+            "currentStage": "focused repair",
+            "nextGate": "focused batch 7/7",
+            "passed": 1,
+            "failed": 6,
+            "processed": 7,
+            "running": 0,
+            "pending": 0
+          },
+          {
+            "id": "stdlib",
+            "label": "stdlib roadmap",
+            "status": "active",
+            "denominatorKind": "known",
+            "completed": 18,
+            "total": 40,
+            "percent": 45,
+            "failureGroups": [],
+            "currentStage": "network and compression",
+            "nextGate": "module contract review",
+            "passed": 18,
+            "failed": 0,
+            "processed": 18,
+            "running": 0,
+            "pending": 22
+          }
         ]
       },
-      "expected": { "allowed": true, "code": "multi-axis-progress-valid" }
+      "expected": {
+        "allowed": true,
+        "code": "multi-axis-progress-valid"
+      }
     },
     {
       "id": "missing-stdlib-axis",
       "trace": {
         "runId": "sollang-2",
-        "requiredAxisIds": ["compiler", "stdlib"],
+        "requiredAxisIds": [
+          "compiler",
+          "stdlib"
+        ],
         "axes": [
-          { "id": "compiler", "label": "compiler", "status": "active", "denominatorKind": "known", "completed": 1, "total": 7, "percent": 14.3, "failureGroups": [], "currentStage": "repair", "nextGate": "batch zero" }
+          {
+            "id": "compiler",
+            "label": "compiler",
+            "status": "active",
+            "denominatorKind": "known",
+            "completed": 1,
+            "total": 7,
+            "percent": 14.3,
+            "failureGroups": [],
+            "currentStage": "repair",
+            "nextGate": "batch zero",
+            "passed": 1,
+            "failed": 0,
+            "processed": 1,
+            "running": 0,
+            "pending": 6
+          }
         ]
       },
-      "expected": { "allowed": false, "code": "required-axis-missing" }
+      "expected": {
+        "allowed": false,
+        "code": "required-axis-missing"
+      }
     },
     {
       "id": "wrong-percentage",
       "trace": {
         "runId": "sollang-3",
-        "requiredAxisIds": ["compiler"],
+        "requiredAxisIds": [
+          "compiler"
+        ],
         "axes": [
-          { "id": "compiler", "label": "compiler", "status": "active", "denominatorKind": "known", "completed": 1, "total": 7, "percent": 15, "failureGroups": [], "currentStage": "repair", "nextGate": "batch zero" }
+          {
+            "id": "compiler",
+            "label": "compiler",
+            "status": "active",
+            "denominatorKind": "known",
+            "completed": 1,
+            "total": 7,
+            "percent": 15,
+            "failureGroups": [],
+            "currentStage": "repair",
+            "nextGate": "batch zero",
+            "passed": 1,
+            "failed": 0,
+            "processed": 1,
+            "running": 0,
+            "pending": 6
+          }
         ]
       },
-      "expected": { "allowed": false, "code": "percentage-mismatch" }
+      "expected": {
+        "allowed": false,
+        "code": "percentage-mismatch"
+      }
     },
     {
       "id": "unknown-project-denominator-is-scoped",
       "trace": {
         "runId": "sollang-4",
-        "requiredAxisIds": ["stdlib"],
+        "requiredAxisIds": [
+          "stdlib"
+        ],
         "axes": [
-          { "id": "stdlib", "label": "stdlib", "status": "active", "denominatorKind": "unknown", "scopeLabel": "current approved module inventory", "unknownReason": "the roadmap is still being normalized into an authoritative manifest", "failureGroups": [], "currentStage": "inventory", "nextGate": "freeze module manifest" }
+          {
+            "id": "stdlib",
+            "label": "stdlib",
+            "status": "active",
+            "denominatorKind": "unknown",
+            "scopeLabel": "current approved module inventory",
+            "unknownReason": "the roadmap is still being normalized into an authoritative manifest",
+            "failureGroups": [],
+            "currentStage": "inventory",
+            "nextGate": "freeze module manifest"
+          }
         ]
       },
-      "expected": { "allowed": true, "code": "multi-axis-progress-valid" }
+      "expected": {
+        "allowed": true,
+        "code": "multi-axis-progress-valid"
+      }
     },
     {
       "id": "unknown-denominator-cannot-carry-estimated-percent",
       "trace": {
         "runId": "sollang-5",
-        "requiredAxisIds": ["stdlib"],
+        "requiredAxisIds": [
+          "stdlib"
+        ],
         "axes": [
-          { "id": "stdlib", "label": "stdlib", "status": "active", "denominatorKind": "unknown", "completed": 18, "total": 40, "percent": 45, "scopeLabel": "estimated roadmap", "unknownReason": "not authoritative", "failureGroups": [], "currentStage": "inventory", "nextGate": "freeze manifest" }
+          {
+            "id": "stdlib",
+            "label": "stdlib",
+            "status": "active",
+            "denominatorKind": "unknown",
+            "completed": 18,
+            "total": 40,
+            "percent": 45,
+            "scopeLabel": "estimated roadmap",
+            "unknownReason": "not authoritative",
+            "failureGroups": [],
+            "currentStage": "inventory",
+            "nextGate": "freeze manifest"
+          }
         ]
       },
-      "expected": { "allowed": false, "code": "invalid-unknown-denominator" }
+      "expected": {
+        "allowed": false,
+        "code": "invalid-unknown-denominator"
+      }
     },
     {
       "id": "known-axis-completion-must-match-status",
       "trace": {
         "runId": "sollang-6",
-        "requiredAxisIds": ["compiler"],
+        "requiredAxisIds": [
+          "compiler"
+        ],
         "axes": [
-          { "id": "compiler", "label": "compiler", "status": "active", "denominatorKind": "known", "completed": 7, "total": 7, "percent": 100, "failureGroups": [], "currentStage": "focused batch complete", "nextGate": "full fixed point" }
+          {
+            "id": "compiler",
+            "label": "compiler",
+            "status": "active",
+            "denominatorKind": "known",
+            "completed": 7,
+            "total": 7,
+            "percent": 100,
+            "failureGroups": [],
+            "currentStage": "focused batch complete",
+            "nextGate": "full fixed point",
+            "passed": 7,
+            "failed": 0,
+            "processed": 7,
+            "running": 0,
+            "pending": 0
+          }
         ]
       },
-      "expected": { "allowed": false, "code": "complete-axis-not-marked-complete" }
+      "expected": {
+        "allowed": false,
+        "code": "complete-axis-not-marked-complete"
+      }
     },
     {
       "id": "undeclared-axis-is-rejected",
       "trace": {
         "runId": "sollang-7",
-        "requiredAxisIds": ["compiler"],
+        "requiredAxisIds": [
+          "compiler"
+        ],
         "axes": [
-          { "id": "compiler", "label": "compiler", "status": "active", "denominatorKind": "known", "completed": 1, "total": 2, "percent": 50, "failureGroups": [], "currentStage": "repair", "nextGate": "batch zero" },
-          { "id": "bonus", "label": "invented work", "status": "active", "denominatorKind": "unknown", "scopeLabel": "extra", "unknownReason": "not requested", "failureGroups": [], "currentStage": "none", "nextGate": "none" }
+          {
+            "id": "compiler",
+            "label": "compiler",
+            "status": "active",
+            "denominatorKind": "known",
+            "completed": 1,
+            "total": 2,
+            "percent": 50,
+            "failureGroups": [],
+            "currentStage": "repair",
+            "nextGate": "batch zero",
+            "passed": 1,
+            "failed": 0,
+            "processed": 1,
+            "running": 0,
+            "pending": 1
+          },
+          {
+            "id": "bonus",
+            "label": "invented work",
+            "status": "active",
+            "denominatorKind": "unknown",
+            "scopeLabel": "extra",
+            "unknownReason": "not requested",
+            "failureGroups": [],
+            "currentStage": "none",
+            "nextGate": "none"
+          }
         ]
       },
-      "expected": { "allowed": false, "code": "undeclared-axis" }
+      "expected": {
+        "allowed": false,
+        "code": "undeclared-axis"
+      }
     },
     {
       "id": "overall-aggregate-is-forbidden",
       "trace": {
         "runId": "sollang-8",
-        "requiredAxisIds": ["compiler"],
+        "requiredAxisIds": [
+          "compiler"
+        ],
         "overallPercent": 50,
         "axes": [
-          { "id": "compiler", "label": "compiler", "status": "active", "denominatorKind": "known", "completed": 1, "total": 2, "percent": 50, "failureGroups": [], "currentStage": "repair", "nextGate": "batch zero" }
+          {
+            "id": "compiler",
+            "label": "compiler",
+            "status": "active",
+            "denominatorKind": "known",
+            "completed": 1,
+            "total": 2,
+            "percent": 50,
+            "failureGroups": [],
+            "currentStage": "repair",
+            "nextGate": "batch zero",
+            "passed": 1,
+            "failed": 0,
+            "processed": 1,
+            "running": 0,
+            "pending": 1
+          }
         ]
       },
-      "expected": { "allowed": false, "code": "invalid-trace" }
+      "expected": {
+        "allowed": false,
+        "code": "invalid-trace"
+      }
+    },
+    {
+      "id": "terminal-processed-is-not-passed",
+      "trace": {
+        "runId": "terminal-processed-is-not-passed",
+        "requiredAxisIds": [
+          "stage2"
+        ],
+        "axes": [
+          {
+            "id": "stage2",
+            "label": "Stage2 exact batch",
+            "status": "active",
+            "denominatorKind": "known",
+            "completed": 174,
+            "total": 177,
+            "percent": 98.3,
+            "passed": 174,
+            "failed": 3,
+            "processed": 177,
+            "running": 0,
+            "pending": 0,
+            "failureGroups": [
+              {
+                "label": "runtime failure",
+                "count": 3
+              }
+            ],
+            "currentStage": "terminal failures",
+            "nextGate": "repair and rerun failed fixtures"
+          }
+        ]
+      },
+      "expected": {
+        "allowed": true,
+        "code": "multi-axis-progress-valid"
+      }
+    },
+    {
+      "id": "running-and-pending-are-distinct",
+      "trace": {
+        "runId": "running-and-pending-are-distinct",
+        "requiredAxisIds": [
+          "stage2"
+        ],
+        "axes": [
+          {
+            "id": "stage2",
+            "label": "Stage2 exact batch",
+            "status": "active",
+            "denominatorKind": "known",
+            "completed": 117,
+            "total": 177,
+            "percent": 66.1,
+            "passed": 117,
+            "failed": 3,
+            "processed": 120,
+            "running": 7,
+            "pending": 50,
+            "failureGroups": [
+              {
+                "label": "runtime failure",
+                "count": 3
+              }
+            ],
+            "currentStage": "terminal failures",
+            "nextGate": "repair and rerun failed fixtures"
+          }
+        ]
+      },
+      "expected": {
+        "allowed": true,
+        "code": "multi-axis-progress-valid"
+      }
+    },
+    {
+      "id": "all-passed-is-complete",
+      "trace": {
+        "runId": "all-passed-is-complete",
+        "requiredAxisIds": [
+          "stage2"
+        ],
+        "axes": [
+          {
+            "id": "stage2",
+            "label": "Stage2 exact batch",
+            "status": "complete",
+            "denominatorKind": "known",
+            "completed": 177,
+            "total": 177,
+            "percent": 100,
+            "passed": 177,
+            "failed": 0,
+            "processed": 177,
+            "running": 0,
+            "pending": 0,
+            "failureGroups": [],
+            "currentStage": "terminal failures",
+            "nextGate": "repair and rerun failed fixtures"
+          }
+        ]
+      },
+      "expected": {
+        "allowed": true,
+        "code": "multi-axis-progress-valid"
+      }
+    },
+    {
+      "id": "processed-ordinal-cannot-replace-completed",
+      "trace": {
+        "runId": "processed-ordinal-cannot-replace-completed",
+        "requiredAxisIds": [
+          "stage2"
+        ],
+        "axes": [
+          {
+            "id": "stage2",
+            "label": "Stage2 exact batch",
+            "status": "complete",
+            "denominatorKind": "known",
+            "completed": 177,
+            "total": 177,
+            "percent": 100,
+            "passed": 174,
+            "failed": 3,
+            "processed": 177,
+            "running": 0,
+            "pending": 0,
+            "failureGroups": [
+              {
+                "label": "runtime failure",
+                "count": 3
+              }
+            ],
+            "currentStage": "terminal failures",
+            "nextGate": "repair and rerun failed fixtures"
+          }
+        ]
+      },
+      "expected": {
+        "allowed": false,
+        "code": "completed-is-not-passed"
+      }
+    },
+    {
+      "id": "failure-groups-must-sum-to-failed",
+      "trace": {
+        "runId": "failure-groups-must-sum-to-failed",
+        "requiredAxisIds": [
+          "stage2"
+        ],
+        "axes": [
+          {
+            "id": "stage2",
+            "label": "Stage2 exact batch",
+            "status": "active",
+            "denominatorKind": "known",
+            "completed": 174,
+            "total": 177,
+            "percent": 98.3,
+            "passed": 174,
+            "failed": 3,
+            "processed": 177,
+            "running": 0,
+            "pending": 0,
+            "failureGroups": [
+              {
+                "label": "runtime failure",
+                "count": 2
+              }
+            ],
+            "currentStage": "terminal failures",
+            "nextGate": "repair and rerun failed fixtures"
+          }
+        ]
+      },
+      "expected": {
+        "allowed": false,
+        "code": "failure-count-mismatch"
+      }
+    },
+    {
+      "id": "terminal-count-must-equal-processed",
+      "trace": {
+        "runId": "terminal-count-must-equal-processed",
+        "requiredAxisIds": [
+          "stage2"
+        ],
+        "axes": [
+          {
+            "id": "stage2",
+            "label": "Stage2 exact batch",
+            "status": "active",
+            "denominatorKind": "known",
+            "completed": 174,
+            "total": 177,
+            "percent": 98.3,
+            "passed": 174,
+            "failed": 3,
+            "processed": 176,
+            "running": 0,
+            "pending": 0,
+            "failureGroups": [
+              {
+                "label": "runtime failure",
+                "count": 3
+              }
+            ],
+            "currentStage": "terminal failures",
+            "nextGate": "repair and rerun failed fixtures"
+          }
+        ]
+      },
+      "expected": {
+        "allowed": false,
+        "code": "processed-count-mismatch"
+      }
+    },
+    {
+      "id": "running-cannot-be-counted-as-processed",
+      "trace": {
+        "runId": "running-cannot-be-counted-as-processed",
+        "requiredAxisIds": [
+          "stage2"
+        ],
+        "axes": [
+          {
+            "id": "stage2",
+            "label": "Stage2 exact batch",
+            "status": "active",
+            "denominatorKind": "known",
+            "completed": 174,
+            "total": 177,
+            "percent": 98.3,
+            "passed": 174,
+            "failed": 3,
+            "processed": 178,
+            "running": 1,
+            "pending": 0,
+            "failureGroups": [
+              {
+                "label": "runtime failure",
+                "count": 3
+              }
+            ],
+            "currentStage": "terminal failures",
+            "nextGate": "repair and rerun failed fixtures"
+          }
+        ]
+      },
+      "expected": {
+        "allowed": false,
+        "code": "processed-count-mismatch"
+      }
+    },
+    {
+      "id": "outcomes-must-cover-total",
+      "trace": {
+        "runId": "outcomes-must-cover-total",
+        "requiredAxisIds": [
+          "stage2"
+        ],
+        "axes": [
+          {
+            "id": "stage2",
+            "label": "Stage2 exact batch",
+            "status": "active",
+            "denominatorKind": "known",
+            "completed": 174,
+            "total": 177,
+            "percent": 98.3,
+            "passed": 174,
+            "failed": 3,
+            "processed": 177,
+            "running": 1,
+            "pending": 0,
+            "failureGroups": [
+              {
+                "label": "runtime failure",
+                "count": 3
+              }
+            ],
+            "currentStage": "terminal failures",
+            "nextGate": "repair and rerun failed fixtures"
+          }
+        ]
+      },
+      "expected": {
+        "allowed": false,
+        "code": "outcome-total-mismatch"
+      }
+    },
+    {
+      "id": "duplicate-failure-groups-are-not-disjoint",
+      "trace": {
+        "runId": "duplicate-failure-groups-are-not-disjoint",
+        "requiredAxisIds": [
+          "stage2"
+        ],
+        "axes": [
+          {
+            "id": "stage2",
+            "label": "Stage2 exact batch",
+            "status": "active",
+            "denominatorKind": "known",
+            "completed": 174,
+            "total": 177,
+            "percent": 98.3,
+            "passed": 174,
+            "failed": 3,
+            "processed": 177,
+            "running": 0,
+            "pending": 0,
+            "failureGroups": [
+              {
+                "label": "runtime failure",
+                "count": 1
+              },
+              {
+                "label": "runtime failure",
+                "count": 2
+              }
+            ],
+            "currentStage": "terminal failures",
+            "nextGate": "repair and rerun failed fixtures"
+          }
+        ]
+      },
+      "expected": {
+        "allowed": false,
+        "code": "duplicate-failure-group"
+      }
+    },
+    {
+      "id": "negative-outcome-is-rejected",
+      "trace": {
+        "runId": "negative-outcome-is-rejected",
+        "requiredAxisIds": [
+          "stage2"
+        ],
+        "axes": [
+          {
+            "id": "stage2",
+            "label": "Stage2 exact batch",
+            "status": "active",
+            "denominatorKind": "known",
+            "completed": 174,
+            "total": 177,
+            "percent": 98.3,
+            "passed": 174,
+            "failed": 3,
+            "processed": 177,
+            "running": -1,
+            "pending": 1,
+            "failureGroups": [
+              {
+                "label": "runtime failure",
+                "count": 3
+              }
+            ],
+            "currentStage": "terminal failures",
+            "nextGate": "repair and rerun failed fixtures"
+          }
+        ]
+      },
+      "expected": {
+        "allowed": false,
+        "code": "invalid-outcome-counts"
+      }
+    },
+    {
+      "id": "fractional-outcome-is-rejected",
+      "trace": {
+        "runId": "fractional-outcome-is-rejected",
+        "requiredAxisIds": [
+          "stage2"
+        ],
+        "axes": [
+          {
+            "id": "stage2",
+            "label": "Stage2 exact batch",
+            "status": "active",
+            "denominatorKind": "known",
+            "completed": 174,
+            "total": 177,
+            "percent": 98.3,
+            "passed": 174,
+            "failed": 3,
+            "processed": 177,
+            "running": 0.5,
+            "pending": -0.5,
+            "failureGroups": [
+              {
+                "label": "runtime failure",
+                "count": 3
+              }
+            ],
+            "currentStage": "terminal failures",
+            "nextGate": "repair and rerun failed fixtures"
+          }
+        ]
+      },
+      "expected": {
+        "allowed": false,
+        "code": "invalid-outcome-counts"
+      }
+    },
+    {
+      "id": "legacy-outcomes-are-not-inferred",
+      "trace": {
+        "runId": "legacy-outcomes-are-not-inferred",
+        "requiredAxisIds": [
+          "stage2"
+        ],
+        "axes": [
+          {
+            "id": "stage2",
+            "label": "Stage2 exact batch",
+            "status": "active",
+            "denominatorKind": "known",
+            "completed": 174,
+            "total": 177,
+            "percent": 98.3,
+            "failureGroups": [
+              {
+                "label": "runtime failure",
+                "count": 3
+              }
+            ],
+            "currentStage": "terminal failures",
+            "nextGate": "repair and rerun failed fixtures"
+          }
+        ]
+      },
+      "expected": {
+        "allowed": false,
+        "code": "invalid-outcome-counts"
+      }
+    },
+    {
+      "id": "all-passed-with-failure-categories-is-rejected",
+      "trace": {
+        "runId": "all-passed-with-failure-categories-is-rejected",
+        "requiredAxisIds": [
+          "stage2"
+        ],
+        "axes": [
+          {
+            "id": "stage2",
+            "label": "Stage2 exact batch",
+            "status": "complete",
+            "denominatorKind": "known",
+            "completed": 177,
+            "total": 177,
+            "percent": 100,
+            "passed": 177,
+            "failed": 0,
+            "processed": 177,
+            "running": 0,
+            "pending": 0,
+            "failureGroups": [
+              {
+                "label": "runtime failure",
+                "count": 3
+              }
+            ],
+            "currentStage": "terminal failures",
+            "nextGate": "repair and rerun failed fixtures"
+          }
+        ]
+      },
+      "expected": {
+        "allowed": false,
+        "code": "failure-count-mismatch"
+      }
     }
   ]
 }

@@ -1,0 +1,52 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://agentic-shaping.slogs.dev/evals/golden-drift-evidence.schema.json",
+  "title": "Agentic Shaping Golden Drift Evidence",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["failureId", "evidenceSource", "expectedHashBefore", "actualHash", "updatedHash", "artifactChecks", "referenceBehavior", "updatePath"],
+  "properties": {
+    "failureId": { "type": "string", "minLength": 1 },
+    "evidenceSource": { "const": "harness-events" },
+    "expectedHashBefore": { "$ref": "#/$defs/sha256" },
+    "actualHash": { "$ref": "#/$defs/sha256" },
+    "updatedHash": { "$ref": "#/$defs/sha256" },
+    "artifactChecks": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/check" }
+    },
+    "referenceBehavior": { "$ref": "#/$defs/evidence" },
+    "updatePath": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["kind", "outcome", "evidenceId"],
+      "properties": {
+        "kind": { "const": "authoritative-command" },
+        "outcome": { "enum": ["pass", "fail"] },
+        "evidenceId": { "type": "string", "minLength": 1 }
+      }
+    }
+  },
+  "$defs": {
+    "sha256": { "type": "string", "pattern": "^[A-Fa-f0-9]{64}$" },
+    "check": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["kind", "outcome", "evidenceId"],
+      "properties": {
+        "kind": { "enum": ["assemble", "link", "execute"] },
+        "outcome": { "enum": ["pass", "fail"] },
+        "evidenceId": { "type": "string", "minLength": 1 }
+      }
+    },
+    "evidence": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["outcome", "evidenceId"],
+      "properties": {
+        "outcome": { "enum": ["pass", "fail"] },
+        "evidenceId": { "type": "string", "minLength": 1 }
+      }
+    }
+  }
+}

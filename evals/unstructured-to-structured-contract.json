@@ -1,0 +1,17 @@
+{
+  "schemaVersion": 5,
+  "ruleId": "AS-US-001",
+  "description": "A durable machine-decidable unstructured signal is not complete until it becomes an authoritative structured asset, is consumed by a real path, and shows a frozen before/after improvement without weakening the current task or safety gates.",
+  "traceSchema": "unstructured-to-structured-trace.schema.json",
+  "runtimeModule": "unstructured-to-structured.mjs",
+  "structuredAssetKinds": ["schema", "type", "enum", "manifest", "index", "invariant", "validator", "fixture", "pipeline"],
+  "requiredImprovementMetrics": ["manualJudgments", "reanalysisUnits", "lateFailures", "retries", "elapsedMs", "contextTokens", "misses"],
+  "claimLevels": {
+    "signal-observed": "A durable machine-decidable signal is bound to a frozen target revision, input fingerprint, executed baseline receipt, planned authoritative asset, and explicit next gate, but it is not yet applied. This is an honest in-progress state and never evidence that Agentic Shaping improved the target.",
+    "structured-and-applied": "The authoritative asset is validated and consumed by a real path, but causal improvement is not yet measured. A frozen executable measurement plan is required.",
+    "measured-improvement": "The same frozen input shows a strict before/after reduction on an allowed metric, and the measurement values are bound to an executed measurement command and output hash. Only this level may claim that Agentic Shaping improved the target."
+  },
+  "traceAuthority": "orchestrator",
+  "orchestratorEvidence": "Signal-observed requires a target repository and revision, frozen input fingerprint, and an executed baseline command whose exit code matches its declared expected exit code. This preserves intentional failing baselines without calling them command failures. Every allowed structured claim additionally requires zero-exit validator and consumer receipts. Measured improvement additionally requires zero-exit candidate and exact measurement command receipts with matching output hashes.",
+  "nonEvidence": ["documentation-only", "memory-only", "asset-created-only", "agent-authored-claim", "trace-authority-string-only", "unfrozen-before-after"]
+}

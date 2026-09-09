@@ -1,0 +1,334 @@
+{
+  "suiteSha256": "0cbd5a2a753162b843b220b82f048b4e4a0b1373f60c9e408d7a1cbe232b2f78",
+  "runtimeSha256": "9b12ebe36fec0020019938892a1318165474b00eb43ef5983d89f61dbf6926fa",
+  "legacyFalseAcceptance": {
+    "trace": {
+      "runId": "legacy-false-acceptance",
+      "requiredAxisIds": [
+        "stage2"
+      ],
+      "axes": [
+        {
+          "id": "stage2",
+          "label": "Stage2",
+          "status": "complete",
+          "denominatorKind": "known",
+          "completed": 177,
+          "total": 177,
+          "percent": 100,
+          "failureGroups": [
+            {
+              "label": "runtime failure",
+              "count": 3
+            }
+          ],
+          "currentStage": "terminal",
+          "nextGate": "repair"
+        }
+      ]
+    },
+    "actual": {
+      "allowed": true,
+      "code": "multi-axis-progress-valid",
+      "axes": 1,
+      "knownAxes": 1,
+      "unknownAxes": 0
+    }
+  },
+  "results": [
+    {
+      "id": "compiler-and-stdlib-reported-independently",
+      "expected": {
+        "allowed": true,
+        "code": "multi-axis-progress-valid"
+      },
+      "actual": {
+        "allowed": false,
+        "code": "invalid-axis",
+        "axes": 0,
+        "knownAxes": 0,
+        "unknownAxes": 0
+      }
+    },
+    {
+      "id": "missing-stdlib-axis",
+      "expected": {
+        "allowed": false,
+        "code": "required-axis-missing"
+      },
+      "actual": {
+        "allowed": false,
+        "code": "required-axis-missing",
+        "axes": 0,
+        "knownAxes": 0,
+        "unknownAxes": 0
+      }
+    },
+    {
+      "id": "wrong-percentage",
+      "expected": {
+        "allowed": false,
+        "code": "percentage-mismatch"
+      },
+      "actual": {
+        "allowed": false,
+        "code": "invalid-axis",
+        "axes": 0,
+        "knownAxes": 0,
+        "unknownAxes": 0
+      }
+    },
+    {
+      "id": "unknown-project-denominator-is-scoped",
+      "expected": {
+        "allowed": true,
+        "code": "multi-axis-progress-valid"
+      },
+      "actual": {
+        "allowed": true,
+        "code": "multi-axis-progress-valid",
+        "axes": 1,
+        "knownAxes": 0,
+        "unknownAxes": 1
+      }
+    },
+    {
+      "id": "unknown-denominator-cannot-carry-estimated-percent",
+      "expected": {
+        "allowed": false,
+        "code": "invalid-unknown-denominator"
+      },
+      "actual": {
+        "allowed": false,
+        "code": "invalid-unknown-denominator",
+        "axes": 0,
+        "knownAxes": 0,
+        "unknownAxes": 0
+      }
+    },
+    {
+      "id": "known-axis-completion-must-match-status",
+      "expected": {
+        "allowed": false,
+        "code": "complete-axis-not-marked-complete"
+      },
+      "actual": {
+        "allowed": false,
+        "code": "invalid-axis",
+        "axes": 0,
+        "knownAxes": 0,
+        "unknownAxes": 0
+      }
+    },
+    {
+      "id": "undeclared-axis-is-rejected",
+      "expected": {
+        "allowed": false,
+        "code": "undeclared-axis"
+      },
+      "actual": {
+        "allowed": false,
+        "code": "undeclared-axis",
+        "axes": 0,
+        "knownAxes": 0,
+        "unknownAxes": 0
+      }
+    },
+    {
+      "id": "overall-aggregate-is-forbidden",
+      "expected": {
+        "allowed": false,
+        "code": "invalid-trace"
+      },
+      "actual": {
+        "allowed": false,
+        "code": "invalid-trace",
+        "axes": 0,
+        "knownAxes": 0,
+        "unknownAxes": 0
+      }
+    },
+    {
+      "id": "terminal-processed-is-not-passed",
+      "expected": {
+        "allowed": true,
+        "code": "multi-axis-progress-valid"
+      },
+      "actual": {
+        "allowed": false,
+        "code": "invalid-axis",
+        "axes": 0,
+        "knownAxes": 0,
+        "unknownAxes": 0
+      }
+    },
+    {
+      "id": "running-and-pending-are-distinct",
+      "expected": {
+        "allowed": true,
+        "code": "multi-axis-progress-valid"
+      },
+      "actual": {
+        "allowed": false,
+        "code": "invalid-axis",
+        "axes": 0,
+        "knownAxes": 0,
+        "unknownAxes": 0
+      }
+    },
+    {
+      "id": "all-passed-is-complete",
+      "expected": {
+        "allowed": true,
+        "code": "multi-axis-progress-valid"
+      },
+      "actual": {
+        "allowed": false,
+        "code": "invalid-axis",
+        "axes": 0,
+        "knownAxes": 0,
+        "unknownAxes": 0
+      }
+    },
+    {
+      "id": "processed-ordinal-cannot-replace-completed",
+      "expected": {
+        "allowed": false,
+        "code": "completed-is-not-passed"
+      },
+      "actual": {
+        "allowed": false,
+        "code": "invalid-axis",
+        "axes": 0,
+        "knownAxes": 0,
+        "unknownAxes": 0
+      }
+    },
+    {
+      "id": "failure-groups-must-sum-to-failed",
+      "expected": {
+        "allowed": false,
+        "code": "failure-count-mismatch"
+      },
+      "actual": {
+        "allowed": false,
+        "code": "invalid-axis",
+        "axes": 0,
+        "knownAxes": 0,
+        "unknownAxes": 0
+      }
+    },
+    {
+      "id": "terminal-count-must-equal-processed",
+      "expected": {
+        "allowed": false,
+        "code": "processed-count-mismatch"
+      },
+      "actual": {
+        "allowed": false,
+        "code": "invalid-axis",
+        "axes": 0,
+        "knownAxes": 0,
+        "unknownAxes": 0
+      }
+    },
+    {
+      "id": "running-cannot-be-counted-as-processed",
+      "expected": {
+        "allowed": false,
+        "code": "processed-count-mismatch"
+      },
+      "actual": {
+        "allowed": false,
+        "code": "invalid-axis",
+        "axes": 0,
+        "knownAxes": 0,
+        "unknownAxes": 0
+      }
+    },
+    {
+      "id": "outcomes-must-cover-total",
+      "expected": {
+        "allowed": false,
+        "code": "outcome-total-mismatch"
+      },
+      "actual": {
+        "allowed": false,
+        "code": "invalid-axis",
+        "axes": 0,
+        "knownAxes": 0,
+        "unknownAxes": 0
+      }
+    },
+    {
+      "id": "duplicate-failure-groups-are-not-disjoint",
+      "expected": {
+        "allowed": false,
+        "code": "duplicate-failure-group"
+      },
+      "actual": {
+        "allowed": false,
+        "code": "invalid-axis",
+        "axes": 0,
+        "knownAxes": 0,
+        "unknownAxes": 0
+      }
+    },
+    {
+      "id": "negative-outcome-is-rejected",
+      "expected": {
+        "allowed": false,
+        "code": "invalid-outcome-counts"
+      },
+      "actual": {
+        "allowed": false,
+        "code": "invalid-axis",
+        "axes": 0,
+        "knownAxes": 0,
+        "unknownAxes": 0
+      }
+    },
+    {
+      "id": "fractional-outcome-is-rejected",
+      "expected": {
+        "allowed": false,
+        "code": "invalid-outcome-counts"
+      },
+      "actual": {
+        "allowed": false,
+        "code": "invalid-axis",
+        "axes": 0,
+        "knownAxes": 0,
+        "unknownAxes": 0
+      }
+    },
+    {
+      "id": "legacy-outcomes-are-not-inferred",
+      "expected": {
+        "allowed": false,
+        "code": "invalid-outcome-counts"
+      },
+      "actual": {
+        "allowed": true,
+        "code": "multi-axis-progress-valid",
+        "axes": 1,
+        "knownAxes": 1,
+        "unknownAxes": 0
+      }
+    },
+    {
+      "id": "all-passed-with-failure-categories-is-rejected",
+      "expected": {
+        "allowed": false,
+        "code": "failure-count-mismatch"
+      },
+      "actual": {
+        "allowed": false,
+        "code": "invalid-axis",
+        "axes": 0,
+        "knownAxes": 0,
+        "unknownAxes": 0
+      }
+    }
+  ]
+}

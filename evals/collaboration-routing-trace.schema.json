@@ -2,10 +2,32 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "type": "object",
   "additionalProperties": false,
-  "required": ["runId", "phase", "requestTargets", "currentTaskComplete", "forbiddenActions", "actions"],
+  "required": ["runId", "phase", "triggerKind", "requestTargets", "currentTaskComplete", "forbiddenActions", "actions"],
   "properties": {
     "runId": { "type": "string", "minLength": 1, "maxLength": 128 },
     "phase": { "enum": ["in-progress", "final"] },
+    "triggerKind": { "enum": ["explicit-request", "standing-authorization-durable-signal"] },
+    "standingAuthorization": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["scope", "activeGoalId", "evidence", "durableSignalEvidence"],
+      "properties": {
+        "scope": { "const": "active-goal" },
+        "activeGoalId": { "type": "string", "minLength": 1, "maxLength": 128 },
+        "evidence": { "type": "array", "minItems": 1, "uniqueItems": true, "items": { "type": "string", "minLength": 1, "maxLength": 512 } },
+        "durableSignalEvidence": { "type": "array", "minItems": 1, "uniqueItems": true, "items": { "type": "string", "minLength": 1, "maxLength": 512 } }
+      }
+    },
+    "evolutionCycle": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["cycleId", "reopenedAfterDurableSignal"],
+      "properties": {
+        "cycleId": { "type": "string", "minLength": 1, "maxLength": 128 },
+        "previousCycleId": { "type": "string", "minLength": 1, "maxLength": 128 },
+        "reopenedAfterDurableSignal": { "type": "boolean" }
+      }
+    },
     "requestTargets": {
       "type": "array",
       "minItems": 1,
@@ -33,6 +55,7 @@
               "audit",
               "prompt-change",
               "hook-change",
+              "evaluation-change",
               "evaluation-contract",
               "behavioral-verification"
             ]

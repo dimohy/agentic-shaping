@@ -8,11 +8,13 @@ const runtimePath = join(here, "progress-report.mjs");
 const suite = JSON.parse(readFileSync(join(here, "progress-report-traces.json"), "utf8"));
 let failures = 0;
 
-for (const [id, file, expectedStatus, expectedText] of [
+const cliCases = [
   ["runtime-no-args-fails-closed", null, 64, "--trace <progress-report-trace.json>"],
   ["runtime-allowed-trace", join(here, "fixtures", "progress-report", "allowed.json"), 0, "multi-axis-progress-valid"],
-  ["runtime-blocked-trace", join(here, "fixtures", "progress-report", "blocked.json"), 2, "required-axis-missing"]
-]) {
+  ["runtime-blocked-trace", join(here, "fixtures", "progress-report", "blocked.json"), 2, "required-axis-missing"],
+  ["runtime-ordinal-is-not-passed", join(here, "fixtures", "progress-report", "ordinal-is-not-passed.json"), 2, "completed-is-not-passed"]
+];
+for (const [id, file, expectedStatus, expectedText] of cliCases) {
   const args = file ? [runtimePath, "--trace", file] : [runtimePath];
   const run = spawnSync(process.execPath, args, { encoding: "utf8" });
   const output = run.stdout + run.stderr;
@@ -31,7 +33,7 @@ for (const testCase of suite.cases) {
 }
 
 if (failures > 0) {
-  process.stderr.write(`[progress report] FAIL ${failures}/${suite.cases.length + 3}\n`);
+  process.stderr.write(`[progress report] FAIL ${failures}/${suite.cases.length + cliCases.length}\n`);
   process.exit(1);
 }
-process.stdout.write(`[progress report] PASS ${suite.cases.length + 3}/${suite.cases.length + 3}; rule ${contract.ruleId}.\n`);
+process.stdout.write(`[progress report] PASS ${suite.cases.length + cliCases.length}/${suite.cases.length + cliCases.length}; rule ${contract.ruleId}.\n`);

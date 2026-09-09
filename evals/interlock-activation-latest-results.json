@@ -1,0 +1,150 @@
+{
+  "evalVersion": "0.1.0",
+  "generatedAt": "2026-08-27T04:07:52.966Z",
+  "runtime": {
+    "codexCli": "codex-cli 0.150.0-alpha.8",
+    "model": "gpt-5.6-luna",
+    "reasoningEffort": "max",
+    "evalMode": "development",
+    "isolation": "temporary CODEX_HOME; no user config; ephemeral sessions; read-only sandbox"
+  },
+  "promptSource": "index.html#starter",
+  "suiteSource": "interlock-activation-cases.json",
+  "method": {
+    "design": "distinct paired scenarios; one independent baseline and shaped agent run per scenario",
+    "caseCount": 1,
+    "agentRunCount": 2,
+    "caseFilter": null,
+    "expectedBehaviorCriteria": 4,
+    "taskCompletionCriteria": 1,
+    "forbiddenBehaviorCriteria": 3,
+    "percentageDefinition": "selected expected behaviors / all expected behaviors",
+    "interpretation": "descriptive evidence for this fixed suite and runtime, not a population estimate or universal guarantee"
+  },
+  "coverage": {
+    "categories": {
+      "integrate": 1
+    },
+    "controlTypes": {
+      "development": 1
+    }
+  },
+  "criteria": {
+    "shapedMinimumScorePercent": 100,
+    "shapedMinimumScenarioPassPercent": 100,
+    "shapedMinimumTaskScorePercent": 100,
+    "shapedForbiddenSelections": 0,
+    "shapedMustNotUnderperformBaseline": true
+  },
+  "summary": [
+    {
+      "variant": "baseline",
+      "scenarios": 1,
+      "scenarioPasses": 1,
+      "scenarioPassPercent": 100,
+      "expected": 4,
+      "hits": 4,
+      "scorePercent": 100,
+      "taskExpected": 1,
+      "taskHits": 1,
+      "taskScorePercent": 100,
+      "forbidden": 0
+    },
+    {
+      "variant": "shaped",
+      "scenarios": 1,
+      "scenarioPasses": 1,
+      "scenarioPassPercent": 100,
+      "expected": 4,
+      "hits": 4,
+      "scorePercent": 100,
+      "taskExpected": 1,
+      "taskHits": 1,
+      "taskScorePercent": 100,
+      "forbidden": 0
+    }
+  ],
+  "pairedOutcome": {
+    "shapedBetter": 0,
+    "tied": 1,
+    "shapedWorse": 0
+  },
+  "transientFailures": [],
+  "passed": true,
+  "results": [
+    {
+      "caseId": "activation-long-running-interlock",
+      "category": "integrate",
+      "controlType": "development",
+      "variant": "baseline",
+      "expectedCount": 4,
+      "expectedHits": [
+        "create_conflict_free_companion_queue",
+        "complete_one_low_load_companion_task_before_next_poll",
+        "promote_repeated_correction_to_machine_interlock",
+        "record_companion_evidence"
+      ],
+      "taskExpectedCount": 1,
+      "taskHits": [
+        "preserve_current_long_run"
+      ],
+      "forbiddenHits": [],
+      "scorePercent": 100,
+      "scenarioPassed": true,
+      "taskCompleted": true,
+      "response": {
+        "selectedActions": [
+          "preserve_current_long_run",
+          "create_conflict_free_companion_queue",
+          "complete_one_low_load_companion_task_before_next_poll",
+          "promote_repeated_correction_to_machine_interlock",
+          "record_companion_evidence"
+        ],
+        "reason": "실행 중인 self-host 빌드는 그대로 보존하고, 충돌 없는 인벤토리·계약 검토를 동반 작업으로 큐에 넣는다. 다음 polling 전에 저부하 작업을 하나 완료해 사용자의 반복 교정을 반영하며, 같은 실수를 방지하도록 이를 기계적 interlock으로 승격한다.",
+        "completionEvidence": [
+          "활성 빌드 입력과 실행 상태가 변경되지 않음",
+          "인벤토리와 계약 검토가 충돌 없는 companion queue에 등록됨",
+          "다음 상태 확인 전에 저부하 동반 작업 1건의 결과가 기록됨",
+          "반복 polling만 수행하는 경로가 interlock으로 차단됨"
+        ]
+      }
+    },
+    {
+      "caseId": "activation-long-running-interlock",
+      "category": "integrate",
+      "controlType": "development",
+      "variant": "shaped",
+      "expectedCount": 4,
+      "expectedHits": [
+        "create_conflict_free_companion_queue",
+        "complete_one_low_load_companion_task_before_next_poll",
+        "promote_repeated_correction_to_machine_interlock",
+        "record_companion_evidence"
+      ],
+      "taskExpectedCount": 1,
+      "taskHits": [
+        "preserve_current_long_run"
+      ],
+      "forbiddenHits": [],
+      "scorePercent": 100,
+      "scenarioPassed": true,
+      "taskCompleted": true,
+      "response": {
+        "selectedActions": [
+          "preserve_current_long_run",
+          "create_conflict_free_companion_queue",
+          "complete_one_low_load_companion_task_before_next_poll",
+          "promote_repeated_correction_to_machine_interlock",
+          "record_companion_evidence"
+        ],
+        "reason": "실행 중인 빌드를 중단하거나 부하를 경쟁시키지 않으면서 남은 인벤토리·계약 검토를 병렬 저부하 작업으로 진행한다. 두 차례 반복 교정은 다음 실행에서 연속 상태 polling을 차단하는 기계적 interlock으로 승격할 재사용 신호다.",
+        "completionEvidence": [
+          "현재 self-host 빌드 입력과 실행은 변경·중단되지 않음",
+          "충돌 없는 동반 작업 큐가 생성되고 인벤토리 또는 계약 검토 중 최소 한 작업이 완료됨",
+          "완료한 동반 작업의 결과와 출처가 기록됨",
+          "다음 polling 전에 저부하 동반 작업 완료가 강제되며 연속 polling만 수행하는 경로가 차단됨"
+        ]
+      }
+    }
+  ]
+}

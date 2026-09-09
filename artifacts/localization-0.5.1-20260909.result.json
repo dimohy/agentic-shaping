@@ -1,0 +1,10 @@
+{
+  "schemaVersion": 1,
+  "command": "node .\\scripts\\build-localized-content.mjs",
+  "startedAt": "2026-09-08T20:34:07.7072239Z",
+  "completedAt": "2026-09-08T20:35:36.2377230Z",
+  "exitCode": 0,
+  "failureIds": [],
+  "durableLogPath": "artifacts\\localization-0.5.1-20260909.log",
+  "logSha256": "c8d090b7b0736ec502d8f880d30e6e3c38d5042d85239e070851d5fa5e86e833"
+}

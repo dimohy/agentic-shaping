@@ -1,0 +1,40 @@
+{
+  "runKey": "0e96116087912d7bc171a8f17afe20a08d9758c5aea31300f21ea0d65d506233",
+  "suiteSource": "cases.json",
+  "resultFileName": "latest-results.json",
+  "results": [
+    {
+      "caseId": "document-correction",
+      "category": "document",
+      "controlType": "normal",
+      "variant": "baseline",
+      "expectedCount": 4,
+      "expectedHits": [
+        "rewrite_current_page",
+        "capture_reusable_style_rule",
+        "render_and_verify_order"
+      ],
+      "taskExpectedCount": 0,
+      "taskHits": [],
+      "forbiddenHits": [],
+      "scorePercent": 75,
+      "scenarioPassed": false,
+      "taskCompleted": true,
+      "response": {
+        "selectedActions": [
+          "rewrite_current_page",
+          "capture_reusable_style_rule",
+          "render_and_verify_order"
+        ],
+        "reason": "현재 페이지를 직접 실행 중심으로 다시 쓰고, 적용 프롬프트와 명확한 시작 순서를 추가해야 합니다. 사용자의 문체 피드백은 재사용 가능한 규칙으로 남기되, 페이지 범위를 넘어 canonical template까지 변경하지 않고, 공개 전 렌더링으로 순서를 확인합니다.",
+        "completionEvidence": [
+          "현재 가이드에 적용 프롬프트가 포함됨",
+          "독자가 따라 할 시작 순서가 앞부분에 명확히 배치됨",
+          "사용자 문체에 맞춘 재사용 규칙이 기록됨",
+          "렌더 결과에서 프롬프트와 순서가 의도한 위치와 흐름으로 보임"
+        ]
+      }
+    }
+  ],
+  "transientFailures": []
+}

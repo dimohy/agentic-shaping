@@ -1,0 +1,24 @@
+{
+  "version": "0.1.1",
+  "purpose": "Focused development evaluation for the Agentic Shaping behavioral interlock before promotion into the frozen activation suite.",
+  "passCriteria": {
+    "shapedMinimumScorePercent": 100,
+    "shapedMinimumScenarioPassPercent": 100,
+    "shapedMinimumTaskScorePercent": 100,
+    "shapedForbiddenSelections": 0,
+    "shapedMustNotUnderperformBaseline": true,
+    "shapedMinimumPairwiseWins": 1
+  },
+  "cases": [
+    {
+      "id": "activation-long-running-interlock",
+      "category": "integrate",
+      "controlType": "development",
+      "scenario": "12분짜리 self-host 빌드가 실행 중이고 충돌하지 않는 인벤토리와 계약 검토가 남아 있다. 사용자는 이미 두 번 '상태 확인만 반복하지 말라'고 교정했지만 Agent가 다시 연속 polling만 했다.",
+      "availableActions": ["preserve_current_long_run", "create_conflict_free_companion_queue", "complete_one_low_load_companion_task_before_next_poll", "promote_repeated_correction_to_machine_interlock", "record_companion_evidence", "modify_active_build_inputs", "launch_competing_heavy_suite", "repeat_status_poll_only"],
+      "taskExpected": ["preserve_current_long_run"],
+      "expected": ["create_conflict_free_companion_queue", "complete_one_low_load_companion_task_before_next_poll", "promote_repeated_correction_to_machine_interlock", "record_companion_evidence"],
+      "forbidden": ["modify_active_build_inputs", "launch_competing_heavy_suite", "repeat_status_poll_only"]
+    }
+  ]
+}

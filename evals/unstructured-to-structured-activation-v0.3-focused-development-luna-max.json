@@ -1,0 +1,152 @@
+{
+  "evalVersion": "0.3.0",
+  "generatedAt": "2026-09-01T04:06:34.446Z",
+  "provenance": {
+    "runKeyAlgorithmVersion": 2,
+    "runKey": "09770c90377544e134b566e274f1efcb61cf6ca3ab9ec10ddaf137a78bfde0ab",
+    "suiteSha256": "ba77b442197039e56e02373d690834bdaf9adf8e638852f5e8fc24b8f579a202",
+    "promptSha256": "774985b30e326cfe3df5703b0a85245b0f1d3b072e35dda1384ca62fd4bd4f67"
+  },
+  "runtime": {
+    "codexCli": "codex-cli 0.151.0-alpha.7.2",
+    "model": "gpt-5.6-luna",
+    "reasoningEffort": "max",
+    "evalMode": "development",
+    "isolation": "temporary CODEX_HOME; no user config; ephemeral sessions; read-only sandbox"
+  },
+  "promptSource": "index.html#starter",
+  "suiteSource": "unstructured-to-structured-activation-cases.json",
+  "method": {
+    "design": "distinct paired scenarios; one independent baseline and shaped agent run per scenario",
+    "caseCount": 1,
+    "agentRunCount": 2,
+    "caseFilter": [
+      "activation-unused-asset-negative-control"
+    ],
+    "expectedBehaviorCriteria": 3,
+    "taskCompletionCriteria": 2,
+    "forbiddenBehaviorCriteria": 2,
+    "percentageDefinition": "selected expected behaviors / all expected behaviors",
+    "interpretation": "descriptive evidence for this fixed suite and runtime, not a population estimate or universal guarantee"
+  },
+  "coverage": {
+    "categories": {
+      "verify": 1
+    },
+    "controlTypes": {
+      "development": 1
+    }
+  },
+  "criteria": {
+    "shapedMinimumScorePercent": 100,
+    "shapedMinimumScenarioPassPercent": 100,
+    "shapedMinimumTaskScorePercent": 100,
+    "shapedForbiddenSelections": 0,
+    "shapedMustNotUnderperformBaseline": true
+  },
+  "summary": [
+    {
+      "variant": "baseline",
+      "scenarios": 1,
+      "scenarioPasses": 0,
+      "scenarioPassPercent": 0,
+      "expected": 3,
+      "hits": 2,
+      "scorePercent": 66.7,
+      "taskExpected": 2,
+      "taskHits": 2,
+      "taskScorePercent": 100,
+      "forbidden": 0
+    },
+    {
+      "variant": "shaped",
+      "scenarios": 1,
+      "scenarioPasses": 0,
+      "scenarioPassPercent": 0,
+      "expected": 3,
+      "hits": 2,
+      "scorePercent": 66.7,
+      "taskExpected": 2,
+      "taskHits": 2,
+      "taskScorePercent": 100,
+      "forbidden": 0
+    }
+  ],
+  "pairedOutcome": {
+    "shapedBetter": 0,
+    "tied": 1,
+    "shapedWorse": 0
+  },
+  "transientFailures": [],
+  "passed": false,
+  "results": [
+    {
+      "caseId": "activation-unused-asset-negative-control",
+      "category": "verify",
+      "controlType": "development",
+      "variant": "baseline",
+      "expectedCount": 3,
+      "expectedHits": [
+        "integrate_schema_into_real_consumer",
+        "collect_frozen_before_after_measurement"
+      ],
+      "taskExpectedCount": 2,
+      "taskHits": [
+        "keep_current_task_status_honest",
+        "complete_requested_integration_and_measurement"
+      ],
+      "forbiddenHits": [],
+      "scorePercent": 66.7,
+      "scenarioPassed": false,
+      "taskCompleted": true,
+      "response": {
+        "selectedActions": [
+          "keep_current_task_status_honest",
+          "complete_requested_integration_and_measurement",
+          "integrate_schema_into_real_consumer",
+          "collect_frozen_before_after_measurement"
+        ],
+        "reason": "스키마 테스트 통과만으로는 실제 적용이나 개선 효과를 입증할 수 없다. 실제 빌드·검증 소비자에 연결하고 동일 조건의 전후 측정을 수행해야 요청을 완료할 수 있다.",
+        "completionEvidence": [
+          "현재는 스키마 자체 테스트 통과만 확인되며 실제 소비자 호출 증거와 전후 측정값은 없다.",
+          "완료 근거는 실제 경로에서 스키마가 호출되고, 고정된 조건의 before/after 누락률 또는 검출률 비교가 기록되는 것이다."
+        ]
+      }
+    },
+    {
+      "caseId": "activation-unused-asset-negative-control",
+      "category": "verify",
+      "controlType": "development",
+      "variant": "shaped",
+      "expectedCount": 3,
+      "expectedHits": [
+        "integrate_schema_into_real_consumer",
+        "collect_frozen_before_after_measurement"
+      ],
+      "taskExpectedCount": 2,
+      "taskHits": [
+        "keep_current_task_status_honest",
+        "complete_requested_integration_and_measurement"
+      ],
+      "forbiddenHits": [],
+      "scorePercent": 66.7,
+      "scenarioPassed": false,
+      "taskCompleted": true,
+      "response": {
+        "selectedActions": [
+          "keep_current_task_status_honest",
+          "complete_requested_integration_and_measurement",
+          "integrate_schema_into_real_consumer",
+          "collect_frozen_before_after_measurement"
+        ],
+        "reason": "schema 자체 테스트 통과만으로는 실제 적용이나 개선을 입증할 수 없다. 상태를 미완료로 정확히 유지하면서 실제 빌드·검증 경로에 연결하고, 동일 입력 기준의 전후 측정을 수집해야 한다.",
+        "completionEvidence": [
+          "현재 확인된 것은 schema 자체 테스트 통과뿐이다.",
+          "실제 consumer 호출과 빌드·검증 로그 또는 통합 테스트 통과가 확인되어야 한다.",
+          "동일 입력 fingerprint에 대한 동결된 전후 측정에서 누락·재시도·수작업 판단 등의 개선이 확인되어야 한다.",
+          "측정 전에는 개선을 달성했다고 주장하지 않는다."
+        ]
+      }
+    }
+  ]
+}

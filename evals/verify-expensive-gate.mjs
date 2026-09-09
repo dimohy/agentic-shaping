@@ -13,6 +13,7 @@ const hash = value => value.repeat(64);
 function validEvidence() {
   return {
     gateId: "sollang-stage2",
+    gateOrdinal: 5,
     estimatedCostMs: 700000,
     evidenceSource: "harness-events",
     inputFingerprintBefore: hash("a"),
@@ -29,7 +30,21 @@ function validEvidence() {
     probes: [
       { probeId: "whole-drop-absent", kind: "positive", outcome: "pass", evidenceId: "llvm:fixed" },
       { probeId: "old-whole-drop-detected", kind: "negative", outcome: "pass", evidenceId: "llvm:broken" }
-    ]
+    ],
+    priorLateFailures: [],
+    outcomeObservability: {
+      durableLogPath: "artifacts/stage2.log",
+      completionRecordPath: "artifacts/stage2.result.json",
+      recordSchemaVersion: 1,
+      capturesExitCode: true,
+      capturesFailureIds: true,
+      executionMode: "detached-supervisor",
+      survivesObserverDisconnect: true,
+      waitsOnSupervisedProcessOnly: true,
+      writesCompletionRecordOnTermination: true,
+      successRequiresEmptyFailureIds: true,
+      failureIdsRequireFailureContext: true
+    }
   };
 }
 
@@ -62,6 +77,29 @@ function fixture(name) {
     value.evidenceSource = "model-claim";
   } else if (name === "unknown-field") {
     value.readyBecause = "looks complete";
+  } else if (name === "promoted-late-failure") {
+    value.probes.push({ probeId: "partition-single-drop", kind: "positive", outcome: "pass", evidenceId: "runtime:partition-fixed" });
+    value.priorLateFailures.push({ failureId: "partition-double-free", discoveredGateOrdinal: 5, promotedGateOrdinal: 2, probeId: "partition-single-drop", evidenceId: "asan:double-free" });
+  } else if (name === "late-failure-not-promoted") {
+    value.priorLateFailures.push({ failureId: "partition-double-free", discoveredGateOrdinal: 5, promotedGateOrdinal: 5, probeId: "missing-partition-probe", evidenceId: "asan:double-free" });
+  } else if (name === "missing-exit-code") {
+    value.outcomeObservability.capturesExitCode = false;
+  } else if (name === "missing-failure-ids") {
+    value.outcomeObservability.capturesFailureIds = false;
+  } else if (name === "aliased-outcome-paths") {
+    value.outcomeObservability.completionRecordPath = value.outcomeObservability.durableLogPath;
+  } else if (name === "attached-runner") {
+    value.outcomeObservability.executionMode = "foreground-session";
+  } else if (name === "observer-disconnect-stops-runner") {
+    value.outcomeObservability.survivesObserverDisconnect = false;
+  } else if (name === "process-tree-wait") {
+    value.outcomeObservability.waitsOnSupervisedProcessOnly = false;
+  } else if (name === "missing-termination-record") {
+    value.outcomeObservability.writesCompletionRecordOnTermination = false;
+  } else if (name === "success-allows-failure-ids") {
+    value.outcomeObservability.successRequiresEmptyFailureIds = false;
+  } else if (name === "failure-ids-ignore-context") {
+    value.outcomeObservability.failureIdsRequireFailureContext = false;
   } else {
     throw new Error(`Unknown fixture: ${name}`);
   }

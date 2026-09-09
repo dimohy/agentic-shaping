@@ -1,0 +1,30 @@
+{
+  "runId": "processed-ordinal-cannot-replace-completed",
+  "requiredAxisIds": [
+    "stage2"
+  ],
+  "axes": [
+    {
+      "id": "stage2",
+      "label": "Stage2 exact batch",
+      "status": "complete",
+      "denominatorKind": "known",
+      "completed": 177,
+      "total": 177,
+      "percent": 100,
+      "passed": 174,
+      "failed": 3,
+      "processed": 177,
+      "running": 0,
+      "pending": 0,
+      "failureGroups": [
+        {
+          "label": "runtime failure",
+          "count": 3
+        }
+      ],
+      "currentStage": "terminal failures",
+      "nextGate": "repair and rerun failed fixtures"
+    }
+  ]
+}

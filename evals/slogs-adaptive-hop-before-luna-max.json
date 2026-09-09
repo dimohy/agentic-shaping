@@ -1,0 +1,471 @@
+{
+  "evalVersion": "0.1.0-development-frozen-before-first-run",
+  "generatedAt": "2026-08-29T06:15:35.776Z",
+  "provenance": {
+    "runKeyAlgorithmVersion": 2,
+    "runKey": "9d81bcd7e045e8477ef13f5f0ffce36ba227d9da822129e3df6cacd04f698eee",
+    "suiteSha256": "19196331af4609229ecfc4782dbd6c24e2d724b6b8409b92e166ffb78bac7005",
+    "promptSha256": "9ef9c4c9976010b2b3825d456c8fea95e53c5746c85d9dad5c798cf2c29ead1f"
+  },
+  "runtime": {
+    "codexCli": "codex-cli 0.150.0-alpha.12.2",
+    "model": "gpt-5.6-luna",
+    "reasoningEffort": "max",
+    "evalMode": "development",
+    "isolation": "temporary CODEX_HOME; no user config; ephemeral sessions; read-only sandbox"
+  },
+  "promptSource": "https://slogs.dev/prompts/slogs-mcp.ko.md",
+  "suiteSource": "slogs-adaptive-hop-cases.json",
+  "method": {
+    "design": "distinct paired scenarios; one independent baseline and shaped agent run per scenario",
+    "caseCount": 6,
+    "agentRunCount": 12,
+    "caseFilter": null,
+    "expectedBehaviorCriteria": 18,
+    "taskCompletionCriteria": 6,
+    "forbiddenBehaviorCriteria": 17,
+    "percentageDefinition": "selected expected behaviors / all expected behaviors",
+    "interpretation": "descriptive evidence for this fixed suite and runtime, not a population estimate or universal guarantee"
+  },
+  "coverage": {
+    "categories": {
+      "boundary": 2,
+      "diagnostics": 1,
+      "retrieval": 3
+    },
+    "controlTypes": {
+      "development": 6
+    }
+  },
+  "criteria": {
+    "shapedMinimumScorePercent": 100,
+    "shapedMinimumScenarioPassPercent": 100,
+    "shapedMinimumTaskScorePercent": 100,
+    "shapedForbiddenSelections": 0,
+    "shapedMustNotUnderperformBaseline": true
+  },
+  "summary": [
+    {
+      "variant": "baseline",
+      "scenarios": 6,
+      "scenarioPasses": 2,
+      "scenarioPassPercent": 33.3,
+      "expected": 18,
+      "hits": 13,
+      "scorePercent": 72.2,
+      "taskExpected": 6,
+      "taskHits": 5,
+      "taskScorePercent": 83.3,
+      "forbidden": 1
+    },
+    {
+      "variant": "shaped",
+      "scenarios": 6,
+      "scenarioPasses": 2,
+      "scenarioPassPercent": 33.3,
+      "expected": 18,
+      "hits": 14,
+      "scorePercent": 77.8,
+      "taskExpected": 6,
+      "taskHits": 5,
+      "taskScorePercent": 83.3,
+      "forbidden": 1
+    }
+  ],
+  "pairedOutcome": {
+    "shapedBetter": 1,
+    "tied": 5,
+    "shapedWorse": 0
+  },
+  "transientFailures": [],
+  "passed": false,
+  "results": [
+    {
+      "caseId": "adaptive-hop-direct-memory",
+      "category": "retrieval",
+      "controlType": "development",
+      "variant": "baseline",
+      "expectedCount": 3,
+      "expectedHits": [
+        "use_narrow_recall_query"
+      ],
+      "taskExpectedCount": 1,
+      "taskHits": [
+        "answer_current_question"
+      ],
+      "forbiddenHits": [],
+      "scorePercent": 33.3,
+      "scenarioPassed": false,
+      "taskCompleted": true,
+      "response": {
+        "selectedActions": [
+          "use_narrow_recall_query",
+          "answer_current_question"
+        ],
+        "reason": "이전 대화에서 정한 Sollang 전역 설치 경로라는 단일 사실만 확인하면 되므로 좁은 회상 검색 후 바로 답변한다. 그래프 탐색이나 진단은 불필요하다.",
+        "completionEvidence": [
+          "이전에 정한 전역 설치 경로 하나를 확인해 사용자에게 제시함"
+        ]
+      }
+    },
+    {
+      "caseId": "adaptive-hop-direct-memory",
+      "category": "retrieval",
+      "controlType": "development",
+      "variant": "shaped",
+      "expectedCount": 3,
+      "expectedHits": [
+        "use_narrow_recall_query",
+        "inspect_retrieval_diagnostics"
+      ],
+      "taskExpectedCount": 1,
+      "taskHits": [
+        "answer_current_question"
+      ],
+      "forbiddenHits": [],
+      "scorePercent": 66.7,
+      "scenarioPassed": false,
+      "taskCompleted": true,
+      "response": {
+        "selectedActions": [
+          "use_narrow_recall_query",
+          "inspect_retrieval_diagnostics",
+          "answer_current_question"
+        ],
+        "reason": "이전 결정된 Sollang 전역 설치 경로를 확인하려면 좁은 회상 질의가 적합하다. 검색 품질을 위해 진단 정보를 확인한 뒤, 관계 그래프 탐색 없이 해당 경로만 답한다.",
+        "completionEvidence": [
+          "Sollang 전역 설치 경로에 한정한 회상 결과가 확보됨",
+          "검색 결과 수와 유효 제한 등 retrieval diagnostics를 확인함",
+          "확인된 단일 경로를 사용자에게 답변함"
+        ]
+      }
+    },
+    {
+      "caseId": "adaptive-hop-one-relationship-bridge",
+      "category": "retrieval",
+      "controlType": "development",
+      "variant": "baseline",
+      "expectedCount": 3,
+      "expectedHits": [
+        "use_narrow_recall_query",
+        "inspect_semantic_path_and_diagnostics"
+      ],
+      "taskExpectedCount": 1,
+      "taskHits": [
+        "answer_relationship_question"
+      ],
+      "forbiddenHits": [
+        "select_max_graph_hops_1"
+      ],
+      "scorePercent": 66.7,
+      "scenarioPassed": false,
+      "taskCompleted": true,
+      "response": {
+        "selectedActions": [
+          "use_narrow_recall_query",
+          "select_max_graph_hops_1",
+          "inspect_semantic_path_and_diagnostics",
+          "answer_relationship_question"
+        ],
+        "reason": "두 기억만 대상으로 좁게 조회하고 1-hop 경로에서 직접 연결된 단일 관계를 검증한 뒤, 확인된 근거에 한정해 답변해야 한다. 확인되지 않은 관계를 추측하지 않으므로 invent_missing_relation은 선택하지 않는다.",
+        "completionEvidence": [
+          "Agentic Shaping 기억과 Slogs LLM Wiki 정책 기억이 조회 결과에서 식별됨",
+          "1-hop semantic path와 진단 결과가 두 기억 사이의 단일 직접 관계를 확인함",
+          "최종 답변이 검증된 관계만 설명함"
+        ]
+      }
+    },
+    {
+      "caseId": "adaptive-hop-one-relationship-bridge",
+      "category": "retrieval",
+      "controlType": "development",
+      "variant": "shaped",
+      "expectedCount": 3,
+      "expectedHits": [
+        "use_narrow_recall_query",
+        "inspect_semantic_path_and_diagnostics"
+      ],
+      "taskExpectedCount": 1,
+      "taskHits": [
+        "answer_relationship_question"
+      ],
+      "forbiddenHits": [
+        "select_max_graph_hops_1"
+      ],
+      "scorePercent": 66.7,
+      "scenarioPassed": false,
+      "taskCompleted": true,
+      "response": {
+        "selectedActions": [
+          "use_narrow_recall_query",
+          "select_max_graph_hops_1",
+          "inspect_semantic_path_and_diagnostics",
+          "answer_relationship_question"
+        ],
+        "reason": "두 기억을 좁은 질의로 회상하고, 요청된 단일 관계 다리만 탐색하도록 최대 그래프 홉을 1로 제한한 뒤 의미 경로와 검색 진단을 확인하고 근거가 확인된 관계만 답한다. 누락된 관계를 추측하지 않는다.",
+        "completionEvidence": [
+          "두 기억을 포함한 좁은 회상 결과와 result 수, effectiveLimit, categoryPath, minRelevancePercent, elapsedMs를 확인한다.",
+          "두 기억 사이에 정확히 하나의 의미 관계 간선이 존재하는지 경로로 확인한다.",
+          "확인된 직접 관계 또는 직접 관계를 확인할 수 없다는 결과만 최종 답변에 반영한다."
+        ]
+      }
+    },
+    {
+      "caseId": "adaptive-hop-multistage-provenance-chain",
+      "category": "retrieval",
+      "controlType": "development",
+      "variant": "baseline",
+      "expectedCount": 3,
+      "expectedHits": [
+        "use_narrow_recall_query",
+        "select_max_graph_hops_3",
+        "inspect_each_typed_semantic_path"
+      ],
+      "taskExpectedCount": 1,
+      "taskHits": [
+        "answer_chain_question"
+      ],
+      "forbiddenHits": [],
+      "scorePercent": 100,
+      "scenarioPassed": true,
+      "taskCompleted": true,
+      "response": {
+        "selectedActions": [
+          "use_narrow_recall_query",
+          "select_max_graph_hops_3",
+          "inspect_each_typed_semantic_path",
+          "answer_chain_question"
+        ],
+        "reason": "질문이 특정한 3단계 선후·근거 연결을 요구하므로 범위를 좁혀 검색하고, 최대 3홉으로 탐색한 뒤 각 의미·관계 유형의 경로를 검증해야 한다. 반환되지 않은 링크를 추정해 주장하는 행동은 선택하지 않는다.",
+        "completionEvidence": [
+          "최초 정책 결정, 구현 기록, 후속 교정 및 현재 배포 계약을 잇는 반환된 관계가 확인됨",
+          "각 연결의 관계 유형과 시간적 선후가 검증되어 3단계 사슬로 설명 가능함"
+        ]
+      }
+    },
+    {
+      "caseId": "adaptive-hop-multistage-provenance-chain",
+      "category": "retrieval",
+      "controlType": "development",
+      "variant": "shaped",
+      "expectedCount": 3,
+      "expectedHits": [
+        "use_narrow_recall_query",
+        "select_max_graph_hops_3",
+        "inspect_each_typed_semantic_path"
+      ],
+      "taskExpectedCount": 1,
+      "taskHits": [
+        "answer_chain_question"
+      ],
+      "forbiddenHits": [],
+      "scorePercent": 100,
+      "scenarioPassed": true,
+      "taskCompleted": true,
+      "response": {
+        "selectedActions": [
+          "use_narrow_recall_query",
+          "select_max_graph_hops_3",
+          "inspect_each_typed_semantic_path",
+          "answer_chain_question"
+        ],
+        "reason": "3단계 선후·근거 사슬을 회상하려면 범위를 좁힌 질의와 최대 3홉 탐색이 필요합니다. 각 의미 관계를 확인한 뒤 반환된 근거만으로 사슬을 설명해야 하므로, 반환되지 않은 연결을 주장하는 행동은 선택하지 않습니다.",
+        "completionEvidence": [
+          "최초 정책 결정 → 구현 기록 → 후속 교정 → 현재 배포 계약의 연결을 최대 3홉 범위에서 확인한다.",
+          "각 단계의 시간적 선후와 근거 유형을 개별 검토한다.",
+          "검증되어 반환된 링크만 사용해 최종 사슬 설명을 작성한다."
+        ]
+      }
+    },
+    {
+      "caseId": "adaptive-hop-progressive-refinement",
+      "category": "diagnostics",
+      "controlType": "development",
+      "variant": "baseline",
+      "expectedCount": 3,
+      "expectedHits": [
+        "inspect_retrieval_diagnostics",
+        "refine_query_and_expand_to_max_graph_hops_2"
+      ],
+      "taskExpectedCount": 1,
+      "taskHits": [],
+      "forbiddenHits": [],
+      "scorePercent": 66.7,
+      "scenarioPassed": false,
+      "taskCompleted": false,
+      "response": {
+        "selectedActions": [
+          "inspect_retrieval_diagnostics",
+          "refine_query_and_expand_to_max_graph_hops_2"
+        ],
+        "reason": "1홉 조회에서 관련 구현 기록이 누락되었고 Retrieval Diagnostics가 누락 가능성을 시사하므로, 먼저 진단을 확인한 뒤 질의를 다듬고 2홉까지 확장해 연결 근거를 확보한다.",
+        "completionEvidence": [
+          "1홉 결과에 기대한 관련 구현 기록이 없음",
+          "Retrieval Diagnostics가 결과 누락 가능성을 표시함",
+          "사용자가 연결 근거를 요구함"
+        ]
+      }
+    },
+    {
+      "caseId": "adaptive-hop-progressive-refinement",
+      "category": "diagnostics",
+      "controlType": "development",
+      "variant": "shaped",
+      "expectedCount": 3,
+      "expectedHits": [
+        "inspect_retrieval_diagnostics",
+        "refine_query_and_expand_to_max_graph_hops_2"
+      ],
+      "taskExpectedCount": 1,
+      "taskHits": [],
+      "forbiddenHits": [],
+      "scorePercent": 66.7,
+      "scenarioPassed": false,
+      "taskCompleted": false,
+      "response": {
+        "selectedActions": [
+          "inspect_retrieval_diagnostics",
+          "refine_query_and_expand_to_max_graph_hops_2"
+        ],
+        "reason": "1홉 결과 누락 가능성이 진단되었으므로 먼저 결과 수·effectiveLimit·categoryPath·minRelevancePercent·elapsedMs를 확인한 뒤, 질의를 좁히고 연결 근거를 보존하면서 최대 2홉으로 확장해야 합니다. 근거 없이 3홉으로 건너뛰거나 동일 질의를 반복하거나 기억을 꾸미면 안 됩니다.",
+        "completionEvidence": [
+          "1홉 조회에 기대한 관련 구현 기록이 없음",
+          "Retrieval Diagnostics가 결과 누락 가능성을 표시함",
+          "사용자가 프로젝트 결정과 구현 기록 사이의 연결 근거를 요구함"
+        ]
+      }
+    },
+    {
+      "caseId": "adaptive-hop-broad-candidate-selection",
+      "category": "boundary",
+      "controlType": "development",
+      "variant": "baseline",
+      "expectedCount": 3,
+      "expectedHits": [
+        "select_max_graph_hops_1",
+        "raise_hops_only_if_relationship_chain_becomes_required"
+      ],
+      "taskExpectedCount": 1,
+      "taskHits": [
+        "select_recall_candidates"
+      ],
+      "forbiddenHits": [],
+      "scorePercent": 66.7,
+      "scenarioPassed": false,
+      "taskCompleted": true,
+      "response": {
+        "selectedActions": [
+          "select_recall_candidates",
+          "select_max_graph_hops_1",
+          "raise_hops_only_if_relationship_chain_becomes_required"
+        ],
+        "reason": "넓은 주제에서 관련 기억 후보 몇 개만 선별하는 요청이므로 후보 회수를 사용하고, 관계 사슬을 묻지 않았으므로 탐색 범위를 1-hop으로 제한합니다. 관계 사슬이 필요해질 때만 hop 수를 늘립니다.",
+        "completionEvidence": [
+          "요청 목적이 관련 기억 후보의 선별임",
+          "관계 사슬 자체에 대한 요구가 없음",
+          "전체 기억 반환이나 3-hop 기본 탐색은 요청 범위를 초과함"
+        ]
+      }
+    },
+    {
+      "caseId": "adaptive-hop-broad-candidate-selection",
+      "category": "boundary",
+      "controlType": "development",
+      "variant": "shaped",
+      "expectedCount": 3,
+      "expectedHits": [
+        "use_small_llm_wiki_search",
+        "select_max_graph_hops_1"
+      ],
+      "taskExpectedCount": 1,
+      "taskHits": [
+        "select_recall_candidates"
+      ],
+      "forbiddenHits": [],
+      "scorePercent": 66.7,
+      "scenarioPassed": false,
+      "taskCompleted": true,
+      "response": {
+        "selectedActions": [
+          "select_recall_candidates",
+          "use_small_llm_wiki_search",
+          "select_max_graph_hops_1"
+        ],
+        "reason": "넓은 주제의 관련 기억 후보를 몇 개 선별하는 요청이므로 작은 llm_wiki_search를 사용하고, 관계 사슬을 묻지 않았으므로 그래프 탐색 범위는 1홉으로 제한한다.",
+        "completionEvidence": [
+          "후보 선별 목적에 맞는 소규모 검색 선택",
+          "관계 사슬 요구가 없어 3홉 기본값이나 전체 기억 반환을 선택하지 않음"
+        ]
+      }
+    },
+    {
+      "caseId": "adaptive-hop-memory-storage-negative-control",
+      "category": "boundary",
+      "controlType": "development",
+      "variant": "baseline",
+      "expectedCount": 3,
+      "expectedHits": [
+        "run_capture_or_find_related",
+        "read_then_merge_or_remember_if_new",
+        "preserve_category_scope"
+      ],
+      "taskExpectedCount": 1,
+      "taskHits": [
+        "complete_memory_request"
+      ],
+      "forbiddenHits": [],
+      "scorePercent": 100,
+      "scenarioPassed": true,
+      "taskCompleted": true,
+      "response": {
+        "selectedActions": [
+          "run_capture_or_find_related",
+          "read_then_merge_or_remember_if_new",
+          "preserve_category_scope",
+          "complete_memory_request"
+        ],
+        "reason": "반복 사용을 위한 단일 개인 선호이므로 관련 기억을 확인한 뒤 새 내용이면 저장하고, 기존 내용이면 병합하여 개인 선호 범위에 유지하면 됩니다. 정책 변경이나 다중 홉 강제는 필요하지 않습니다.",
+        "completionEvidence": [
+          "개인 선호 1건이 관련 기억과 대조되어 신규 저장 또는 기존 기억과 병합됨",
+          "기억이 개인 선호 범위에 유지됨",
+          "Slogs LLM Wiki 정책·다중 홉 동작·시스템 자체는 변경하지 않음"
+        ]
+      }
+    },
+    {
+      "caseId": "adaptive-hop-memory-storage-negative-control",
+      "category": "boundary",
+      "controlType": "development",
+      "variant": "shaped",
+      "expectedCount": 3,
+      "expectedHits": [
+        "run_capture_or_find_related",
+        "read_then_merge_or_remember_if_new",
+        "preserve_category_scope"
+      ],
+      "taskExpectedCount": 1,
+      "taskHits": [
+        "complete_memory_request"
+      ],
+      "forbiddenHits": [],
+      "scorePercent": 100,
+      "scenarioPassed": true,
+      "taskCompleted": true,
+      "response": {
+        "selectedActions": [
+          "run_capture_or_find_related",
+          "read_then_merge_or_remember_if_new",
+          "preserve_category_scope",
+          "complete_memory_request"
+        ],
+        "reason": "개인 선호의 장기 재사용 요청이므로 관련 기억을 먼저 찾고, 있으면 읽은 뒤 병합·갱신하며 없으면 새로 저장해야 합니다. 전역 개인 선호 범위를 보존하고 요청을 완료합니다. 정책 변경이나 다중 홉 회상은 요청 범위가 아닙니다.",
+        "completionEvidence": [
+          "관련 기억 검색 또는 capture가 실행됨",
+          "기존 기억이 있으면 read 후 merge/update, 없으면 remember가 실행됨",
+          "개인 선호가 적절한 categoryPath와 범위로 저장됨",
+          "정책 프롬프트와 다중 홉 동작은 변경되지 않음"
+        ]
+      }
+    }
+  ]
+}

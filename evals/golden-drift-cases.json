@@ -1,0 +1,15 @@
+{
+  "schemaVersion": 1,
+  "ruleId": "AS-GD-001",
+  "cases": [
+    { "id": "triangulated-drift-allows-update", "fixture": "valid", "expected": { "allowed": true, "code": "OK" } },
+    { "id": "unchanged-golden-is-not-drift", "fixture": "no-drift", "expected": { "allowed": false, "code": "AS-GD-001-NO-DRIFT" } },
+    { "id": "missing-link-check-blocks-update", "fixture": "missing-check", "expected": { "allowed": false, "code": "AS-GD-001-INCOMPLETE-ARTIFACT-CHECKS" } },
+    { "id": "failed-execution-blocks-update", "fixture": "failed-artifact", "expected": { "allowed": false, "code": "AS-GD-001-INVALID-ARTIFACT" } },
+    { "id": "reference-mismatch-blocks-update", "fixture": "reference-mismatch", "expected": { "allowed": false, "code": "AS-GD-001-REFERENCE-MISMATCH" } },
+    { "id": "direct-edit-blocks-update", "fixture": "direct-edit", "expected": { "allowed": false, "code": "AS-GD-001-INVALID-EVIDENCE" } },
+    { "id": "failed-authoritative-command-blocks-update", "fixture": "failed-update", "expected": { "allowed": false, "code": "AS-GD-001-UNTRUSTED-UPDATE" } },
+    { "id": "published-bytes-mismatch-blocks-update", "fixture": "wrong-bytes", "expected": { "allowed": false, "code": "AS-GD-001-PUBLISHED-BYTES-MISMATCH" } },
+    { "id": "model-authored-evidence-blocks-update", "fixture": "wrong-authority", "expected": { "allowed": false, "code": "AS-GD-001-INVALID-EVIDENCE" } }
+  ]
+}

@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <meta name="publication-contract" content="AS-PS-001;version=0.3.1;policy=2026.09.04.2;AS-SA-001=25/25;status=live-registry-verified;limitation=first-use-scope-decision-pending" />
+    <meta name="publication-contract" content="AS-PS-001;version=0.5.7;policy=2026.09.09.9;AS-CT-001=7/7;status=behavior-verified;limitation=runtime-must-integrate-a-supported-cancellation-channel" />
     <meta name="site-root" content="../" />
     <link rel="canonical" href="https://agentic-shaping.slogs.dev/ko/" />
     <link rel="alternate" hreflang="en" href="https://agentic-shaping.slogs.dev/" />
@@ -11,7 +11,7 @@
     <link rel="alternate" hreflang="ja" href="https://agentic-shaping.slogs.dev/ja/" />
     <link rel="alternate" hreflang="zh-Hans" href="https://agentic-shaping.slogs.dev/zh/" />
     <link rel="alternate" hreflang="x-default" href="https://agentic-shaping.slogs.dev/" />
-    <meta name="application-version" content="v0.3" />
+    <meta name="application-version" content="v0.5" />
     <title>Agentic Shaping — 스스로 발견하고 진화하는 AI 작업법</title>
     <meta
       name="description"
@@ -144,7 +144,7 @@
             ><button type="button" data-copy="starter">복사</button>
           </div>
           <pre id="starter">
-Agentic Shaping v0.3
+Agentic Shaping v0.5
 
 이 작업에는 Agentic Shaping을 적용해줘.
 
@@ -163,6 +163,8 @@ Agentic Shaping v0.3
 3. 협업·시스템 진화 라우팅
    - 개인·프로젝트 사실·선호·결정을 다음 작업에서 회상하려는 요청은 기억 경로로, Agentic Shaping 자체를 개선하려는 요청은 그 프롬프트·훅·평가 자산으로, LLM Wiki 자체를 개선하려는 요청은 그 정책·훅·평가 자산으로 서로 구분한다.
    - Agentic Shaping이나 LLM Wiki 시스템 개선을 명시한 경우 기억 저장만으로 완료하지 않는다. 권한 범위 안에서 해당 권위 자산을 실제로 바꾸고, 명시적 진화 요청 발동 사례와 평범한 기억 요청이 정책을 바꾸지 않는 부정 대조군을 포함한 행동 평가를 통과한다.
+   - 사용자가 활성 목표 동안 Agentic Shaping과 Slogs LLM Wiki의 지속 진화를 명시적으로 승인하면 그 권한은 같은 목표 안에서 새로 확인된 durable 신호에만 유지한다. 이후 각 변경도 사전 고정 평가 계약·실제 권위 자산 변경·행동 검증을 요구하지만 같은 권한을 반복해서 묻지 않는다. 목표 종료·범위 변경·일회성 신호·민감정보·권한 확대에는 권한을 이어 쓰지 않는다.
+   - 새 durable 신호가 확인되면 이전 시스템 진화의 완료율을 재사용하지 않는다. Agentic Shaping과 Slogs LLM Wiki 각각에 새 진화 사이클을 열고 완료/총건수와 현재 단계를 다시 계산하며, 각 시스템의 권위 자산 변경과 행동 검증 전에는 완료로 보고하지 않는다.
    - 정책·평가 변경 요청은 권위 정책과 평가 자산, 영어·한국어·일본어·중국어 홈페이지와 README, 버전 이력을 하나의 공개 버전에서 함께 갱신하고 생성·링크·다국어·정적 회귀로 드리프트를 차단한다. 문구·호환 버그 수정은 patch, 하위 호환 기능 추가는 minor, 기존 계약을 깨는 변경은 major로 판정한다.
 4. 현재 해결 + 다음 실행 구조화
    - 신호가 있으면 현재 결과만 고치고 멈추지 않는다. 현재 작업 완료 → 원인·판단 기준 포착 → 권위 자산 갱신 → 조기 검증·회귀 검사 → 실제 결과 확인까지 필요한 전체 경로를 수행한다.
@@ -177,6 +179,7 @@ Agentic Shaping v0.3
    - 상태는 `signal-observed`, `structured-and-applied`, `measured-improvement`의 세 단계로 정확히 구분한다. `structured-and-applied` 단계는 동결 입력, 기준군·적용군 근거, 허용 지표와 실행 명령을 가진 측정 계획까지 보존하며, 오직 같은 입력의 전후 지표가 실제로 좋아진 마지막 단계만 Agentic Shaping이 대상을 개선했다고 표현한다.
    - 문서나 기억에 적은 것, 자산을 만들기만 한 것, Agent의 개선 주장은 정형화 완료 증거가 아니다. 실제 소비 경로가 없으면 미적용이며, 소비 경로는 있지만 전후 측정이 없으면 `structured-and-applied`로만 보고한다. 일회성·창의적 판단은 억지로 정형화하지 않는다.
    - `traceAuthority: orchestrator` 같은 자기 선언 문자열은 실행 증거가 아니다. 정형화 적용을 통과하려면 오케스트레이터가 대상 저장소 revision과 입력 지문을 고정하고 validator·실제 consumer의 성공 명령과 출력 해시를 수집해야 한다. `measured-improvement`는 같은 실행에서 기준군·적용군뿐 아니라 전후 값을 산출한 측정 명령의 실행 증거도 요구하며, 기록된 측정 명령과 출력 해시가 그 증거와 정확히 일치해야 한다. 하나라도 없거나 어긋나면 `signal-observed` 또는 `structured-and-applied`보다 높게 보고하지 않는다.
+   - 스키마나 validator 제약을 강화할 때는 등록된 기존 소비 자료를 전수 조사하고 호환성 검사기로 먼저 검증한다. 부적합 자료는 권위 있는 원본 식별자를 근거로 마이그레이션하고 다시 통과시킨 뒤에만 호환성과 공개 완료를 주장한다. 로컬 평가 모음만 통과한 상태는 충분하지 않다.
 5. 컨텍스트 확장 게이트
    - 문서·소스·로그가 커져 전체 읽기와 같은 탐색이 반복되면, 기존 검색·파서·컴파일러·테스트를 먼저 발견하고 검증해 작업 흐름에 통합한다. 부족한 분석만 인벤토리·인덱스·심볼/의존 그래프·범위 질의·검증기로 정형화한다.
    - 원문을 권위로 보존하고 분석 결과를 원문 위치와 버전/해시에 추적 가능하게 한다. stale 결과는 갱신하거나 실패시키며, Agent에는 현재 질문에 필요한 작은 근거 묶음만 제공한다.
@@ -185,6 +188,10 @@ Agentic Shaping v0.3
    - 창작 작업에서도 명시된 텍스트 수·가독성·출력 형식·경로를 별도로 검증한다. 그 밖의 불변식·실패 조건처럼 기계 판정 가능한 것은 코드와 계약으로 검증한다.
 7. 실행 전·후 검증
    - 고비용·파괴적·배포 작업은 입력 계약, 정확한 대상, 권한, 실패 조건을 먼저 검증한다. 경고와 silent fallback을 성공으로 숨기지 않는다.
+   - 고비용 게이트 뒤에서 늦게 발견된 실패는 다음 전체 재실행 전에 더 이른 좁은 probe로 승격하고, 그 probe의 통과와 실행 순서를 하네스 증거로 고정한다.
+   - 60,000ms 이상 장기 실행은 시작 전에 서로 다른 영속 로그와 구조화된 실행 결과 기록 경로를 고정하고, 관찰 연결이 종료되어도 계속되는 독립 감독 프로세스로 실행한다. 감독 프로세스는 종료 시 실제 exit code와 정확한 실패 ID를 결과 기록에 남겨야 한다. 성공 종료의 실패 ID 집합은 비어 있어야 하고 실패 ID는 실패 문맥에서만 추출한다. 또한 성공 종료는 관찰된 전체 자식 종료와 일치하는 고아 프로세스 0건을 요구하며 결과 기록의 `orphanProcessIds`도 비어 있어야 한다. 대화형 출력이 잘렸거나 결과 기록이 없으면 완료나 실패 원인을 추측하지 않는다.
+   - 이미 실패가 확정된 장기 실행을 조기 종료할 때는 원시 프로세스 kill을 완료 경로로 사용하지 않는다. 감독 프로세스가 소비하는 명시적 취소 marker 또는 API를 사용하고, 전체 자식 종료·고아 프로세스 0건·비영(非零) exit code·`cancelled` 상태·정확한 `CANCELLATION_REQUESTED` 실패 ID를 같은 구조화된 실행 결과 기록에 남긴 뒤에만 취소 완료로 판정한다.
+   - 생성 산출물의 golden이 달라졌으면 텍스트 차이나 Agent 판단만으로 덮어쓰지 않는다. 실제 산출물의 assemble·link·execute, 독립 참조와의 관찰 동작 일치, 권위 갱신 명령, 검증 바이트와 게시 golden의 해시 일치를 모두 확인한다.
    - 실제 파일·화면·런타임·공식 URL·배포 상태로 완료를 확인한다. 검증된 새 경로가 있으면 중복·임시·우회 경로를 정리하고, 개선 효과는 시간·컨텍스트·누락·재시도 변화로 측정한다.
 8. 완료 보고
    - 현재 요청의 결과, 적용한 과거 결정, 새로 포착·구조화한 재사용 자산, 실행한 검증, 남은 한계를 구분해 알려준다.
@@ -590,7 +597,7 @@ Agentic Shaping v0.3
             <div>
               <small>CONFIRMED FINAL POLICY SYNC</small>
               <strong>90% <i>→</i> 100%</strong>
-              <span class="policy-version">HOMEPAGE v0.3 ↔ SLOGS 2026.09.04.2</span>
+              <span class="policy-version">HOMEPAGE v0.5 ↔ SLOGS 2026.09.09.1</span>
               <p>
                 홈페이지 최종 프롬프트의 확인된 행동 계약을 Slogs LLM Wiki 한국어·영어
                 런타임 정책에 동기화했습니다. 라이브 정책 5개 짝 회귀·10회 Luna Max
@@ -610,7 +617,7 @@ Agentic Shaping v0.3
             <div>
               <small>REUSABLE SKILL DISCOVERY · AS-SA-001</small>
               <strong>25/25</strong>
-              <span class="policy-version">LIVE REGISTRY VERIFIED</span>
+              <span class="policy-version">BEHAVIOR VERIFIED</span>
               <b>사용자 변화</b>
               <p>
                 신호를 local · project · cross-project · general-method로 분류하고,

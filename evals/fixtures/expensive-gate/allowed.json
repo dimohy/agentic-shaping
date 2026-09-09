@@ -1,5 +1,6 @@
 {
   "gateId": "sollang-stage2",
+  "gateOrdinal": 5,
   "estimatedCostMs": 700000,
   "evidenceSource": "harness-events",
   "inputFingerprintBefore": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
@@ -16,5 +17,19 @@
   "probes": [
     { "probeId": "whole-drop-absent", "kind": "positive", "outcome": "pass", "evidenceId": "llvm:fixed" },
     { "probeId": "old-whole-drop-detected", "kind": "negative", "outcome": "pass", "evidenceId": "llvm:broken" }
-  ]
+  ],
+  "priorLateFailures": [],
+  "outcomeObservability": {
+    "durableLogPath": "artifacts/stage2.log",
+    "completionRecordPath": "artifacts/stage2.result.json",
+    "recordSchemaVersion": 1,
+    "capturesExitCode": true,
+    "capturesFailureIds": true,
+    "executionMode": "detached-supervisor",
+    "survivesObserverDisconnect": true,
+    "waitsOnSupervisedProcessOnly": true,
+    "writesCompletionRecordOnTermination": true,
+    "successRequiresEmptyFailureIds": true,
+    "failureIdsRequireFailureContext": true
+  }
 }

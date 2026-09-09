@@ -1,0 +1,15 @@
+{
+  "runId": "fixture-allowed",
+  "phase": "final",
+  "requestTargets": ["agentic-shaping", "slogs-llm-wiki"],
+  "currentTaskComplete": true,
+  "forbiddenActions": [],
+  "actions": [
+    { "target": "agentic-shaping", "kind": "hook-change", "evidence": ["AS-CR-001 hook changed"] },
+    { "target": "agentic-shaping", "kind": "evaluation-contract", "evidence": ["AS-CR-001 contract frozen"] },
+    { "target": "agentic-shaping", "kind": "behavioral-verification", "evidence": ["12/12 deterministic cases passed"] },
+    { "target": "slogs-llm-wiki", "kind": "prompt-change", "evidence": ["policy version 2026.09.01.1"] },
+    { "target": "slogs-llm-wiki", "kind": "evaluation-contract", "evidence": ["trigger and negative control frozen"] },
+    { "target": "slogs-llm-wiki", "kind": "behavioral-verification", "evidence": ["live policy route checked"] }
+  ]
+}

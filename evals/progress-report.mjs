@@ -23,7 +23,8 @@ export function evaluateProgressReport(trace) {
 
   const axisKeys = new Set([
     "id", "label", "status", "denominatorKind", "completed", "total", "percent",
-    "scopeLabel", "unknownReason", "failureGroups", "currentStage", "nextGate"
+    "scopeLabel", "unknownReason", "failureGroups", "currentStage", "nextGate",
+    "processed", "passed", "failed", "running", "pending"
   ]);
   const axisIds = trace.axes.map(axis => axis?.id);
   if (new Set(axisIds).size !== axisIds.length) return base("duplicate-axis");
@@ -49,12 +50,20 @@ export function evaluateProgressReport(trace) {
           || "scopeLabel" in axis || "unknownReason" in axis) return base("invalid-known-denominator");
       const expected = Number((axis.completed * 100 / axis.total).toFixed(progressReportContract.percentageDecimals));
       if (axis.percent !== expected) return base("percentage-mismatch");
+      if (![axis.processed, axis.passed, axis.failed, axis.running, axis.pending]
+          .every(value => Number.isSafeInteger(value) && value >= 0)) return base("invalid-outcome-counts");
+      if (axis.completed !== axis.passed) return base("completed-is-not-passed");
+      const failureLabels = axis.failureGroups.map(group => group.label);
+      if (new Set(failureLabels).size !== failureLabels.length) return base("duplicate-failure-group");
+      if (axis.failureGroups.reduce((sum, group) => sum + group.count, 0) !== axis.failed) return base("failure-count-mismatch");
+      if (axis.processed !== axis.passed + axis.failed) return base("processed-count-mismatch");
+      if (axis.total !== axis.processed + axis.running + axis.pending) return base("outcome-total-mismatch");
       if (axis.status === "complete" && axis.completed !== axis.total) return base("incomplete-axis-marked-complete");
       if (axis.status !== "complete" && axis.completed === axis.total) return base("complete-axis-not-marked-complete");
     } else {
       unknownAxes += 1;
       if (!text(axis.scopeLabel) || !text(axis.unknownReason)
-          || "completed" in axis || "total" in axis || "percent" in axis
+          || ["completed", "total", "percent", "processed", "passed", "failed", "running", "pending"].some(key => key in axis)
           || axis.status === "complete") return base("invalid-unknown-denominator");
     }
   }

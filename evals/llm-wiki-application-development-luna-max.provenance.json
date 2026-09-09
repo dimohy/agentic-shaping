@@ -1,0 +1,13 @@
+{
+  "schemaVersion": 1,
+  "result": "llm-wiki-application-development-luna-max.json",
+  "suite": "llm-wiki-application-cases-v0.1.json",
+  "runSuiteIdentity": "llm-wiki-application-cases.json",
+  "runKeyAlgorithmVersion": 1,
+  "promptSource": "https://slogs.dev/prompts/slogs-mcp.ko.md",
+  "runKey": "7aa5ea51844a3c1c37f73c8094d2227a0047d775550b3fd08c0c7f1746e13314",
+  "suiteSha256": "e8d11d59e2a444518a6672b6d75f9d740232717fca3fc9b791da896dc626c7fd",
+  "promptSha256": "11437a033ff19486b319012e40e596b477e2af9d0738cb26a7f53d0af478bdc9",
+  "resultSha256": "eff7b06d3e94831d63c5d72522e068368682ac7993bb84894043067a28a9aacd",
+  "note": "The original runner removed its checkpoint after completion. This sidecar preserves the verified frozen-run identity; the recomputed runKey matched the checkpoint runKey observed during the run."
+}

@@ -1,0 +1,13 @@
+{
+  "schemaVersion": 1,
+  "ruleId": "AS-PR-001",
+  "description": "A performance acceptance claim must prove that each compared execution traversed its version-specific production command, driver, API, and capability branch with identical workload inputs and outputs.",
+  "evidenceSchema": "production-route-evidence.schema.json",
+  "runtimeModule": "production-route.mjs",
+  "routeStages": ["command", "driver", "api", "capability"],
+  "routeEvidenceAuthority": "harness-events",
+  "minimumSamplesPerVariant": 3,
+  "requiredEqualEvidence": ["inputFingerprint", "output.sha256", "output.bytes"],
+  "requiredDifferentEvidence": ["compilerFingerprint"],
+  "diagnosticPolicy": "A diagnostic execution may use another route, but it cannot authorize a production performance claim."
+}

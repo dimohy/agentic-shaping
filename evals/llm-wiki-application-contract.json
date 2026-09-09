@@ -1,0 +1,16 @@
+{
+  "schemaVersion": 1,
+  "ruleId": "AS-LW-001",
+  "description": "Relevant LLM Wiki memories must be mapped to the current plan, applied artifact, and verification evidence or explicitly excluded with a current-request reason before completion.",
+  "traceSchema": "llm-wiki-application-trace.schema.json",
+  "runtimeModule": "llm-wiki-application.mjs",
+  "relevantUnaccountedMaximum": 0,
+  "forbiddenActionsMaximum": 0,
+  "requireCurrentTaskComplete": true,
+  "appliedEvidence": ["planItemId", "actionEvidence", "verificationEvidence"],
+  "allowedDispositions": ["applied", "excluded"],
+  "sensitiveDisposition": "excluded",
+  "irrelevantDisposition": "excluded",
+  "traceAuthority": "orchestrator",
+  "nonEvidence": ["prompt-text-present", "wiki-tool-called", "memory-id-listed", "agent-authored-claim"]
+}

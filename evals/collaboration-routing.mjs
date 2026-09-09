@@ -14,15 +14,43 @@ const validEvidence = evidence => Array.isArray(evidence)
   && evidence.length > 0
   && evidence.every(item => typeof item === "string" && item.trim().length > 0);
 
+const validStandingAuthorization = authorization => authorization !== null
+  && typeof authorization === "object"
+  && !Array.isArray(authorization)
+  && authorization.scope === collaborationRoutingContract.standingAuthorizationScope
+  && typeof authorization.activeGoalId === "string"
+  && authorization.activeGoalId.trim().length > 0
+  && validEvidence(authorization.evidence)
+  && authorization.evidence.length >= collaborationRoutingContract.standingAuthorizationEvidenceMinimum;
+
 export function evaluateCollaborationRouting(trace) {
   const base = { allowed: false, code: "invalid-trace", targets: 0, materialChanges: 0, verifiedTargets: 0 };
   if (trace === null || typeof trace !== "object" || Array.isArray(trace)
       || !uniqueKnownTargets(trace.requestTargets)
+      || !collaborationRoutingContract.triggerKinds.includes(trace.triggerKind)
       || !collaborationRoutingContract.phases.includes(trace.phase)
       || !Array.isArray(trace.actions)
       || !Array.isArray(trace.forbiddenActions)) return base;
   if (trace.forbiddenActions.length > collaborationRoutingContract.forbiddenActionsMaximum) {
     return { ...base, code: "forbidden-action", targets: trace.requestTargets.length };
+  }
+  if (trace.triggerKind === "standing-authorization-durable-signal") {
+    if (!validStandingAuthorization(trace.standingAuthorization)) {
+      return { ...base, code: "standing-authorization-missing", targets: trace.requestTargets.length };
+    }
+    if (!validEvidence(trace.standingAuthorization.durableSignalEvidence)
+        || trace.standingAuthorization.durableSignalEvidence.length < collaborationRoutingContract.durableSignalEvidenceMinimum) {
+      return { ...base, code: "durable-signal-evidence-missing", targets: trace.requestTargets.length };
+    }
+    if (collaborationRoutingContract.standingAuthorizationRequiresReopenedCycle
+        && (trace.evolutionCycle === null
+          || typeof trace.evolutionCycle !== "object"
+          || Array.isArray(trace.evolutionCycle)
+          || typeof trace.evolutionCycle.cycleId !== "string"
+          || trace.evolutionCycle.cycleId.trim().length === 0
+          || trace.evolutionCycle.reopenedAfterDurableSignal !== true)) {
+      return { ...base, code: "durable-signal-cycle-not-reopened", targets: trace.requestTargets.length };
+    }
   }
   if (trace.phase === "final" && collaborationRoutingContract.finalRequiresCurrentTaskComplete
       && trace.currentTaskComplete !== true) {

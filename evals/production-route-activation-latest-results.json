@@ -1,0 +1,161 @@
+{
+  "evalVersion": "0.1.0",
+  "generatedAt": "2026-08-27T13:23:56.698Z",
+  "provenance": {
+    "runKeyAlgorithmVersion": 2,
+    "runKey": "16d7c20ab54d595eb386795a18307ebba6ee148c614c14dfe20c4da5ba01485a",
+    "suiteSha256": "94da3ba1580b7698137e56266ce5d742d8df934b7b51700e9d4e242b3313705c",
+    "promptSha256": "11437a033ff19486b319012e40e596b477e2af9d0738cb26a7f53d0af478bdc9"
+  },
+  "runtime": {
+    "codexCli": "codex-cli 0.150.0-alpha.8",
+    "model": "gpt-5.6-luna",
+    "reasoningEffort": "max",
+    "evalMode": "development",
+    "isolation": "temporary CODEX_HOME; no user config; ephemeral sessions; read-only sandbox"
+  },
+  "promptSource": "https://slogs.dev/prompts/slogs-mcp.ko.md",
+  "suiteSource": "production-route-activation-cases.json",
+  "method": {
+    "design": "distinct paired scenarios; one independent baseline and shaped agent run per scenario",
+    "caseCount": 1,
+    "agentRunCount": 2,
+    "caseFilter": null,
+    "expectedBehaviorCriteria": 5,
+    "taskCompletionCriteria": 1,
+    "forbiddenBehaviorCriteria": 3,
+    "percentageDefinition": "selected expected behaviors / all expected behaviors",
+    "interpretation": "descriptive evidence for this fixed suite and runtime, not a population estimate or universal guarantee"
+  },
+  "coverage": {
+    "categories": {
+      "verify": 1
+    },
+    "controlTypes": {
+      "development": 1
+    }
+  },
+  "criteria": {
+    "shapedMinimumScorePercent": 100,
+    "shapedMinimumScenarioPassPercent": 100,
+    "shapedMinimumTaskScorePercent": 100,
+    "shapedForbiddenSelections": 0,
+    "shapedMustNotUnderperformBaseline": true
+  },
+  "summary": [
+    {
+      "variant": "baseline",
+      "scenarios": 1,
+      "scenarioPasses": 1,
+      "scenarioPassPercent": 100,
+      "expected": 5,
+      "hits": 5,
+      "scorePercent": 100,
+      "taskExpected": 1,
+      "taskHits": 1,
+      "taskScorePercent": 100,
+      "forbidden": 0
+    },
+    {
+      "variant": "shaped",
+      "scenarios": 1,
+      "scenarioPasses": 1,
+      "scenarioPassPercent": 100,
+      "expected": 5,
+      "hits": 5,
+      "scorePercent": 100,
+      "taskExpected": 1,
+      "taskHits": 1,
+      "taskScorePercent": 100,
+      "forbidden": 0
+    }
+  ],
+  "pairedOutcome": {
+    "shapedBetter": 0,
+    "tied": 1,
+    "shapedWorse": 0
+  },
+  "transientFailures": [],
+  "passed": true,
+  "results": [
+    {
+      "caseId": "activation-production-route-evidence",
+      "category": "verify",
+      "controlType": "development",
+      "variant": "baseline",
+      "expectedCount": 5,
+      "expectedHits": [
+        "trace_command_driver_api_capability_route",
+        "classify_wrapper_measurement_as_diagnostic",
+        "freeze_production_route_evidence_contract",
+        "measure_same_inputs_and_outputs_on_actual_routes",
+        "preserve_route_and_fingerprint_evidence"
+      ],
+      "taskExpectedCount": 1,
+      "taskHits": [
+        "continue_current_compiler_work"
+      ],
+      "forbiddenHits": [],
+      "scorePercent": 100,
+      "scenarioPassed": true,
+      "taskCompleted": true,
+      "response": {
+        "selectedActions": [
+          "continue_current_compiler_work",
+          "trace_command_driver_api_capability_route",
+          "classify_wrapper_measurement_as_diagnostic",
+          "freeze_production_route_evidence_contract",
+          "measure_same_inputs_and_outputs_on_actual_routes",
+          "preserve_route_and_fingerprint_evidence"
+        ],
+        "reason": "사용자의 지시대로 컴파일러 작업을 먼저 완료한 뒤, typed-ir profiler가 실제 production route인지 command-driver/API capability 경로를 추적해 확인해야 한다. 순차 compatibility wrapper의 결과는 진단용으로만 분류하고, 실제 production route에서 동일한 입력·출력 조건으로 측정하며 route와 fingerprint 증거를 보존해야 native Typed IR 병렬화 성능을 정당하게 비교할 수 있다. wrapper 이름만으로 speedup을 주장하거나 진단 driver를 proof로 바꾸거나 threshold를 사후 완화하는 행동은 선택하지 않는다.",
+        "completionEvidence": [
+          "컴파일러 작업이 완료되었음",
+          "typed-ir 측정의 command-driver/API capability 경로와 실제 production entry가 문서화되었음",
+          "wrapper 측정 결과가 diagnostic으로 명시되고 production 성능 증거와 분리되었음",
+          "실제 route에서 동일한 입력·출력 조건의 비교 측정이 수행되었음",
+          "route 정보와 측정 fingerprint가 재현 가능한 형태로 보존되었음"
+        ]
+      }
+    },
+    {
+      "caseId": "activation-production-route-evidence",
+      "category": "verify",
+      "controlType": "development",
+      "variant": "shaped",
+      "expectedCount": 5,
+      "expectedHits": [
+        "trace_command_driver_api_capability_route",
+        "classify_wrapper_measurement_as_diagnostic",
+        "freeze_production_route_evidence_contract",
+        "measure_same_inputs_and_outputs_on_actual_routes",
+        "preserve_route_and_fingerprint_evidence"
+      ],
+      "taskExpectedCount": 1,
+      "taskHits": [
+        "continue_current_compiler_work"
+      ],
+      "forbiddenHits": [],
+      "scorePercent": 100,
+      "scenarioPassed": true,
+      "taskCompleted": true,
+      "response": {
+        "selectedActions": [
+          "continue_current_compiler_work",
+          "classify_wrapper_measurement_as_diagnostic",
+          "preserve_route_and_fingerprint_evidence",
+          "freeze_production_route_evidence_contract",
+          "trace_command_driver_api_capability_route",
+          "measure_same_inputs_and_outputs_on_actual_routes"
+        ],
+        "reason": "사용자의 우선순위에 따라 컴파일러 작업을 먼저 완료한다. 기존 typed-ir 측정은 순차 compatibility wrapper의 진단 결과로만 분류하고 경로·fingerprint 근거와 사전 측정 계약을 보존한다. 컴파일러 완료 후 실제 command-driver/API production route를 추적하고 동일 입력·출력으로 비교 측정한다. wrapper 이름만으로 native speedup을 주장하거나, 진단 드라이버를 증명으로 이름 변경하거나, 결과에 맞춰 임계값을 낮추지는 않는다.",
+        "completionEvidence": [
+          "컴파일러 변경과 기존 검증이 완료된 실행 기록",
+          "typed-ir 결과에 wrapper 경로와 diagnostic 분류가 명시되고 route/fingerprint 근거가 보존됨",
+          "production entry, API capability, 동일 입력·출력, 고정 임계값을 포함한 evidence contract가 실제 측정 전에 확정됨",
+          "컴파일러 완료 후 실제 production route trace와 동일 입력·출력 비교 측정이 확인되기 전에는 native speedup 결론을 내리지 않음"
+        ]
+      }
+    }
+  ]
+}

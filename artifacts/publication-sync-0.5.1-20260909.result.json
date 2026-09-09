@@ -1,0 +1,13 @@
+{
+  "schemaVersion": 1,
+  "command": "node .\\evals\\verify-publication-sync.mjs",
+  "startedAt": "2026-09-08T20:36:50.2142033Z",
+  "completedAt": "2026-09-08T20:36:52.4597883Z",
+  "exitCode": 1,
+  "failureIds": [
+    "Error: current publication is not synchronized: AS-PS-001-CHANGELOG-INCOMPLETE",
+    "if (!current.allowed) throw new Error(`current publication is not synchronized: ${current.code}`);"
+  ],
+  "durableLogPath": "artifacts\\publication-sync-0.5.1-20260909.log",
+  "logSha256": "38d7d28a56c8ab75f83b411c8747edc4131a29c7ff288aff15a55741da606b49"
+}

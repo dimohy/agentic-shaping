@@ -1,14 +1,45 @@
 {
-  "schemaVersion": 1,
+  "schemaVersion": 2,
   "ruleId": "AS-PRG-001",
   "description": "Long-running work reports every harness-declared goal axis independently with an exact completed/total percentage or an explicit unknown-denominator scope; it never hides an axis behind a single aggregate percentage.",
   "traceSchema": "progress-report-trace.schema.json",
   "runtimeModule": "progress-report.mjs",
   "percentageDecimals": 1,
-  "requiredKnownFields": ["completed", "total", "percent"],
-  "requiredUnknownFields": ["scopeLabel", "unknownReason"],
-  "requiredStatusFields": ["failureGroups", "currentStage", "nextGate"],
-  "forbiddenTopLevelFields": ["overallPercent"],
+  "requiredKnownFields": [
+    "completed",
+    "total",
+    "percent",
+    "processed",
+    "passed",
+    "failed",
+    "running",
+    "pending"
+  ],
+  "requiredUnknownFields": [
+    "scopeLabel",
+    "unknownReason"
+  ],
+  "requiredStatusFields": [
+    "failureGroups",
+    "currentStage",
+    "nextGate"
+  ],
+  "forbiddenTopLevelFields": [
+    "overallPercent"
+  ],
   "traceAuthority": "orchestrator",
-  "nonEvidence": ["agent-estimated-denominator", "single-axis-summary", "elapsed-time-only", "agent-authored-claim"]
+  "nonEvidence": [
+    "agent-estimated-denominator",
+    "single-axis-summary",
+    "elapsed-time-only",
+    "agent-authored-claim"
+  ],
+  "outcomeInvariants": [
+    "completed = passed",
+    "processed = passed + failed",
+    "total = passed + failed + running + pending",
+    "sum(failureGroups.count) = failed"
+  ],
+  "processedMeaning": "terminal outcomes only; never an ordinal or successful completion count",
+  "failureGroupsMeaning": "disjoint current failed outcomes, not historical failures or unprocessed items"
 }

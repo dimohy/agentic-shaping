@@ -7,6 +7,7 @@
       "trace": {
         "runId": "dual-1",
         "phase": "final",
+        "triggerKind": "explicit-request",
         "requestTargets": ["agentic-shaping", "slogs-llm-wiki"],
         "currentTaskComplete": true,
         "forbiddenActions": [],
@@ -26,6 +27,7 @@
       "trace": {
         "runId": "memory-1",
         "phase": "final",
+        "triggerKind": "explicit-request",
         "requestTargets": ["memory"],
         "currentTaskComplete": true,
         "forbiddenActions": [],
@@ -41,6 +43,7 @@
       "trace": {
         "runId": "memory-negative-1",
         "phase": "final",
+        "triggerKind": "explicit-request",
         "requestTargets": ["memory"],
         "currentTaskComplete": true,
         "forbiddenActions": [],
@@ -55,6 +58,7 @@
       "trace": {
         "runId": "misroute-1",
         "phase": "final",
+        "triggerKind": "explicit-request",
         "requestTargets": ["agentic-shaping", "slogs-llm-wiki"],
         "currentTaskComplete": true,
         "forbiddenActions": [],
@@ -70,6 +74,7 @@
       "trace": {
         "runId": "partial-1",
         "phase": "final",
+        "triggerKind": "explicit-request",
         "requestTargets": ["agentic-shaping", "slogs-llm-wiki"],
         "currentTaskComplete": true,
         "forbiddenActions": [],
@@ -86,6 +91,7 @@
       "trace": {
         "runId": "no-contract-1",
         "phase": "final",
+        "triggerKind": "explicit-request",
         "requestTargets": ["agentic-shaping"],
         "currentTaskComplete": true,
         "forbiddenActions": [],
@@ -101,6 +107,7 @@
       "trace": {
         "runId": "no-behavior-1",
         "phase": "final",
+        "triggerKind": "explicit-request",
         "requestTargets": ["slogs-llm-wiki"],
         "currentTaskComplete": true,
         "forbiddenActions": [],
@@ -116,6 +123,7 @@
       "trace": {
         "runId": "forbidden-1",
         "phase": "final",
+        "triggerKind": "explicit-request",
         "requestTargets": ["agentic-shaping"],
         "currentTaskComplete": true,
         "forbiddenActions": ["stored secret in policy"],
@@ -128,6 +136,7 @@
       "trace": {
         "runId": "incomplete-1",
         "phase": "final",
+        "triggerKind": "explicit-request",
         "requestTargets": ["agentic-shaping"],
         "currentTaskComplete": false,
         "forbiddenActions": [],
@@ -140,6 +149,7 @@
       "trace": {
         "runId": "progress-1",
         "phase": "in-progress",
+        "triggerKind": "explicit-request",
         "requestTargets": ["agentic-shaping", "slogs-llm-wiki"],
         "currentTaskComplete": false,
         "forbiddenActions": [],
@@ -157,6 +167,7 @@
       "trace": {
         "runId": "wait-companion-1",
         "phase": "in-progress",
+        "triggerKind": "explicit-request",
         "requestTargets": ["agentic-shaping", "slogs-llm-wiki"],
         "currentTaskComplete": false,
         "forbiddenActions": [],
@@ -176,6 +187,7 @@
       "trace": {
         "runId": "progress-2",
         "phase": "in-progress",
+        "triggerKind": "explicit-request",
         "requestTargets": ["agentic-shaping", "slogs-llm-wiki"],
         "currentTaskComplete": false,
         "forbiddenActions": [],
@@ -191,12 +203,97 @@
       "trace": {
         "runId": "progress-3",
         "phase": "in-progress",
+        "triggerKind": "explicit-request",
         "requestTargets": ["agentic-shaping"],
         "currentTaskComplete": true,
         "forbiddenActions": [],
         "actions": []
       },
       "expected": { "allowed": false, "code": "phase-completion-mismatch" }
+    },
+    {
+      "id": "standing-authorization-continues-durable-dual-system-evolution",
+      "trace": {
+        "runId": "standing-1",
+        "phase": "in-progress",
+        "triggerKind": "standing-authorization-durable-signal",
+        "standingAuthorization": {
+          "scope": "active-goal",
+          "activeGoalId": "sollang-windows-stabilization",
+          "evidence": ["user explicitly authorized Agentic Shaping and Slogs LLM Wiki evolution while the active goal continues"],
+          "durableSignalEvidence": ["collaboration was twice misrouted during the same active goal"]
+        },
+        "evolutionCycle": {
+          "cycleId": "sollang-windows-stabilization-cycle-2",
+          "previousCycleId": "sollang-windows-stabilization-cycle-1",
+          "reopenedAfterDurableSignal": true
+        },
+        "requestTargets": ["agentic-shaping", "slogs-llm-wiki"],
+        "currentTaskComplete": false,
+        "forbiddenActions": [],
+        "actions": [
+          { "target": "agentic-shaping", "kind": "evaluation-contract", "evidence": ["AS-CR-001 standing-authorization cases frozen"] },
+          { "target": "agentic-shaping", "kind": "evaluation-change", "evidence": ["standing authorization is an executable routing input"] },
+          { "target": "slogs-llm-wiki", "kind": "evaluation-contract", "evidence": ["ordinary-memory and expired-goal controls frozen"] },
+          { "target": "slogs-llm-wiki", "kind": "prompt-change", "evidence": ["active-goal authorization policy version advanced"] }
+        ]
+      },
+      "expected": { "allowed": true, "code": "system-evolution-in-progress" }
+    },
+    {
+      "id": "durable-signal-without-standing-authorization-is-blocked",
+      "trace": {
+        "runId": "standing-missing-1",
+        "phase": "in-progress",
+        "triggerKind": "standing-authorization-durable-signal",
+        "requestTargets": ["agentic-shaping", "slogs-llm-wiki"],
+        "currentTaskComplete": false,
+        "forbiddenActions": [],
+        "actions": []
+      },
+      "expected": { "allowed": false, "code": "standing-authorization-missing" }
+    },
+    {
+      "id": "empty-durable-signal-evidence-is-blocked",
+      "trace": {
+        "runId": "standing-empty-signal-1",
+        "phase": "in-progress",
+        "triggerKind": "standing-authorization-durable-signal",
+        "standingAuthorization": {
+          "scope": "active-goal",
+          "activeGoalId": "sollang-windows-stabilization",
+          "evidence": ["standing authorization exists"],
+          "durableSignalEvidence": []
+        },
+        "requestTargets": ["agentic-shaping", "slogs-llm-wiki"],
+        "currentTaskComplete": false,
+        "forbiddenActions": [],
+        "actions": []
+      },
+      "expected": { "allowed": false, "code": "durable-signal-evidence-missing" }
+    },
+    {
+      "id": "durable-signal-cannot-reuse-completed-cycle",
+      "trace": {
+        "runId": "standing-stale-cycle-1",
+        "phase": "in-progress",
+        "triggerKind": "standing-authorization-durable-signal",
+        "standingAuthorization": {
+          "scope": "active-goal",
+          "activeGoalId": "sollang-windows-stabilization",
+          "evidence": ["standing authorization exists"],
+          "durableSignalEvidence": ["a new late compiler failure was confirmed"]
+        },
+        "evolutionCycle": {
+          "cycleId": "sollang-windows-stabilization-cycle-1",
+          "reopenedAfterDurableSignal": false
+        },
+        "requestTargets": ["agentic-shaping", "slogs-llm-wiki"],
+        "currentTaskComplete": false,
+        "forbiddenActions": [],
+        "actions": []
+      },
+      "expected": { "allowed": false, "code": "durable-signal-cycle-not-reopened" }
     }
   ]
 }

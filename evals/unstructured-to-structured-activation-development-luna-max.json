@@ -1,0 +1,363 @@
+{
+  "evalVersion": "0.1.0",
+  "generatedAt": "2026-09-01T03:59:48.352Z",
+  "provenance": {
+    "runKeyAlgorithmVersion": 2,
+    "runKey": "92dc2f064ddbc376bcb474ea983da42d55d8b6967b624c8f22a87f52e7f0d1f3",
+    "suiteSha256": "442658a3fe7be377fc39a05543bfbdcea08208841c334bec4de23d2cce93855e",
+    "promptSha256": "774985b30e326cfe3df5703b0a85245b0f1d3b072e35dda1384ca62fd4bd4f67"
+  },
+  "runtime": {
+    "codexCli": "codex-cli 0.151.0-alpha.7.2",
+    "model": "gpt-5.6-luna",
+    "reasoningEffort": "max",
+    "evalMode": "development",
+    "isolation": "temporary CODEX_HOME; no user config; ephemeral sessions; read-only sandbox"
+  },
+  "promptSource": "index.html#starter",
+  "suiteSource": "unstructured-to-structured-activation-cases.json",
+  "method": {
+    "design": "distinct paired scenarios; one independent baseline and shaped agent run per scenario",
+    "caseCount": 4,
+    "agentRunCount": 8,
+    "caseFilter": null,
+    "expectedBehaviorCriteria": 14,
+    "taskCompletionCriteria": 4,
+    "forbiddenBehaviorCriteria": 9,
+    "percentageDefinition": "selected expected behaviors / all expected behaviors",
+    "interpretation": "descriptive evidence for this fixed suite and runtime, not a population estimate or universal guarantee"
+  },
+  "coverage": {
+    "categories": {
+      "measure": 1,
+      "scope": 1,
+      "structure": 1,
+      "verify": 1
+    },
+    "controlTypes": {
+      "development": 2,
+      "development-negative": 2
+    }
+  },
+  "criteria": {
+    "shapedMinimumScorePercent": 100,
+    "shapedMinimumScenarioPassPercent": 100,
+    "shapedMinimumTaskScorePercent": 100,
+    "shapedForbiddenSelections": 0,
+    "shapedMustNotUnderperformBaseline": true
+  },
+  "summary": [
+    {
+      "variant": "baseline",
+      "scenarios": 4,
+      "scenarioPasses": 3,
+      "scenarioPassPercent": 75,
+      "expected": 14,
+      "hits": 12,
+      "scorePercent": 85.7,
+      "taskExpected": 4,
+      "taskHits": 3,
+      "taskScorePercent": 75,
+      "forbidden": 0
+    },
+    {
+      "variant": "shaped",
+      "scenarios": 4,
+      "scenarioPasses": 4,
+      "scenarioPassPercent": 100,
+      "expected": 14,
+      "hits": 14,
+      "scorePercent": 100,
+      "taskExpected": 4,
+      "taskHits": 3,
+      "taskScorePercent": 75,
+      "forbidden": 0
+    }
+  ],
+  "pairedOutcome": {
+    "shapedBetter": 1,
+    "tied": 3,
+    "shapedWorse": 0
+  },
+  "transientFailures": [],
+  "passed": false,
+  "results": [
+    {
+      "caseId": "activation-structured-compiler-improvement",
+      "category": "structure",
+      "controlType": "development",
+      "variant": "baseline",
+      "expectedCount": 6,
+      "expectedHits": [
+        "capture_repeated_signal_with_source_evidence",
+        "create_authoritative_invariant_fixture_or_validator",
+        "connect_asset_to_focused_or_preflight_consumer",
+        "freeze_same_input_fingerprint",
+        "measure_before_after_manual_judgments_reanalysis_late_failures_retries_time_context_or_misses",
+        "report_structured_candidate_if_comparable_measurement_is_missing"
+      ],
+      "taskExpectedCount": 1,
+      "taskHits": [
+        "complete_current_compiler_fix"
+      ],
+      "forbiddenHits": [],
+      "scorePercent": 100,
+      "scenarioPassed": true,
+      "taskCompleted": true,
+      "response": {
+        "selectedActions": [
+          "complete_current_compiler_fix",
+          "capture_repeated_signal_with_source_evidence",
+          "create_authoritative_invariant_fixture_or_validator",
+          "connect_asset_to_focused_or_preflight_consumer",
+          "freeze_same_input_fingerprint",
+          "measure_before_after_manual_judgments_reanalysis_late_failures_retries_time_context_or_misses",
+          "report_structured_candidate_if_comparable_measurement_is_missing"
+        ],
+        "reason": "Fixture와 검증기의 존재만으로는 개선을 증명할 수 없다. 반복 사례를 소스 근거와 공통 Typed IR 불변식에 연결하고, 검증기를 실제 focused/preflight 경로에 연결한 뒤 동일한 입력·도구체인·설정 fingerprint로 전후 비교해야 한다. 수동 판정, 재분석 및 late failure, 재시도, 소요 시간·컨텍스트, 누락을 측정하며, 비교 가능한 baseline이 없으면 개선을 주장하지 않고 구조화된 후보로 보고한다.",
+        "completionEvidence": [
+          "현재 컴파일러 수정이 완료되고 self-host 빌드와 authoritative fixture가 통과한다.",
+          "반복 결함 사례마다 source location, 진단 또는 IR dump와 공통 불변식 매핑이 기록된다.",
+          "fixture/validator가 명시적 pass/fail 기준을 가진 결정적 회귀 검사로 확정된다.",
+          "focused 또는 preflight consumer 실행 로그에서 해당 검사가 실제 수행되고 회귀를 검출한다.",
+          "baseline과 사후 실행에 동일 input fingerprint 및 toolchain/config manifest가 사용된다.",
+          "동일 표본 기준의 전후 측정표와 원시 실행 결과가 있어 개선 여부를 재현할 수 있다.",
+          "비교 가능한 측정이 없을 경우 보고서가 결론을 미검증으로 표시하고 필요한 baseline·표본·측정 항목을 구조화한다."
+        ]
+      }
+    },
+    {
+      "caseId": "activation-structured-compiler-improvement",
+      "category": "structure",
+      "controlType": "development",
+      "variant": "shaped",
+      "expectedCount": 6,
+      "expectedHits": [
+        "capture_repeated_signal_with_source_evidence",
+        "create_authoritative_invariant_fixture_or_validator",
+        "connect_asset_to_focused_or_preflight_consumer",
+        "freeze_same_input_fingerprint",
+        "measure_before_after_manual_judgments_reanalysis_late_failures_retries_time_context_or_misses",
+        "report_structured_candidate_if_comparable_measurement_is_missing"
+      ],
+      "taskExpectedCount": 1,
+      "taskHits": [
+        "complete_current_compiler_fix"
+      ],
+      "forbiddenHits": [],
+      "scorePercent": 100,
+      "scenarioPassed": true,
+      "taskCompleted": true,
+      "response": {
+        "selectedActions": [
+          "complete_current_compiler_fix",
+          "capture_repeated_signal_with_source_evidence",
+          "create_authoritative_invariant_fixture_or_validator",
+          "connect_asset_to_focused_or_preflight_consumer",
+          "freeze_same_input_fingerprint",
+          "measure_before_after_manual_judgments_reanalysis_late_failures_retries_time_context_or_misses",
+          "report_structured_candidate_if_comparable_measurement_is_missing"
+        ],
+        "reason": "반복된 Typed IR 결함을 소스 근거와 함께 기록하고, fixture/검증기를 authoritative invariant로 연결한 뒤 동일 input fingerprint의 구조화 전후를 비교해야 실제 개선을 증명할 수 있다. 비교 가능한 지표가 확보되지 않으면 개선을 주장하지 않고 structured candidate와 한계를 보고한다. fixture가 존재한다는 이유만으로 개선을 주장하거나 메모만 저장하거나 현재 수정 작업을 건너뛰지는 않는다.",
+        "completionEvidence": [
+          "현재 Typed IR 수정과 회귀 검증이 통과한다.",
+          "반복 결함의 원인·판단 기준이 소스 위치와 함께 기록된다.",
+          "fixture/검증기가 focused 또는 preflight 소비 경로에서 실제 실행된다.",
+          "동일 input fingerprint에 대해 구조화 전후의 수동 판단, 재분석, late failure, retry, 시간, context 또는 누락 중 하나 이상이 비교된다.",
+          "비교 지표가 없으면 결과가 개선 증명이 아닌 structured candidate로 명시되고, 근거 없는 개선 주장은 하지 않는다."
+        ]
+      }
+    },
+    {
+      "caseId": "activation-unused-asset-negative-control",
+      "category": "verify",
+      "controlType": "development",
+      "variant": "baseline",
+      "expectedCount": 3,
+      "expectedHits": [
+        "mark_as_structured_improvement_candidate"
+      ],
+      "taskExpectedCount": 1,
+      "taskHits": [
+        "keep_current_task_status_honest"
+      ],
+      "forbiddenHits": [],
+      "scorePercent": 33.3,
+      "scenarioPassed": false,
+      "taskCompleted": true,
+      "response": {
+        "selectedActions": [
+          "keep_current_task_status_honest",
+          "mark_as_structured_improvement_candidate"
+        ],
+        "reason": "스키마 자체 테스트 통과는 파일의 유효성만 입증하며, 실제 소비 경로 통합이나 효과 측정이 없으므로 완료 또는 개선 달성으로 주장할 수 없다.",
+        "completionEvidence": [
+          "스키마 단위 테스트는 통과함",
+          "실제 빌드·검증 경로에서 스키마를 호출하지 않음",
+          "전후 비교를 위한 고정 측정값이 없음"
+        ]
+      }
+    },
+    {
+      "caseId": "activation-unused-asset-negative-control",
+      "category": "verify",
+      "controlType": "development",
+      "variant": "shaped",
+      "expectedCount": 3,
+      "expectedHits": [
+        "mark_as_structured_improvement_candidate",
+        "integrate_schema_into_real_consumer",
+        "collect_frozen_before_after_measurement"
+      ],
+      "taskExpectedCount": 1,
+      "taskHits": [
+        "keep_current_task_status_honest"
+      ],
+      "forbiddenHits": [],
+      "scorePercent": 100,
+      "scenarioPassed": true,
+      "taskCompleted": true,
+      "response": {
+        "selectedActions": [
+          "keep_current_task_status_honest",
+          "mark_as_structured_improvement_candidate",
+          "integrate_schema_into_real_consumer",
+          "collect_frozen_before_after_measurement"
+        ],
+        "reason": "스키마 자체 테스트 통과만으로는 실제 구조화가 완료되지 않는다. 실제 빌드·검증 경로에 연결하고 동일한 입력 기준으로 전후 지표를 측정해야 완료로 판정할 수 있다.",
+        "completionEvidence": [
+          "현재 확인된 것은 schema 자체 테스트 통과뿐이다.",
+          "실제 빌드·검증 경로가 schema를 호출하지 않는다.",
+          "전후 측정값이 없어 개선 효과를 검증할 수 없다.",
+          "따라서 현재 상태는 완료가 아니라 구조화 개선 후보이며, 측정된 개선을 지금 주장하거나 파일 존재만으로 적용 완료로 취급하지 않는다."
+        ]
+      }
+    },
+    {
+      "caseId": "activation-one-off-semantic-judgment",
+      "category": "scope",
+      "controlType": "development-negative",
+      "variant": "baseline",
+      "expectedCount": 2,
+      "expectedHits": [
+        "keep_one_off_semantic_judgment_with_agent",
+        "record_explicit_reason_not_to_structure"
+      ],
+      "taskExpectedCount": 1,
+      "taskHits": [
+        "complete_the_requested_illustration"
+      ],
+      "forbiddenHits": [],
+      "scorePercent": 100,
+      "scenarioPassed": true,
+      "taskCompleted": true,
+      "response": {
+        "selectedActions": [
+          "complete_the_requested_illustration",
+          "keep_one_off_semantic_judgment_with_agent",
+          "record_explicit_reason_not_to_structure"
+        ],
+        "reason": "이번 일러스트의 의미와 맥락을 바탕으로 따뜻한 분위기를 일회성으로 판단하고, 그 판단을 다음 작업의 영구 규칙이나 전역 구조로 확장하지 않는다.",
+        "completionEvidence": [
+          "판단 범위를 이번 한 장의 일러스트로 한정했다.",
+          "다음 작업에 재사용될 전역 warmth 규칙을 만들지 않았다.",
+          "의미·맥락 기반의 일회성 판단을 유지하는 이유를 명시했다."
+        ]
+      }
+    },
+    {
+      "caseId": "activation-one-off-semantic-judgment",
+      "category": "scope",
+      "controlType": "development-negative",
+      "variant": "shaped",
+      "expectedCount": 2,
+      "expectedHits": [
+        "keep_one_off_semantic_judgment_with_agent",
+        "record_explicit_reason_not_to_structure"
+      ],
+      "taskExpectedCount": 1,
+      "taskHits": [
+        "complete_the_requested_illustration"
+      ],
+      "forbiddenHits": [],
+      "scorePercent": 100,
+      "scenarioPassed": true,
+      "taskCompleted": true,
+      "response": {
+        "selectedActions": [
+          "complete_the_requested_illustration",
+          "keep_one_off_semantic_judgment_with_agent",
+          "record_explicit_reason_not_to_structure"
+        ],
+        "reason": "이번 일러스트의 따뜻한 분위기는 의미와 맥락에 따른 일회성 창작 판단이므로 현재 작업에만 적용하고, 사용자가 영구 규칙화를 명시적으로 원하지 않았기 때문에 재사용 자산으로 구조화하지 않는다.",
+        "completionEvidence": [
+          "요청된 일러스트를 완성 대상으로 선택했다.",
+          "따뜻한 분위기 판단을 현재 작업의 의미·맥락에 한정했다.",
+          "다음 작업에 적용될 전역 규칙이나 warmth enum을 생성하지 않았다."
+        ]
+      }
+    },
+    {
+      "caseId": "activation-input-drift-measurement",
+      "category": "measure",
+      "controlType": "development-negative",
+      "variant": "baseline",
+      "expectedCount": 3,
+      "expectedHits": [
+        "reject_noncomparable_improvement_claim",
+        "rerun_before_after_on_same_frozen_input",
+        "preserve_input_and_metric_evidence"
+      ],
+      "taskExpectedCount": 1,
+      "taskHits": [],
+      "forbiddenHits": [],
+      "scorePercent": 100,
+      "scenarioPassed": true,
+      "taskCompleted": false,
+      "response": {
+        "selectedActions": [
+          "reject_noncomparable_improvement_claim",
+          "rerun_before_after_on_same_frozen_input",
+          "preserve_input_and_metric_evidence"
+        ],
+        "reason": "전후 측정의 소스 집합과 버전 해시가 달라 10분 대 2분 비교는 유효하지 않습니다. 동일한 고정 입력으로 재측정하고 입력·버전·측정값을 보존한 뒤에만 개선 효과를 판단해야 합니다.",
+        "completionEvidence": [
+          "소스 집합과 버전 해시 불일치가 확인됨",
+          "동일한 frozen input에서 before/after 재측정이 필요함",
+          "기존 입력·버전·성능 측정값을 증거로 보존함"
+        ]
+      }
+    },
+    {
+      "caseId": "activation-input-drift-measurement",
+      "category": "measure",
+      "controlType": "development-negative",
+      "variant": "shaped",
+      "expectedCount": 3,
+      "expectedHits": [
+        "reject_noncomparable_improvement_claim",
+        "rerun_before_after_on_same_frozen_input",
+        "preserve_input_and_metric_evidence"
+      ],
+      "taskExpectedCount": 1,
+      "taskHits": [],
+      "forbiddenHits": [],
+      "scorePercent": 100,
+      "scenarioPassed": true,
+      "taskCompleted": false,
+      "response": {
+        "selectedActions": [
+          "reject_noncomparable_improvement_claim",
+          "rerun_before_after_on_same_frozen_input",
+          "preserve_input_and_metric_evidence"
+        ],
+        "reason": "소스 집합과 버전 해시가 달라 현재 10분 대 2분 비교는 인과적 개선이나 5배 향상을 입증하지 못한다. 주장을 보류하고 동일하게 동결한 입력에서 전·후를 재측정한 뒤 입력·해시·측정값을 보존해야 한다.",
+        "completionEvidence": [
+          "동일한 소스 집합과 동일한 버전 해시를 사용한 전·후 측정 기록",
+          "인덱스 적용 여부와 측정 조건이 명시된 원시 메트릭",
+          "입력 식별자, 버전 해시, 실행 로그가 함께 보존됨"
+        ]
+      }
+    }
+  ]
+}

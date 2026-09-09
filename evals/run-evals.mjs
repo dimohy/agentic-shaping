@@ -2,19 +2,38 @@ import { copyFileSync, existsSync, mkdirSync, mkdtempSync, readFileSync, rmSync,
 import { tmpdir } from "node:os";
 import { join, resolve } from "node:path";
 import { spawnSync } from "node:child_process";
-import { createHash } from "node:crypto";
+import { buildEvaluationRunKey, sha256 } from "./run-identity.mjs";
+import { persistPromptSnapshot } from "./prompt-snapshot.mjs";
+
+if (process.argv.length > 2) {
+  throw new Error("run-evals.mjs accepts no CLI arguments; configure the evaluation with AGENTIC_SHAPING_EVAL_* environment variables");
+}
 
 const root = resolve(import.meta.dirname, "..");
 const caseFileName = process.env.AGENTIC_SHAPING_EVAL_SUITE || "cases.json";
 if (!/^[a-z0-9][a-z0-9._-]*\.json$/i.test(caseFileName)) throw new Error("Invalid evaluation suite filename");
-const cases = JSON.parse(readFileSync(join(import.meta.dirname, caseFileName), "utf8"));
+const caseFileText = readFileSync(join(import.meta.dirname, caseFileName), "utf8");
+const cases = JSON.parse(caseFileText);
+const suiteSha256 = sha256(caseFileText);
 const schema = join(import.meta.dirname, "response.schema.json");
 const evalModel = "gpt-5.6-luna";
 const reasoningEffort = "max";
 const resultFileName = process.env.AGENTIC_SHAPING_EVAL_RESULT || "latest-results.json";
 if (!/^[a-z0-9][a-z0-9._-]*\.json$/i.test(resultFileName)) throw new Error("Invalid evaluation result filename");
 const percent = (numerator, denominator) => Number((numerator / denominator * 100).toFixed(1));
-if (cases.cases.length < 20) throw new Error("Public behavioral evaluation requires at least 20 distinct scenarios");
+const evalMode = process.env.AGENTIC_SHAPING_EVAL_MODE || "public";
+if (!new Set(["public", "development"]).has(evalMode)) throw new Error("Invalid AGENTIC_SHAPING_EVAL_MODE");
+if (evalMode === "public" && cases.cases.length < 20) {
+  throw new Error("Public behavioral evaluation requires at least 20 distinct scenarios");
+}
+const publishedResultNames = new Set([
+  "activation-latest-results.json",
+  "latest-results.json",
+  "slogs-policy-smoke-luna-max.json"
+]);
+if (evalMode === "development" && publishedResultNames.has(resultFileName)) {
+  throw new Error("Development evaluation cannot overwrite a published result artifact");
+}
 const caseIds = new Set();
 for (const testCase of cases.cases) {
   if (caseIds.has(testCase.id)) throw new Error(`Duplicate case id: ${testCase.id}`);
@@ -35,6 +54,11 @@ const evaluationCases = requestedCaseIds.length === 0
   : cases.cases.filter(testCase => requestedCaseIds.includes(testCase.id));
 if (requestedCaseIds.some(id => !caseIds.has(id))) throw new Error("Unknown evaluation case filter");
 if (evaluationCases.length === 0) throw new Error("Evaluation case filter selected no scenarios");
+const validateOnly = process.env.AGENTIC_SHAPING_EVAL_VALIDATE_ONLY === "1";
+if (validateOnly) {
+  process.stdout.write(`VALIDATION PASS mode=${evalMode} suite=${caseFileName} cases=${evaluationCases.length} result=${resultFileName}\n`);
+  process.exit(0);
+}
 const html = readFileSync(join(root, "index.html"), "utf8");
 const starterMatch = html.match(/<pre id="starter">([\s\S]*?)<\/pre>/);
 if (!starterMatch) throw new Error("Public starter prompt was not found in index.html");
@@ -52,15 +76,20 @@ const starter = promptUrl
     })
   : starterFromPage;
 const promptSource = promptUrl || "index.html#starter";
-const runKey = createHash("sha256").update(JSON.stringify({
+const promptSnapshot = persistPromptSnapshot(import.meta.dirname, starter);
+const promptSha256 = promptSnapshot.promptSha256;
+const promptSnapshotFileName = promptSnapshot.fileName;
+const runKey = buildEvaluationRunKey({
+  algorithmVersion: 2,
   suite: caseFileName,
+  suiteText: caseFileText,
   suiteVersion: cases.version,
   caseIds: evaluationCases.map(testCase => testCase.id),
   starter,
   evalModel,
   reasoningEffort,
   promptSource,
-})).digest("hex");
+});
 const checkpointPath = join(import.meta.dirname, `${resultFileName}.checkpoint.json`);
 
 const tempRoot = mkdtempSync(join(tmpdir(), "agentic-shaping-eval-"));
@@ -170,11 +199,6 @@ const summarize = variant => {
 };
 const summary = [summarize("baseline"), summarize("shaped")];
 const baseline = summary[0], shaped = summary[1], criteria = cases.passCriteria;
-const passed = shaped.scorePercent >= criteria.shapedMinimumScorePercent
-  && shaped.scenarioPassPercent >= criteria.shapedMinimumScenarioPassPercent
-  && (criteria.shapedMinimumTaskScorePercent === undefined || shaped.taskScorePercent >= criteria.shapedMinimumTaskScorePercent)
-  && shaped.forbidden === criteria.shapedForbiddenSelections
-  && (!criteria.shapedMustNotUnderperformBaseline || shaped.scorePercent >= baseline.scorePercent);
 const pairedOutcome = { shapedBetter: 0, tied: 0, shapedWorse: 0 };
 for (const testCase of evaluationCases) {
   const baselineCase = results.find(x => x.caseId === testCase.id && x.variant === "baseline");
@@ -185,6 +209,13 @@ for (const testCase of evaluationCases) {
   else if (expectedDelta < 0 || (expectedDelta === 0 && forbiddenDelta < 0)) pairedOutcome.shapedWorse++;
   else pairedOutcome.tied++;
 }
+const passed = shaped.scorePercent >= criteria.shapedMinimumScorePercent
+  && shaped.scenarioPassPercent >= criteria.shapedMinimumScenarioPassPercent
+  && (criteria.shapedMinimumTaskScorePercent === undefined || shaped.taskScorePercent >= criteria.shapedMinimumTaskScorePercent)
+  && shaped.forbidden === criteria.shapedForbiddenSelections
+  && (!criteria.shapedMustNotUnderperformBaseline || shaped.scorePercent >= baseline.scorePercent)
+  && (criteria.shapedMinimumPairwiseWins === undefined
+    || pairedOutcome.shapedBetter >= criteria.shapedMinimumPairwiseWins);
 const countBy = field => Object.fromEntries(
   [...new Set(evaluationCases.map(testCase => testCase[field]))]
     .sort()
@@ -193,7 +224,8 @@ const countBy = field => Object.fromEntries(
 const report = {
   evalVersion: cases.version,
   generatedAt: new Date().toISOString(),
-  runtime: { codexCli: spawnSync("codex", ["--version"], { encoding: "utf8" }).stdout.trim(), model: evalModel, reasoningEffort, isolation: "temporary CODEX_HOME; no user config; ephemeral sessions; read-only sandbox" },
+  provenance: { runKeyAlgorithmVersion: 2, runKey, suiteSha256, promptSha256, promptSnapshot: promptSnapshotFileName },
+  runtime: { codexCli: spawnSync("codex", ["--version"], { encoding: "utf8" }).stdout.trim(), model: evalModel, reasoningEffort, evalMode, isolation: "temporary CODEX_HOME; no user config; ephemeral sessions; read-only sandbox" },
   promptSource,
   suiteSource: caseFileName,
   method: {

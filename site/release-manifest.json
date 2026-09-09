@@ -1,18 +1,18 @@
 {
   "schemaVersion": 2,
   "contractId": "AS-PS-001",
-  "version": "0.3.1",
-  "displayVersion": "v0.3",
-  "previousVersion": "0.3.0",
+  "version": "0.5.7",
+  "displayVersion": "v0.5",
+  "previousVersion": "0.5.6",
   "changeLevel": "patch",
-  "releaseDate": "2026-09-04",
-  "policyVersion": "2026.09.04.2",
+  "releaseDate": "2026-09-09",
+  "policyVersion": "2026.09.09.9",
   "feature": {
-    "ruleId": "AS-SA-001",
-    "passed": 25,
-    "total": 25,
-    "status": "live-registry-verified",
-    "limitation": "first-use-scope-decision-pending"
+    "ruleId": "AS-CT-001",
+    "passed": 7,
+    "total": 7,
+    "status": "behavior-verified",
+    "limitation": "runtime-must-integrate-a-supported-cancellation-channel"
   },
   "authoritativeFiles": [
     "CHANGELOG.md",
@@ -27,12 +27,37 @@
     "evals/skill-abstraction-contract.json",
     "evals/skill-abstraction-traces.json",
     "evals/verify-skill-abstraction.mjs"
+    ,"evals/trace-corpus-compatibility.mjs"
+    ,"evals/verify-trace-corpus-compatibility.mjs"
+    ,"evals/cancellation-terminal-contract.json"
+    ,"evals/cancellation-terminal.mjs"
+    ,"evals/verify-cancellation-terminal.mjs"
   ],
   "publicCapabilities": [
     {
+      "ruleId": "AS-CT-001",
+      "verifier": "evals/verify-cancellation-terminal.mjs",
+      "expectedPasses": 7,
+      "files": [
+        "evals/cancellation-terminal-contract.json",
+        "evals/cancellation-terminal.mjs",
+        "evals/verify-cancellation-terminal.mjs"
+      ]
+    },
+    {
+      "ruleId": "AS-US-COMPAT-001",
+      "verifier": "evals/verify-trace-corpus-compatibility.mjs",
+      "expectedPasses": 5,
+      "files": [
+        "evals/trace-corpus-compatibility.mjs",
+        "evals/verify-trace-corpus-compatibility.mjs",
+        "evals/unstructured-to-structured.mjs"
+      ]
+    },
+    {
       "ruleId": "AS-PRG-001",
       "verifier": "evals/verify-progress-report.mjs",
-      "expectedPasses": 11,
+      "expectedPasses": 25,
       "files": [
         "evals/progress-report-contract.json",
         "evals/progress-report-trace.schema.json",
@@ -40,7 +65,8 @@
         "evals/progress-report.mjs",
         "evals/verify-progress-report.mjs",
         "evals/fixtures/progress-report/allowed.json",
-        "evals/fixtures/progress-report/blocked.json"
+        "evals/fixtures/progress-report/blocked.json",
+        "evals/fixtures/progress-report/ordinal-is-not-passed.json"
       ]
     },
     {
@@ -60,7 +86,7 @@
     {
       "ruleId": "AS-CR-001",
       "verifier": "evals/verify-collaboration-routing.mjs",
-      "expectedPasses": 13,
+      "expectedPasses": 17,
       "files": [
         "evals/collaboration-routing-contract.json",
         "evals/collaboration-routing-trace.schema.json",
@@ -72,7 +98,7 @@
     {
       "ruleId": "AS-EG-001",
       "verifier": "evals/verify-expensive-gate.mjs",
-      "expectedPasses": 11,
+      "expectedPasses": 22,
       "files": [
         "evals/expensive-gate-contract.json",
         "evals/expensive-gate-evidence.schema.json",
@@ -81,6 +107,18 @@
         "evals/verify-expensive-gate.mjs",
         "evals/fixtures/expensive-gate/allowed.json",
         "evals/fixtures/expensive-gate/blocked.json"
+      ]
+    },
+    {
+      "ruleId": "AS-GD-001",
+      "verifier": "evals/verify-golden-drift.mjs",
+      "expectedPasses": 9,
+      "files": [
+        "evals/golden-drift-contract.json",
+        "evals/golden-drift-evidence.schema.json",
+        "evals/golden-drift-cases.json",
+        "evals/golden-drift.mjs",
+        "evals/verify-golden-drift.mjs"
       ]
     },
     {

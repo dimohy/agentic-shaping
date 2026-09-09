@@ -1,0 +1,44 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["runId", "project", "policyVersion", "currentTaskComplete", "forbiddenActions", "memories"],
+  "properties": {
+    "runId": { "type": "string", "minLength": 1, "maxLength": 128 },
+    "project": { "type": "string", "minLength": 1, "maxLength": 256 },
+    "policyVersion": { "type": "string", "minLength": 1, "maxLength": 64 },
+    "currentTaskComplete": { "type": "boolean" },
+    "forbiddenActions": {
+      "type": "array",
+      "items": { "type": "string", "minLength": 1, "maxLength": 256 },
+      "uniqueItems": true
+    },
+    "memories": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "scope", "relevant", "sensitive", "disposition", "planItemId", "actionEvidence", "verificationEvidence", "exclusionReason"],
+        "properties": {
+          "id": { "type": "string", "minLength": 1, "maxLength": 128 },
+          "scope": { "type": "string", "minLength": 1, "maxLength": 256 },
+          "relevant": { "type": "boolean" },
+          "sensitive": { "type": "boolean" },
+          "disposition": { "enum": ["applied", "excluded"] },
+          "planItemId": { "type": ["string", "null"], "minLength": 1, "maxLength": 128 },
+          "actionEvidence": {
+            "type": "array",
+            "items": { "type": "string", "minLength": 1, "maxLength": 512 },
+            "uniqueItems": true
+          },
+          "verificationEvidence": {
+            "type": "array",
+            "items": { "type": "string", "minLength": 1, "maxLength": 512 },
+            "uniqueItems": true
+          },
+          "exclusionReason": { "type": ["string", "null"], "minLength": 1, "maxLength": 512 }
+        }
+      }
+    }
+  }
+}

@@ -6,6 +6,7 @@
   "additionalProperties": false,
   "required": [
     "gateId",
+    "gateOrdinal",
     "estimatedCostMs",
     "evidenceSource",
     "inputFingerprintBefore",
@@ -13,10 +14,13 @@
     "changedContracts",
     "declaredConsumers",
     "consumerAudits",
-    "probes"
+    "probes",
+    "priorLateFailures",
+    "outcomeObservability"
   ],
   "properties": {
     "gateId": { "type": "string", "minLength": 1 },
+    "gateOrdinal": { "type": "integer", "minimum": 1 },
     "estimatedCostMs": { "type": "integer", "minimum": 0 },
     "evidenceSource": { "const": "harness-events" },
     "inputFingerprintBefore": { "$ref": "#/$defs/sha256" },
@@ -37,6 +41,14 @@
     "probes": {
       "type": "array",
       "items": { "$ref": "#/$defs/probe" }
+    },
+    "priorLateFailures": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": { "$ref": "#/$defs/lateFailure" }
+    },
+    "outcomeObservability": {
+      "$ref": "#/$defs/outcomeObservability"
     }
   },
   "$defs": {
@@ -73,6 +85,36 @@
         "kind": { "enum": ["positive", "negative"] },
         "outcome": { "enum": ["pass", "fail"] },
         "evidenceId": { "type": "string", "minLength": 1 }
+      }
+    },
+    "lateFailure": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["failureId", "discoveredGateOrdinal", "promotedGateOrdinal", "probeId", "evidenceId"],
+      "properties": {
+        "failureId": { "type": "string", "minLength": 1 },
+        "discoveredGateOrdinal": { "type": "integer", "minimum": 1 },
+        "promotedGateOrdinal": { "type": "integer", "minimum": 1 },
+        "probeId": { "type": "string", "minLength": 1 },
+        "evidenceId": { "type": "string", "minLength": 1 }
+      }
+    },
+    "outcomeObservability": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["durableLogPath", "completionRecordPath", "recordSchemaVersion", "capturesExitCode", "capturesFailureIds", "executionMode", "survivesObserverDisconnect", "waitsOnSupervisedProcessOnly", "writesCompletionRecordOnTermination", "successRequiresEmptyFailureIds", "failureIdsRequireFailureContext"],
+      "properties": {
+        "durableLogPath": { "type": "string", "minLength": 1 },
+        "completionRecordPath": { "type": "string", "minLength": 1 },
+        "recordSchemaVersion": { "const": 1 },
+        "capturesExitCode": { "type": "boolean" },
+        "capturesFailureIds": { "type": "boolean" },
+        "executionMode": { "const": "detached-supervisor" },
+        "survivesObserverDisconnect": { "type": "boolean" },
+        "waitsOnSupervisedProcessOnly": { "type": "boolean" },
+        "writesCompletionRecordOnTermination": { "type": "boolean" },
+        "successRequiresEmptyFailureIds": { "type": "boolean" },
+        "failureIdsRequireFailureContext": { "type": "boolean" }
       }
     }
   }

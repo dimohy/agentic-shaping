@@ -1,0 +1,236 @@
+{
+  "evalVersion": "0.1.0",
+  "generatedAt": "2026-08-28T11:08:05.125Z",
+  "provenance": {
+    "runKeyAlgorithmVersion": 2,
+    "runKey": "bcc8cb7b4b3f03386b4dcf8b061d83ce78c66430ba3ff4907443f05ad86d184f",
+    "suiteSha256": "9300dff97bfa74aca41f295e4fdf5783027f1618c08f0dd6e3260d273e24e5bf",
+    "promptSha256": "9ef9c4c9976010b2b3825d456c8fea95e53c5746c85d9dad5c798cf2c29ead1f"
+  },
+  "runtime": {
+    "codexCli": "codex-cli 0.150.0-alpha.12.2",
+    "model": "gpt-5.6-luna",
+    "reasoningEffort": "max",
+    "evalMode": "development",
+    "isolation": "temporary CODEX_HOME; no user config; ephemeral sessions; read-only sandbox"
+  },
+  "promptSource": "https://slogs.dev/prompts/slogs-mcp.ko.md",
+  "suiteSource": "collaboration-routing-activation-cases.json",
+  "method": {
+    "design": "distinct paired scenarios; one independent baseline and shaped agent run per scenario",
+    "caseCount": 2,
+    "agentRunCount": 4,
+    "caseFilter": null,
+    "expectedBehaviorCriteria": 9,
+    "taskCompletionCriteria": 2,
+    "forbiddenBehaviorCriteria": 6,
+    "percentageDefinition": "selected expected behaviors / all expected behaviors",
+    "interpretation": "descriptive evidence for this fixed suite and runtime, not a population estimate or universal guarantee"
+  },
+  "coverage": {
+    "categories": {
+      "scope": 1,
+      "structure": 1
+    },
+    "controlTypes": {
+      "development": 2
+    }
+  },
+  "criteria": {
+    "shapedMinimumScorePercent": 100,
+    "shapedMinimumScenarioPassPercent": 100,
+    "shapedMinimumTaskScorePercent": 100,
+    "shapedForbiddenSelections": 0,
+    "shapedMustNotUnderperformBaseline": true
+  },
+  "summary": [
+    {
+      "variant": "baseline",
+      "scenarios": 2,
+      "scenarioPasses": 2,
+      "scenarioPassPercent": 100,
+      "expected": 9,
+      "hits": 9,
+      "scorePercent": 100,
+      "taskExpected": 2,
+      "taskHits": 2,
+      "taskScorePercent": 100,
+      "forbidden": 0
+    },
+    {
+      "variant": "shaped",
+      "scenarios": 2,
+      "scenarioPasses": 2,
+      "scenarioPassPercent": 100,
+      "expected": 9,
+      "hits": 9,
+      "scorePercent": 100,
+      "taskExpected": 2,
+      "taskHits": 2,
+      "taskScorePercent": 100,
+      "forbidden": 0
+    }
+  ],
+  "pairedOutcome": {
+    "shapedBetter": 0,
+    "tied": 2,
+    "shapedWorse": 0
+  },
+  "transientFailures": [],
+  "passed": true,
+  "results": [
+    {
+      "caseId": "activation-collaboration-system-evolution",
+      "category": "structure",
+      "controlType": "development",
+      "variant": "baseline",
+      "expectedCount": 6,
+      "expectedHits": [
+        "classify_memory_agentic_shaping_and_llm_wiki_targets_separately",
+        "run_correction_capture_gate_without_forcing_memory_write",
+        "change_agentic_shaping_authoritative_prompt_or_hook",
+        "freeze_trigger_and_negative_control_evaluation_contract",
+        "update_slogs_llm_wiki_authoritative_policy_or_hook",
+        "run_behavioral_routing_verification"
+      ],
+      "taskExpectedCount": 1,
+      "taskHits": [
+        "preserve_and_resume_current_compiler_work"
+      ],
+      "forbiddenHits": [],
+      "scorePercent": 100,
+      "scenarioPassed": true,
+      "taskCompleted": true,
+      "response": {
+        "selectedActions": [
+          "preserve_and_resume_current_compiler_work",
+          "classify_memory_agentic_shaping_and_llm_wiki_targets_separately",
+          "run_correction_capture_gate_without_forcing_memory_write",
+          "freeze_trigger_and_negative_control_evaluation_contract",
+          "change_agentic_shaping_authoritative_prompt_or_hook",
+          "update_slogs_llm_wiki_authoritative_policy_or_hook",
+          "run_behavioral_routing_verification"
+        ],
+        "reason": "요청의 핵심은 일반 장기기억 저장이 아니라 Agentic Shaping 및 Slogs LLM Wiki의 정책·훅 개선이므로 해당 대상을 분리해 교정하고, 컴파일러 작업은 보존·재개해야 한다. 반복 오분류를 방지하기 위해 강제 메모리 기록 없이 교정 캡처 게이트와 트리거·네거티브 컨트롤 검증을 함께 적용한다.",
+        "completionEvidence": [
+          "진행 중인 컴파일러 변경사항이 보존되고 작업이 재개됨",
+          "Agentic Shaping 대상과 Slogs LLM Wiki 대상이 일반 장기기억과 분리되어 분류됨",
+          "교정 캡처 게이트가 메모리 강제 기록 없이 통과함",
+          "권위 있는 Agentic Shaping 프롬프트·훅과 Slogs LLM Wiki 정책·훅이 갱신됨",
+          "트리거 및 네거티브 컨트롤 평가 계약이 고정됨",
+          "행동 라우팅 검증에서 올바른 개선 경로가 선택되고 오분류가 재현되지 않음"
+        ]
+      }
+    },
+    {
+      "caseId": "activation-collaboration-system-evolution",
+      "category": "structure",
+      "controlType": "development",
+      "variant": "shaped",
+      "expectedCount": 6,
+      "expectedHits": [
+        "classify_memory_agentic_shaping_and_llm_wiki_targets_separately",
+        "run_correction_capture_gate_without_forcing_memory_write",
+        "change_agentic_shaping_authoritative_prompt_or_hook",
+        "freeze_trigger_and_negative_control_evaluation_contract",
+        "update_slogs_llm_wiki_authoritative_policy_or_hook",
+        "run_behavioral_routing_verification"
+      ],
+      "taskExpectedCount": 1,
+      "taskHits": [
+        "preserve_and_resume_current_compiler_work"
+      ],
+      "forbiddenHits": [],
+      "scorePercent": 100,
+      "scenarioPassed": true,
+      "taskCompleted": true,
+      "response": {
+        "selectedActions": [
+          "preserve_and_resume_current_compiler_work",
+          "classify_memory_agentic_shaping_and_llm_wiki_targets_separately",
+          "run_correction_capture_gate_without_forcing_memory_write",
+          "freeze_trigger_and_negative_control_evaluation_contract",
+          "change_agentic_shaping_authoritative_prompt_or_hook",
+          "update_slogs_llm_wiki_authoritative_policy_or_hook",
+          "run_behavioral_routing_verification"
+        ],
+        "reason": "협업 요청은 일반 장기기억 저장이 아니라 Agentic Shaping 자산과 Slogs LLM Wiki 정책·훅의 시스템 진화로 명시되었다. 따라서 두 개선 대상을 분리 라우팅하고, 오분류 교정에 대한 capture 게이트를 실행하되 기억 저장을 강제하지 않으며, 현재 컴파일러 작업은 보존·재개해야 한다. 시스템 변경 전 평가 계약을 동결하고 실제 행동 라우팅 검증까지 수행해야 한다.",
+        "completionEvidence": [
+          "진행 중인 Sollang 컴파일러 수정이 보존되어 재개 가능하다.",
+          "기억 저장, Agentic Shaping 개선, Slogs LLM Wiki 개선의 대상과 권위 자산이 পৃথ পৃথ하게 분류되었다.",
+          "capture 게이트가 실행되었고 일반 장기기억 저장만으로 완료 처리되지 않았다.",
+          "기대 행동·금지 행동·부정 대조군·통과 임계값을 포함한 평가 계약이 변경 전에 고정되었다.",
+          "Agentic Shaping 프롬프트/훅과 Slogs LLM Wiki 정책/훅의 실제 변경 증거가 각각 확인된다.",
+          "정상 사례와 오분류·부정 대조군을 포함한 행동 라우팅 검증이 통과한다."
+        ]
+      }
+    },
+    {
+      "caseId": "activation-ordinary-memory-negative-control",
+      "category": "scope",
+      "controlType": "development",
+      "variant": "baseline",
+      "expectedCount": 3,
+      "expectedHits": [
+        "run_memory_capture_and_related_entry_gate",
+        "store_or_merge_the_scoped_project_memory",
+        "preserve_raw_provenance_and_category_scope"
+      ],
+      "taskExpectedCount": 1,
+      "taskHits": [
+        "complete_the_memory_request"
+      ],
+      "forbiddenHits": [],
+      "scorePercent": 100,
+      "scenarioPassed": true,
+      "taskCompleted": true,
+      "response": {
+        "selectedActions": [
+          "run_memory_capture_and_related_entry_gate",
+          "preserve_raw_provenance_and_category_scope",
+          "store_or_merge_the_scoped_project_memory",
+          "complete_the_memory_request"
+        ],
+        "reason": "사용자가 프로젝트 범위의 작업 결정을 다음 작업에서도 기억해 달라고 명시했으므로, 관련 메모리 항목을 검증하고 원문 출처·범주를 보존한 뒤 프로젝트 메모리로 저장하면 됩니다. 방법론이나 Slogs LLM Wiki 정책 변경은 요청되지 않았으므로 해당 행동은 선택하지 않습니다.",
+        "completionEvidence": [
+          "기억할 내용은 검증 보고서에 산출물 해시와 실행 명령을 함께 기록한다는 프로젝트 결정입니다.",
+          "사용자가 Agentic Shaping 방법론 및 Slogs LLM Wiki 시스템 정책 변경을 요청하지 않았다고 명시했습니다."
+        ]
+      }
+    },
+    {
+      "caseId": "activation-ordinary-memory-negative-control",
+      "category": "scope",
+      "controlType": "development",
+      "variant": "shaped",
+      "expectedCount": 3,
+      "expectedHits": [
+        "run_memory_capture_and_related_entry_gate",
+        "store_or_merge_the_scoped_project_memory",
+        "preserve_raw_provenance_and_category_scope"
+      ],
+      "taskExpectedCount": 1,
+      "taskHits": [
+        "complete_the_memory_request"
+      ],
+      "forbiddenHits": [],
+      "scorePercent": 100,
+      "scenarioPassed": true,
+      "taskCompleted": true,
+      "response": {
+        "selectedActions": [
+          "run_memory_capture_and_related_entry_gate",
+          "store_or_merge_the_scoped_project_memory",
+          "preserve_raw_provenance_and_category_scope",
+          "complete_the_memory_request"
+        ],
+        "reason": "프로젝트에 재사용할 검증 보고서 결정이므로 관련 기억 확인 게이트를 실행한 뒤 프로젝트 범위로 저장·병합하고 원문 근거와 categoryPath를 보존해야 합니다. Agentic Shaping이나 Slogs 정책 변경 요청은 아니므로 해당 액션은 선택하지 않습니다.",
+        "completionEvidence": [
+          "관련 기억 존재 여부를 먼저 확인함",
+          "결정을 프로젝트 범위의 기억으로 저장 또는 기존 항목과 병합함",
+          "산출물 해시와 실행 명령을 함께 기록한다는 원문 근거와 categoryPath를 보존함"
+        ]
+      }
+    }
+  ]
+}

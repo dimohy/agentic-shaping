@@ -1,0 +1,10 @@
+{
+  "schemaVersion": 1,
+  "ruleId": "AS-GD-001",
+  "description": "A changed golden may be accepted only after the actual artifact is valid, its observable behavior matches an independent reference, and the authoritative update path publishes the exact validated bytes.",
+  "evidenceSchema": "golden-drift-evidence.schema.json",
+  "runtimeModule": "golden-drift.mjs",
+  "evidenceAuthority": "harness-events",
+  "requiredArtifactChecks": ["assemble", "link", "execute"],
+  "updateAuthority": "authoritative-command"
+}

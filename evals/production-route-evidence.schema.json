@@ -1,0 +1,105 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://agentic-shaping.slogs.dev/evals/production-route-evidence.schema.json",
+  "title": "Agentic Shaping Production Route Evidence",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["claimId", "claimMode", "routeEvidenceSource", "baseline", "candidate"],
+  "properties": {
+    "claimId": { "type": "string", "minLength": 1 },
+    "claimMode": { "enum": ["acceptance", "diagnostic"] },
+    "routeEvidenceSource": { "const": "harness-events" },
+    "baseline": { "$ref": "#/$defs/execution" },
+    "candidate": { "$ref": "#/$defs/execution" }
+  },
+  "$defs": {
+    "sha256": {
+      "type": "string",
+      "pattern": "^[A-Fa-f0-9]{64}$"
+    },
+    "route": {
+      "type": "array",
+      "minItems": 4,
+      "maxItems": 4,
+      "prefixItems": [
+        { "$ref": "#/$defs/commandStage" },
+        { "$ref": "#/$defs/driverStage" },
+        { "$ref": "#/$defs/apiStage" },
+        { "$ref": "#/$defs/capabilityStage" }
+      ],
+      "items": false
+    },
+    "commandStage": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["kind", "id"],
+      "properties": {
+        "kind": { "const": "command" },
+        "id": { "type": "string", "minLength": 1 }
+      }
+    },
+    "driverStage": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["kind", "id"],
+      "properties": {
+        "kind": { "const": "driver" },
+        "id": { "type": "string", "minLength": 1 }
+      }
+    },
+    "apiStage": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["kind", "id"],
+      "properties": {
+        "kind": { "const": "api" },
+        "id": { "type": "string", "minLength": 1 }
+      }
+    },
+    "capabilityStage": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["kind", "id"],
+      "properties": {
+        "kind": { "const": "capability" },
+        "id": { "type": "string", "minLength": 1 }
+      }
+    },
+    "output": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["sha256", "bytes"],
+      "properties": {
+        "sha256": { "$ref": "#/$defs/sha256" },
+        "bytes": { "type": "integer", "minimum": 1 }
+      }
+    },
+    "sample": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["wallMs", "cpuMs", "peakWorkingSetBytes"],
+      "properties": {
+        "wallMs": { "type": "integer", "minimum": 1 },
+        "cpuMs": { "type": "integer", "minimum": 1 },
+        "peakWorkingSetBytes": { "type": "integer", "minimum": 1 }
+      }
+    },
+    "execution": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["compilerFingerprint", "inputFingerprint", "declaredProductionRoute", "observedRoute", "output", "samples"],
+      "properties": {
+        "compilerFingerprint": { "$ref": "#/$defs/sha256" },
+        "inputFingerprint": { "$ref": "#/$defs/sha256" },
+        "declaredProductionRoute": { "$ref": "#/$defs/route" },
+        "observedRoute": { "$ref": "#/$defs/route" },
+        "output": { "$ref": "#/$defs/output" },
+        "samples": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "$ref": "#/$defs/sample" }
+        }
+      }
+    }
+  }
+}

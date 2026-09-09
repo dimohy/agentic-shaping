@@ -1,0 +1,191 @@
+{
+  "ruleId": "AS-US-001",
+  "cases": [
+    {
+      "id": "compiler-defect-signal-observed-with-executed-baseline",
+      "trace": {
+        "ruleId": "AS-US-001", "traceAuthority": "orchestrator",
+        "orchestratorEvidence": { "runner": "agentic-shaping-orchestrator", "runId": "run-observed-001", "targetRepository": "P:/MyWorks/Sollang", "targetRevision": "b288e41a3a10e85280207a441d169f3a120d2780", "inputFingerprint": "9090909090909090909090909090909090909090909090909090909090909090", "executedCommands": [
+          { "purpose": "baseline", "command": "run focused failing fixture", "exitCode": 1, "expectedExitCode": 1, "outputSha256": "9191919191919191919191919191919191919191919191919191919191919191" }
+        ] },
+        "signal": { "id": "qualified-call-owner-drift", "durable": true, "machineDecidable": true, "sourceEvidence": ["the same nested call topology fails in the retained baseline"] },
+        "decision": { "structured": false, "claimLevel": "signal-observed", "reason": "the baseline is frozen while the production consumer still fails", "plannedAsset": { "kind": "index", "authorityPath": "selfhost/semantic/calls.slg", "nextGate": "focused fixture and production consumer pass on the frozen input" } },
+        "currentTaskComplete": false, "forbiddenActions": []
+      },
+      "expected": { "allowed": true, "code": "AS-US-001-SIGNAL-OBSERVED" }
+    },
+    {
+      "id": "signal-observed-rejects-unexpected-baseline-exit",
+      "trace": {
+        "ruleId": "AS-US-001", "traceAuthority": "orchestrator",
+        "orchestratorEvidence": { "runner": "agentic-shaping-orchestrator", "runId": "run-observed-unexpected-exit", "targetRepository": "P:/MyWorks/Sollang", "targetRevision": "b288e41a3a10e85280207a441d169f3a120d2780", "inputFingerprint": "9696969696969696969696969696969696969696969696969696969696969696", "executedCommands": [
+          { "purpose": "baseline", "command": "run failing fixture", "exitCode": 1, "expectedExitCode": 0, "outputSha256": "9797979797979797979797979797979797979797979797979797979797979797" }
+        ] },
+        "signal": { "id": "unexpected-command-failure", "durable": true, "machineDecidable": true, "sourceEvidence": ["the baseline process failed outside its expected contract"] },
+        "decision": { "structured": false, "claimLevel": "signal-observed", "reason": "unexpected command failure is not evidence", "plannedAsset": { "kind": "fixture", "authorityPath": "examples/regression/pending.slg", "nextGate": "repair the harness and recapture" } },
+        "currentTaskComplete": false, "forbiddenActions": []
+      },
+      "expected": { "allowed": false, "code": "AS-US-001-INVALID-ORCHESTRATOR-EVIDENCE" }
+    },
+    {
+      "id": "signal-observed-without-executed-baseline",
+      "trace": {
+        "ruleId": "AS-US-001", "traceAuthority": "orchestrator",
+        "orchestratorEvidence": { "runner": "agentic-shaping-orchestrator", "runId": "run-observed-no-baseline", "targetRepository": "P:/MyWorks/Sollang", "targetRevision": "b288e41a3a10e85280207a441d169f3a120d2780", "inputFingerprint": "9292929292929292929292929292929292929292929292929292929292929292", "executedCommands": [
+          { "purpose": "validator", "command": "read documentation", "exitCode": 0, "outputSha256": "9393939393939393939393939393939393939393939393939393939393939393" }
+        ] },
+        "signal": { "id": "unexecuted-observation", "durable": true, "machineDecidable": true, "sourceEvidence": ["the Agent says the failure repeated"] },
+        "decision": { "structured": false, "claimLevel": "signal-observed", "reason": "no executed baseline exists", "plannedAsset": { "kind": "fixture", "authorityPath": "examples/regression/pending.slg", "nextGate": "capture the baseline" } },
+        "currentTaskComplete": false, "forbiddenActions": []
+      },
+      "expected": { "allowed": false, "code": "AS-US-001-INVALID-ORCHESTRATOR-EVIDENCE" }
+    },
+    {
+      "id": "completed-task-cannot-stop-at-signal-observed",
+      "trace": {
+        "ruleId": "AS-US-001", "traceAuthority": "orchestrator",
+        "orchestratorEvidence": { "runner": "agentic-shaping-orchestrator", "runId": "run-observed-complete", "targetRepository": "P:/MyWorks/Sollang", "targetRevision": "b288e41a3a10e85280207a441d169f3a120d2780", "inputFingerprint": "9494949494949494949494949494949494949494949494949494949494949494", "executedCommands": [
+          { "purpose": "baseline", "command": "run baseline", "exitCode": 0, "outputSha256": "9595959595959595959595959595959595959595959595959595959595959595" }
+        ] },
+        "signal": { "id": "premature-stop", "durable": true, "machineDecidable": true, "sourceEvidence": ["the durable signal remains unapplied"] },
+        "decision": { "structured": false, "claimLevel": "signal-observed", "reason": "the task was marked complete too early", "plannedAsset": { "kind": "invariant", "authorityPath": "compiler/invariant", "nextGate": "apply and verify the invariant" } },
+        "currentTaskComplete": true, "forbiddenActions": []
+      },
+      "expected": { "allowed": false, "code": "AS-US-001-INVALID-SIGNAL-OBSERVED" }
+    },
+    {
+      "id": "compiler-defect-becomes-consumed-fixture",
+      "trace": {
+        "ruleId": "AS-US-001", "traceAuthority": "orchestrator",
+        "orchestratorEvidence": { "runner": "agentic-shaping-orchestrator", "runId": "run-measured-001", "targetRepository": "P:/MyWorks/Sollang", "targetRevision": "b288e41a3a10e85280207a441d169f3a120d2780", "inputFingerprint": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", "executedCommands": [
+          { "purpose": "validator", "command": "verify focused contract", "exitCode": 0, "outputSha256": "0101010101010101010101010101010101010101010101010101010101010101" },
+          { "purpose": "consumer", "command": "run production consumer", "exitCode": 0, "outputSha256": "0202020202020202020202020202020202020202020202020202020202020202" },
+          { "purpose": "baseline", "command": "measure retained baseline", "exitCode": 0, "outputSha256": "0303030303030303030303030303030303030303030303030303030303030303" },
+          { "purpose": "candidate", "command": "measure candidate", "exitCode": 0, "outputSha256": "0404040404040404040404040404040404040404040404040404040404040404" },
+          { "purpose": "measurement", "command": "compare frozen retry counts", "exitCode": 0, "outputSha256": "0707070707070707070707070707070707070707070707070707070707070707" }
+        ] },
+        "signal": { "id": "nested-result-recovery", "durable": true, "machineDecidable": true, "sourceEvidence": ["same late failure reproduced twice"] },
+        "decision": { "structured": true, "claimLevel": "measured-improvement", "reason": "shared invariant", "asset": { "kind": "fixture", "authorityPath": "examples/regression/1331.slg", "inputFingerprint": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", "validatorEvidence": ["focused verifier passed"] }, "application": { "productionPathChanged": true, "consumerEvidence": ["Stage2 preflight consumes fixture"] }, "measurement": { "metric": "retries", "before": 4, "after": 1, "measuredInputFingerprint": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", "command": "compare frozen retry counts", "outputSha256": "0707070707070707070707070707070707070707070707070707070707070707" } },
+        "currentTaskComplete": true, "forbiddenActions": []
+      },
+      "expected": { "allowed": true, "code": "AS-US-001-STRUCTURED-IMPROVEMENT" }
+    },
+    {
+      "id": "compiler-defect-structured-and-applied-awaits-measurement",
+      "trace": {
+        "ruleId": "AS-US-001", "traceAuthority": "orchestrator",
+        "orchestratorEvidence": { "runner": "agentic-shaping-orchestrator", "runId": "run-applied-001", "targetRepository": "P:/MyWorks/Sollang", "targetRevision": "b288e41a3a10e85280207a441d169f3a120d2780", "inputFingerprint": "abababababababababababababababababababababababababababababababab", "executedCommands": [
+          { "purpose": "validator", "command": "verify focused invariant", "exitCode": 0, "outputSha256": "0505050505050505050505050505050505050505050505050505050505050505" },
+          { "purpose": "consumer", "command": "run pre-LLVM consumer", "exitCode": 0, "outputSha256": "0606060606060606060606060606060606060606060606060606060606060606" }
+        ] },
+        "signal": { "id": "typed-ir-reanalysis", "durable": true, "machineDecidable": true, "sourceEvidence": ["the same ownership boundary was manually rediscovered"] },
+        "decision": { "structured": true, "claimLevel": "structured-and-applied", "reason": "the invariant and focused preflight are now authoritative", "asset": { "kind": "invariant", "authorityPath": "selfhost/llvm/text/invariants.slg", "inputFingerprint": "abababababababababababababababababababababababababababababababab", "validatorEvidence": ["focused invariant verifier passed"] }, "application": { "productionPathChanged": true, "consumerEvidence": ["the pre-LLVM verifier consumes the invariant"] }, "measurementPlan": { "metric": "lateFailures", "measurementCommand": "verify the frozen baseline and candidate compiler against the same fixture batch", "baselineEvidence": ["retained baseline result"], "candidateEvidence": ["retained candidate result"], "measuredInputFingerprint": "abababababababababababababababababababababababababababababababab" } },
+        "currentTaskComplete": true, "forbiddenActions": []
+      },
+      "expected": { "allowed": true, "code": "AS-US-001-STRUCTURED-AND-APPLIED" }
+    },
+    {
+      "id": "one-off-creative-choice-stays-unstructured",
+      "trace": { "ruleId": "AS-US-001", "traceAuthority": "orchestrator", "signal": { "id": "one-image-composition", "durable": false, "machineDecidable": false, "sourceEvidence": ["explicit one-off request"] }, "decision": { "structured": false, "reason": "meaning remains agent judgment" }, "currentTaskComplete": true, "forbiddenActions": [] },
+      "expected": { "allowed": true, "code": "AS-US-001-NOT-DURABLE" }
+    },
+    {
+      "id": "durable-signal-left-in-prose",
+      "trace": { "ruleId": "AS-US-001", "traceAuthority": "orchestrator", "signal": { "id": "repeat", "durable": true, "machineDecidable": true, "sourceEvidence": ["repeated"] }, "decision": { "structured": false, "reason": "documented only" }, "currentTaskComplete": true, "forbiddenActions": [] },
+      "expected": { "allowed": false, "code": "AS-US-001-UNSTRUCTURED-DURABLE-SIGNAL" }
+    },
+    {
+      "id": "missing-signal-evidence",
+      "trace": { "ruleId": "AS-US-001", "traceAuthority": "orchestrator", "signal": { "id": "repeat", "durable": true, "machineDecidable": true, "sourceEvidence": [] }, "decision": { "structured": false, "reason": "none" }, "currentTaskComplete": true, "forbiddenActions": [] },
+      "expected": { "allowed": false, "code": "AS-US-001-MISSING-SIGNAL-EVIDENCE" }
+    },
+    {
+      "id": "asset-not-consumed",
+      "trace": { "ruleId": "AS-US-001", "traceAuthority": "orchestrator", "signal": { "id": "repeat", "durable": true, "machineDecidable": true, "sourceEvidence": ["repeated"] }, "decision": { "structured": true, "claimLevel": "measured-improvement", "reason": "fixture", "asset": { "kind": "fixture", "authorityPath": "fixture", "inputFingerprint": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb", "validatorEvidence": ["passes"] }, "application": { "productionPathChanged": false, "consumerEvidence": [] }, "measurement": { "metric": "retries", "before": 2, "after": 1, "measuredInputFingerprint": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb" } }, "currentTaskComplete": true, "forbiddenActions": [] },
+      "expected": { "allowed": false, "code": "AS-US-001-NOT-APPLIED" }
+    },
+    {
+      "id": "input-drift",
+      "trace": { "ruleId": "AS-US-001", "traceAuthority": "orchestrator", "signal": { "id": "repeat", "durable": true, "machineDecidable": true, "sourceEvidence": ["repeated"] }, "decision": { "structured": true, "claimLevel": "measured-improvement", "reason": "validator", "asset": { "kind": "validator", "authorityPath": "validator", "inputFingerprint": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc", "validatorEvidence": ["passes"] }, "application": { "productionPathChanged": true, "consumerEvidence": ["consumer"] }, "measurement": { "metric": "lateFailures", "before": 2, "after": 0, "measuredInputFingerprint": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd", "command": "compare late failures", "outputSha256": "0808080808080808080808080808080808080808080808080808080808080808" } }, "currentTaskComplete": true, "forbiddenActions": [] },
+      "expected": { "allowed": false, "code": "AS-US-001-INPUT-DRIFT" }
+    },
+    {
+      "id": "no-measured-improvement",
+      "trace": { "ruleId": "AS-US-001", "traceAuthority": "orchestrator", "signal": { "id": "repeat", "durable": true, "machineDecidable": true, "sourceEvidence": ["repeated"] }, "decision": { "structured": true, "claimLevel": "measured-improvement", "reason": "index", "asset": { "kind": "index", "authorityPath": "index", "inputFingerprint": "eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee", "validatorEvidence": ["passes"] }, "application": { "productionPathChanged": true, "consumerEvidence": ["consumer"] }, "measurement": { "metric": "elapsedMs", "before": 100, "after": 100, "measuredInputFingerprint": "eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee", "command": "compare elapsed time", "outputSha256": "0909090909090909090909090909090909090909090909090909090909090909" } }, "currentTaskComplete": true, "forbiddenActions": [] },
+      "expected": { "allowed": false, "code": "AS-US-001-NO-MEASURED-IMPROVEMENT" }
+    },
+    {
+      "id": "current-task-incomplete",
+      "trace": { "ruleId": "AS-US-001", "traceAuthority": "orchestrator", "signal": { "id": "one-off", "durable": false, "machineDecidable": false, "sourceEvidence": ["request"] }, "decision": { "structured": false, "reason": "one-off" }, "currentTaskComplete": false, "forbiddenActions": [] },
+      "expected": { "allowed": false, "code": "AS-US-001-CURRENT-TASK" }
+    },
+    {
+      "id": "forbidden-action",
+      "trace": { "ruleId": "AS-US-001", "traceAuthority": "orchestrator", "signal": { "id": "one-off", "durable": false, "machineDecidable": false, "sourceEvidence": ["request"] }, "decision": { "structured": false, "reason": "one-off" }, "currentTaskComplete": true, "forbiddenActions": ["secret-written"] },
+      "expected": { "allowed": false, "code": "AS-US-001-FORBIDDEN-ACTION" }
+    },
+    {
+      "id": "documentation-only-is-not-a-structured-asset",
+      "trace": { "ruleId": "AS-US-001", "traceAuthority": "orchestrator", "signal": { "id": "repeat", "durable": true, "machineDecidable": true, "sourceEvidence": ["repeated"] }, "decision": { "structured": true, "claimLevel": "measured-improvement", "reason": "documented", "asset": { "kind": "documentation", "authorityPath": "notes.md", "inputFingerprint": "ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff", "validatorEvidence": ["text exists"] }, "application": { "productionPathChanged": true, "consumerEvidence": ["reader"] }, "measurement": { "metric": "retries", "before": 2, "after": 1, "measuredInputFingerprint": "ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff" } }, "currentTaskComplete": true, "forbiddenActions": [] },
+      "expected": { "allowed": false, "code": "AS-US-001-INVALID-ASSET" }
+    },
+    {
+      "id": "structured-and-applied-without-measurement-plan",
+      "trace": { "ruleId": "AS-US-001", "traceAuthority": "orchestrator", "signal": { "id": "repeat", "durable": true, "machineDecidable": true, "sourceEvidence": ["repeated"] }, "decision": { "structured": true, "claimLevel": "structured-and-applied", "reason": "applied fixture", "asset": { "kind": "fixture", "authorityPath": "fixture", "inputFingerprint": "1212121212121212121212121212121212121212121212121212121212121212", "validatorEvidence": ["passes"] }, "application": { "productionPathChanged": true, "consumerEvidence": ["consumer"] } }, "currentTaskComplete": true, "forbiddenActions": [] },
+      "expected": { "allowed": false, "code": "AS-US-001-INVALID-MEASUREMENT-PLAN" }
+    },
+    {
+      "id": "candidate-claim-cannot-carry-improvement-measurement",
+      "trace": { "ruleId": "AS-US-001", "traceAuthority": "orchestrator", "signal": { "id": "repeat", "durable": true, "machineDecidable": true, "sourceEvidence": ["repeated"] }, "decision": { "structured": true, "claimLevel": "structured-and-applied", "reason": "candidate only", "asset": { "kind": "validator", "authorityPath": "validator", "inputFingerprint": "3434343434343434343434343434343434343434343434343434343434343434", "validatorEvidence": ["passes"] }, "application": { "productionPathChanged": true, "consumerEvidence": ["consumer"] }, "measurementPlan": { "metric": "lateFailures", "measurementCommand": "run frozen comparison", "baselineEvidence": ["baseline"], "candidateEvidence": ["candidate"], "measuredInputFingerprint": "3434343434343434343434343434343434343434343434343434343434343434" }, "measurement": { "metric": "lateFailures", "before": 1, "after": 0, "measuredInputFingerprint": "3434343434343434343434343434343434343434343434343434343434343434" } }, "currentTaskComplete": true, "forbiddenActions": [] },
+      "expected": { "allowed": false, "code": "AS-US-001-CLAIM-EVIDENCE-MISMATCH" }
+    },
+    {
+      "id": "trace-authority-label-without-executed-receipt",
+      "trace": {
+        "ruleId": "AS-US-001", "traceAuthority": "orchestrator",
+        "signal": { "id": "repeat", "durable": true, "machineDecidable": true, "sourceEvidence": ["repeated"] },
+        "decision": { "structured": true, "claimLevel": "measured-improvement", "reason": "claimed by label only", "asset": { "kind": "validator", "authorityPath": "validator", "inputFingerprint": "5656565656565656565656565656565656565656565656565656565656565656", "validatorEvidence": ["passes"] }, "application": { "productionPathChanged": true, "consumerEvidence": ["consumer"] }, "measurement": { "metric": "lateFailures", "before": 2, "after": 1, "measuredInputFingerprint": "5656565656565656565656565656565656565656565656565656565656565656", "command": "compare late failures", "outputSha256": "1010101010101010101010101010101010101010101010101010101010101010" } },
+        "currentTaskComplete": true, "forbiddenActions": []
+      },
+      "expected": { "allowed": false, "code": "AS-US-001-INVALID-ORCHESTRATOR-EVIDENCE" }
+    },
+    {
+      "id": "measured-claim-without-measurement-command-receipt",
+      "trace": {
+        "ruleId": "AS-US-001", "traceAuthority": "orchestrator",
+        "orchestratorEvidence": { "runner": "agentic-shaping-orchestrator", "runId": "run-missing-measurement", "targetRepository": "P:/MyWorks/Sollang", "targetRevision": "b288e41a3a10e85280207a441d169f3a120d2780", "inputFingerprint": "6767676767676767676767676767676767676767676767676767676767676767", "executedCommands": [
+          { "purpose": "validator", "command": "verify contract", "exitCode": 0, "outputSha256": "1111111111111111111111111111111111111111111111111111111111111111" },
+          { "purpose": "consumer", "command": "run consumer", "exitCode": 0, "outputSha256": "1212121212121212121212121212121212121212121212121212121212121212" },
+          { "purpose": "baseline", "command": "capture baseline", "exitCode": 0, "outputSha256": "1313131313131313131313131313131313131313131313131313131313131313" },
+          { "purpose": "candidate", "command": "capture candidate", "exitCode": 0, "outputSha256": "1414141414141414141414141414141414141414141414141414141414141414" }
+        ] },
+        "signal": { "id": "unbound-measurement", "durable": true, "machineDecidable": true, "sourceEvidence": ["numbers were authored without a measurement receipt"] },
+        "decision": { "structured": true, "claimLevel": "measured-improvement", "reason": "claim lacks bound execution", "asset": { "kind": "validator", "authorityPath": "validator", "inputFingerprint": "6767676767676767676767676767676767676767676767676767676767676767", "validatorEvidence": ["passes"] }, "application": { "productionPathChanged": true, "consumerEvidence": ["consumer"] }, "measurement": { "metric": "lateFailures", "before": 2, "after": 1, "measuredInputFingerprint": "6767676767676767676767676767676767676767676767676767676767676767", "command": "compare late failures", "outputSha256": "1515151515151515151515151515151515151515151515151515151515151515" } },
+        "currentTaskComplete": true, "forbiddenActions": []
+      },
+      "expected": { "allowed": false, "code": "AS-US-001-MEASUREMENT-RECEIPT-MISMATCH" }
+    },
+    {
+      "id": "measured-claim-with-mismatched-output-hash",
+      "trace": {
+        "ruleId": "AS-US-001", "traceAuthority": "orchestrator",
+        "orchestratorEvidence": { "runner": "agentic-shaping-orchestrator", "runId": "run-mismatched-measurement", "targetRepository": "P:/MyWorks/Sollang", "targetRevision": "b288e41a3a10e85280207a441d169f3a120d2780", "inputFingerprint": "6868686868686868686868686868686868686868686868686868686868686868", "executedCommands": [
+          { "purpose": "validator", "command": "verify contract", "exitCode": 0, "outputSha256": "1616161616161616161616161616161616161616161616161616161616161616" },
+          { "purpose": "consumer", "command": "run consumer", "exitCode": 0, "outputSha256": "1717171717171717171717171717171717171717171717171717171717171717" },
+          { "purpose": "baseline", "command": "capture baseline", "exitCode": 0, "outputSha256": "1818181818181818181818181818181818181818181818181818181818181818" },
+          { "purpose": "candidate", "command": "capture candidate", "exitCode": 0, "outputSha256": "1919191919191919191919191919191919191919191919191919191919191919" },
+          { "purpose": "measurement", "command": "compare late failures", "exitCode": 0, "outputSha256": "2020202020202020202020202020202020202020202020202020202020202020" }
+        ] },
+        "signal": { "id": "mismatched-measurement", "durable": true, "machineDecidable": true, "sourceEvidence": ["claimed values reference another output"] },
+        "decision": { "structured": true, "claimLevel": "measured-improvement", "reason": "measurement hash drift", "asset": { "kind": "validator", "authorityPath": "validator", "inputFingerprint": "6868686868686868686868686868686868686868686868686868686868686868", "validatorEvidence": ["passes"] }, "application": { "productionPathChanged": true, "consumerEvidence": ["consumer"] }, "measurement": { "metric": "lateFailures", "before": 2, "after": 1, "measuredInputFingerprint": "6868686868686868686868686868686868686868686868686868686868686868", "command": "compare late failures", "outputSha256": "2121212121212121212121212121212121212121212121212121212121212121" } },
+        "currentTaskComplete": true, "forbiddenActions": []
+      },
+      "expected": { "allowed": false, "code": "AS-US-001-MEASUREMENT-RECEIPT-MISMATCH" }
+    },
+    {
+      "id": "agent-authored-trace",
+      "trace": { "ruleId": "AS-US-001", "traceAuthority": "agent", "signal": { "id": "one-off", "durable": false, "machineDecidable": false, "sourceEvidence": ["request"] }, "decision": { "structured": false, "reason": "one-off" }, "currentTaskComplete": true, "forbiddenActions": [] },
+      "expected": { "allowed": false, "code": "AS-US-001-INVALID-TRACE" }
+    }
+  ]
+}
