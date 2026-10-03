@@ -1,0 +1,8 @@
+{
+  "ruleId": "AS-I18N-001",
+  "frozenAt": "2026-10-03",
+  "cases": ["default-missing", "check-missing", "refresh-missing", "check-cannot-translate", "complete-catalog-build"],
+  "expectedExternalLaunches": 0,
+  "defaultPolicy": "Missing translation fails before any external process; external translation requires explicit --translate",
+  "claims": "Generator process behavior under an instrumented spawn hook, not remote translation quality"
+}

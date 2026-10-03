@@ -1,5 +1,8 @@
 {
   "schemaVersion": 5,
+  "diagnosticContinuationContract": "diagnostic-continuation-contract.json",
+  "diagnosticLaunchAdapter": "../scripts/launch-diagnostic.mjs",
+  "diagnosticPolicy": "Repeated diagnosis also requires AS-DC-001; passing input/log/control checks alone does not justify another whole-input observation.",
   "ruleId": "AS-EG-001",
   "description": "Before a high-cost gate, every changed contract must have a harness-declared downstream consumer inventory, exact passing audits, positive and negative cheap probes, stable active inputs, and durable outcome observability.",
   "minimumCostMs": 60000,

@@ -2,6 +2,22 @@
 
 Agentic Shaping uses Semantic Versioning. Compatible wording and bug corrections increment `patch`, backward-compatible capabilities increment `minor`, and incompatible public-contract changes increment `major`.
 
+## [0.5.8] - 2026-10-03
+
+### What changed for users
+
+- Repeated costly diagnosis now has an explicit continuation contract, AS-DC-001. It rejects exhausted whole-input budgets, renamed observations with no discriminating gain, unsampled gaps, insufficient trace capacity, unaudited reuse and available cheaper alternatives.
+- The real launch adapter blocks rejected plans before child creation; original acceptance scope, input and timeout stay independent.
+- Verification: 18/18 frozen deterministic cases; rejected commands never started and a normal command executed. This proves prevention in integrated paths, not compiler speedup, model superiority or global Codex enforcement.
+- The local Sollang integration uses durable execution records. Slogs bounded historical reads are a separate source change and require a production rollout before claiming live tool behavior.
+
+### Technical notes
+
+- Compatibility: Existing acceptance gates remain independent. Missing translation catalogs now require explicit `--translate` to start an external process.
+- Contracts: AS-DC-001 adds cost-aware continuation to AS-EG-001; AS-I18N-001 protects ordinary generation and check modes.
+- Verification: Frozen continuation 18/18 and localization 5/5; retained AS-EG-001 22/22; actual Sollang adapter 2/2.
+- Known limitation: Only integrated launch paths enforce the checks. Neither global Codex enforcement nor compiler speedup nor public website deployment is claimed.
+
 ## [0.5.7] - 2026-09-09
 
 ### What changed for users

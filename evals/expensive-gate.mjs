@@ -1,6 +1,7 @@
 import { readFileSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
+export { evaluateDiagnosticContinuation } from './diagnostic-continuation.mjs';
 
 const here = dirname(fileURLToPath(import.meta.url));
 

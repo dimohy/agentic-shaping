@@ -1,4 +1,6 @@
 import { readFileSync } from "node:fs";
+import { resolve } from 'node:path';
+const root = resolve(import.meta.dirname, '..');
 
 const normalize = value => value.replaceAll("\r\n", "\n").trim();
 const decodeHtml = value => value
@@ -17,8 +19,8 @@ const pairs = [
 
 let sharedVersion;
 for (const pair of pairs) {
-  const html = readFileSync(pair.htmlPath, "utf8");
-  const readme = readFileSync(pair.readmePath, "utf8");
+  const html = readFileSync(resolve(root, pair.htmlPath), "utf8");
+  const readme = readFileSync(resolve(root, pair.readmePath), "utf8");
   const version = html.match(/<meta\s+name="application-version"\s+content="(v\d+\.\d+)"\s*\/>/)?.[1];
   if (!version) throw new Error(`${pair.htmlPath}에서 공개 버전 메타를 찾지 못했습니다.`);
   sharedVersion ??= version;
@@ -39,8 +41,8 @@ for (const pair of pairs) {
   }
 }
 
-const koreanHtml = readFileSync("ko/index.html", "utf8");
-const koreanReadme = readFileSync("README.ko.md", "utf8");
+const koreanHtml = readFileSync(resolve(root, "ko/index.html"), "utf8");
+const koreanReadme = readFileSync(resolve(root, "README.ko.md"), "utf8");
 for (const contract of [
   "CONTEXT-SCALABLE ANALYSIS",
   "원문 위치와 버전/해시",

@@ -8,7 +8,8 @@ const root = resolve(import.meta.dirname, "..");
 const siteDir = join(root, "site");
 const localeDir = join(siteDir, "locales");
 const release = JSON.parse(readFileSync(join(siteDir, "release-manifest.json"), "utf8"));
-const applyRelease = source => source.replaceAll("{{PUBLIC_VERSION}}", release.displayVersion);
+const applyRelease = source => source.replaceAll("{{PUBLIC_VERSION}}", release.displayVersion)
+  .replaceAll('{{POLICY_VERSION}}', release.policyVersion);
 const htmlSource = applyRelease(readFileSync(join(siteDir, "index.ko.source.html"), "utf8"));
 const readmeSource = applyRelease(readFileSync(join(siteDir, "README.ko.source.md"), "utf8"));
 const stylesSource = readFileSync(join(root, "styles.css"), "utf8");
@@ -20,6 +21,8 @@ const stylesAsset = `styles.${stylesHash.slice(0, 12)}.css`;
 const scriptAsset = `script.${scriptHash.slice(0, 12)}.js`;
 const refresh = process.argv.includes("--refresh");
 const check = process.argv.includes("--check");
+const allowTranslation = process.argv.includes("--translate");
+if (check && allowTranslation) throw new Error('AS-I18N-001-CHECK-CANNOT-TRANSLATE');
 const hasHangul = value => /[가-힣]/.test(value);
 
 const units = new Map();
@@ -71,8 +74,8 @@ const translate = async (items, locale) => {
   const existing = existsSync(catalogPath) ? JSON.parse(readFileSync(catalogPath, "utf8")) : {};
   const translated = refresh ? {} : { ...existing };
   const pending = refresh ? [...items] : [...items].filter(([text]) => !translated[text]);
-  if (check && pending.length > 0) {
-    throw new Error(`${locale.code} catalog is missing ${pending.length} source units; run the generator without --check.`);
+  if (pending.length > 0 && !allowTranslation) {
+    throw new Error(`AS-I18N-001-MISSING-CATALOG: ${locale.code} is missing ${pending.length} source units. Supply the catalog or explicitly select --translate; no translation process was started.`);
   }
   if (pending.length === 0) return translated;
   const batches = [];

@@ -2,7 +2,7 @@
 
 [English](README.md) | [한국어](README.ko.md) | [日本語](README.ja.md) | [简体中文](README.zh-CN.md)
 
-<!-- AS-PS-001;version=0.5.7;policy=2026.09.09.9;AS-CT-001=7/7;status=behavior-verified;limitation=runtime-must-integrate-a-supported-cancellation-channel -->
+<!-- AS-PS-001;version=0.5.8;policy=2026.10.03.1;AS-DC-001=18/18;status=behavior-verified;limitation=integrated-launch-paths-only-no-compiler-speedup-claim -->
 
 > 这是让 AI Agent 先发现工作中的隐性知识·偏好·纠正·失败，并将其塑造成可在下一次执行中复用的记忆·规则·工具·验证器，与用户一起按用户的方式进化的工作方法。
 
@@ -146,6 +146,7 @@ Agentic Shaping v0.5
 7. 执行前后验证
    - 对高成本、破坏性或部署操作，先验证输入契约、准确目标、权限和失败条件。不得用警告和 silent fallback 隐藏成功状态。
    - 在高成本门控之后才发现的失败，应在下一次完整重新执行前提升为更早、更窄的 probe，并将该 probe 的通过结果和执行顺序固定为 harness 证据。
+   - 重复高成本诊断前，先固定先前执行记录、累计运行预算、待区分的原因候选和预期观测结果。存在观测空白、记录容量不足或更低成本的合适路径时，阻止全输入重新执行。结构化资产增加不等于改进；分别验证原始完成标准与成本降低。
    - 对持续时间超过 60,000ms 的长期执行，应在开始前固定彼此独立的持久化日志和结构化执行结果记录路径，并通过即使观测连接终止也能继续运行的独立监督进程执行。监督进程终止时必须将实际 exit code 和准确的失败 ID 写入结果记录。成功终止时失败 ID 集合必须为空，且失败 ID 只能从失败上下文中提取。此外，成功终止还要求与观测到的全部子进程终止一致，即孤儿进程数量为 0，结果记录中的 `orphanProcessIds` 也必须为空。如果交互式输出被截断或没有结果记录，不得猜测完成状态或失败原因。
    - 提前终止已确认失败的长期执行时，不得将原始进程 kill 用作完成路径。应使用由监督进程消费的明确取消 marker 或 API，并将全部子进程终止、孤儿进程数量为 0、非零 exit code、`cancelled` 状态以及准确的 `CANCELLATION_REQUESTED` 失败 ID 写入同一结构化执行结果记录；只有这样才能判定取消完成。
    - 如果生成产出物的 golden 发生变化，不得仅凭文本差异或 Agent 判断直接覆盖。必须同时确认实际产出物通过 assemble、link、execute，与独立参考实现的可观测行为一致，权威更新命令成功，并且验证字节与已发布 golden 的哈希一致。

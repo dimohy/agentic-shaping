@@ -1,0 +1,42 @@
+{
+  "schemaVersion": 1,
+  "ruleId": "AS-DC-001",
+  "frozenAt": "2026-10-03",
+  "scope": "Repeated costly diagnosis; preserve independent original acceptance",
+  "runtimeModule": "diagnostic-continuation.mjs",
+  "launchAdapter": "../scripts/launch-diagnostic.mjs",
+  "requirements": [
+    "Hash-bound prior execution records, actual unresolved candidates and explicit cumulative whole-input run budget",
+    "Predeclared exhaustive discriminating outcomes, no unsampled gap or insufficient trace capacity",
+    "Review existing source analysis, focused reproduction and checkpoint reuse before another whole-input run",
+    "Select an available cheaper suitable alternative; unavailable reuse requires an evidence-bound incompatibility reason",
+    "Diagnostic success never closes original acceptance; preserve original input, timeout and authorized scope",
+    "Launch adapter rejects invalid plans before spawning any child and records the decision"
+  ],
+  "evaluation": {
+    "suite": "diagnostic-continuation-cases.json",
+    "allCasesMustPass": true,
+    "forbiddenLaunches": 0,
+    "claims": "Deterministic prevention, not model behavior superiority or compiler speedup",
+    "cases": [
+      ["focused-normal", "OK"],
+      ["irreducible-whole-normal", "OK"],
+      ["original-acceptance", "OK"],
+      ["repeated-whole-budget", "AS-DC-001-BUDGET"],
+      ["renamed-observer-no-gain", "AS-DC-001-NO-DISCRIMINATION"],
+      ["stride-128-gap", "AS-DC-001-OBSERVATION-GAP"],
+      ["trace-capacity", "AS-DC-001-OBSERVATION-GAP"],
+      ["available-cheaper", "AS-DC-001-CHEAPER-AVAILABLE"],
+      ["reuse-without-audit", "AS-DC-001-ALTERNATIVE-AUDIT"],
+      ["missing-focused-audit", "AS-DC-001-ALTERNATIVE-AUDIT"],
+      ["unknown-cost", "AS-DC-001-INVALID-PLAN"],
+      ["stale-evidence", "AS-DC-001-EVIDENCE-DRIFT"],
+      ["scope-expansion", "AS-DC-001-SCOPE"],
+      ["diagnosis-as-acceptance", "AS-DC-001-ACCEPTANCE"],
+      ["shortened-acceptance", "AS-DC-001-ACCEPTANCE"],
+      ["docs-only-no-evidence", "AS-DC-001-INVALID-PLAN"],
+      ["unknown-fields", "AS-DC-001-INVALID-PLAN"],
+      ["candidate-omission", "AS-DC-001-NO-DISCRIMINATION"]
+    ]
+  }
+}

@@ -22,8 +22,10 @@ const alternates = [
 ];
 const sectionIds = ["start", "loop", "scale", "memory", "prompts", "validation"];
 const languageLinks = "[English](README.md) | [한국어](README.ko.md) | [日本語](README.ja.md) | [简体中文](README.zh-CN.md)";
-const policyVersion = read("site/index.ko.source.html").match(/HOMEPAGE \{\{PUBLIC_VERSION\}\} ↔ SLOGS ([0-9.]+)/)?.[1];
-if (!policyVersion) fail("한국어 홈페이지 권위 소스에서 Slogs 정책 버전을 찾지 못했습니다.");
+const policyVersion = release.policyVersion;
+if (!/^\d{4}\.\d{2}\.\d{2}\.\d+$/.test(policyVersion)
+    || !read('site/index.ko.source.html').includes('HOMEPAGE {{PUBLIC_VERSION}} ↔ SLOGS {{POLICY_VERSION}}'))
+  fail('한국어 홈페이지 정책 버전이 단일 권위 매니페스트에 연결되지 않았습니다.');
 const headerContract = JSON.parse(read("site/header-layout-contract.json"));
 const assetManifest = JSON.parse(read("site-assets/manifest.json"));
 const sha256 = content => createHash("sha256").update(content).digest("hex");

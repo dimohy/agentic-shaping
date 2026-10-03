@@ -5,7 +5,8 @@ const root = resolve(import.meta.dirname, "..");
 const html = readFileSync(join(root, "index.html"), "utf8");
 const versionMatch = html.match(/HOMEPAGE v[0-9.]+ ↔ SLOGS ([0-9.]+)/);
 if (!versionMatch) throw new Error("홈페이지에서 Slogs 정책 버전을 찾을 수 없습니다.");
-const expectedVersion = versionMatch[1];
+const expectedVersion = JSON.parse(readFileSync(join(root,'site/release-manifest.json'),'utf8')).policyVersion;
+if (versionMatch[1] !== expectedVersion) throw new Error('Homepage policy version differs from the authoritative release manifest.');
 
 const get = async url => {
   const response = await fetch(url);
@@ -23,35 +24,27 @@ if (version !== expectedVersion) throw new Error(`정책 버전 불일치: page=
 for (const [language, prompt, fragments] of [
   ["ko", korean, [
     `Prompt Version: ${expectedVersion}`,
-    "현재 결과 완성",
-    "명시적 일회성 작업",
-    "관련 하드코딩을 모두 교체",
-    "일반 작업 품질·안전 회귀와 Agentic Shaping 고유 발동 평가는 분리",
-    "협업과 시스템 진화 라우팅",
-    "기억 저장은 Agentic Shaping 또는 Slogs LLM Wiki 시스템 개선의 완료 증거가 아니다",
-    "모든 목표축",
-    "모든 wait/poll 전에",
-    "첫 poll을 포함한",
-    "안전한 비충돌 동반 작업",
-    "진행률 보고·기억 capture/write·Agent 주장은 증거가 아니다",
-    "인터록이 노출되지 않으면 강제 적용을 주장하지 말고",
-    "진행 중 단계",
+    "모든 요청 목표축",
+    "정형화의 효과와 반복 진단 비용",
+    "누적 전체 실행 예산",
+    "AS-DC-001",
+    "원래 완료 기준",
+    "정형화 자산·검사·문서가 늘어난 사실",
+    "비용 발생 전 실행 장치로 차단",
+    "기억 저장은 강제 적용 증거가 아니다",
+    "공개는 사용자의 명시 요청에서만",
   ]],
   ["en", english, [
     `Prompt Version: ${expectedVersion}`,
-    "complete the current result",
-    "explicit one-off work",
-    "replace all related hardcodes",
-    "Separate general task-quality and safety regression from Agentic Shaping activation evaluation",
-    "Collaboration And System-Evolution Routing",
-    "Memory storage is not completion evidence for Agentic Shaping or Slogs LLM Wiki system improvement",
-    "every harness-declared goal axis",
-    "before every wait/poll",
-    "including the first poll",
-    "safe non-conflicting companion work",
-    "a progress message, memory capture/write, or Agent claim is not evidence",
-    "When no interlock is exposed, do not claim hard enforcement",
-    "During an in-progress phase",
+    "all requested goal axes",
+    "Structured outcomes and repeated diagnostic cost",
+    "cumulative whole-input run budget",
+    "AS-DC-001",
+    "original acceptance criteria",
+    "Growth in assets, checks or documentation",
+    "before incurring cost",
+    "memory writes are not hard-enforcement evidence",
+    "Publish only upon explicit request",
   ]],
 ]) {
   for (const fragment of fragments) {

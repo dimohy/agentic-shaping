@@ -2,7 +2,7 @@
 
 [English](README.md) | [한국어](README.ko.md) | [日本語](README.ja.md) | [简体中文](README.zh-CN.md)
 
-<!-- AS-PS-001;version=0.5.7;policy=2026.09.09.9;AS-CT-001=7/7;status=behavior-verified;limitation=runtime-must-integrate-a-supported-cancellation-channel -->
+<!-- AS-PS-001;version=0.5.8;policy=2026.10.03.1;AS-DC-001=18/18;status=behavior-verified;limitation=integrated-launch-paths-only-no-compiler-speedup-claim -->
 
 > An AI work method that actively discovers tacit knowledge, preferences, corrections, and failures, then shapes them into reusable memories, rules, tools, and verifiers so the system evolves with the user’s way of working.
 
@@ -146,6 +146,7 @@ When the user explicitly states that information, a state, or a task is one-off 
 7. Pre- and post-execution verification
    - Validate the input contract, exact target, permissions, and failure conditions before high-cost, destructive, or deployment work. Do not hide warnings or silent fallbacks as success.
    - Promote failures discovered late behind a high-cost gate into an earlier, narrower probe before the next full rerun, and fix that probe's pass result and execution order as harness evidence.
+   - Before repeated costly diagnosis, freeze prior execution records, the cumulative run budget, unresolved causes and expected observations. Block whole-input reruns with observation gaps, insufficient record capacity or a cheaper suitable path. Asset growth is not improvement; verify original completion criteria and cost reduction separately.
    - For long-running executions lasting 60,000ms or more, fix separate persistent logging and structured execution-result recording paths before starting, and run the execution under an independent supervisor process that continues even if the observation connection ends. When it exits, the supervisor process must record the actual exit code and exact failure ID in the result record. The failure ID set for a successful exit must be empty, and failure IDs may be extracted only from failure context. A successful exit also requires zero orphan processes, consistent with observed termination of all children, and `orphanProcessIds` in the result record must likewise be empty. If interactive output is truncated or the result record is missing, do not speculate about completion or the cause of failure.
    - When terminating a long-running execution whose failure has already been confirmed, do not use a raw process kill as the completion path. Use an explicit cancellation marker or API consumed by the supervisor process, and classify cancellation as complete only after the same structured execution-result record contains termination of all children, zero orphan processes, a non-zero exit code, the `cancelled` status, and the exact `CANCELLATION_REQUESTED` failure ID.
    - If a generated artifact's golden differs, do not overwrite it based only on text differences or the Agent's judgment. Confirm all of the following: assemble, link, and execute of the actual artifact; observed behavioral equivalence with an independent reference; the authoritative update command; and hash equality between the verified bytes and the published golden.

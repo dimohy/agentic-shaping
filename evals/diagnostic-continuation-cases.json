@@ -1,0 +1,23 @@
+{
+  "schemaVersion": 1,
+  "cases": [
+    {"id":"focused-normal","changes":{},"expected":"OK"},
+    {"id":"irreducible-whole-normal","changes":{"mode":"whole-input"},"expected":"OK"},
+    {"id":"original-acceptance","changes":{"purpose":"acceptance","completionMode":"acceptance","mode":"whole-input"},"expected":"OK"},
+    {"id":"repeated-whole-budget","changes":{"mode":"whole-input","maximumWholeInputRuns":1},"expected":"AS-DC-001-BUDGET"},
+    {"id":"renamed-observer-no-gain","changes":{"mode":"whole-input","noGain":true},"expected":"AS-DC-001-NO-DISCRIMINATION"},
+    {"id":"stride-128-gap","changes":{"stride":128},"expected":"AS-DC-001-OBSERVATION-GAP"},
+    {"id":"trace-capacity","changes":{"maximumRecords":1},"expected":"AS-DC-001-OBSERVATION-GAP"},
+    {"id":"available-cheaper","changes":{"mode":"whole-input","cheaperAvailable":true},"expected":"AS-DC-001-CHEAPER-AVAILABLE"},
+    {"id":"reuse-without-audit","changes":{"mode":"whole-input","reuseReason":""},"expected":"AS-DC-001-ALTERNATIVE-AUDIT"},
+    {"id":"missing-focused-audit","changes":{"mode":"whole-input","omitFocused":true},"expected":"AS-DC-001-ALTERNATIVE-AUDIT"},
+    {"id":"unknown-cost","changes":{"expectedCostMs":null},"expected":"AS-DC-001-INVALID-PLAN"},
+    {"id":"stale-evidence","changes":{"staleEvidence":true},"expected":"AS-DC-001-EVIDENCE-DRIFT"},
+    {"id":"scope-expansion","changes":{"requestedScope":"global"},"expected":"AS-DC-001-SCOPE"},
+    {"id":"diagnosis-as-acceptance","changes":{"completionMode":"acceptance"},"expected":"AS-DC-001-ACCEPTANCE"},
+    {"id":"shortened-acceptance","changes":{"purpose":"acceptance","completionMode":"acceptance","timeoutMs":1000},"expected":"AS-DC-001-ACCEPTANCE"},
+    {"id":"docs-only-no-evidence","changes":{"omitEvidence":true},"expected":"AS-DC-001-INVALID-PLAN"},
+    {"id":"unknown-fields","changes":{"unknownFields":true},"expected":"AS-DC-001-INVALID-PLAN"},
+    {"id":"candidate-omission","changes":{"omitCandidate":true},"expected":"AS-DC-001-NO-DISCRIMINATION"}
+  ]
+}
