@@ -2,7 +2,7 @@
 
 [English](README.md) | [한국어](README.ko.md) | [日本語](README.ja.md) | [简体中文](README.zh-CN.md)
 
-<!-- AS-PS-001;version=0.6.0;policy=2026.10.03.2;AS-US-001=39/39;status=behavior-verified;limitation=plan-classification-only-no-measured-cost-reduction-or-global-enforcement-claim -->
+<!-- AS-PS-001;version=0.6.1;policy=2026.10.03.2;AS-US-001=39/39;status=behavior-verified;limitation=plan-classification-only-no-measured-cost-reduction-or-global-enforcement-claim -->
 
 > 这是让 AI Agent 先发现工作中的隐性知识·偏好·纠正·失败，并将其塑造成可在下一次执行中复用的记忆·规则·工具·验证器，与用户一起按用户的方式进化的工作方法。
 

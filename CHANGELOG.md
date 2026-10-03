@@ -2,6 +2,22 @@
 
 Agentic Shaping uses Semantic Versioning. Compatible wording and bug corrections increment `patch`, backward-compatible capabilities increment `minor`, and incompatible public-contract changes increment `major`.
 
+## [0.6.1] - 2026-10-04
+
+### What changed for users
+
+- The short copyable task prompt now chooses existing-tool reuse, direct model processing or reusable code by total cost and required accuracy.
+- Repeated signals are improvement candidates; they no longer command unconditional asset promotion in the short prompt.
+- New assets require a benefit, and neither new code nor a cost assessment form is required for every task.
+- Mandatory verification stays intact. Reports distinguish verified improvements from effects that have not been measured.
+
+### Technical notes
+
+- Compatibility: Wording correction; existing runtime contracts and Slogs policy 2026.10.03.2 remain compatible.
+- Contracts: The existing multilingual source and publication checks cover the short prompt in all four languages.
+- Verification: Retain AS-US-001 39/39; regenerate four homepage and README surfaces and check publication consistency.
+- Known limitation: This corrects public prompt guidance; it does not prove measured speedup or universal Agent compliance.
+
 ## [0.6.0] - 2026-10-03
 
 ### What changed for users

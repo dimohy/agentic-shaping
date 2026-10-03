@@ -1,11 +1,11 @@
 {
   "schemaVersion": 2,
   "contractId": "AS-PS-001",
-  "version": "0.6.0",
+  "version": "0.6.1",
   "displayVersion": "v0.6",
-  "previousVersion": "0.5.8",
-  "changeLevel": "minor",
-  "releaseDate": "2026-10-03",
+  "previousVersion": "0.6.0",
+  "changeLevel": "patch",
+  "releaseDate": "2026-10-04",
   "policyVersion": "2026.10.03.2",
   "feature": {
     "ruleId": "AS-US-001",

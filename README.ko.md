@@ -2,7 +2,7 @@
 
 [English](README.md) | [한국어](README.ko.md) | [日本語](README.ja.md) | [简体中文](README.zh-CN.md)
 
-<!-- AS-PS-001;version=0.6.0;policy=2026.10.03.2;AS-US-001=39/39;status=behavior-verified;limitation=plan-classification-only-no-measured-cost-reduction-or-global-enforcement-claim -->
+<!-- AS-PS-001;version=0.6.1;policy=2026.10.03.2;AS-US-001=39/39;status=behavior-verified;limitation=plan-classification-only-no-measured-cost-reduction-or-global-enforcement-claim -->
 
 > AI Agent가 작업 속 암묵지·취향·교정·실패를 먼저 발견하고, 다음 실행에 다시 쓸 수 있는 기억·규칙·도구·검증기로 빚어 사용자의 방식으로 함께 진화하는 작업법입니다.
 

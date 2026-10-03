@@ -2,7 +2,7 @@
 
 [English](README.md) | [한국어](README.ko.md) | [日本語](README.ja.md) | [简体中文](README.zh-CN.md)
 
-<!-- AS-PS-001;version=0.6.0;policy=2026.10.03.2;AS-US-001=39/39;status=behavior-verified;limitation=plan-classification-only-no-measured-cost-reduction-or-global-enforcement-claim -->
+<!-- AS-PS-001;version=0.6.1;policy=2026.10.03.2;AS-US-001=39/39;status=behavior-verified;limitation=plan-classification-only-no-measured-cost-reduction-or-global-enforcement-claim -->
 
 > AI Agentが作業中の暗黙知・好み・修正・失敗を先に発見し、次の実行で再利用できる記憶・ルール・ツール・検証器へと磨き上げ、ユーザーのやり方でともに進化する作業法です。
 
