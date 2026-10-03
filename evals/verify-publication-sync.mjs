@@ -141,7 +141,7 @@ const surfaces = surfaceDefinitions.map(([kind, locale, path]) => {
   };
 });
 
-const changelog = read("CHANGELOG.md");
+const changelog = read("CHANGELOG.md").replaceAll("\r\n", "\n");
 const releaseVersionPattern = release.version.replaceAll(".", "\\.");
 const releaseSection = changelog.match(new RegExp(`## \\[${releaseVersionPattern}\\][\\s\\S]*?(?=\\n## \\[|$)`))?.[0];
 if (!releaseSection) throw new Error(`CHANGELOG.md: ${release.version} release missing`);

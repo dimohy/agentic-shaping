@@ -58,5 +58,10 @@ for (const contract of ["비정형→정형 전환 게이트", "signal-observed"
   if (!koreanReadme.includes(contract)) throw new Error(`한국어 README에서 비정형→정형 계약을 찾지 못했습니다: ${contract}`);
   if (!koreanHtml.includes(contract)) throw new Error(`한국어 홈페이지에서 비정형→정형 계약을 찾지 못했습니다: ${contract}`);
 }
+for (const contract of ["신호는 개선 검토의 계기이며 새 코드 작성 명령이 아니다", "두 번의 반복만으로 자동 승격하지 않는다", "작성·실행·디버깅·검증·유지보수·컨텍스트의 총비용", "매번 별도 평가 양식이나 임시 스크립트를 만들지 않는다", "정형 승격을 선택한 경우에만", "기존 도구와 계약을 먼저 재사용하며 새 코드 작성을 강제하지 않는다", "필수 정확성·권한·기대값·검사를 약화하지 않는다"]) {
+  if (!koreanReadme.includes(contract) || !koreanHtml.includes(contract)) {
+    throw new Error(`한국어 공개 프롬프트에 비용 선택 계약이 없습니다: ${contract}`);
+  }
+}
 
 console.log(`4개 언어의 README 적용 프롬프트, 분석 확장 계약 및 공개 버전 ${sharedVersion} 검사 통과`);

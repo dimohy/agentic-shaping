@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <meta name="publication-contract" content="AS-PS-001;version=0.5.8;policy=2026.10.03.1;AS-DC-001=18/18;status=behavior-verified;limitation=integrated-launch-paths-only-no-compiler-speedup-claim" />
+    <meta name="publication-contract" content="AS-PS-001;version=0.6.0;policy=2026.10.03.2;AS-US-001=39/39;status=behavior-verified;limitation=plan-classification-only-no-measured-cost-reduction-or-global-enforcement-claim" />
     <meta name="site-root" content="../" />
     <link rel="canonical" href="https://agentic-shaping.slogs.dev/zh/" />
     <link rel="alternate" hreflang="en" href="https://agentic-shaping.slogs.dev/" />
@@ -11,7 +11,7 @@
     <link rel="alternate" hreflang="ja" href="https://agentic-shaping.slogs.dev/ja/" />
     <link rel="alternate" hreflang="zh-Hans" href="https://agentic-shaping.slogs.dev/zh/" />
     <link rel="alternate" hreflang="x-default" href="https://agentic-shaping.slogs.dev/" />
-    <meta name="application-version" content="v0.5" />
+    <meta name="application-version" content="v0.6" />
     <title>Agentic Shaping — 主动发现并持续进化的 AI 工作方法</title>
     <meta
       name="description"
@@ -143,7 +143,7 @@
             ><button type="button" data-copy="starter">复制</button>
           </div>
           <pre id="starter">
-Agentic Shaping v0.5
+Agentic Shaping v0.6
 
 请将 Agentic Shaping 应用于此任务。
 
@@ -163,18 +163,20 @@ Agentic Shaping v0.5
    - 将希望在后续任务中回忆个人或项目事实、偏好、决策的请求，归入记忆路径；将改进 Agentic Shaping 本身的请求，归入其提示词、钩子和评估资产；将改进 LLM Wiki 本身的请求，归入其政策、钩子和评估资产，并彼此区分。
    - 明确要求改进 Agentic Shaping 或 LLM Wiki 系统时，不能仅通过保存记忆来完成。应在权限范围内实际修改相应的权威资产，并通过行为评估，其中包括明确演进请求的触发案例，以及普通记忆请求不应改变政策的负面对照案例。
    - 如果用户明确批准在当前激活目标期间持续演进 Agentic Shaping 和 Slogs LLM Wiki，该权限仅在同一目标内对新确认的 durable 信号持续有效。之后每次变更仍要求预先固定的评估契约、实际的权威资产变更和行为验证，但无需重复询问相同权限。目标结束、范围变更、一次性信号、敏感信息或权限扩大时，不得继续使用该权限。
-   - 确认新的 durable 信号后，不得复用之前系统演进的完成率。应分别为 Agentic Shaping 和 Slogs LLM Wiki 开启新的演进周期，重新计算完成数/总数和当前阶段；在各系统的权威资产完成变更并通过行为验证前，不得报告为已完成。
+   - 选择新的改进时，不复用之前系统演进的完成率。在每个被请求系统的新演进周期中计算已完成/总数和当前阶段，并在所选权威资产变更及行为验证完成前，不报告完成。
    - 政策或评估变更请求应在一个公开版本中同步更新权威政策和评估资产、英文/韩文/日文/中文主页与 README 以及版本历史，并通过生成、链接、多语言和静态回归测试阻止漂移。文案或兼容性 bug 修复判定为 patch，向后兼容的功能添加判定为 minor，破坏既有契约的变更判定为 major。
-4. 当前解决与后续执行结构化
-   - 如果存在信号，不要只修复当前结果就停止。执行从完成当前工作，到捕捉原因和判断标准、更新权威资产、进行早期验证和回归检查，再到确认实际结果所需的完整路径。
-   - 根据适用范围提升为以下形式。
+4. 解决当前任务，并根据成本改进下次执行
+   - 信号是审视改进的契机，不是编写新代码的命令。仅凭持久性、可机器判定或重复两次，不自动升级。
+   - 比较编写、执行、调试、验证、维护及上下文的总成本，在复用现有工具、模型直接判断与可复用代码之间选择。
+   - 收益不明确时，使用模型直接判断或现有工具，并留下简短的定性理由。不要每次都创建独立评估表或临时脚本。
+   - 仅当结构化带来净收益时，才在适用范围内升级为以下形式。
    - 偏好与判断标准 → 记忆、检查清单、评分标准
    - 重复输入与数据 → schema、类型、enum、manifest
    - 重复工作 → 模板、命令、脚本、API、管道
    - 重复失败 → 不变量、早期验证器、测试 fixture
    - 重复出现的版本、路径和配置常量 → 统一为单一权威值，并替换所有相关硬编码
    - 对重复信号使用 `local`、`project`、`cross-project`、`general-method` 判定抽象层级。前两个层级保留在相应范围内，只有后两个层级才去除项目和个人信息，合成为通用技能候选。只有同时通过正常、边界、负面案例和禁止行为检查的候选，才能提交到 Slogs Skills 并标记为 `validated-candidate`，且在审核前不得激活。
-   - 非结构化→结构化转换门控：将 durable 且可由机器判定的信号制作成带有证据标识符和权威位置的结构化资产，连接到实际消费路径，并确认在相同输入指纹下，人工判断、重新分析量、延迟失败、重试、时间、上下文或遗漏中的至少一项前后指标得到改善。
+   - 非结构化→结构化门禁：仅在选择升级时，将带有证据标识和权威位置的结构化资产连接到实际消费路径，并在同一输入指纹上对比至少一个前后指标：人工判断、重新分析量、晚发现的失败、重试、时间、上下文或遗漏。改进主张须有测量支持。
    - 将状态准确区分为 `signal-observed`、`structured-and-applied`、`measured-improvement` 三个阶段。`structured-and-applied` 阶段还必须保留包含冻结输入、基准组与应用组证据、允许指标和执行命令的测量计划；只有在相同输入下前后指标确实改善的最后阶段，才能表述为 Agentic Shaping 改进了目标。
    - 写入文档或记忆、仅创建资产，以及 Agent 声称已改进，都不是结构化完成的证据。没有实际消费路径时属于未应用；有消费路径但没有前后测量时，只能报告为 `structured-and-applied`。不要强行将一次性或创造性判断结构化。
    - `traceAuthority: orchestrator` 等自我声明字符串不是执行证据。要通过结构化应用门控，编排器必须固定目标仓库 revision 和输入指纹，并收集 validator、实际 consumer 的成功命令及输出哈希。`measured-improvement` 不仅要求同一次执行中存在基准组与应用组，还要求有生成前后值的测量命令执行证据；记录的测量命令和输出哈希必须与该证据完全一致。缺少或不一致任何一项时，不得将状态报告为高于 `signal-observed` 或 `structured-and-applied`。
@@ -184,7 +186,7 @@ Agentic Shaping v0.5
    - 保留原文作为权威来源，并使分析结果能够追溯到原文位置和版本/哈希。过期结果应更新或使其失败，只向 Agent 提供当前问题所需的小型证据集合。
 6. 判断边界
    - 由 Agent 判断语义、歧义和创造性，并实际制作请求的创作变体。只有经过用户确认的可复用偏好才能被捕捉；也要明确说明没有经过确认的偏好，不要将一次性选择变成永久规则。
-   - 即使是创作任务，也要单独验证明确规定的文本数量、可读性、输出格式和路径。对于其他可由机器判定的不变量和失败条件，则使用代码和契约进行验证。
+   - 创作任务也应验证指定的文本数量、可读性、输出格式和路径。对于可机器判定的条件，优先复用现有工具与契约，不强制编写新代码。任何选择都不得削弱必需的正确性、权限、期望值或检查。
 7. 执行前后验证
    - 对高成本、破坏性或部署操作，先验证输入契约、准确目标、权限和失败条件。不得用警告和 silent fallback 隐藏成功状态。
    - 在高成本门控之后才发现的失败，应在下一次完整重新执行前提升为更早、更窄的 probe，并将该 probe 的通过结果和执行顺序固定为 harness 证据。
@@ -246,7 +248,7 @@ Agentic Shaping v0.5
           </article>
           <i>→</i>
           <article>
-            <small>03</small><b>结构化</b><span>记忆 · 规则 · 架构</span>
+            <small>03</small><b>按需结构化</b><span>记忆 · 规则 · 架构</span>
           </article>
           <i>→</i>
           <article>
@@ -573,7 +575,7 @@ Agentic Shaping v0.5
             <div>
               <small>CONFIRMED FINAL POLICY SYNC</small>
               <strong>90% <i>→</i> 100%</strong>
-              <span class="policy-version">HOMEPAGE v0.5 ↔ SLOGS 2026.10.03.1</span>
+              <span class="policy-version">HOMEPAGE v0.6 ↔ SLOGS 2026.10.03.2</span>
               <p>
                 已将官网最终提示词中确认的行为契约同步到 Slogs LLM Wiki 的韩语和英语运行时策略。在 5 对在线策略回归和 10 次 Luna Max 执行中，确认独有行为从 18/20 → 20/20，禁止行为为 0 次。
               </p>
@@ -581,7 +583,7 @@ Agentic Shaping v0.5
             <ul>
               <li>独立执行当前结果完成、安全边界和 durable 改进</li>
               <li>不为一次性任务强行创建记忆或全局规则</li>
-              <li>durable 信号要完整落到权威资产、早期验证和回归</li>
+              <li>对所选结构化完成权威资产、提前验证及回归</li>
               <li>将重复的版本、路径和配置统一到单一权威来源，并替换所有相关硬编码</li>
             </ul>
             <a href="../evals/slogs-policy-smoke-luna-max.json">策略行为结果</a>

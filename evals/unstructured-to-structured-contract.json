@@ -1,7 +1,7 @@
 {
-  "schemaVersion": 5,
+  "schemaVersion": 6,
   "ruleId": "AS-US-001",
-  "description": "A durable machine-decidable unstructured signal is not complete until it becomes an authoritative structured asset, is consumed by a real path, and shows a frozen before/after improvement without weakening the current task or safety gates.",
+  "description": "Select model interpretation, existing tools, or reusable code by expected net benefit. Durable machine-decidable signals do not force new code when an explicit cost selection chooses model-direct or reuse-existing. Structured application and improvement claims still require their original executed evidence.",
   "traceSchema": "unstructured-to-structured-trace.schema.json",
   "runtimeModule": "unstructured-to-structured.mjs",
   "structuredAssetKinds": ["schema", "type", "enum", "manifest", "index", "invariant", "validator", "fixture", "pipeline"],
@@ -13,5 +13,27 @@
   },
   "traceAuthority": "orchestrator",
   "orchestratorEvidence": "Signal-observed requires a target repository and revision, frozen input fingerprint, and an executed baseline command whose exit code matches its declared expected exit code. This preserves intentional failing baselines without calling them command failures. Every allowed structured claim additionally requires zero-exit validator and consumer receipts. Measured improvement additionally requires zero-exit candidate and exact measurement command receipts with matching output hashes.",
-  "nonEvidence": ["documentation-only", "memory-only", "asset-created-only", "agent-authored-claim", "trace-authority-string-only", "unfrozen-before-after"]
+  "nonEvidence": ["documentation-only", "memory-only", "asset-created-only", "agent-authored-claim", "trace-authority-string-only", "unfrozen-before-after"],
+  "costSelection": {
+    "optional": true,
+    "strategies": [
+      "model-direct",
+      "reuse-existing",
+      "reusable-code"
+    ],
+    "newCodeBenefit": [
+      "supported",
+      "unknown",
+      "negative"
+    ],
+    "requiredFields": [
+      "strategy",
+      "newCodeBenefit",
+      "rationale",
+      "mandatoryChecksPreserved"
+    ],
+    "reusableCodeRequires": "supported",
+    "qualitativeRationaleAllowed": true,
+    "scope": "Plan classification, not proof that mandatory checks executed or that improvement was measured. Existing forbiddenActions, task completion, structured evidence, measurement and signal-observed gates remain authoritative."
+  }
 }

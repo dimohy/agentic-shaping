@@ -1,5 +1,62 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$defs": {
+    "costSelection": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "strategy",
+        "newCodeBenefit",
+        "rationale",
+        "mandatoryChecksPreserved"
+      ],
+      "properties": {
+        "strategy": {
+          "enum": [
+            "model-direct",
+            "reuse-existing",
+            "reusable-code"
+          ]
+        },
+        "newCodeBenefit": {
+          "enum": [
+            "supported",
+            "unknown",
+            "negative"
+          ]
+        },
+        "rationale": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "\\S"
+        },
+        "mandatoryChecksPreserved": {
+          "const": true
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "strategy": {
+                "const": "reusable-code"
+              }
+            },
+            "required": [
+              "strategy"
+            ]
+          },
+          "then": {
+            "properties": {
+              "newCodeBenefit": {
+                "const": "supported"
+              }
+            }
+          }
+        }
+      ]
+    }
+  },
   "type": "object",
   "additionalProperties": false,
   "required": ["ruleId", "traceAuthority", "signal", "decision", "currentTaskComplete", "forbiddenActions"],
@@ -51,13 +108,14 @@
           "type": "object",
           "additionalProperties": false,
           "required": ["structured", "reason"],
-          "properties": { "structured": { "const": false }, "reason": { "type": "string", "minLength": 1 } }
+          "properties": { "structured": { "const": false }, "reason": { "type": "string", "minLength": 1 }, "costSelection": { "$ref": "#/$defs/costSelection" } }
         },
         {
           "type": "object",
           "additionalProperties": false,
           "required": ["structured", "reason", "claimLevel", "plannedAsset"],
           "properties": {
+            "costSelection": { "$ref": "#/$defs/costSelection" },
             "structured": { "const": false },
             "reason": { "type": "string", "minLength": 1 },
             "claimLevel": { "const": "signal-observed" },
@@ -78,6 +136,7 @@
           "additionalProperties": false,
           "required": ["structured", "reason", "claimLevel", "asset", "application"],
           "properties": {
+            "costSelection": { "$ref": "#/$defs/costSelection" },
             "structured": { "const": true },
             "reason": { "type": "string", "minLength": 1 },
             "claimLevel": { "enum": ["structured-and-applied", "measured-improvement"] },

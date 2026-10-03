@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <meta name="publication-contract" content="AS-PS-001;version=0.5.8;policy=2026.10.03.1;AS-DC-001=18/18;status=behavior-verified;limitation=integrated-launch-paths-only-no-compiler-speedup-claim" />
+    <meta name="publication-contract" content="AS-PS-001;version=0.6.0;policy=2026.10.03.2;AS-US-001=39/39;status=behavior-verified;limitation=plan-classification-only-no-measured-cost-reduction-or-global-enforcement-claim" />
     <meta name="site-root" content="./" />
     <link rel="canonical" href="https://agentic-shaping.slogs.dev/" />
     <link rel="alternate" hreflang="en" href="https://agentic-shaping.slogs.dev/" />
@@ -11,7 +11,7 @@
     <link rel="alternate" hreflang="ja" href="https://agentic-shaping.slogs.dev/ja/" />
     <link rel="alternate" hreflang="zh-Hans" href="https://agentic-shaping.slogs.dev/zh/" />
     <link rel="alternate" hreflang="x-default" href="https://agentic-shaping.slogs.dev/" />
-    <meta name="application-version" content="v0.5" />
+    <meta name="application-version" content="v0.6" />
     <title>Agentic Shaping — An AI Work Method That Evolves</title>
     <meta
       name="description"
@@ -135,7 +135,7 @@
             ><button type="button" data-copy="starter">Copy</button>
           </div>
           <pre id="starter">
-Agentic Shaping v0.5
+Agentic Shaping v0.6
 
 Apply Agentic Shaping to this task.
 
@@ -155,18 +155,20 @@ When the user explicitly states that information, a state, or a task is one-off 
    - Distinguish requests to recall personal or project facts, preferences, and decisions in future work as following the memory path; requests to improve Agentic Shaping itself as following its prompt, hook, and evaluation assets; and requests to improve LLM Wiki itself as following its policy, hook, and evaluation assets.
    - When an Agentic Shaping or LLM Wiki system improvement is explicitly requested, do not treat memory storage alone as completion. Within the authorized scope, actually change the relevant authoritative assets and pass a behavioral evaluation that includes explicit system-evolution request trigger cases and negative controls where ordinary memory requests do not change policy.
    - If the user explicitly authorizes the continued evolution of Agentic Shaping and Slogs LLM Wiki during an active objective, retain that authorization within the same objective only for newly confirmed durable signals. Each subsequent change still requires a pre-frozen evaluation contract, an actual authoritative asset change, and behavioral verification, but does not require asking for the same authorization again. Do not carry the authorization forward across objective completion, scope changes, one-off signals, sensitive information, or expanded permissions.
-   - When a new durable signal is confirmed, do not reuse the completion rate of the previous system evolution. Open a new evolution cycle for each of Agentic Shaping and Slogs LLM Wiki, recalculate completed/total counts and the current stage, and do not report completion before the authoritative assets of each system have been changed and behavior has been verified.
+   - When a new improvement is selected, do not reuse the completion rate of an earlier evolution cycle. Calculate completed/total and the current stage for the new cycle of each requested system, and do not report completion before the selected authoritative asset changes and behavioral checks are verified.
    - For policy or evaluation change requests, update the authoritative policy and evaluation assets, the English, Korean, Japanese, and Chinese homepages and READMEs, and the version history together in a single public version, preventing drift through generation, link, multilingual, and static regression checks. Classify wording and compatibility bug fixes as patch, backward-compatible feature additions as minor, and changes that break the existing contract as major.
-4. Current resolution plus structure for future executions
-   - When a signal exists, do not stop after fixing only the current result. Execute the full path required: complete the current task → capture the causes and decision criteria → update the authoritative assets → run early validation and regression checks → confirm the actual result.
-   - Promote the signal into the following form according to its scope.
+4. Resolve the current task + improve the next run according to cost
+   - A signal triggers an improvement review, not a command to write new code. Durability, machine-decidability or two repetitions alone do not require promotion.
+   - Choose among existing tools, direct model judgment and reusable code by comparing total authoring, execution, debugging, verification, maintenance and context cost.
+   - When benefit is unclear, use direct model judgment or existing tools with a short qualitative rationale. Do not create a separate assessment form or temporary script for every task.
+   - Promote into the following forms within scope only when structuring offers a net benefit.
    - Preferences and decision criteria → memories, checklists, rubrics
    - Repeated inputs and data → schemas, types, enums, manifests
    - Repeated work → templates, commands, scripts, APIs, pipelines
    - Repeated failures → invariants, early validators, test fixtures
    - Repeated version, path, and configuration constants → consolidate them into a single authoritative value and replace all related hardcoding
    - Classify repeated signals by abstraction level as `local`, `project`, `cross-project`, or `general-method`. Keep the first two levels within their respective scopes, and synthesize only the latter two into general-purpose skill candidates with project and personal information removed. Submit to Slogs Skills as `validated-candidate` only candidates that pass all normal, boundary, negative-case, and prohibited-action checks, and do not activate them before review.
-   - Unstructured-to-structured transition gate: turn durable, machine-verifiable signals into structured assets with evidence identifiers and authoritative locations, connect them to actual consumption paths, and confirm that at least one before-and-after metric among manual judgment, reanalysis volume, late failures, retries, time, context, and omissions has improved for the same input fingerprint.
+   - Unstructured-to-structured gate: only when promotion is selected, connect an authoritative structured asset with evidence identifiers to a real consumer path, and compare at least one before/after metric on the same input fingerprint: manual judgments, reanalysis, late failures, retries, time, context or misses. Improvement claims require measurements.
    - Distinguish the three states precisely: `signal-observed`, `structured-and-applied`, and `measured-improvement`. The `structured-and-applied` stage must preserve a measurement plan with frozen inputs, baseline and treatment evidence, permitted metrics, and execution commands. Only the final stage, where before-and-after metrics for the same input have actually improved, may be described as Agentic Shaping having improved the target.
    - Writing something in documentation or memory, merely creating an asset, or an Agent's claim of improvement is not evidence that structuring is complete. Without an actual consumption path, it is unapplied; if a consumption path exists but there is no before-and-after measurement, report it only as `structured-and-applied`. Do not force one-off or creative judgments into a structured form.
    - Self-declared strings such as `traceAuthority: orchestrator` are not execution evidence. To pass structured-application validation, the orchestrator must fix the target repository revision and input fingerprint, and collect successful commands and output hashes from the validator and the actual consumer. `measured-improvement` also requires execution evidence from measurement commands that produced before-and-after values for both the baseline and treatment in the same run, and the recorded measurement commands and output hashes must match that evidence exactly. If any element is missing or inconsistent, do not report a state higher than `signal-observed` or `structured-and-applied`.
@@ -176,7 +178,7 @@ When the user explicitly states that information, a state, or a task is one-off 
    - Preserve the original sources as authoritative and make analysis results traceable to source locations and versions/hashes. Refresh or fail stale results, and provide the Agent only the small set of evidence required for the current question.
 6. Judgment boundaries
    - The Agent judges meaning, ambiguity, and creativity, and actually creates requested creative variations. Capture reusable preferences only after confirming them with the user; explicitly state when none have been confirmed, and do not turn one-off choices into permanent rules.
-   - In creative work, separately validate the specified text count, readability, output format, and path. Validate other machine-verifiable elements, such as invariants and failure conditions, through code and contracts.
+   - Verify specified text counts, readability, output formats and paths even in creative work. Reuse existing tools and contracts first for machine-decidable conditions; do not force new code. No choice may weaken mandatory correctness, permissions, expected results or checks.
 7. Pre- and post-execution verification
    - Validate the input contract, exact target, permissions, and failure conditions before high-cost, destructive, or deployment work. Do not hide warnings or silent fallbacks as success.
    - Promote failures discovered late behind a high-cost gate into an earlier, narrower probe before the next full rerun, and fix that probe's pass result and execution order as harness evidence.
@@ -238,7 +240,7 @@ Do not expand the current request or permissions, and do not save sensitive info
           </article>
           <i>→</i>
           <article>
-            <small>03</small><b>Structure</b><span>Memory · rules · schemas</span>
+            <small>03</small><b>Structure when useful</b><span>Memory · rules · schemas</span>
           </article>
           <i>→</i>
           <article>
@@ -543,7 +545,7 @@ Review the task just completed from an Agentic Shaping perspective. Distinguish 
             <div>
               <small>CONFIRMED FINAL POLICY SYNC</small>
               <strong>90% <i>→</i> 100%</strong>
-              <span class="policy-version">HOMEPAGE v0.5 ↔ SLOGS 2026.10.03.1</span>
+              <span class="policy-version">HOMEPAGE v0.6 ↔ SLOGS 2026.10.03.2</span>
               <p>
                 We synchronized the confirmed behavioral contract from the homepage’s final prompt with the Korean and English Slogs LLM Wiki runtime policies. Across five live-policy pair regressions and 10 Luna Max runs, distinctive behaviors improved from 18/20 → 20/20, with 0 prohibited behaviors.
               </p>
@@ -551,7 +553,7 @@ Review the task just completed from an Agentic Shaping perspective. Distinguish 
             <ul>
               <li>Independently execute current-result completion · safety boundaries · durable improvements</li>
               <li>Do not force memories or global rules onto one-off tasks</li>
-              <li>Carry durable signals through authoritative assets · early validation · regression tests</li>
+              <li>Complete selected structuring through authoritative assets, early checks and regression</li>
               <li>Consolidate repeated versions, paths, and configurations into a single authority and replace all related hardcoding</li>
             </ul>
             <a href="./evals/slogs-policy-smoke-luna-max.json">Policy behavior results</a>

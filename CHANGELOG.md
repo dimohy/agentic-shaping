@@ -2,6 +2,22 @@
 
 Agentic Shaping uses Semantic Versioning. Compatible wording and bug corrections increment `patch`, backward-compatible capabilities increment `minor`, and incompatible public-contract changes increment `major`.
 
+## [0.6.0] - 2026-10-03
+
+### What changed for users
+
+- Signals trigger a cost review rather than mandatory new code. Choose direct model judgment, existing tools or reusable code by total authoring, execution, debugging, verification, maintenance and context cost.
+- Durable, machine-decidable or repeated signals alone no longer require code promotion when an explicit cost selection chooses direct judgment or reuse. Brief qualitative reasoning is sufficient when benefit is unclear.
+- Mandatory correctness, permissions, expected results and checks remain protected. Structured application and measured improvement still require their original evidence.
+- Verification: AS-US-001 39/39, including 21 unchanged legacy cases and 18 new cost-selection cases exercised through the existing runtime CLI. This validates plan classification, not actual cost reduction or global enforcement.
+
+### Technical notes
+
+- Compatibility: Optional decision.costSelection preserves existing traces. model-direct and reuse-existing can retain structured=false; reusable-code requires supported benefit.
+- Contracts: AS-US-001 schemaVersion 6 adds cost selection without replacing its existing signal-observed, consumer or measurement evidence gates.
+- Verification: Frozen AS-US-001 39/39; multilingual generation and public prompt equality use the existing generators and checks.
+- Known limitation: mandatoryChecksPreserved is a declared plan condition, not proof that every actual check ran. No measured speedup or published deployment is claimed here.
+
 ## [0.5.8] - 2026-10-03
 
 ### What changed for users

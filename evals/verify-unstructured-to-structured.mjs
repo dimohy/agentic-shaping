@@ -8,7 +8,9 @@ const suite = JSON.parse(readFileSync(new URL("./unstructured-to-structured-trac
 const contract = JSON.parse(readFileSync(new URL("./unstructured-to-structured-contract.json", import.meta.url), "utf8"));
 const traceSchemaText = readFileSync(new URL("./unstructured-to-structured-trace.schema.json", import.meta.url), "utf8");
 if (suite.ruleId !== contract.ruleId || contract.ruleId !== "AS-US-001") throw new Error("AS-US-001 contract/suite mismatch");
-if (contract.schemaVersion !== 5
+if (contract.schemaVersion !== 6
+    || contract.costSelection?.reusableCodeRequires !== "supported"
+    || !traceSchemaText.includes('"costSelection"')
     || !contract.claimLevels?.["signal-observed"]
     || !contract.claimLevels?.["structured-and-applied"]
     || !contract.claimLevels?.["measured-improvement"]
@@ -28,6 +30,16 @@ for (const testCase of suite.cases) {
   const actual = evaluateUnstructuredToStructured(testCase.trace);
   if (actual.allowed !== testCase.expected.allowed || actual.code !== testCase.expected.code) {
     throw new Error(`${testCase.id}: expected ${JSON.stringify(testCase.expected)}, got ${JSON.stringify(actual)}`);
+  }
+  if (testCase.runtimeCheck) {
+    const runtime = spawnSync(process.execPath,
+      [resolve(import.meta.dirname, "unstructured-to-structured.mjs"), "--trace", "-"],
+      { input: JSON.stringify(testCase.trace), encoding: "utf8" });
+    const runtimeResult = JSON.parse(runtime.stdout);
+    if (runtime.status !== (testCase.expected.allowed ? 0 : 2)
+        || runtimeResult.allowed !== actual.allowed || runtimeResult.code !== actual.code) {
+      throw new Error(`${testCase.id}: runtime differs from the decision gate: ${runtime.status} ${runtime.stdout}${runtime.stderr}`);
+    }
   }
   passed++;
 }

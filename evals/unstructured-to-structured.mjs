@@ -7,7 +7,23 @@ const claimLevels = new Set(["structured-and-applied", "measured-improvement"]);
 const hash = /^[a-f0-9]{64}$/i;
 const revision = /^[a-f0-9]{7,64}$/i;
 const evidencePurposes = new Set(["validator", "consumer", "baseline", "candidate", "measurement"]);
+const costStrategies = new Set(["model-direct", "reuse-existing", "reusable-code"]);
+const newCodeBenefits = new Set(["supported", "unknown", "negative"]);
 const fail = code => ({ allowed: false, code });
+
+// Classify the declared plan; this does not attest that its checks executed.
+export function evaluateCostSelection(selection) {
+  if (!selection || !costStrategies.has(selection.strategy)
+      || !newCodeBenefits.has(selection.newCodeBenefit)
+      || typeof selection.rationale !== "string" || !selection.rationale.trim()) {
+    return fail("AS-US-001-INVALID-COST-SELECTION");
+  }
+  if (selection.mandatoryChecksPreserved !== true) return fail("AS-US-001-MANDATORY-CHECKS-NOT-PRESERVED");
+  if (selection.strategy === "reusable-code" && selection.newCodeBenefit !== "supported") {
+    return fail("AS-US-001-NEW-CODE-BENEFIT-UNSUPPORTED");
+  }
+  return { allowed: true, code: "AS-US-001-COST-SELECTED" };
+}
 
 const validExecutedCommand = value => value
   && evidencePurposes.has(value.purpose)
@@ -43,6 +59,11 @@ export function evaluateUnstructuredToStructured(trace) {
 
   const mustStructure = trace.signal.durable === true && trace.signal.machineDecidable === true;
   if (!trace.decision || typeof trace.decision.structured !== "boolean" || typeof trace.decision.reason !== "string" || !trace.decision.reason.trim()) return fail("AS-US-001-INVALID-DECISION");
+  const selection = trace.decision.costSelection;
+  if (selection !== undefined) {
+    const result = evaluateCostSelection(selection);
+    if (!result.allowed) return result;
+  }
   if (!trace.decision.structured) {
     if (trace.decision.claimLevel === "signal-observed") {
       const planned = trace.decision.plannedAsset;
@@ -59,6 +80,10 @@ export function evaluateUnstructuredToStructured(trace) {
       return { allowed: true, code: "AS-US-001-SIGNAL-OBSERVED" };
     }
     if (trace.currentTaskComplete !== true) return fail("AS-US-001-CURRENT-TASK");
+    if (selection && selection.strategy !== "reusable-code") {
+      if (trace.decision.claimLevel !== undefined) return fail("AS-US-001-INVALID-CLAIM-LEVEL");
+      return { allowed: true, code: "AS-US-001-COST-SELECTED" };
+    }
     return mustStructure ? fail("AS-US-001-UNSTRUCTURED-DURABLE-SIGNAL") : { allowed: true, code: "AS-US-001-NOT-DURABLE" };
   }
 
@@ -114,7 +139,8 @@ if (process.argv[1] === fileURLToPath(import.meta.url)) {
     process.stderr.write("AS-US-001 requires --trace <path>\n");
     process.exit(64);
   }
-  const result = evaluateUnstructuredToStructured(JSON.parse(readFileSync(process.argv[traceIndex + 1], "utf8")));
+  const tracePath = process.argv[traceIndex + 1];
+  const result = evaluateUnstructuredToStructured(JSON.parse(readFileSync(tracePath === "-" ? 0 : tracePath, "utf8")));
   process.stdout.write(`${JSON.stringify(result)}\n`);
   if (!result.allowed) process.exitCode = 2;
 }

@@ -1,18 +1,18 @@
 {
   "schemaVersion": 2,
   "contractId": "AS-PS-001",
-  "version": "0.5.8",
-  "displayVersion": "v0.5",
-  "previousVersion": "0.5.7",
-  "changeLevel": "patch",
+  "version": "0.6.0",
+  "displayVersion": "v0.6",
+  "previousVersion": "0.5.8",
+  "changeLevel": "minor",
   "releaseDate": "2026-10-03",
-  "policyVersion": "2026.10.03.1",
+  "policyVersion": "2026.10.03.2",
   "feature": {
-    "ruleId": "AS-DC-001",
-    "passed": 18,
-    "total": 18,
+    "ruleId": "AS-US-001",
+    "passed": 39,
+    "total": 39,
     "status": "behavior-verified",
-    "limitation": "integrated-launch-paths-only-no-compiler-speedup-claim"
+    "limitation": "plan-classification-only-no-measured-cost-reduction-or-global-enforcement-claim"
   },
   "authoritativeFiles": [
     "CHANGELOG.md",
@@ -33,25 +33,40 @@
     "evals/verify-publication-sync.mjs",
     "evals/skill-abstraction-contract.json",
     "evals/skill-abstraction-traces.json",
-    "evals/verify-skill-abstraction.mjs"
-    ,"evals/trace-corpus-compatibility.mjs"
-    ,"evals/verify-trace-corpus-compatibility.mjs"
-    ,"evals/cancellation-terminal-contract.json"
-    ,"evals/cancellation-terminal.mjs"
-    ,"evals/verify-cancellation-terminal.mjs"
+    "evals/verify-skill-abstraction.mjs",
+    "evals/trace-corpus-compatibility.mjs",
+    "evals/verify-trace-corpus-compatibility.mjs",
+    "evals/cancellation-terminal-contract.json",
+    "evals/cancellation-terminal.mjs",
+    "evals/verify-cancellation-terminal.mjs",
+    "evals/unstructured-to-structured.mjs",
+    "evals/unstructured-to-structured-contract.json",
+    "evals/unstructured-to-structured-trace.schema.json",
+    "evals/unstructured-to-structured-traces.json",
+    "evals/verify-unstructured-to-structured.mjs"
   ],
   "publicCapabilities": [
     {
       "ruleId": "AS-DC-001",
       "verifier": "evals/verify-diagnostic-continuation.mjs",
       "expectedPasses": 18,
-      "files": ["evals/diagnostic-continuation-contract.json", "evals/diagnostic-continuation-cases.json", "evals/diagnostic-continuation.mjs", "evals/verify-diagnostic-continuation.mjs", "scripts/launch-diagnostic.mjs"]
+      "files": [
+        "evals/diagnostic-continuation-contract.json",
+        "evals/diagnostic-continuation-cases.json",
+        "evals/diagnostic-continuation.mjs",
+        "evals/verify-diagnostic-continuation.mjs",
+        "scripts/launch-diagnostic.mjs"
+      ]
     },
     {
       "ruleId": "AS-I18N-001",
       "verifier": "evals/verify-localization-cost.mjs",
       "expectedPasses": 5,
-      "files": ["evals/localization-cost-contract.json", "evals/verify-localization-cost.mjs", "scripts/build-localized-content.mjs"]
+      "files": [
+        "evals/localization-cost-contract.json",
+        "evals/verify-localization-cost.mjs",
+        "scripts/build-localized-content.mjs"
+      ]
     },
     {
       "ruleId": "AS-CT-001",
@@ -149,6 +164,18 @@
         "hooks/codex-hooks.example.json",
         "hooks/README.md",
         "evals/verify-codex-wait-hook.mjs"
+      ]
+    },
+    {
+      "ruleId": "AS-US-001",
+      "verifier": "evals/verify-unstructured-to-structured.mjs",
+      "expectedPasses": 39,
+      "files": [
+        "evals/unstructured-to-structured.mjs",
+        "evals/unstructured-to-structured-contract.json",
+        "evals/unstructured-to-structured-trace.schema.json",
+        "evals/unstructured-to-structured-traces.json",
+        "evals/verify-unstructured-to-structured.mjs"
       ]
     }
   ],
