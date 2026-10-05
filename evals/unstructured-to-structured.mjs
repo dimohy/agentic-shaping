@@ -19,6 +19,21 @@ export function evaluateCostSelection(selection) {
     return fail("AS-US-001-INVALID-COST-SELECTION");
   }
   if (selection.mandatoryChecksPreserved !== true) return fail("AS-US-001-MANDATORY-CHECKS-NOT-PRESERVED");
+  const diagnosis = selection.diagnosis;
+  if (diagnosis !== undefined) {
+    if (!diagnosis || !["sufficient", "insufficient", "unsupported"].includes(diagnosis.structuredOutcome)) {
+      return fail("AS-US-001-INVALID-DIAGNOSIS");
+    }
+    if (diagnosis.structuredOutcome !== "sufficient") {
+      const inspection = diagnosis.sourceInspection;
+      if (!inspection || !Array.isArray(inspection.references) || inspection.references.length === 0
+          || inspection.references.some(value => typeof value !== "string" || !value.trim())
+          || typeof inspection.finding !== "string" || !inspection.finding.trim()
+          || typeof inspection.nextAction !== "string" || !inspection.nextAction.trim()) {
+        return fail("AS-US-001-DIRECT-INSPECTION-REQUIRED");
+      }
+    }
+  }
   if (selection.strategy === "reusable-code" && selection.newCodeBenefit !== "supported") {
     return fail("AS-US-001-NEW-CODE-BENEFIT-UNSUPPORTED");
   }

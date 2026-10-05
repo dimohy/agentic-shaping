@@ -1,4 +1,4 @@
-import { readFileSync, writeFileSync, mkdtempSync, mkdirSync, cpSync, existsSync } from 'node:fs';
+import { readFileSync, writeFileSync, mkdtempSync, mkdirSync, cpSync, existsSync, rmSync } from 'node:fs';
 import { join, resolve } from 'node:path';
 import { tmpdir } from 'node:os';
 import { spawnSync } from 'node:child_process';
@@ -21,4 +21,20 @@ if(conflict.status===0 || !conflict.stderr.includes('AS-I18N-001-CHECK-CANNOT-TR
 for(const [code,bytes] of Object.entries(originals))writeFileSync(join(dir,'site/locales',code+'.json'),bytes);
 const complete=run([]);
 if(complete.status!==0 || existsSync(marker))throw new Error('Complete catalog build failed: '+complete.stderr);passed++;
-process.stdout.write(JSON.stringify({ruleId:'AS-I18N-001',summary:`PASS ${passed}/5`,passed,total:5,externalLaunches:0,evidenceDirectory:dir})+'\n');
+const generated=['index.html','ko/index.html','ja/index.html','zh/index.html','README.md','README.ko.md','README.ja.md','README.zh-CN.md'];
+const baseline=Object.fromEntries(generated.map(file=>[file,readFileSync(join(dir,file))]));
+for(const ending of ['\r\n','\r']){
+  for(const file of ['index.ko.source.html','README.ko.source.md']){
+    const path=join(dir,'site',file), source=readFileSync(path,'utf8').replace(/\r\n?/g,'\n');
+    writeFileSync(path,source.replaceAll('\n',ending));
+  }
+  const same=run(['--check']);
+  if(same.status!==0 || existsSync(marker)
+      || generated.some(file=>!readFileSync(join(dir,file)).equals(baseline[file])))throw new Error('Source newline changed catalog identity or generated output: '+same.stderr);
+  passed++;
+}
+// The dedicated, freshly created fixture is the only owned cleanup target.
+const parent=resolve(dir,'..');
+if(parent!==resolve(tmpdir()) || !dir.split(/[\\/]/).at(-1).startsWith('as-i18n-'))throw new Error('Fixture cleanup boundary mismatch');
+rmSync(dir,{recursive:true});
+process.stdout.write(JSON.stringify({ruleId:'AS-I18N-001',summary:`PASS ${passed}/7`,passed,total:7,externalLaunches:0,temporaryFixtureRemoved:!existsSync(dir)})+'\n');

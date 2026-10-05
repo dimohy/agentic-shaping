@@ -1,5 +1,21 @@
 # Changelog
 
+## [0.6.2] - 2026-10-05
+
+### What changed for users
+
+- Agents must directly inspect relevant original material when structured diagnosis cannot answer the question.
+- Agents must identify facts, remaining uncertainty and the next action before repeating checks or handing interpretation to the user.
+- Mandatory integrity, equivalence and safety checks remain required after manual inspection.
+- Existing translations are reused across source newline styles without starting external translation.
+
+### Technical notes
+
+- Compatibility: Corrects diagnosis behavior; existing traces without a diagnosis declaration remain supported.
+- Contracts: AS-US-001 checks sourceInspection for declared insufficient or unsupported diagnosis; source newline normalization is centralized in the existing generator.
+- Verification: AS-US-001 47/47; AS-I18N-001 7/7; four homepage and README generation, translation and policy synchronization checks.
+- Known limitation: Declared plan checks do not authenticate actual source reading, universal Agent compliance or measured speedup. Slogs runtime policy is 2026.10.05.2.
+
 Agentic Shaping uses Semantic Versioning. Compatible wording and bug corrections increment `patch`, backward-compatible capabilities increment `minor`, and incompatible public-contract changes increment `major`.
 
 ## [0.6.1] - 2026-10-04

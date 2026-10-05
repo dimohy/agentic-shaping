@@ -1,16 +1,16 @@
 {
   "schemaVersion": 2,
   "contractId": "AS-PS-001",
-  "version": "0.6.1",
+  "version": "0.6.2",
   "displayVersion": "v0.6",
-  "previousVersion": "0.6.0",
+  "previousVersion": "0.6.1",
   "changeLevel": "patch",
-  "releaseDate": "2026-10-04",
-  "policyVersion": "2026.10.03.2",
+  "releaseDate": "2026-10-05",
+  "policyVersion": "2026.10.05.2",
   "feature": {
     "ruleId": "AS-US-001",
-    "passed": 39,
-    "total": 39,
+    "passed": 47,
+    "total": 47,
     "status": "behavior-verified",
     "limitation": "plan-classification-only-no-measured-cost-reduction-or-global-enforcement-claim"
   },
@@ -61,7 +61,7 @@
     {
       "ruleId": "AS-I18N-001",
       "verifier": "evals/verify-localization-cost.mjs",
-      "expectedPasses": 5,
+      "expectedPasses": 7,
       "files": [
         "evals/localization-cost-contract.json",
         "evals/verify-localization-cost.mjs",
@@ -169,7 +169,7 @@
     {
       "ruleId": "AS-US-001",
       "verifier": "evals/verify-unstructured-to-structured.mjs",
-      "expectedPasses": 39,
+      "expectedPasses": 47,
       "files": [
         "evals/unstructured-to-structured.mjs",
         "evals/unstructured-to-structured-contract.json",

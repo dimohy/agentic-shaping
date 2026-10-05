@@ -10,8 +10,9 @@ const localeDir = join(siteDir, "locales");
 const release = JSON.parse(readFileSync(join(siteDir, "release-manifest.json"), "utf8"));
 const applyRelease = source => source.replaceAll("{{PUBLIC_VERSION}}", release.displayVersion)
   .replaceAll('{{POLICY_VERSION}}', release.policyVersion);
-const htmlSource = applyRelease(readFileSync(join(siteDir, "index.ko.source.html"), "utf8"));
-const readmeSource = applyRelease(readFileSync(join(siteDir, "README.ko.source.md"), "utf8"));
+const readSource = path => readFileSync(path, "utf8").replace(/\r\n?/g, "\n");
+const htmlSource = applyRelease(readSource(join(siteDir, "index.ko.source.html")));
+const readmeSource = applyRelease(readSource(join(siteDir, "README.ko.source.md")));
 const stylesSource = readFileSync(join(root, "styles.css"), "utf8");
 const scriptSource = readFileSync(join(root, "script.js"), "utf8");
 const digest = content => createHash("sha256").update(content).digest("hex");

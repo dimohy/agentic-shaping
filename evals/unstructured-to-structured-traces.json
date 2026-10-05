@@ -205,6 +205,327 @@
     {"id": "cost-reuse-cannot-claim-unstructured-improvement", "trace": {"ruleId": "AS-US-001", "traceAuthority": "orchestrator", "signal": {"id": "repeat", "durable": true, "machineDecidable": true, "sourceEvidence": ["repeated"]}, "decision": {"structured": false, "reason": "documented only", "costSelection": {"strategy": "reuse-existing", "newCodeBenefit": "negative", "rationale": "Reuse the existing authoritative validator; additional code duplicates it.", "mandatoryChecksPreserved": true}, "claimLevel": "measured-improvement"}, "currentTaskComplete": true, "forbiddenActions": []}, "expected": {"allowed": false, "code": "AS-US-001-INVALID-CLAIM-LEVEL"}, "runtimeCheck": true},
     {"id": "cost-reuse-preserves-signal-observed", "trace": {"ruleId": "AS-US-001", "traceAuthority": "orchestrator", "orchestratorEvidence": {"runner": "agentic-shaping-orchestrator", "runId": "run-observed-001", "targetRepository": "P:/MyWorks/Sollang", "targetRevision": "b288e41a3a10e85280207a441d169f3a120d2780", "inputFingerprint": "9090909090909090909090909090909090909090909090909090909090909090", "executedCommands": [{"purpose": "baseline", "command": "run focused failing fixture", "exitCode": 1, "expectedExitCode": 1, "outputSha256": "9191919191919191919191919191919191919191919191919191919191919191"}]}, "signal": {"id": "qualified-call-owner-drift", "durable": true, "machineDecidable": true, "sourceEvidence": ["the same nested call topology fails in the retained baseline"]}, "decision": {"structured": false, "claimLevel": "signal-observed", "reason": "the baseline is frozen while the production consumer still fails", "plannedAsset": {"kind": "index", "authorityPath": "selfhost/semantic/calls.slg", "nextGate": "focused fixture and production consumer pass on the frozen input"}, "costSelection": {"strategy": "reuse-existing", "newCodeBenefit": "unknown", "rationale": "Reuse the existing authoritative validator; additional code duplicates it.", "mandatoryChecksPreserved": true}}, "currentTaskComplete": false, "forbiddenActions": []}, "expected": {"allowed": true, "code": "AS-US-001-SIGNAL-OBSERVED"}, "runtimeCheck": true},
     {"id": "cost-selection-cannot-waive-measurement-receipt", "trace": {"ruleId": "AS-US-001", "traceAuthority": "orchestrator", "orchestratorEvidence": {"runner": "agentic-shaping-orchestrator", "runId": "run-missing-measurement", "targetRepository": "P:/MyWorks/Sollang", "targetRevision": "b288e41a3a10e85280207a441d169f3a120d2780", "inputFingerprint": "6767676767676767676767676767676767676767676767676767676767676767", "executedCommands": [{"purpose": "validator", "command": "verify contract", "exitCode": 0, "outputSha256": "1111111111111111111111111111111111111111111111111111111111111111"}, {"purpose": "consumer", "command": "run consumer", "exitCode": 0, "outputSha256": "1212121212121212121212121212121212121212121212121212121212121212"}, {"purpose": "baseline", "command": "capture baseline", "exitCode": 0, "outputSha256": "1313131313131313131313131313131313131313131313131313131313131313"}, {"purpose": "candidate", "command": "capture candidate", "exitCode": 0, "outputSha256": "1414141414141414141414141414141414141414141414141414141414141414"}]}, "signal": {"id": "unbound-measurement", "durable": true, "machineDecidable": true, "sourceEvidence": ["numbers were authored without a measurement receipt"]}, "decision": {"structured": true, "claimLevel": "measured-improvement", "reason": "claim lacks bound execution", "asset": {"kind": "validator", "authorityPath": "validator", "inputFingerprint": "6767676767676767676767676767676767676767676767676767676767676767", "validatorEvidence": ["passes"]}, "application": {"productionPathChanged": true, "consumerEvidence": ["consumer"]}, "measurement": {"metric": "lateFailures", "before": 2, "after": 1, "measuredInputFingerprint": "6767676767676767676767676767676767676767676767676767676767676767", "command": "compare late failures", "outputSha256": "1515151515151515151515151515151515151515151515151515151515151515"}, "costSelection": {"strategy": "reusable-code", "newCodeBenefit": "supported", "rationale": "Repeated exact input transformations need a reusable validated consumer.", "mandatoryChecksPreserved": true}}, "currentTaskComplete": true, "forbiddenActions": []}, "expected": {"allowed": false, "code": "AS-US-001-MEASUREMENT-RECEIPT-MISMATCH"}, "runtimeCheck": true},
-    {"id": "cost-selection-cannot-waive-consumer", "trace": {"ruleId": "AS-US-001", "traceAuthority": "orchestrator", "signal": {"id": "repeat", "durable": true, "machineDecidable": true, "sourceEvidence": ["repeated"]}, "decision": {"structured": true, "claimLevel": "measured-improvement", "reason": "fixture", "asset": {"kind": "fixture", "authorityPath": "fixture", "inputFingerprint": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb", "validatorEvidence": ["passes"]}, "application": {"productionPathChanged": false, "consumerEvidence": []}, "measurement": {"metric": "retries", "before": 2, "after": 1, "measuredInputFingerprint": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"}, "costSelection": {"strategy": "reusable-code", "newCodeBenefit": "supported", "rationale": "Repeated exact input transformations need a reusable validated consumer.", "mandatoryChecksPreserved": true}}, "currentTaskComplete": true, "forbiddenActions": []}, "expected": {"allowed": false, "code": "AS-US-001-NOT-APPLIED"}, "runtimeCheck": true}
+    {"id": "cost-selection-cannot-waive-consumer", "trace": {"ruleId": "AS-US-001", "traceAuthority": "orchestrator", "signal": {"id": "repeat", "durable": true, "machineDecidable": true, "sourceEvidence": ["repeated"]}, "decision": {"structured": true, "claimLevel": "measured-improvement", "reason": "fixture", "asset": {"kind": "fixture", "authorityPath": "fixture", "inputFingerprint": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb", "validatorEvidence": ["passes"]}, "application": {"productionPathChanged": false, "consumerEvidence": []}, "measurement": {"metric": "retries", "before": 2, "after": 1, "measuredInputFingerprint": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"}, "costSelection": {"strategy": "reusable-code", "newCodeBenefit": "supported", "rationale": "Repeated exact input transformations need a reusable validated consumer.", "mandatoryChecksPreserved": true}}, "currentTaskComplete": true, "forbiddenActions": []}, "expected": {"allowed": false, "code": "AS-US-001-NOT-APPLIED"}, "runtimeCheck": true},
+    {
+      "id": "diagnosis-insufficient-direct-read",
+      "trace": {
+        "ruleId": "AS-US-001",
+        "traceAuthority": "orchestrator",
+        "signal": {
+          "id": "repeat",
+          "durable": true,
+          "machineDecidable": true,
+          "sourceEvidence": [
+            "repeated"
+          ]
+        },
+        "decision": {
+          "structured": false,
+          "reason": "documented only",
+          "costSelection": {
+            "strategy": "model-direct",
+            "newCodeBenefit": "unknown",
+            "rationale": "Model interpretation avoids a throwaway parser for this bounded request.",
+            "mandatoryChecksPreserved": true,
+            "diagnosis": {
+              "structuredOutcome": "insufficient",
+              "sourceInspection": {
+                "references": [
+                  "input/requirements.md:11",
+                  "src/condition.cs:97-104",
+                  "results/failure.json"
+                ],
+                "finding": "The requirement asks for a column-value business summary, while the strict check distinguishes invocation values.",
+                "nextAction": "Keep original conditions and add a separately labelled business summary."
+              }
+            }
+          }
+        },
+        "currentTaskComplete": true,
+        "forbiddenActions": []
+      },
+      "expected": {
+        "allowed": true,
+        "code": "AS-US-001-COST-SELECTED"
+      },
+      "runtimeCheck": true
+    },
+    {
+      "id": "diagnosis-unsupported-direct-read",
+      "trace": {
+        "ruleId": "AS-US-001",
+        "traceAuthority": "orchestrator",
+        "signal": {
+          "id": "repeat",
+          "durable": true,
+          "machineDecidable": true,
+          "sourceEvidence": [
+            "repeated"
+          ]
+        },
+        "decision": {
+          "structured": false,
+          "reason": "documented only",
+          "costSelection": {
+            "strategy": "model-direct",
+            "newCodeBenefit": "unknown",
+            "rationale": "Model interpretation avoids a throwaway parser for this bounded request.",
+            "mandatoryChecksPreserved": true,
+            "diagnosis": {
+              "structuredOutcome": "unsupported",
+              "sourceInspection": {
+                "references": [
+                  "input/requirements.md:11",
+                  "src/condition.cs:97-104",
+                  "results/failure.json"
+                ],
+                "finding": "The requirement asks for a column-value business summary, while the strict check distinguishes invocation values.",
+                "nextAction": "Keep original conditions and add a separately labelled business summary."
+              }
+            }
+          }
+        },
+        "currentTaskComplete": true,
+        "forbiddenActions": []
+      },
+      "expected": {
+        "allowed": true,
+        "code": "AS-US-001-COST-SELECTED"
+      },
+      "runtimeCheck": true
+    },
+    {
+      "id": "diagnosis-insufficient-no-direct-read",
+      "trace": {
+        "ruleId": "AS-US-001",
+        "traceAuthority": "orchestrator",
+        "signal": {
+          "id": "repeat",
+          "durable": true,
+          "machineDecidable": true,
+          "sourceEvidence": [
+            "repeated"
+          ]
+        },
+        "decision": {
+          "structured": false,
+          "reason": "documented only",
+          "costSelection": {
+            "strategy": "model-direct",
+            "newCodeBenefit": "unknown",
+            "rationale": "Model interpretation avoids a throwaway parser for this bounded request.",
+            "mandatoryChecksPreserved": true,
+            "diagnosis": {
+              "structuredOutcome": "insufficient"
+            }
+          }
+        },
+        "currentTaskComplete": true,
+        "forbiddenActions": []
+      },
+      "expected": {
+        "allowed": false,
+        "code": "AS-US-001-DIRECT-INSPECTION-REQUIRED"
+      },
+      "runtimeCheck": true
+    },
+    {
+      "id": "diagnosis-unsupported-user-handoff-no-read",
+      "trace": {
+        "ruleId": "AS-US-001",
+        "traceAuthority": "orchestrator",
+        "signal": {
+          "id": "repeat",
+          "durable": true,
+          "machineDecidable": true,
+          "sourceEvidence": [
+            "repeated"
+          ]
+        },
+        "decision": {
+          "structured": false,
+          "reason": "documented only",
+          "costSelection": {
+            "strategy": "model-direct",
+            "newCodeBenefit": "unknown",
+            "rationale": "Model interpretation avoids a throwaway parser for this bounded request.",
+            "mandatoryChecksPreserved": true,
+            "diagnosis": {
+              "structuredOutcome": "unsupported"
+            }
+          }
+        },
+        "currentTaskComplete": true,
+        "forbiddenActions": []
+      },
+      "expected": {
+        "allowed": false,
+        "code": "AS-US-001-DIRECT-INSPECTION-REQUIRED"
+      },
+      "runtimeCheck": true
+    },
+    {
+      "id": "diagnosis-empty-read-references",
+      "trace": {
+        "ruleId": "AS-US-001",
+        "traceAuthority": "orchestrator",
+        "signal": {
+          "id": "repeat",
+          "durable": true,
+          "machineDecidable": true,
+          "sourceEvidence": [
+            "repeated"
+          ]
+        },
+        "decision": {
+          "structured": false,
+          "reason": "documented only",
+          "costSelection": {
+            "strategy": "model-direct",
+            "newCodeBenefit": "unknown",
+            "rationale": "Model interpretation avoids a throwaway parser for this bounded request.",
+            "mandatoryChecksPreserved": true,
+            "diagnosis": {
+              "structuredOutcome": "insufficient",
+              "sourceInspection": {
+                "references": [],
+                "finding": "The requirement asks for a column-value business summary, while the strict check distinguishes invocation values.",
+                "nextAction": "Keep original conditions and add a separately labelled business summary."
+              }
+            }
+          }
+        },
+        "currentTaskComplete": true,
+        "forbiddenActions": []
+      },
+      "expected": {
+        "allowed": false,
+        "code": "AS-US-001-DIRECT-INSPECTION-REQUIRED"
+      },
+      "runtimeCheck": true
+    },
+    {
+      "id": "diagnosis-read-without-finding",
+      "trace": {
+        "ruleId": "AS-US-001",
+        "traceAuthority": "orchestrator",
+        "signal": {
+          "id": "repeat",
+          "durable": true,
+          "machineDecidable": true,
+          "sourceEvidence": [
+            "repeated"
+          ]
+        },
+        "decision": {
+          "structured": false,
+          "reason": "documented only",
+          "costSelection": {
+            "strategy": "model-direct",
+            "newCodeBenefit": "unknown",
+            "rationale": "Model interpretation avoids a throwaway parser for this bounded request.",
+            "mandatoryChecksPreserved": true,
+            "diagnosis": {
+              "structuredOutcome": "insufficient",
+              "sourceInspection": {
+                "references": [
+                  "input/requirements.md:11",
+                  "src/condition.cs:97-104",
+                  "results/failure.json"
+                ],
+                "finding": " ",
+                "nextAction": "Keep original conditions and add a separately labelled business summary."
+              }
+            }
+          }
+        },
+        "currentTaskComplete": true,
+        "forbiddenActions": []
+      },
+      "expected": {
+        "allowed": false,
+        "code": "AS-US-001-DIRECT-INSPECTION-REQUIRED"
+      },
+      "runtimeCheck": true
+    },
+    {
+      "id": "diagnosis-direct-read-cannot-waive-checks",
+      "trace": {
+        "ruleId": "AS-US-001",
+        "traceAuthority": "orchestrator",
+        "signal": {
+          "id": "repeat",
+          "durable": true,
+          "machineDecidable": true,
+          "sourceEvidence": [
+            "repeated"
+          ]
+        },
+        "decision": {
+          "structured": false,
+          "reason": "documented only",
+          "costSelection": {
+            "strategy": "model-direct",
+            "newCodeBenefit": "unknown",
+            "rationale": "Model interpretation avoids a throwaway parser for this bounded request.",
+            "mandatoryChecksPreserved": false,
+            "diagnosis": {
+              "structuredOutcome": "insufficient",
+              "sourceInspection": {
+                "references": [
+                  "input/requirements.md:11",
+                  "src/condition.cs:97-104",
+                  "results/failure.json"
+                ],
+                "finding": "The requirement asks for a column-value business summary, while the strict check distinguishes invocation values.",
+                "nextAction": "Keep original conditions and add a separately labelled business summary."
+              }
+            }
+          }
+        },
+        "currentTaskComplete": true,
+        "forbiddenActions": []
+      },
+      "expected": {
+        "allowed": false,
+        "code": "AS-US-001-MANDATORY-CHECKS-NOT-PRESERVED"
+      },
+      "runtimeCheck": true
+    },
+    {
+      "id": "diagnosis-sufficient-existing-check",
+      "trace": {
+        "ruleId": "AS-US-001",
+        "traceAuthority": "orchestrator",
+        "signal": {
+          "id": "repeat",
+          "durable": true,
+          "machineDecidable": true,
+          "sourceEvidence": [
+            "repeated"
+          ]
+        },
+        "decision": {
+          "structured": false,
+          "reason": "documented only",
+          "costSelection": {
+            "strategy": "model-direct",
+            "newCodeBenefit": "unknown",
+            "rationale": "Model interpretation avoids a throwaway parser for this bounded request.",
+            "mandatoryChecksPreserved": true,
+            "diagnosis": {
+              "structuredOutcome": "sufficient"
+            }
+          }
+        },
+        "currentTaskComplete": true,
+        "forbiddenActions": []
+      },
+      "expected": {
+        "allowed": true,
+        "code": "AS-US-001-COST-SELECTED"
+      },
+      "runtimeCheck": true
+    }
   ]
 }

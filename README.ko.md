@@ -2,7 +2,7 @@
 
 [English](README.md) | [한국어](README.ko.md) | [日本語](README.ja.md) | [简体中文](README.zh-CN.md)
 
-<!-- AS-PS-001;version=0.6.1;policy=2026.10.03.2;AS-US-001=39/39;status=behavior-verified;limitation=plan-classification-only-no-measured-cost-reduction-or-global-enforcement-claim -->
+<!-- AS-PS-001;version=0.6.2;policy=2026.10.05.2;AS-US-001=47/47;status=behavior-verified;limitation=plan-classification-only-no-measured-cost-reduction-or-global-enforcement-claim -->
 
 > AI Agent가 작업 속 암묵지·취향·교정·실패를 먼저 발견하고, 다음 실행에 다시 쓸 수 있는 기억·규칙·도구·검증기로 빚어 사용자의 방식으로 함께 진화하는 작업법입니다.
 
@@ -127,6 +127,7 @@ Agentic Shaping v0.6
    - 신호는 개선 검토의 계기이며 새 코드 작성 명령이 아니다. durable·기계 판정 가능·두 번의 반복만으로 자동 승격하지 않는다.
    - 기존 도구 재사용, 모델의 직접 판단, 재사용 코드 중 작성·실행·디버깅·검증·유지보수·컨텍스트의 총비용을 비교해 선택한다.
    - 이득이 불명확하면 모델 직접 판단이나 기존 도구를 사용하고 짧은 정성 근거를 남긴다. 매번 별도 평가 양식이나 임시 스크립트를 만들지 않는다.
+   - 정형 검사로 원인을 판별할 수 없거나 지원 범위 밖이면, Agent가 관련 원문·코드·실패 출력을 작은 범위로 직접 읽어 문제와 다음 행동을 확인한다. 이 확인 전에 같은 검사를 반복하거나 새 검사기를 늘리거나 해석을 사용자에게 넘기지 않는다. 실제로 없는 자료나 권한·제품 선택만 구체적인 근거와 함께 질문하며 필수 무결성·동치·안전 검증은 유지한다.
    - 정형화가 순이득을 주는 경우에만 적용 범위에 맞춰 다음 형태로 승격한다.
    - 취향·판단 기준 → 기억, 체크리스트, 루브릭
    - 반복 입력·데이터 → 스키마, 타입, enum, 매니페스트

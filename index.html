@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <meta name="publication-contract" content="AS-PS-001;version=0.6.1;policy=2026.10.03.2;AS-US-001=39/39;status=behavior-verified;limitation=plan-classification-only-no-measured-cost-reduction-or-global-enforcement-claim" />
+    <meta name="publication-contract" content="AS-PS-001;version=0.6.2;policy=2026.10.05.2;AS-US-001=47/47;status=behavior-verified;limitation=plan-classification-only-no-measured-cost-reduction-or-global-enforcement-claim" />
     <meta name="site-root" content="./" />
     <link rel="canonical" href="https://agentic-shaping.slogs.dev/" />
     <link rel="alternate" hreflang="en" href="https://agentic-shaping.slogs.dev/" />
@@ -173,6 +173,7 @@ When the user explicitly states that information, a state, or a task is one-off 
    - Writing something in documentation or memory, merely creating an asset, or an Agent's claim of improvement is not evidence that structuring is complete. Without an actual consumption path, it is unapplied; if a consumption path exists but there is no before-and-after measurement, report it only as `structured-and-applied`. Do not force one-off or creative judgments into a structured form.
    - Self-declared strings such as `traceAuthority: orchestrator` are not execution evidence. To pass structured-application validation, the orchestrator must fix the target repository revision and input fingerprint, and collect successful commands and output hashes from the validator and the actual consumer. `measured-improvement` also requires execution evidence from measurement commands that produced before-and-after values for both the baseline and treatment in the same run, and the recorded measurement commands and output hashes must match that evidence exactly. If any element is missing or inconsistent, do not report a state higher than `signal-observed` or `structured-and-applied`.
    - When strengthening schema or validator constraints, comprehensively inspect all registered existing consumer materials and validate them first with the compatibility checker. Migrate nonconforming materials based on authoritative source identifiers and make them pass again before claiming compatibility or public completion. Passing only a local evaluation suite is insufficient.
+   - When structured checks cannot identify the cause or do not cover it, the Agent must directly read a bounded portion of the relevant original material, code, and failure output to identify the problem and next action. Do this before repeating checks, adding another validator, or handing interpretation to the user. Ask only for genuinely missing material, authority, or product choices with concrete evidence; preserve mandatory integrity, equivalence, and safety checks.
 5. Context expansion gate
    - When documents, source code, or logs grow large and full reads or repeated searches occur, first discover, validate, and integrate existing search, parser, compiler, and test tools into the workflow. Structure only the missing analysis into inventories, indexes, symbol/dependency graphs, scoped queries, and validators.
    - Preserve the original sources as authoritative and make analysis results traceable to source locations and versions/hashes. Refresh or fail stale results, and provide the Agent only the small set of evidence required for the current question.
@@ -545,7 +546,7 @@ Review the task just completed from an Agentic Shaping perspective. Distinguish 
             <div>
               <small>CONFIRMED FINAL POLICY SYNC</small>
               <strong>90% <i>→</i> 100%</strong>
-              <span class="policy-version">HOMEPAGE v0.6 ↔ SLOGS 2026.10.03.2</span>
+              <span class="policy-version">HOMEPAGE v0.6 ↔ SLOGS 2026.10.05.2</span>
               <p>
                 We synchronized the confirmed behavioral contract from the homepage’s final prompt with the Korean and English Slogs LLM Wiki runtime policies. Across five live-policy pair regressions and 10 Luna Max runs, distinctive behaviors improved from 18/20 → 20/20, with 0 prohibited behaviors.
               </p>

@@ -8,9 +8,10 @@ const suite = JSON.parse(readFileSync(new URL("./unstructured-to-structured-trac
 const contract = JSON.parse(readFileSync(new URL("./unstructured-to-structured-contract.json", import.meta.url), "utf8"));
 const traceSchemaText = readFileSync(new URL("./unstructured-to-structured-trace.schema.json", import.meta.url), "utf8");
 if (suite.ruleId !== contract.ruleId || contract.ruleId !== "AS-US-001") throw new Error("AS-US-001 contract/suite mismatch");
-if (contract.schemaVersion !== 6
+if (contract.schemaVersion !== 7
     || contract.costSelection?.reusableCodeRequires !== "supported"
     || !traceSchemaText.includes('"costSelection"')
+    || !traceSchemaText.includes('"sourceInspection"')
     || !contract.claimLevels?.["signal-observed"]
     || !contract.claimLevels?.["structured-and-applied"]
     || !contract.claimLevels?.["measured-improvement"]

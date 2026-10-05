@@ -2,7 +2,7 @@
 
 [English](README.md) | [한국어](README.ko.md) | [日本語](README.ja.md) | [简体中文](README.zh-CN.md)
 
-<!-- AS-PS-001;version=0.6.1;policy=2026.10.03.2;AS-US-001=39/39;status=behavior-verified;limitation=plan-classification-only-no-measured-cost-reduction-or-global-enforcement-claim -->
+<!-- AS-PS-001;version=0.6.2;policy=2026.10.05.2;AS-US-001=47/47;status=behavior-verified;limitation=plan-classification-only-no-measured-cost-reduction-or-global-enforcement-claim -->
 
 > 这是让 AI Agent 先发现工作中的隐性知识·偏好·纠正·失败，并将其塑造成可在下一次执行中复用的记忆·规则·工具·验证器，与用户一起按用户的方式进化的工作方法。
 
@@ -139,6 +139,7 @@ Agentic Shaping v0.6
    - 写入文档或记忆、仅创建资产，以及 Agent 声称已改进，都不是结构化完成的证据。没有实际消费路径时属于未应用；有消费路径但没有前后测量时，只能报告为 `structured-and-applied`。不要强行将一次性或创造性判断结构化。
    - `traceAuthority: orchestrator` 等自我声明字符串不是执行证据。要通过结构化应用门控，编排器必须固定目标仓库 revision 和输入指纹，并收集 validator、实际 consumer 的成功命令及输出哈希。`measured-improvement` 不仅要求同一次执行中存在基准组与应用组，还要求有生成前后值的测量命令执行证据；记录的测量命令和输出哈希必须与该证据完全一致。缺少或不一致任何一项时，不得将状态报告为高于 `signal-observed` 或 `structured-and-applied`。
    - 加强 schema 或 validator 约束时，应先全面调查已注册的现有消费资料，并使用兼容性检查器进行验证。只有以权威原始标识符为依据迁移不合格资料并重新通过检查后，才能声称兼容并公开完成。仅通过本地评估集合的状态并不足够。
+   - 当结构化检查无法判断原因或超出支持范围时，Agent必须直接阅读相关原始资料、代码和失败输出的必要部分，确认问题及下一步行动。在此之前，不重复同样的检查、不增加验证器，也不把解读交给用户。仅对确实缺失的资料、权限或产品选择提出有具体依据的问题，并保留必要的完整性、等价性和安全检查。
 5. 上下文扩展门控
    - 当文档、源代码或日志变大，导致反复完整阅读和重复相同探索时，先发现并验证现有搜索、解析器、编译器和测试，然后将其整合到工作流中。仅将不足的分析结构化为清单、索引、符号/依赖图、范围查询和验证器。
    - 保留原文作为权威来源，并使分析结果能够追溯到原文位置和版本/哈希。过期结果应更新或使其失败，只向 Agent 提供当前问题所需的小型证据集合。

@@ -32,6 +32,74 @@
         },
         "mandatoryChecksPreserved": {
           "const": true
+        },
+        "diagnosis": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "structuredOutcome"
+          ],
+          "properties": {
+            "structuredOutcome": {
+              "enum": [
+                "sufficient",
+                "insufficient",
+                "unsupported"
+              ]
+            },
+            "sourceInspection": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "references",
+                "finding",
+                "nextAction"
+              ],
+              "properties": {
+                "references": {
+                  "type": "array",
+                  "minItems": 1,
+                  "items": {
+                    "type": "string",
+                    "minLength": 1,
+                    "pattern": "\\S"
+                  }
+                },
+                "finding": {
+                  "type": "string",
+                  "minLength": 1,
+                  "pattern": "\\S"
+                },
+                "nextAction": {
+                  "type": "string",
+                  "minLength": 1,
+                  "pattern": "\\S"
+                }
+              }
+            }
+          },
+          "allOf": [
+            {
+              "if": {
+                "properties": {
+                  "structuredOutcome": {
+                    "enum": [
+                      "insufficient",
+                      "unsupported"
+                    ]
+                  }
+                },
+                "required": [
+                  "structuredOutcome"
+                ]
+              },
+              "then": {
+                "required": [
+                  "sourceInspection"
+                ]
+              }
+            }
+          ]
         }
       },
       "allOf": [
@@ -59,33 +127,89 @@
   },
   "type": "object",
   "additionalProperties": false,
-  "required": ["ruleId", "traceAuthority", "signal", "decision", "currentTaskComplete", "forbiddenActions"],
+  "required": [
+    "ruleId",
+    "traceAuthority",
+    "signal",
+    "decision",
+    "currentTaskComplete",
+    "forbiddenActions"
+  ],
   "properties": {
-    "ruleId": { "const": "AS-US-001" },
-    "traceAuthority": { "const": "orchestrator" },
+    "ruleId": {
+      "const": "AS-US-001"
+    },
+    "traceAuthority": {
+      "const": "orchestrator"
+    },
     "orchestratorEvidence": {
       "type": "object",
       "additionalProperties": false,
-      "required": ["runner", "runId", "targetRepository", "targetRevision", "inputFingerprint", "executedCommands"],
+      "required": [
+        "runner",
+        "runId",
+        "targetRepository",
+        "targetRevision",
+        "inputFingerprint",
+        "executedCommands"
+      ],
       "properties": {
-        "runner": { "const": "agentic-shaping-orchestrator" },
-        "runId": { "type": "string", "minLength": 1 },
-        "targetRepository": { "type": "string", "minLength": 1 },
-        "targetRevision": { "type": "string", "pattern": "^[A-Fa-f0-9]{7,64}$" },
-        "inputFingerprint": { "type": "string", "pattern": "^[A-Fa-f0-9]{64}$" },
+        "runner": {
+          "const": "agentic-shaping-orchestrator"
+        },
+        "runId": {
+          "type": "string",
+          "minLength": 1
+        },
+        "targetRepository": {
+          "type": "string",
+          "minLength": 1
+        },
+        "targetRevision": {
+          "type": "string",
+          "pattern": "^[A-Fa-f0-9]{7,64}$"
+        },
+        "inputFingerprint": {
+          "type": "string",
+          "pattern": "^[A-Fa-f0-9]{64}$"
+        },
         "executedCommands": {
           "type": "array",
           "minItems": 1,
           "items": {
             "type": "object",
             "additionalProperties": false,
-            "required": ["purpose", "command", "exitCode", "outputSha256"],
+            "required": [
+              "purpose",
+              "command",
+              "exitCode",
+              "outputSha256"
+            ],
             "properties": {
-              "purpose": { "enum": ["validator", "consumer", "baseline", "candidate", "measurement"] },
-              "command": { "type": "string", "minLength": 1 },
-              "exitCode": { "type": "integer" },
-              "expectedExitCode": { "type": "integer", "default": 0 },
-              "outputSha256": { "type": "string", "pattern": "^[A-Fa-f0-9]{64}$" }
+              "purpose": {
+                "enum": [
+                  "validator",
+                  "consumer",
+                  "baseline",
+                  "candidate",
+                  "measurement"
+                ]
+              },
+              "command": {
+                "type": "string",
+                "minLength": 1
+              },
+              "exitCode": {
+                "type": "integer"
+              },
+              "expectedExitCode": {
+                "type": "integer",
+                "default": 0
+              },
+              "outputSha256": {
+                "type": "string",
+                "pattern": "^[A-Fa-f0-9]{64}$"
+              }
             }
           }
         }
@@ -94,12 +218,31 @@
     "signal": {
       "type": "object",
       "additionalProperties": false,
-      "required": ["id", "durable", "machineDecidable", "sourceEvidence"],
+      "required": [
+        "id",
+        "durable",
+        "machineDecidable",
+        "sourceEvidence"
+      ],
       "properties": {
-        "id": { "type": "string", "minLength": 1 },
-        "durable": { "type": "boolean" },
-        "machineDecidable": { "type": "boolean" },
-        "sourceEvidence": { "type": "array", "minItems": 1, "items": { "type": "string", "minLength": 1 } }
+        "id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "durable": {
+          "type": "boolean"
+        },
+        "machineDecidable": {
+          "type": "boolean"
+        },
+        "sourceEvidence": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
       }
     },
     "decision": {
@@ -107,26 +250,76 @@
         {
           "type": "object",
           "additionalProperties": false,
-          "required": ["structured", "reason"],
-          "properties": { "structured": { "const": false }, "reason": { "type": "string", "minLength": 1 }, "costSelection": { "$ref": "#/$defs/costSelection" } }
+          "required": [
+            "structured",
+            "reason"
+          ],
+          "properties": {
+            "structured": {
+              "const": false
+            },
+            "reason": {
+              "type": "string",
+              "minLength": 1
+            },
+            "costSelection": {
+              "$ref": "#/$defs/costSelection"
+            }
+          }
         },
         {
           "type": "object",
           "additionalProperties": false,
-          "required": ["structured", "reason", "claimLevel", "plannedAsset"],
+          "required": [
+            "structured",
+            "reason",
+            "claimLevel",
+            "plannedAsset"
+          ],
           "properties": {
-            "costSelection": { "$ref": "#/$defs/costSelection" },
-            "structured": { "const": false },
-            "reason": { "type": "string", "minLength": 1 },
-            "claimLevel": { "const": "signal-observed" },
+            "costSelection": {
+              "$ref": "#/$defs/costSelection"
+            },
+            "structured": {
+              "const": false
+            },
+            "reason": {
+              "type": "string",
+              "minLength": 1
+            },
+            "claimLevel": {
+              "const": "signal-observed"
+            },
             "plannedAsset": {
               "type": "object",
               "additionalProperties": false,
-              "required": ["kind", "authorityPath", "nextGate"],
+              "required": [
+                "kind",
+                "authorityPath",
+                "nextGate"
+              ],
               "properties": {
-                "kind": { "enum": ["schema", "type", "enum", "manifest", "index", "invariant", "validator", "fixture", "pipeline"] },
-                "authorityPath": { "type": "string", "minLength": 1 },
-                "nextGate": { "type": "string", "minLength": 1 }
+                "kind": {
+                  "enum": [
+                    "schema",
+                    "type",
+                    "enum",
+                    "manifest",
+                    "index",
+                    "invariant",
+                    "validator",
+                    "fixture",
+                    "pipeline"
+                  ]
+                },
+                "authorityPath": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "nextGate": {
+                  "type": "string",
+                  "minLength": 1
+                }
               }
             }
           }
@@ -134,95 +327,284 @@
         {
           "type": "object",
           "additionalProperties": false,
-          "required": ["structured", "reason", "claimLevel", "asset", "application"],
+          "required": [
+            "structured",
+            "reason",
+            "claimLevel",
+            "asset",
+            "application"
+          ],
           "properties": {
-            "costSelection": { "$ref": "#/$defs/costSelection" },
-            "structured": { "const": true },
-            "reason": { "type": "string", "minLength": 1 },
-            "claimLevel": { "enum": ["structured-and-applied", "measured-improvement"] },
+            "costSelection": {
+              "$ref": "#/$defs/costSelection"
+            },
+            "structured": {
+              "const": true
+            },
+            "reason": {
+              "type": "string",
+              "minLength": 1
+            },
+            "claimLevel": {
+              "enum": [
+                "structured-and-applied",
+                "measured-improvement"
+              ]
+            },
             "asset": {
-              "type": "object", "additionalProperties": false,
-              "required": ["kind", "authorityPath", "inputFingerprint", "validatorEvidence"],
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "kind",
+                "authorityPath",
+                "inputFingerprint",
+                "validatorEvidence"
+              ],
               "properties": {
-                "kind": { "enum": ["schema", "type", "enum", "manifest", "index", "invariant", "validator", "fixture", "pipeline"] },
-                "authorityPath": { "type": "string", "minLength": 1 },
-                "inputFingerprint": { "type": "string", "pattern": "^[A-Fa-f0-9]{64}$" },
-                "validatorEvidence": { "type": "array", "minItems": 1, "items": { "type": "string", "minLength": 1 } }
+                "kind": {
+                  "enum": [
+                    "schema",
+                    "type",
+                    "enum",
+                    "manifest",
+                    "index",
+                    "invariant",
+                    "validator",
+                    "fixture",
+                    "pipeline"
+                  ]
+                },
+                "authorityPath": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "inputFingerprint": {
+                  "type": "string",
+                  "pattern": "^[A-Fa-f0-9]{64}$"
+                },
+                "validatorEvidence": {
+                  "type": "array",
+                  "minItems": 1,
+                  "items": {
+                    "type": "string",
+                    "minLength": 1
+                  }
+                }
               }
             },
             "application": {
-              "type": "object", "additionalProperties": false,
-              "required": ["productionPathChanged", "consumerEvidence"],
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "productionPathChanged",
+                "consumerEvidence"
+              ],
               "properties": {
-                "productionPathChanged": { "const": true },
-                "consumerEvidence": { "type": "array", "minItems": 1, "items": { "type": "string", "minLength": 1 } }
+                "productionPathChanged": {
+                  "const": true
+                },
+                "consumerEvidence": {
+                  "type": "array",
+                  "minItems": 1,
+                  "items": {
+                    "type": "string",
+                    "minLength": 1
+                  }
+                }
               }
             },
             "measurementPlan": {
-              "type": "object", "additionalProperties": false,
-              "required": ["metric", "measurementCommand", "baselineEvidence", "candidateEvidence", "measuredInputFingerprint"],
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "metric",
+                "measurementCommand",
+                "baselineEvidence",
+                "candidateEvidence",
+                "measuredInputFingerprint"
+              ],
               "properties": {
-                "metric": { "enum": ["manualJudgments", "reanalysisUnits", "lateFailures", "retries", "elapsedMs", "contextTokens", "misses"] },
-                "measurementCommand": { "type": "string", "minLength": 1 },
-                "baselineEvidence": { "type": "array", "minItems": 1, "items": { "type": "string", "minLength": 1 } },
-                "candidateEvidence": { "type": "array", "minItems": 1, "items": { "type": "string", "minLength": 1 } },
-                "measuredInputFingerprint": { "type": "string", "pattern": "^[A-Fa-f0-9]{64}$" }
+                "metric": {
+                  "enum": [
+                    "manualJudgments",
+                    "reanalysisUnits",
+                    "lateFailures",
+                    "retries",
+                    "elapsedMs",
+                    "contextTokens",
+                    "misses"
+                  ]
+                },
+                "measurementCommand": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "baselineEvidence": {
+                  "type": "array",
+                  "minItems": 1,
+                  "items": {
+                    "type": "string",
+                    "minLength": 1
+                  }
+                },
+                "candidateEvidence": {
+                  "type": "array",
+                  "minItems": 1,
+                  "items": {
+                    "type": "string",
+                    "minLength": 1
+                  }
+                },
+                "measuredInputFingerprint": {
+                  "type": "string",
+                  "pattern": "^[A-Fa-f0-9]{64}$"
+                }
               }
             },
             "measurement": {
-              "type": "object", "additionalProperties": false,
-              "required": ["metric", "before", "after", "measuredInputFingerprint", "command", "outputSha256"],
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "metric",
+                "before",
+                "after",
+                "measuredInputFingerprint",
+                "command",
+                "outputSha256"
+              ],
               "properties": {
-                "metric": { "enum": ["manualJudgments", "reanalysisUnits", "lateFailures", "retries", "elapsedMs", "contextTokens", "misses"] },
-                "before": { "type": "number", "minimum": 0 },
-                "after": { "type": "number", "minimum": 0 },
-                "measuredInputFingerprint": { "type": "string", "pattern": "^[A-Fa-f0-9]{64}$" },
-                "command": { "type": "string", "minLength": 1 },
-                "outputSha256": { "type": "string", "pattern": "^[A-Fa-f0-9]{64}$" }
+                "metric": {
+                  "enum": [
+                    "manualJudgments",
+                    "reanalysisUnits",
+                    "lateFailures",
+                    "retries",
+                    "elapsedMs",
+                    "contextTokens",
+                    "misses"
+                  ]
+                },
+                "before": {
+                  "type": "number",
+                  "minimum": 0
+                },
+                "after": {
+                  "type": "number",
+                  "minimum": 0
+                },
+                "measuredInputFingerprint": {
+                  "type": "string",
+                  "pattern": "^[A-Fa-f0-9]{64}$"
+                },
+                "command": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "outputSha256": {
+                  "type": "string",
+                  "pattern": "^[A-Fa-f0-9]{64}$"
+                }
               }
             }
           },
           "allOf": [
             {
-              "if": { "properties": { "claimLevel": { "const": "structured-and-applied" } } },
-              "then": { "required": ["measurementPlan"], "not": { "required": ["measurement"] } }
+              "if": {
+                "properties": {
+                  "claimLevel": {
+                    "const": "structured-and-applied"
+                  }
+                }
+              },
+              "then": {
+                "required": [
+                  "measurementPlan"
+                ],
+                "not": {
+                  "required": [
+                    "measurement"
+                  ]
+                }
+              }
             },
             {
-              "if": { "properties": { "claimLevel": { "const": "measured-improvement" } } },
-              "then": { "required": ["measurement"], "not": { "required": ["measurementPlan"] } }
+              "if": {
+                "properties": {
+                  "claimLevel": {
+                    "const": "measured-improvement"
+                  }
+                }
+              },
+              "then": {
+                "required": [
+                  "measurement"
+                ],
+                "not": {
+                  "required": [
+                    "measurementPlan"
+                  ]
+                }
+              }
             }
           ]
         }
       ]
     },
-    "currentTaskComplete": { "type": "boolean" },
-    "forbiddenActions": { "type": "array", "maxItems": 0 }
+    "currentTaskComplete": {
+      "type": "boolean"
+    },
+    "forbiddenActions": {
+      "type": "array",
+      "maxItems": 0
+    }
   },
   "allOf": [
     {
       "if": {
         "properties": {
           "decision": {
-            "properties": { "claimLevel": { "const": "signal-observed" } },
-            "required": ["claimLevel"]
+            "properties": {
+              "claimLevel": {
+                "const": "signal-observed"
+              }
+            },
+            "required": [
+              "claimLevel"
+            ]
           }
         }
       },
       "then": {
-        "required": ["orchestratorEvidence"],
-        "properties": { "currentTaskComplete": { "const": false } }
+        "required": [
+          "orchestratorEvidence"
+        ],
+        "properties": {
+          "currentTaskComplete": {
+            "const": false
+          }
+        }
       }
     },
     {
       "if": {
         "properties": {
           "decision": {
-            "properties": { "structured": { "const": true } },
-            "required": ["structured"]
+            "properties": {
+              "structured": {
+                "const": true
+              }
+            },
+            "required": [
+              "structured"
+            ]
           }
         }
       },
-      "then": { "required": ["orchestratorEvidence"] }
+      "then": {
+        "required": [
+          "orchestratorEvidence"
+        ]
+      }
     }
   ]
 }
