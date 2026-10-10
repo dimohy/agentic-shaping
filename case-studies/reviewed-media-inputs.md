@@ -22,6 +22,14 @@ Repeated loading of a large speech model was also observed during production. Th
 
 ## Reusable decision
 
+### A paused render reused verified work
+
+When production resumed, the external storage mount was absent. The existing mount command restored access before any regeneration was attempted. The camera renderer now checks the saved input hashes, completed clip hashes, owned paths, dimensions and frame cadence before reusing a contiguous set of completed scenes. The actual production log confirmed reuse of eleven scenes and rendering continued at scene twelve. The interrupted twelfth clip was preserved separately and was not accepted as completed work.
+
+Five focused cases passed against the same PowerShell functions consumed by the renderer. They cover unchanged work, changed inputs, changed clip bytes, invalid paths or cadence, and the producer's fractional final-frame boundary. Fixture tests do not establish media quality; the saved production clips were separately inspected and hash checked. A one-frame trim boundary is accepted only when the container duration matches its frame count. Missing additional frames remain an error.
+
+This is observed recovery and reuse, not a measured end-to-end speedup. Final composition, perceptual review and private YouTube presentation remain separate completion criteria.
+
 ### A thumbnail correction reached the upload consumer
 
 The next run mistakenly generated landscape covers for five vertical Shorts. The correction was applied to the selected assets and to the existing publication preparation function: a Shorts cover must have a 9:16 final image and a portrait original, while the parent thumbnail must remain 16:9. Cropping a landscape original into a portrait file cannot bypass this check. The function reads the actual images rather than trusting an aspect-ratio label in a receipt.
