@@ -22,6 +22,12 @@ Repeated loading of a large speech model was also observed during production. Th
 
 ## Reusable decision
 
+### A thumbnail correction reached the upload consumer
+
+The next run mistakenly generated landscape covers for five vertical Shorts. The correction was applied to the selected assets and to the existing publication preparation function: a Shorts cover must have a 9:16 final image and a portrait original, while the parent thumbnail must remain 16:9. Cropping a landscape original into a portrait file cannot bypass this check. The function reads the actual images rather than trusting an aspect-ratio label in a receipt.
+
+All six selected covers passed the integrated preparation command. The focused publication suite passed 23 cases, including normal portrait and landscape inputs, the previous landscape Shorts failure, a crop bypass, and conflicting visibility declarations. This proves preparation behavior and selected-input compliance. It does not prove that YouTube displays the intended cover, that a private video is publicly visible, or that the workflow is faster. Actual upload and displayed-cover verification remain separate.
+
 Use direct editorial judgment for natural language and scene meaning. Reuse the existing synthesis, pause parser and PCM assembler. Promote only repeated, mechanically decidable omissions and input bindings to execution checks. Preserve source meaning and final listening/visual verification. Count verified outcomes rather than the number of documents or validators added.
 
 ## 한국어 요약
