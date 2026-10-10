@@ -1,5 +1,22 @@
 # Changelog
 
+## [0.6.3] - 2026-10-10
+
+### What changed for users
+
+- A production case demonstrates binding reviewed files to the actual generation command.
+- Required closings and pause roles are verified in the local media consumer rather than only recorded in memory.
+- Approved voice artifacts are reused through an explicit resolver that rejects mismatched identities, transcripts and hashes.
+- Recovered correctness, skipped tests, perceptual review and measured speedup are reported separately.
+
+### Technical notes
+
+- Compatibility: Adds a case study and links without changing the public evaluation API or Slogs policy authority.
+- Contracts: Retains AS-US-001 47/47 and existing mandatory completion requirements.
+- Verification: Focused local production tests are described with their actual scope; four paired-surface catalogs and generation checks are synchronized.
+- Known limitation: Five failed-before/successful-after staging pairs establish recovered correctness, not a speedup. Full media and runtime performance verification remain separate.
+
+
 ## [0.6.2] - 2026-10-05
 
 ### What changed for users

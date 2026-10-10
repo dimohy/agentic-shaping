@@ -1,11 +1,11 @@
 {
   "schemaVersion": 2,
   "contractId": "AS-PS-001",
-  "version": "0.6.2",
+  "version": "0.6.3",
   "displayVersion": "v0.6",
-  "previousVersion": "0.6.1",
+  "previousVersion": "0.6.2",
   "changeLevel": "patch",
-  "releaseDate": "2026-10-05",
+  "releaseDate": "2026-10-10",
   "policyVersion": "2026.10.05.2",
   "feature": {
     "ruleId": "AS-US-001",
@@ -43,7 +43,8 @@
     "evals/unstructured-to-structured-contract.json",
     "evals/unstructured-to-structured-trace.schema.json",
     "evals/unstructured-to-structured-traces.json",
-    "evals/verify-unstructured-to-structured.mjs"
+    "evals/verify-unstructured-to-structured.mjs",
+    "case-studies/reviewed-media-inputs.md"
   ],
   "publicCapabilities": [
     {

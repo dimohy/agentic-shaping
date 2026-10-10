@@ -2,7 +2,7 @@
 
 [English](README.md) | [한국어](README.ko.md) | [日本語](README.ja.md) | [简体中文](README.zh-CN.md)
 
-<!-- AS-PS-001;version=0.6.2;policy=2026.10.05.2;AS-US-001=47/47;status=behavior-verified;limitation=plan-classification-only-no-measured-cost-reduction-or-global-enforcement-claim -->
+<!-- AS-PS-001;version=0.6.3;policy=2026.10.05.2;AS-US-001=47/47;status=behavior-verified;limitation=plan-classification-only-no-measured-cost-reduction-or-global-enforcement-claim -->
 
 > An AI work method that actively discovers tacit knowledge, preferences, corrections, and failures, then shapes them into reusable memories, rules, tools, and verifiers so the system evolves with the user’s way of working.
 
@@ -288,6 +288,10 @@ Agentic Shaping is not a method for expanding an Agent's permissions.
 - When the current request conflicts with past memories, the current request takes precedence.
 - It does not mix general principles with project-specific syntax·contracts·validation criteria.
 - It does not reduce creative judgment to mechanical rules merely because it can be automated.
+
+## A production case with verified consumer inputs
+
+The [media production case](case-studies/reviewed-media-inputs.md) documents omitted review inputs, required closings and pause directives in the actual generation path. Failed-path and successful-path timing is not a speedup comparison; final listening, visual review and publication completion remain separate.
 
 ## Repository Structure
 

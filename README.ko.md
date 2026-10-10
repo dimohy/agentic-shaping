@@ -2,7 +2,7 @@
 
 [English](README.md) | [한국어](README.ko.md) | [日本語](README.ja.md) | [简体中文](README.zh-CN.md)
 
-<!-- AS-PS-001;version=0.6.2;policy=2026.10.05.2;AS-US-001=47/47;status=behavior-verified;limitation=plan-classification-only-no-measured-cost-reduction-or-global-enforcement-claim -->
+<!-- AS-PS-001;version=0.6.3;policy=2026.10.05.2;AS-US-001=47/47;status=behavior-verified;limitation=plan-classification-only-no-measured-cost-reduction-or-global-enforcement-claim -->
 
 > AI Agent가 작업 속 암묵지·취향·교정·실패를 먼저 발견하고, 다음 실행에 다시 쓸 수 있는 기억·규칙·도구·검증기로 빚어 사용자의 방식으로 함께 진화하는 작업법입니다.
 
@@ -288,6 +288,10 @@ Agentic Shaping은 Agent의 권한을 넓히는 방법이 아닙니다.
 - 현재 요청과 과거 기억이 충돌하면 현재 요청을 우선합니다.
 - 일반 원칙과 프로젝트별 문법·계약·검증 기준을 섞지 않습니다.
 - 자동화할 수 있다는 이유만으로 창의적 판단까지 기계 규칙으로 축소하지 않습니다.
+
+## 실제 소비 경로를 확인한 제작 사례
+
+검토 단계의 입력 누락·필수 마무리·쉼 지시를 실제 생성 경로에서 확인한 [미디어 제작 사례](case-studies/reviewed-media-inputs.md)를 공개합니다. 실패 경로와 성공 경로의 시간 차이를 속도 향상으로 해석하지 않으며 최종 청취·화면 검수·게시 완료를 별도로 확인합니다.
 
 ## 저장소 구성
 

@@ -2,7 +2,7 @@
 
 [English](README.md) | [한국어](README.ko.md) | [日本語](README.ja.md) | [简体中文](README.zh-CN.md)
 
-<!-- AS-PS-001;version=0.6.2;policy=2026.10.05.2;AS-US-001=47/47;status=behavior-verified;limitation=plan-classification-only-no-measured-cost-reduction-or-global-enforcement-claim -->
+<!-- AS-PS-001;version=0.6.3;policy=2026.10.05.2;AS-US-001=47/47;status=behavior-verified;limitation=plan-classification-only-no-measured-cost-reduction-or-global-enforcement-claim -->
 
 > 这是让 AI Agent 先发现工作中的隐性知识·偏好·纠正·失败，并将其塑造成可在下一次执行中复用的记忆·规则·工具·验证器，与用户一起按用户的方式进化的工作方法。
 
@@ -288,6 +288,10 @@ Agentic Shaping 不是扩大 Agent 权限的方法。
 - 当前请求与过往记忆冲突时，以当前请求为优先。
 - 不混淆通用原则与项目特定的语法·契约·验证标准。
 - 不会仅因某件事可以自动化，就把创造性判断也缩减为机器规则。
+
+## 已核对实际输入路径的制作案例
+
+公开[媒体制作案例](case-studies/reviewed-media-inputs.md)，说明如何在实际生成路径中验证审核输入遗漏、必需结尾话语和停顿指令。失败路径与成功路径的时间差不代表提速；最终听觉检查、画面检查及发布完成分别验证。
 
 ## 仓库结构
 
