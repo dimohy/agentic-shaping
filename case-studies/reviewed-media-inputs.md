@@ -41,3 +41,9 @@ Use direct editorial judgment for natural language and scene meaning. Reuse the 
 ## 한국어 요약
 
 검토 원고에 규칙이 있다는 사실만으로 실제 생성에 적용됐다고 판단하지 않습니다. 검토한 파일의 위치·해시·필수 마무리·쉼 역할을 생성 명령의 실제 입력과 대조합니다. 한국어의 자연스러움과 장면의 의미는 직접 검토하고, 반복되는 누락과 입력 불일치는 기존 실행 경로에서 차단합니다. 실패 경로와 성공 경로의 시간은 같은 작업을 수행한 비교가 아니므로 속도 향상으로 보고하지 않습니다. 최종 청취·화면 검수와 업로드 완료는 별도로 확인합니다.
+
+### Public visibility did not establish ordered release
+
+An interrupted browser navigation left one Short private, but the browser task advanced to the next Short before confirming the previous public transition. All six videos eventually became public and passed playback, Korean-subtitle, HD, related-link and portrait-cover checks. The final two releases were nevertheless reversed. A later reporter assertion incorrectly dismissed that discrepancy; the original browser action log showed the successor public while its predecessor was still private. That assertion was withdrawn. Existing videos and links were preserved rather than republished to disguise the history.
+
+The existing publication completion validator now checks an explicitly requested release sequence against the actual observed sequence. Twenty-four focused publication cases passed, including correct order, reversed order and an assertion-only bypass. The real package is rejected for its order mismatch even though its visibility and presentation checks pass. This is a completion check, not proof that every browser agent enforces order before acting. A successful public upload cannot repair an earlier ordering error.
