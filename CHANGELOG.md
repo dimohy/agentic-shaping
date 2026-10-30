@@ -1,5 +1,24 @@
 # Changelog
 
+## [0.7.0] - 2026-10-30
+
+### What changed for users
+
+- Adds a resumable editorial SOP: capture actual baseline, review every sentence, run existing checks, verify evidence, then resume the original delivery process.
+- AS-SOP-001 rejects fabricated before-text, missing or repeated review records, skipped checks, stale hashes and semantic-quality overclaims across 22 frozen cases.
+- Existing AS-US-001 consumes optional reviewWorkflow reports; a qualitySensitive delivery plan requires one. Existing unmarked plans retain their checks.
+- LingoMotion connects the final gate to actual local snapshots and checker logs before live synthesis. Slogs exposes authenticated submitted-report validation and the corresponding policy.
+- Scope: submitted evidence and tested consumer paths only. No certification of subjective quality, actual Agent reading, independent review or automatic enforcement in every host. No measured speedup claim.
+- Method references and English/Korean SOP manuals are published; four language surfaces are synchronized.
+
+### Technical notes
+
+- Compatibility: Existing unmarked cost-selection plans retain their checks; the CLI now exposes --cost-selection alongside --trace.
+- Contracts: AS-SOP-001 adds 22 frozen cases and intermediate/final separation while retaining AS-US-001 47/47.
+- Verification: The staged Git snapshot runs every published capability verifier and synchronizes eight generated surfaces.
+- Known limitation: Evidence shape does not prove semantic quality, execution authenticity or enforcement across all Agent hosts.
+
+
 ## [0.6.3] - 2026-10-10
 
 ### What changed for users

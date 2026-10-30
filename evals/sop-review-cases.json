@@ -1,0 +1,2007 @@
+{
+  "ruleId": "AS-SOP-001",
+  "cases": [
+    {
+      "id": "normal-edited",
+      "report": {
+        "schemaVersion": 1,
+        "contractId": "AS-SOP-001",
+        "sop": {
+          "id": "artifact-semantic-review",
+          "sha256": "fd1a9ae4652d6d80484a7fcac002db7f39577922598fedd0dce40c1b316bc6db"
+        },
+        "artifact": {
+          "beforeText": "여러분은 무엇을 맡기는 응답을 하고 있습니까?\n\n그 문제 속의 나도 내어드리는 것입니다.",
+          "beforeSha256": "4673cdf9c395e076211aba77014a1eedfe5f0904f2ae0bbedf825c46f6c69e59",
+          "afterText": "여러분, 주님께 무엇을 맡기고 있습니까?\n\n나 자신도 주님의 말씀을 따르게 해 달라고 기도해야 합니다.",
+          "afterSha256": "0dc05584f36132570d149ded967856b9e49074f7d3f403118bc11480bf459931"
+        },
+        "review": {
+          "method": "agent-close-reading",
+          "units": [
+            {
+              "index": 1,
+              "before": "여러분은 무엇을 맡기는 응답을 하고 있습니까?",
+              "after": "여러분, 주님께 무엇을 맡기고 있습니까?",
+              "decision": "revise",
+              "observation": "주님께 무엇을 맡기는지 직접 질문하여 추상적인 응답이라는 말을 풀었다.",
+              "sentences": [
+                {
+                  "text": "여러분, 주님께 무엇을 맡기고 있습니까?",
+                  "focus": "주님께",
+                  "observation": "주님께 무엇을 맡기는지 직접 질문하여 추상적인 응답이라는 말을 풀었다."
+                }
+              ]
+            },
+            {
+              "index": 2,
+              "before": "그 문제 속의 나도 내어드리는 것입니다.",
+              "after": "나 자신도 주님의 말씀을 따르게 해 달라고 기도해야 합니다.",
+              "decision": "revise",
+              "observation": "주님의 말씀을 따르게 해 달라고 기도하는 실제 말로 바꾸었다.",
+              "sentences": [
+                {
+                  "text": "나 자신도 주님의 말씀을 따르게 해 달라고 기도해야 합니다.",
+                  "focus": "주님의 말씀",
+                  "observation": "주님의 말씀을 따르게 해 달라고 기도하는 실제 말로 바꾸었다."
+                }
+              ]
+            }
+          ]
+        },
+        "mechanical": {
+          "executed": true,
+          "exitCode": 0,
+          "inputSha256": "0dc05584f36132570d149ded967856b9e49074f7d3f403118bc11480bf459931",
+          "command": "known-pattern-check current-script.txt",
+          "toolSha256": "c3a9dacf1e6fe0033c64e83db13445a8828e993ccce8aaf0dcc66957ad053af6",
+          "rulesSha256": "952e99e141cba0f70d883bfebb85b0bf8448623fc4532999322759e42e86c936",
+          "stdoutSha256": "d1ef570a2e12e35ff3a3faefbdb34ed825491021cab5fd5019090e15d587f0bc",
+          "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "scope": "known-patterns-only"
+        },
+        "steps": [
+          {
+            "id": "capture",
+            "status": "completed",
+            "evidenceSha256": "4673cdf9c395e076211aba77014a1eedfe5f0904f2ae0bbedf825c46f6c69e59"
+          },
+          {
+            "id": "review",
+            "status": "completed",
+            "evidenceSha256": "0dc05584f36132570d149ded967856b9e49074f7d3f403118bc11480bf459931"
+          },
+          {
+            "id": "check",
+            "status": "completed",
+            "evidenceSha256": "d1ef570a2e12e35ff3a3faefbdb34ed825491021cab5fd5019090e15d587f0bc"
+          },
+          {
+            "id": "verify",
+            "status": "completed",
+            "evidenceSha256": "0dc05584f36132570d149ded967856b9e49074f7d3f403118bc11480bf459931"
+          }
+        ],
+        "claims": {
+          "semanticQualityCertified": false,
+          "independentReviewPerformed": false,
+          "allAgentsAutomaticallyEnforced": false
+        },
+        "scopePreserved": true
+      },
+      "expected": {
+        "allowed": true,
+        "code": "AS-SOP-001-RECORD-VALID"
+      }
+    },
+    {
+      "id": "normal-unchanged-actual-text",
+      "report": {
+        "schemaVersion": 1,
+        "contractId": "AS-SOP-001",
+        "sop": {
+          "id": "artifact-semantic-review",
+          "sha256": "fd1a9ae4652d6d80484a7fcac002db7f39577922598fedd0dce40c1b316bc6db"
+        },
+        "artifact": {
+          "beforeText": "여러분, 주님께 무엇을 맡기고 있습니까?\n\n나 자신도 주님의 말씀을 따르게 해 달라고 기도해야 합니다.",
+          "beforeSha256": "0dc05584f36132570d149ded967856b9e49074f7d3f403118bc11480bf459931",
+          "afterText": "여러분, 주님께 무엇을 맡기고 있습니까?\n\n나 자신도 주님의 말씀을 따르게 해 달라고 기도해야 합니다.",
+          "afterSha256": "0dc05584f36132570d149ded967856b9e49074f7d3f403118bc11480bf459931"
+        },
+        "review": {
+          "method": "agent-close-reading",
+          "units": [
+            {
+              "index": 1,
+              "before": "여러분, 주님께 무엇을 맡기고 있습니까?",
+              "after": "여러분, 주님께 무엇을 맡기고 있습니까?",
+              "decision": "keep",
+              "observation": "주님께 무엇을 맡기는지 직접 질문하여 추상적인 응답이라는 말을 풀었다.",
+              "sentences": [
+                {
+                  "text": "여러분, 주님께 무엇을 맡기고 있습니까?",
+                  "focus": "주님께",
+                  "observation": "주님께 무엇을 맡기는지 직접 질문하여 추상적인 응답이라는 말을 풀었다."
+                }
+              ]
+            },
+            {
+              "index": 2,
+              "before": "나 자신도 주님의 말씀을 따르게 해 달라고 기도해야 합니다.",
+              "after": "나 자신도 주님의 말씀을 따르게 해 달라고 기도해야 합니다.",
+              "decision": "keep",
+              "observation": "주님의 말씀을 따르게 해 달라고 기도하는 실제 말로 바꾸었다.",
+              "sentences": [
+                {
+                  "text": "나 자신도 주님의 말씀을 따르게 해 달라고 기도해야 합니다.",
+                  "focus": "주님의 말씀",
+                  "observation": "주님의 말씀을 따르게 해 달라고 기도하는 실제 말로 바꾸었다."
+                }
+              ]
+            }
+          ]
+        },
+        "mechanical": {
+          "executed": true,
+          "exitCode": 0,
+          "inputSha256": "0dc05584f36132570d149ded967856b9e49074f7d3f403118bc11480bf459931",
+          "command": "known-pattern-check current-script.txt",
+          "toolSha256": "c3a9dacf1e6fe0033c64e83db13445a8828e993ccce8aaf0dcc66957ad053af6",
+          "rulesSha256": "952e99e141cba0f70d883bfebb85b0bf8448623fc4532999322759e42e86c936",
+          "stdoutSha256": "d1ef570a2e12e35ff3a3faefbdb34ed825491021cab5fd5019090e15d587f0bc",
+          "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "scope": "known-patterns-only"
+        },
+        "steps": [
+          {
+            "id": "capture",
+            "status": "completed",
+            "evidenceSha256": "0dc05584f36132570d149ded967856b9e49074f7d3f403118bc11480bf459931"
+          },
+          {
+            "id": "review",
+            "status": "completed",
+            "evidenceSha256": "0dc05584f36132570d149ded967856b9e49074f7d3f403118bc11480bf459931"
+          },
+          {
+            "id": "check",
+            "status": "completed",
+            "evidenceSha256": "d1ef570a2e12e35ff3a3faefbdb34ed825491021cab5fd5019090e15d587f0bc"
+          },
+          {
+            "id": "verify",
+            "status": "completed",
+            "evidenceSha256": "0dc05584f36132570d149ded967856b9e49074f7d3f403118bc11480bf459931"
+          }
+        ],
+        "claims": {
+          "semanticQualityCertified": false,
+          "independentReviewPerformed": false,
+          "allAgentsAutomaticallyEnforced": false
+        },
+        "scopePreserved": true
+      },
+      "expected": {
+        "allowed": true,
+        "code": "AS-SOP-001-RECORD-VALID"
+      }
+    },
+    {
+      "id": "previous-blanket-passed",
+      "report": {
+        "schemaVersion": 1,
+        "contractId": "AS-SOP-001",
+        "sop": {
+          "id": "artifact-semantic-review",
+          "sha256": "fd1a9ae4652d6d80484a7fcac002db7f39577922598fedd0dce40c1b316bc6db"
+        },
+        "artifact": {
+          "beforeText": "여러분은 무엇을 맡기는 응답을 하고 있습니까?\n\n그 문제 속의 나도 내어드리는 것입니다.",
+          "beforeSha256": "4673cdf9c395e076211aba77014a1eedfe5f0904f2ae0bbedf825c46f6c69e59",
+          "afterText": "여러분, 주님께 무엇을 맡기고 있습니까?\n\n나 자신도 주님의 말씀을 따르게 해 달라고 기도해야 합니다.",
+          "afterSha256": "0dc05584f36132570d149ded967856b9e49074f7d3f403118bc11480bf459931"
+        },
+        "review": {
+          "status": "passed",
+          "notes": "자연스러움 통과"
+        },
+        "mechanical": {
+          "executed": true,
+          "exitCode": 0,
+          "inputSha256": "0dc05584f36132570d149ded967856b9e49074f7d3f403118bc11480bf459931",
+          "command": "known-pattern-check current-script.txt",
+          "toolSha256": "c3a9dacf1e6fe0033c64e83db13445a8828e993ccce8aaf0dcc66957ad053af6",
+          "rulesSha256": "952e99e141cba0f70d883bfebb85b0bf8448623fc4532999322759e42e86c936",
+          "stdoutSha256": "d1ef570a2e12e35ff3a3faefbdb34ed825491021cab5fd5019090e15d587f0bc",
+          "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "scope": "known-patterns-only"
+        },
+        "steps": [
+          {
+            "id": "capture",
+            "status": "completed",
+            "evidenceSha256": "4673cdf9c395e076211aba77014a1eedfe5f0904f2ae0bbedf825c46f6c69e59"
+          },
+          {
+            "id": "review",
+            "status": "completed",
+            "evidenceSha256": "0dc05584f36132570d149ded967856b9e49074f7d3f403118bc11480bf459931"
+          },
+          {
+            "id": "check",
+            "status": "completed",
+            "evidenceSha256": "d1ef570a2e12e35ff3a3faefbdb34ed825491021cab5fd5019090e15d587f0bc"
+          },
+          {
+            "id": "verify",
+            "status": "completed",
+            "evidenceSha256": "0dc05584f36132570d149ded967856b9e49074f7d3f403118bc11480bf459931"
+          }
+        ],
+        "claims": {
+          "semanticQualityCertified": false,
+          "independentReviewPerformed": false,
+          "allAgentsAutomaticallyEnforced": false
+        },
+        "scopePreserved": true
+      },
+      "expected": {
+        "allowed": false,
+        "code": "AS-SOP-001-REVIEW-UNITS"
+      }
+    },
+    {
+      "id": "fabricated-before-example",
+      "report": {
+        "schemaVersion": 1,
+        "contractId": "AS-SOP-001",
+        "sop": {
+          "id": "artifact-semantic-review",
+          "sha256": "fd1a9ae4652d6d80484a7fcac002db7f39577922598fedd0dce40c1b316bc6db"
+        },
+        "artifact": {
+          "beforeText": "여러분은 무엇을 맡기는 응답을 하고 있습니까?\n\n그 문제 속의 나도 내어드리는 것입니다.",
+          "beforeSha256": "4673cdf9c395e076211aba77014a1eedfe5f0904f2ae0bbedf825c46f6c69e59",
+          "afterText": "여러분, 주님께 무엇을 맡기고 있습니까?\n\n나 자신도 주님의 말씀을 따르게 해 달라고 기도해야 합니다.",
+          "afterSha256": "0dc05584f36132570d149ded967856b9e49074f7d3f403118bc11480bf459931"
+        },
+        "review": {
+          "method": "agent-close-reading",
+          "units": [
+            {
+              "index": 1,
+              "before": "초안에 없는 가짜 예시입니다.",
+              "after": "여러분, 주님께 무엇을 맡기고 있습니까?",
+              "decision": "revise",
+              "observation": "주님께 무엇을 맡기는지 직접 질문하여 추상적인 응답이라는 말을 풀었다.",
+              "sentences": [
+                {
+                  "text": "여러분, 주님께 무엇을 맡기고 있습니까?",
+                  "focus": "주님께",
+                  "observation": "주님께 무엇을 맡기는지 직접 질문하여 추상적인 응답이라는 말을 풀었다."
+                }
+              ]
+            },
+            {
+              "index": 2,
+              "before": "그 문제 속의 나도 내어드리는 것입니다.",
+              "after": "나 자신도 주님의 말씀을 따르게 해 달라고 기도해야 합니다.",
+              "decision": "revise",
+              "observation": "주님의 말씀을 따르게 해 달라고 기도하는 실제 말로 바꾸었다.",
+              "sentences": [
+                {
+                  "text": "나 자신도 주님의 말씀을 따르게 해 달라고 기도해야 합니다.",
+                  "focus": "주님의 말씀",
+                  "observation": "주님의 말씀을 따르게 해 달라고 기도하는 실제 말로 바꾸었다."
+                }
+              ]
+            }
+          ]
+        },
+        "mechanical": {
+          "executed": true,
+          "exitCode": 0,
+          "inputSha256": "0dc05584f36132570d149ded967856b9e49074f7d3f403118bc11480bf459931",
+          "command": "known-pattern-check current-script.txt",
+          "toolSha256": "c3a9dacf1e6fe0033c64e83db13445a8828e993ccce8aaf0dcc66957ad053af6",
+          "rulesSha256": "952e99e141cba0f70d883bfebb85b0bf8448623fc4532999322759e42e86c936",
+          "stdoutSha256": "d1ef570a2e12e35ff3a3faefbdb34ed825491021cab5fd5019090e15d587f0bc",
+          "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "scope": "known-patterns-only"
+        },
+        "steps": [
+          {
+            "id": "capture",
+            "status": "completed",
+            "evidenceSha256": "4673cdf9c395e076211aba77014a1eedfe5f0904f2ae0bbedf825c46f6c69e59"
+          },
+          {
+            "id": "review",
+            "status": "completed",
+            "evidenceSha256": "0dc05584f36132570d149ded967856b9e49074f7d3f403118bc11480bf459931"
+          },
+          {
+            "id": "check",
+            "status": "completed",
+            "evidenceSha256": "d1ef570a2e12e35ff3a3faefbdb34ed825491021cab5fd5019090e15d587f0bc"
+          },
+          {
+            "id": "verify",
+            "status": "completed",
+            "evidenceSha256": "0dc05584f36132570d149ded967856b9e49074f7d3f403118bc11480bf459931"
+          }
+        ],
+        "claims": {
+          "semanticQualityCertified": false,
+          "independentReviewPerformed": false,
+          "allAgentsAutomaticallyEnforced": false
+        },
+        "scopePreserved": true
+      },
+      "expected": {
+        "allowed": false,
+        "code": "AS-SOP-001-BEFORE-COVERAGE"
+      }
+    },
+    {
+      "id": "changed-current-snapshot",
+      "report": {
+        "schemaVersion": 1,
+        "contractId": "AS-SOP-001",
+        "sop": {
+          "id": "artifact-semantic-review",
+          "sha256": "fd1a9ae4652d6d80484a7fcac002db7f39577922598fedd0dce40c1b316bc6db"
+        },
+        "artifact": {
+          "beforeText": "여러분은 무엇을 맡기는 응답을 하고 있습니까?\n\n그 문제 속의 나도 내어드리는 것입니다.",
+          "beforeSha256": "4673cdf9c395e076211aba77014a1eedfe5f0904f2ae0bbedf825c46f6c69e59",
+          "afterText": "여러분, 주님께 무엇을 맡기고 있습니까?\n\n나 자신도 주님의 말씀을 따르게 해 달라고 기도해야 합니다.",
+          "afterSha256": "0000000000000000000000000000000000000000000000000000000000000000"
+        },
+        "review": {
+          "method": "agent-close-reading",
+          "units": [
+            {
+              "index": 1,
+              "before": "여러분은 무엇을 맡기는 응답을 하고 있습니까?",
+              "after": "여러분, 주님께 무엇을 맡기고 있습니까?",
+              "decision": "revise",
+              "observation": "주님께 무엇을 맡기는지 직접 질문하여 추상적인 응답이라는 말을 풀었다.",
+              "sentences": [
+                {
+                  "text": "여러분, 주님께 무엇을 맡기고 있습니까?",
+                  "focus": "주님께",
+                  "observation": "주님께 무엇을 맡기는지 직접 질문하여 추상적인 응답이라는 말을 풀었다."
+                }
+              ]
+            },
+            {
+              "index": 2,
+              "before": "그 문제 속의 나도 내어드리는 것입니다.",
+              "after": "나 자신도 주님의 말씀을 따르게 해 달라고 기도해야 합니다.",
+              "decision": "revise",
+              "observation": "주님의 말씀을 따르게 해 달라고 기도하는 실제 말로 바꾸었다.",
+              "sentences": [
+                {
+                  "text": "나 자신도 주님의 말씀을 따르게 해 달라고 기도해야 합니다.",
+                  "focus": "주님의 말씀",
+                  "observation": "주님의 말씀을 따르게 해 달라고 기도하는 실제 말로 바꾸었다."
+                }
+              ]
+            }
+          ]
+        },
+        "mechanical": {
+          "executed": true,
+          "exitCode": 0,
+          "inputSha256": "0dc05584f36132570d149ded967856b9e49074f7d3f403118bc11480bf459931",
+          "command": "known-pattern-check current-script.txt",
+          "toolSha256": "c3a9dacf1e6fe0033c64e83db13445a8828e993ccce8aaf0dcc66957ad053af6",
+          "rulesSha256": "952e99e141cba0f70d883bfebb85b0bf8448623fc4532999322759e42e86c936",
+          "stdoutSha256": "d1ef570a2e12e35ff3a3faefbdb34ed825491021cab5fd5019090e15d587f0bc",
+          "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "scope": "known-patterns-only"
+        },
+        "steps": [
+          {
+            "id": "capture",
+            "status": "completed",
+            "evidenceSha256": "4673cdf9c395e076211aba77014a1eedfe5f0904f2ae0bbedf825c46f6c69e59"
+          },
+          {
+            "id": "review",
+            "status": "completed",
+            "evidenceSha256": "0dc05584f36132570d149ded967856b9e49074f7d3f403118bc11480bf459931"
+          },
+          {
+            "id": "check",
+            "status": "completed",
+            "evidenceSha256": "d1ef570a2e12e35ff3a3faefbdb34ed825491021cab5fd5019090e15d587f0bc"
+          },
+          {
+            "id": "verify",
+            "status": "completed",
+            "evidenceSha256": "0dc05584f36132570d149ded967856b9e49074f7d3f403118bc11480bf459931"
+          }
+        ],
+        "claims": {
+          "semanticQualityCertified": false,
+          "independentReviewPerformed": false,
+          "allAgentsAutomaticallyEnforced": false
+        },
+        "scopePreserved": true
+      },
+      "expected": {
+        "allowed": false,
+        "code": "AS-SOP-001-ARTIFACT-HASH"
+      }
+    },
+    {
+      "id": "missing-reviewed-unit",
+      "report": {
+        "schemaVersion": 1,
+        "contractId": "AS-SOP-001",
+        "sop": {
+          "id": "artifact-semantic-review",
+          "sha256": "fd1a9ae4652d6d80484a7fcac002db7f39577922598fedd0dce40c1b316bc6db"
+        },
+        "artifact": {
+          "beforeText": "여러분은 무엇을 맡기는 응답을 하고 있습니까?\n\n그 문제 속의 나도 내어드리는 것입니다.",
+          "beforeSha256": "4673cdf9c395e076211aba77014a1eedfe5f0904f2ae0bbedf825c46f6c69e59",
+          "afterText": "여러분, 주님께 무엇을 맡기고 있습니까?\n\n나 자신도 주님의 말씀을 따르게 해 달라고 기도해야 합니다.",
+          "afterSha256": "0dc05584f36132570d149ded967856b9e49074f7d3f403118bc11480bf459931"
+        },
+        "review": {
+          "method": "agent-close-reading",
+          "units": [
+            {
+              "index": 1,
+              "before": "여러분은 무엇을 맡기는 응답을 하고 있습니까?",
+              "after": "여러분, 주님께 무엇을 맡기고 있습니까?",
+              "decision": "revise",
+              "observation": "주님께 무엇을 맡기는지 직접 질문하여 추상적인 응답이라는 말을 풀었다.",
+              "sentences": [
+                {
+                  "text": "여러분, 주님께 무엇을 맡기고 있습니까?",
+                  "focus": "주님께",
+                  "observation": "주님께 무엇을 맡기는지 직접 질문하여 추상적인 응답이라는 말을 풀었다."
+                }
+              ]
+            }
+          ]
+        },
+        "mechanical": {
+          "executed": true,
+          "exitCode": 0,
+          "inputSha256": "0dc05584f36132570d149ded967856b9e49074f7d3f403118bc11480bf459931",
+          "command": "known-pattern-check current-script.txt",
+          "toolSha256": "c3a9dacf1e6fe0033c64e83db13445a8828e993ccce8aaf0dcc66957ad053af6",
+          "rulesSha256": "952e99e141cba0f70d883bfebb85b0bf8448623fc4532999322759e42e86c936",
+          "stdoutSha256": "d1ef570a2e12e35ff3a3faefbdb34ed825491021cab5fd5019090e15d587f0bc",
+          "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "scope": "known-patterns-only"
+        },
+        "steps": [
+          {
+            "id": "capture",
+            "status": "completed",
+            "evidenceSha256": "4673cdf9c395e076211aba77014a1eedfe5f0904f2ae0bbedf825c46f6c69e59"
+          },
+          {
+            "id": "review",
+            "status": "completed",
+            "evidenceSha256": "0dc05584f36132570d149ded967856b9e49074f7d3f403118bc11480bf459931"
+          },
+          {
+            "id": "check",
+            "status": "completed",
+            "evidenceSha256": "d1ef570a2e12e35ff3a3faefbdb34ed825491021cab5fd5019090e15d587f0bc"
+          },
+          {
+            "id": "verify",
+            "status": "completed",
+            "evidenceSha256": "0dc05584f36132570d149ded967856b9e49074f7d3f403118bc11480bf459931"
+          }
+        ],
+        "claims": {
+          "semanticQualityCertified": false,
+          "independentReviewPerformed": false,
+          "allAgentsAutomaticallyEnforced": false
+        },
+        "scopePreserved": true
+      },
+      "expected": {
+        "allowed": false,
+        "code": "AS-SOP-001-AFTER-COVERAGE"
+      }
+    },
+    {
+      "id": "duplicated-unit",
+      "report": {
+        "schemaVersion": 1,
+        "contractId": "AS-SOP-001",
+        "sop": {
+          "id": "artifact-semantic-review",
+          "sha256": "fd1a9ae4652d6d80484a7fcac002db7f39577922598fedd0dce40c1b316bc6db"
+        },
+        "artifact": {
+          "beforeText": "여러분은 무엇을 맡기는 응답을 하고 있습니까?\n\n그 문제 속의 나도 내어드리는 것입니다.",
+          "beforeSha256": "4673cdf9c395e076211aba77014a1eedfe5f0904f2ae0bbedf825c46f6c69e59",
+          "afterText": "여러분, 주님께 무엇을 맡기고 있습니까?\n\n나 자신도 주님의 말씀을 따르게 해 달라고 기도해야 합니다.",
+          "afterSha256": "0dc05584f36132570d149ded967856b9e49074f7d3f403118bc11480bf459931"
+        },
+        "review": {
+          "method": "agent-close-reading",
+          "units": [
+            {
+              "index": 1,
+              "before": "여러분은 무엇을 맡기는 응답을 하고 있습니까?",
+              "after": "여러분, 주님께 무엇을 맡기고 있습니까?",
+              "decision": "revise",
+              "observation": "주님께 무엇을 맡기는지 직접 질문하여 추상적인 응답이라는 말을 풀었다.",
+              "sentences": [
+                {
+                  "text": "여러분, 주님께 무엇을 맡기고 있습니까?",
+                  "focus": "주님께",
+                  "observation": "주님께 무엇을 맡기는지 직접 질문하여 추상적인 응답이라는 말을 풀었다."
+                }
+              ]
+            },
+            {
+              "index": 2,
+              "before": "그 문제 속의 나도 내어드리는 것입니다.",
+              "after": "나 자신도 주님의 말씀을 따르게 해 달라고 기도해야 합니다.",
+              "decision": "revise",
+              "observation": "주님의 말씀을 따르게 해 달라고 기도하는 실제 말로 바꾸었다.",
+              "sentences": [
+                {
+                  "text": "나 자신도 주님의 말씀을 따르게 해 달라고 기도해야 합니다.",
+                  "focus": "주님의 말씀",
+                  "observation": "주님의 말씀을 따르게 해 달라고 기도하는 실제 말로 바꾸었다."
+                }
+              ]
+            },
+            {
+              "index": 1,
+              "before": "여러분은 무엇을 맡기는 응답을 하고 있습니까?",
+              "after": "여러분, 주님께 무엇을 맡기고 있습니까?",
+              "decision": "revise",
+              "observation": "주님께 무엇을 맡기는지 직접 질문하여 추상적인 응답이라는 말을 풀었다.",
+              "sentences": [
+                {
+                  "text": "여러분, 주님께 무엇을 맡기고 있습니까?",
+                  "focus": "주님께",
+                  "observation": "주님께 무엇을 맡기는지 직접 질문하여 추상적인 응답이라는 말을 풀었다."
+                }
+              ]
+            }
+          ]
+        },
+        "mechanical": {
+          "executed": true,
+          "exitCode": 0,
+          "inputSha256": "0dc05584f36132570d149ded967856b9e49074f7d3f403118bc11480bf459931",
+          "command": "known-pattern-check current-script.txt",
+          "toolSha256": "c3a9dacf1e6fe0033c64e83db13445a8828e993ccce8aaf0dcc66957ad053af6",
+          "rulesSha256": "952e99e141cba0f70d883bfebb85b0bf8448623fc4532999322759e42e86c936",
+          "stdoutSha256": "d1ef570a2e12e35ff3a3faefbdb34ed825491021cab5fd5019090e15d587f0bc",
+          "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "scope": "known-patterns-only"
+        },
+        "steps": [
+          {
+            "id": "capture",
+            "status": "completed",
+            "evidenceSha256": "4673cdf9c395e076211aba77014a1eedfe5f0904f2ae0bbedf825c46f6c69e59"
+          },
+          {
+            "id": "review",
+            "status": "completed",
+            "evidenceSha256": "0dc05584f36132570d149ded967856b9e49074f7d3f403118bc11480bf459931"
+          },
+          {
+            "id": "check",
+            "status": "completed",
+            "evidenceSha256": "d1ef570a2e12e35ff3a3faefbdb34ed825491021cab5fd5019090e15d587f0bc"
+          },
+          {
+            "id": "verify",
+            "status": "completed",
+            "evidenceSha256": "0dc05584f36132570d149ded967856b9e49074f7d3f403118bc11480bf459931"
+          }
+        ],
+        "claims": {
+          "semanticQualityCertified": false,
+          "independentReviewPerformed": false,
+          "allAgentsAutomaticallyEnforced": false
+        },
+        "scopePreserved": true
+      },
+      "expected": {
+        "allowed": false,
+        "code": "AS-SOP-001-AFTER-COVERAGE"
+      }
+    },
+    {
+      "id": "repeated-generic-assessment",
+      "report": {
+        "schemaVersion": 1,
+        "contractId": "AS-SOP-001",
+        "sop": {
+          "id": "artifact-semantic-review",
+          "sha256": "fd1a9ae4652d6d80484a7fcac002db7f39577922598fedd0dce40c1b316bc6db"
+        },
+        "artifact": {
+          "beforeText": "여러분은 무엇을 맡기는 응답을 하고 있습니까?\n\n그 문제 속의 나도 내어드리는 것입니다.",
+          "beforeSha256": "4673cdf9c395e076211aba77014a1eedfe5f0904f2ae0bbedf825c46f6c69e59",
+          "afterText": "여러분, 주님께 무엇을 맡기고 있습니까?\n\n나 자신도 주님의 말씀을 따르게 해 달라고 기도해야 합니다.",
+          "afterSha256": "0dc05584f36132570d149ded967856b9e49074f7d3f403118bc11480bf459931"
+        },
+        "review": {
+          "method": "agent-close-reading",
+          "units": [
+            {
+              "index": 1,
+              "before": "여러분은 무엇을 맡기는 응답을 하고 있습니까?",
+              "after": "여러분, 주님께 무엇을 맡기고 있습니까?",
+              "decision": "revise",
+              "observation": "주님께 무엇을 맡기는지 직접 질문하여 추상적인 응답이라는 말을 풀었다.",
+              "sentences": [
+                {
+                  "text": "여러분, 주님께 무엇을 맡기고 있습니까?",
+                  "focus": "주님께",
+                  "observation": "주님께 무엇을 맡기는지 직접 질문하여 추상적인 응답이라는 말을 풀었다."
+                }
+              ]
+            },
+            {
+              "index": 2,
+              "before": "그 문제 속의 나도 내어드리는 것입니다.",
+              "after": "나 자신도 주님의 말씀을 따르게 해 달라고 기도해야 합니다.",
+              "decision": "revise",
+              "observation": "주님께 무엇을 맡기는지 직접 질문하여 추상적인 응답이라는 말을 풀었다.",
+              "sentences": [
+                {
+                  "text": "나 자신도 주님의 말씀을 따르게 해 달라고 기도해야 합니다.",
+                  "focus": "주님의 말씀",
+                  "observation": "주님의 말씀을 따르게 해 달라고 기도하는 실제 말로 바꾸었다."
+                }
+              ]
+            }
+          ]
+        },
+        "mechanical": {
+          "executed": true,
+          "exitCode": 0,
+          "inputSha256": "0dc05584f36132570d149ded967856b9e49074f7d3f403118bc11480bf459931",
+          "command": "known-pattern-check current-script.txt",
+          "toolSha256": "c3a9dacf1e6fe0033c64e83db13445a8828e993ccce8aaf0dcc66957ad053af6",
+          "rulesSha256": "952e99e141cba0f70d883bfebb85b0bf8448623fc4532999322759e42e86c936",
+          "stdoutSha256": "d1ef570a2e12e35ff3a3faefbdb34ed825491021cab5fd5019090e15d587f0bc",
+          "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "scope": "known-patterns-only"
+        },
+        "steps": [
+          {
+            "id": "capture",
+            "status": "completed",
+            "evidenceSha256": "4673cdf9c395e076211aba77014a1eedfe5f0904f2ae0bbedf825c46f6c69e59"
+          },
+          {
+            "id": "review",
+            "status": "completed",
+            "evidenceSha256": "0dc05584f36132570d149ded967856b9e49074f7d3f403118bc11480bf459931"
+          },
+          {
+            "id": "check",
+            "status": "completed",
+            "evidenceSha256": "d1ef570a2e12e35ff3a3faefbdb34ed825491021cab5fd5019090e15d587f0bc"
+          },
+          {
+            "id": "verify",
+            "status": "completed",
+            "evidenceSha256": "0dc05584f36132570d149ded967856b9e49074f7d3f403118bc11480bf459931"
+          }
+        ],
+        "claims": {
+          "semanticQualityCertified": false,
+          "independentReviewPerformed": false,
+          "allAgentsAutomaticallyEnforced": false
+        },
+        "scopePreserved": true
+      },
+      "expected": {
+        "allowed": false,
+        "code": "AS-SOP-001-REPEATED-ASSESSMENT"
+      }
+    },
+    {
+      "id": "sentence-not-reviewed",
+      "report": {
+        "schemaVersion": 1,
+        "contractId": "AS-SOP-001",
+        "sop": {
+          "id": "artifact-semantic-review",
+          "sha256": "fd1a9ae4652d6d80484a7fcac002db7f39577922598fedd0dce40c1b316bc6db"
+        },
+        "artifact": {
+          "beforeText": "여러분은 무엇을 맡기는 응답을 하고 있습니까?\n\n그 문제 속의 나도 내어드리는 것입니다.",
+          "beforeSha256": "4673cdf9c395e076211aba77014a1eedfe5f0904f2ae0bbedf825c46f6c69e59",
+          "afterText": "여러분, 주님께 무엇을 맡기고 있습니까?\n\n나 자신도 주님의 말씀을 따르게 해 달라고 기도해야 합니다.",
+          "afterSha256": "0dc05584f36132570d149ded967856b9e49074f7d3f403118bc11480bf459931"
+        },
+        "review": {
+          "method": "agent-close-reading",
+          "units": [
+            {
+              "index": 1,
+              "before": "여러분은 무엇을 맡기는 응답을 하고 있습니까?",
+              "after": "여러분, 주님께 무엇을 맡기고 있습니까?",
+              "decision": "revise",
+              "observation": "주님께 무엇을 맡기는지 직접 질문하여 추상적인 응답이라는 말을 풀었다.",
+              "sentences": []
+            },
+            {
+              "index": 2,
+              "before": "그 문제 속의 나도 내어드리는 것입니다.",
+              "after": "나 자신도 주님의 말씀을 따르게 해 달라고 기도해야 합니다.",
+              "decision": "revise",
+              "observation": "주님의 말씀을 따르게 해 달라고 기도하는 실제 말로 바꾸었다.",
+              "sentences": [
+                {
+                  "text": "나 자신도 주님의 말씀을 따르게 해 달라고 기도해야 합니다.",
+                  "focus": "주님의 말씀",
+                  "observation": "주님의 말씀을 따르게 해 달라고 기도하는 실제 말로 바꾸었다."
+                }
+              ]
+            }
+          ]
+        },
+        "mechanical": {
+          "executed": true,
+          "exitCode": 0,
+          "inputSha256": "0dc05584f36132570d149ded967856b9e49074f7d3f403118bc11480bf459931",
+          "command": "known-pattern-check current-script.txt",
+          "toolSha256": "c3a9dacf1e6fe0033c64e83db13445a8828e993ccce8aaf0dcc66957ad053af6",
+          "rulesSha256": "952e99e141cba0f70d883bfebb85b0bf8448623fc4532999322759e42e86c936",
+          "stdoutSha256": "d1ef570a2e12e35ff3a3faefbdb34ed825491021cab5fd5019090e15d587f0bc",
+          "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "scope": "known-patterns-only"
+        },
+        "steps": [
+          {
+            "id": "capture",
+            "status": "completed",
+            "evidenceSha256": "4673cdf9c395e076211aba77014a1eedfe5f0904f2ae0bbedf825c46f6c69e59"
+          },
+          {
+            "id": "review",
+            "status": "completed",
+            "evidenceSha256": "0dc05584f36132570d149ded967856b9e49074f7d3f403118bc11480bf459931"
+          },
+          {
+            "id": "check",
+            "status": "completed",
+            "evidenceSha256": "d1ef570a2e12e35ff3a3faefbdb34ed825491021cab5fd5019090e15d587f0bc"
+          },
+          {
+            "id": "verify",
+            "status": "completed",
+            "evidenceSha256": "0dc05584f36132570d149ded967856b9e49074f7d3f403118bc11480bf459931"
+          }
+        ],
+        "claims": {
+          "semanticQualityCertified": false,
+          "independentReviewPerformed": false,
+          "allAgentsAutomaticallyEnforced": false
+        },
+        "scopePreserved": true
+      },
+      "expected": {
+        "allowed": false,
+        "code": "AS-SOP-001-SENTENCE-COVERAGE"
+      }
+    },
+    {
+      "id": "invented-sentence",
+      "report": {
+        "schemaVersion": 1,
+        "contractId": "AS-SOP-001",
+        "sop": {
+          "id": "artifact-semantic-review",
+          "sha256": "fd1a9ae4652d6d80484a7fcac002db7f39577922598fedd0dce40c1b316bc6db"
+        },
+        "artifact": {
+          "beforeText": "여러분은 무엇을 맡기는 응답을 하고 있습니까?\n\n그 문제 속의 나도 내어드리는 것입니다.",
+          "beforeSha256": "4673cdf9c395e076211aba77014a1eedfe5f0904f2ae0bbedf825c46f6c69e59",
+          "afterText": "여러분, 주님께 무엇을 맡기고 있습니까?\n\n나 자신도 주님의 말씀을 따르게 해 달라고 기도해야 합니다.",
+          "afterSha256": "0dc05584f36132570d149ded967856b9e49074f7d3f403118bc11480bf459931"
+        },
+        "review": {
+          "method": "agent-close-reading",
+          "units": [
+            {
+              "index": 1,
+              "before": "여러분은 무엇을 맡기는 응답을 하고 있습니까?",
+              "after": "여러분, 주님께 무엇을 맡기고 있습니까?",
+              "decision": "revise",
+              "observation": "주님께 무엇을 맡기는지 직접 질문하여 추상적인 응답이라는 말을 풀었다.",
+              "sentences": [
+                {
+                  "text": "원고에 없는 문장입니다.",
+                  "focus": "주님께",
+                  "observation": "주님께 무엇을 맡기는지 직접 질문하여 추상적인 응답이라는 말을 풀었다."
+                }
+              ]
+            },
+            {
+              "index": 2,
+              "before": "그 문제 속의 나도 내어드리는 것입니다.",
+              "after": "나 자신도 주님의 말씀을 따르게 해 달라고 기도해야 합니다.",
+              "decision": "revise",
+              "observation": "주님의 말씀을 따르게 해 달라고 기도하는 실제 말로 바꾸었다.",
+              "sentences": [
+                {
+                  "text": "나 자신도 주님의 말씀을 따르게 해 달라고 기도해야 합니다.",
+                  "focus": "주님의 말씀",
+                  "observation": "주님의 말씀을 따르게 해 달라고 기도하는 실제 말로 바꾸었다."
+                }
+              ]
+            }
+          ]
+        },
+        "mechanical": {
+          "executed": true,
+          "exitCode": 0,
+          "inputSha256": "0dc05584f36132570d149ded967856b9e49074f7d3f403118bc11480bf459931",
+          "command": "known-pattern-check current-script.txt",
+          "toolSha256": "c3a9dacf1e6fe0033c64e83db13445a8828e993ccce8aaf0dcc66957ad053af6",
+          "rulesSha256": "952e99e141cba0f70d883bfebb85b0bf8448623fc4532999322759e42e86c936",
+          "stdoutSha256": "d1ef570a2e12e35ff3a3faefbdb34ed825491021cab5fd5019090e15d587f0bc",
+          "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "scope": "known-patterns-only"
+        },
+        "steps": [
+          {
+            "id": "capture",
+            "status": "completed",
+            "evidenceSha256": "4673cdf9c395e076211aba77014a1eedfe5f0904f2ae0bbedf825c46f6c69e59"
+          },
+          {
+            "id": "review",
+            "status": "completed",
+            "evidenceSha256": "0dc05584f36132570d149ded967856b9e49074f7d3f403118bc11480bf459931"
+          },
+          {
+            "id": "check",
+            "status": "completed",
+            "evidenceSha256": "d1ef570a2e12e35ff3a3faefbdb34ed825491021cab5fd5019090e15d587f0bc"
+          },
+          {
+            "id": "verify",
+            "status": "completed",
+            "evidenceSha256": "0dc05584f36132570d149ded967856b9e49074f7d3f403118bc11480bf459931"
+          }
+        ],
+        "claims": {
+          "semanticQualityCertified": false,
+          "independentReviewPerformed": false,
+          "allAgentsAutomaticallyEnforced": false
+        },
+        "scopePreserved": true
+      },
+      "expected": {
+        "allowed": false,
+        "code": "AS-SOP-001-SENTENCE-COVERAGE"
+      }
+    },
+    {
+      "id": "unanchored-judgment",
+      "report": {
+        "schemaVersion": 1,
+        "contractId": "AS-SOP-001",
+        "sop": {
+          "id": "artifact-semantic-review",
+          "sha256": "fd1a9ae4652d6d80484a7fcac002db7f39577922598fedd0dce40c1b316bc6db"
+        },
+        "artifact": {
+          "beforeText": "여러분은 무엇을 맡기는 응답을 하고 있습니까?\n\n그 문제 속의 나도 내어드리는 것입니다.",
+          "beforeSha256": "4673cdf9c395e076211aba77014a1eedfe5f0904f2ae0bbedf825c46f6c69e59",
+          "afterText": "여러분, 주님께 무엇을 맡기고 있습니까?\n\n나 자신도 주님의 말씀을 따르게 해 달라고 기도해야 합니다.",
+          "afterSha256": "0dc05584f36132570d149ded967856b9e49074f7d3f403118bc11480bf459931"
+        },
+        "review": {
+          "method": "agent-close-reading",
+          "units": [
+            {
+              "index": 1,
+              "before": "여러분은 무엇을 맡기는 응답을 하고 있습니까?",
+              "after": "여러분, 주님께 무엇을 맡기고 있습니까?",
+              "decision": "revise",
+              "observation": "주님께 무엇을 맡기는지 직접 질문하여 추상적인 응답이라는 말을 풀었다.",
+              "sentences": [
+                {
+                  "text": "여러분, 주님께 무엇을 맡기고 있습니까?",
+                  "focus": "없던 표현",
+                  "observation": "주님께 무엇을 맡기는지 직접 질문하여 추상적인 응답이라는 말을 풀었다."
+                }
+              ]
+            },
+            {
+              "index": 2,
+              "before": "그 문제 속의 나도 내어드리는 것입니다.",
+              "after": "나 자신도 주님의 말씀을 따르게 해 달라고 기도해야 합니다.",
+              "decision": "revise",
+              "observation": "주님의 말씀을 따르게 해 달라고 기도하는 실제 말로 바꾸었다.",
+              "sentences": [
+                {
+                  "text": "나 자신도 주님의 말씀을 따르게 해 달라고 기도해야 합니다.",
+                  "focus": "주님의 말씀",
+                  "observation": "주님의 말씀을 따르게 해 달라고 기도하는 실제 말로 바꾸었다."
+                }
+              ]
+            }
+          ]
+        },
+        "mechanical": {
+          "executed": true,
+          "exitCode": 0,
+          "inputSha256": "0dc05584f36132570d149ded967856b9e49074f7d3f403118bc11480bf459931",
+          "command": "known-pattern-check current-script.txt",
+          "toolSha256": "c3a9dacf1e6fe0033c64e83db13445a8828e993ccce8aaf0dcc66957ad053af6",
+          "rulesSha256": "952e99e141cba0f70d883bfebb85b0bf8448623fc4532999322759e42e86c936",
+          "stdoutSha256": "d1ef570a2e12e35ff3a3faefbdb34ed825491021cab5fd5019090e15d587f0bc",
+          "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "scope": "known-patterns-only"
+        },
+        "steps": [
+          {
+            "id": "capture",
+            "status": "completed",
+            "evidenceSha256": "4673cdf9c395e076211aba77014a1eedfe5f0904f2ae0bbedf825c46f6c69e59"
+          },
+          {
+            "id": "review",
+            "status": "completed",
+            "evidenceSha256": "0dc05584f36132570d149ded967856b9e49074f7d3f403118bc11480bf459931"
+          },
+          {
+            "id": "check",
+            "status": "completed",
+            "evidenceSha256": "d1ef570a2e12e35ff3a3faefbdb34ed825491021cab5fd5019090e15d587f0bc"
+          },
+          {
+            "id": "verify",
+            "status": "completed",
+            "evidenceSha256": "0dc05584f36132570d149ded967856b9e49074f7d3f403118bc11480bf459931"
+          }
+        ],
+        "claims": {
+          "semanticQualityCertified": false,
+          "independentReviewPerformed": false,
+          "allAgentsAutomaticallyEnforced": false
+        },
+        "scopePreserved": true
+      },
+      "expected": {
+        "allowed": false,
+        "code": "AS-SOP-001-SENTENCE-OBSERVATION"
+      }
+    },
+    {
+      "id": "checker-not-executed",
+      "report": {
+        "schemaVersion": 1,
+        "contractId": "AS-SOP-001",
+        "sop": {
+          "id": "artifact-semantic-review",
+          "sha256": "fd1a9ae4652d6d80484a7fcac002db7f39577922598fedd0dce40c1b316bc6db"
+        },
+        "artifact": {
+          "beforeText": "여러분은 무엇을 맡기는 응답을 하고 있습니까?\n\n그 문제 속의 나도 내어드리는 것입니다.",
+          "beforeSha256": "4673cdf9c395e076211aba77014a1eedfe5f0904f2ae0bbedf825c46f6c69e59",
+          "afterText": "여러분, 주님께 무엇을 맡기고 있습니까?\n\n나 자신도 주님의 말씀을 따르게 해 달라고 기도해야 합니다.",
+          "afterSha256": "0dc05584f36132570d149ded967856b9e49074f7d3f403118bc11480bf459931"
+        },
+        "review": {
+          "method": "agent-close-reading",
+          "units": [
+            {
+              "index": 1,
+              "before": "여러분은 무엇을 맡기는 응답을 하고 있습니까?",
+              "after": "여러분, 주님께 무엇을 맡기고 있습니까?",
+              "decision": "revise",
+              "observation": "주님께 무엇을 맡기는지 직접 질문하여 추상적인 응답이라는 말을 풀었다.",
+              "sentences": [
+                {
+                  "text": "여러분, 주님께 무엇을 맡기고 있습니까?",
+                  "focus": "주님께",
+                  "observation": "주님께 무엇을 맡기는지 직접 질문하여 추상적인 응답이라는 말을 풀었다."
+                }
+              ]
+            },
+            {
+              "index": 2,
+              "before": "그 문제 속의 나도 내어드리는 것입니다.",
+              "after": "나 자신도 주님의 말씀을 따르게 해 달라고 기도해야 합니다.",
+              "decision": "revise",
+              "observation": "주님의 말씀을 따르게 해 달라고 기도하는 실제 말로 바꾸었다.",
+              "sentences": [
+                {
+                  "text": "나 자신도 주님의 말씀을 따르게 해 달라고 기도해야 합니다.",
+                  "focus": "주님의 말씀",
+                  "observation": "주님의 말씀을 따르게 해 달라고 기도하는 실제 말로 바꾸었다."
+                }
+              ]
+            }
+          ]
+        },
+        "mechanical": {
+          "executed": false,
+          "exitCode": 0,
+          "inputSha256": "0dc05584f36132570d149ded967856b9e49074f7d3f403118bc11480bf459931",
+          "command": "known-pattern-check current-script.txt",
+          "toolSha256": "c3a9dacf1e6fe0033c64e83db13445a8828e993ccce8aaf0dcc66957ad053af6",
+          "rulesSha256": "952e99e141cba0f70d883bfebb85b0bf8448623fc4532999322759e42e86c936",
+          "stdoutSha256": "d1ef570a2e12e35ff3a3faefbdb34ed825491021cab5fd5019090e15d587f0bc",
+          "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "scope": "known-patterns-only"
+        },
+        "steps": [
+          {
+            "id": "capture",
+            "status": "completed",
+            "evidenceSha256": "4673cdf9c395e076211aba77014a1eedfe5f0904f2ae0bbedf825c46f6c69e59"
+          },
+          {
+            "id": "review",
+            "status": "completed",
+            "evidenceSha256": "0dc05584f36132570d149ded967856b9e49074f7d3f403118bc11480bf459931"
+          },
+          {
+            "id": "check",
+            "status": "completed",
+            "evidenceSha256": "d1ef570a2e12e35ff3a3faefbdb34ed825491021cab5fd5019090e15d587f0bc"
+          },
+          {
+            "id": "verify",
+            "status": "completed",
+            "evidenceSha256": "0dc05584f36132570d149ded967856b9e49074f7d3f403118bc11480bf459931"
+          }
+        ],
+        "claims": {
+          "semanticQualityCertified": false,
+          "independentReviewPerformed": false,
+          "allAgentsAutomaticallyEnforced": false
+        },
+        "scopePreserved": true
+      },
+      "expected": {
+        "allowed": false,
+        "code": "AS-SOP-001-MECHANICAL-NOT-EXECUTED"
+      }
+    },
+    {
+      "id": "checker-input-stale",
+      "report": {
+        "schemaVersion": 1,
+        "contractId": "AS-SOP-001",
+        "sop": {
+          "id": "artifact-semantic-review",
+          "sha256": "fd1a9ae4652d6d80484a7fcac002db7f39577922598fedd0dce40c1b316bc6db"
+        },
+        "artifact": {
+          "beforeText": "여러분은 무엇을 맡기는 응답을 하고 있습니까?\n\n그 문제 속의 나도 내어드리는 것입니다.",
+          "beforeSha256": "4673cdf9c395e076211aba77014a1eedfe5f0904f2ae0bbedf825c46f6c69e59",
+          "afterText": "여러분, 주님께 무엇을 맡기고 있습니까?\n\n나 자신도 주님의 말씀을 따르게 해 달라고 기도해야 합니다.",
+          "afterSha256": "0dc05584f36132570d149ded967856b9e49074f7d3f403118bc11480bf459931"
+        },
+        "review": {
+          "method": "agent-close-reading",
+          "units": [
+            {
+              "index": 1,
+              "before": "여러분은 무엇을 맡기는 응답을 하고 있습니까?",
+              "after": "여러분, 주님께 무엇을 맡기고 있습니까?",
+              "decision": "revise",
+              "observation": "주님께 무엇을 맡기는지 직접 질문하여 추상적인 응답이라는 말을 풀었다.",
+              "sentences": [
+                {
+                  "text": "여러분, 주님께 무엇을 맡기고 있습니까?",
+                  "focus": "주님께",
+                  "observation": "주님께 무엇을 맡기는지 직접 질문하여 추상적인 응답이라는 말을 풀었다."
+                }
+              ]
+            },
+            {
+              "index": 2,
+              "before": "그 문제 속의 나도 내어드리는 것입니다.",
+              "after": "나 자신도 주님의 말씀을 따르게 해 달라고 기도해야 합니다.",
+              "decision": "revise",
+              "observation": "주님의 말씀을 따르게 해 달라고 기도하는 실제 말로 바꾸었다.",
+              "sentences": [
+                {
+                  "text": "나 자신도 주님의 말씀을 따르게 해 달라고 기도해야 합니다.",
+                  "focus": "주님의 말씀",
+                  "observation": "주님의 말씀을 따르게 해 달라고 기도하는 실제 말로 바꾸었다."
+                }
+              ]
+            }
+          ]
+        },
+        "mechanical": {
+          "executed": true,
+          "exitCode": 0,
+          "inputSha256": "0000000000000000000000000000000000000000000000000000000000000000",
+          "command": "known-pattern-check current-script.txt",
+          "toolSha256": "c3a9dacf1e6fe0033c64e83db13445a8828e993ccce8aaf0dcc66957ad053af6",
+          "rulesSha256": "952e99e141cba0f70d883bfebb85b0bf8448623fc4532999322759e42e86c936",
+          "stdoutSha256": "d1ef570a2e12e35ff3a3faefbdb34ed825491021cab5fd5019090e15d587f0bc",
+          "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "scope": "known-patterns-only"
+        },
+        "steps": [
+          {
+            "id": "capture",
+            "status": "completed",
+            "evidenceSha256": "4673cdf9c395e076211aba77014a1eedfe5f0904f2ae0bbedf825c46f6c69e59"
+          },
+          {
+            "id": "review",
+            "status": "completed",
+            "evidenceSha256": "0dc05584f36132570d149ded967856b9e49074f7d3f403118bc11480bf459931"
+          },
+          {
+            "id": "check",
+            "status": "completed",
+            "evidenceSha256": "d1ef570a2e12e35ff3a3faefbdb34ed825491021cab5fd5019090e15d587f0bc"
+          },
+          {
+            "id": "verify",
+            "status": "completed",
+            "evidenceSha256": "0dc05584f36132570d149ded967856b9e49074f7d3f403118bc11480bf459931"
+          }
+        ],
+        "claims": {
+          "semanticQualityCertified": false,
+          "independentReviewPerformed": false,
+          "allAgentsAutomaticallyEnforced": false
+        },
+        "scopePreserved": true
+      },
+      "expected": {
+        "allowed": false,
+        "code": "AS-SOP-001-MECHANICAL-STALE"
+      }
+    },
+    {
+      "id": "checker-failure",
+      "report": {
+        "schemaVersion": 1,
+        "contractId": "AS-SOP-001",
+        "sop": {
+          "id": "artifact-semantic-review",
+          "sha256": "fd1a9ae4652d6d80484a7fcac002db7f39577922598fedd0dce40c1b316bc6db"
+        },
+        "artifact": {
+          "beforeText": "여러분은 무엇을 맡기는 응답을 하고 있습니까?\n\n그 문제 속의 나도 내어드리는 것입니다.",
+          "beforeSha256": "4673cdf9c395e076211aba77014a1eedfe5f0904f2ae0bbedf825c46f6c69e59",
+          "afterText": "여러분, 주님께 무엇을 맡기고 있습니까?\n\n나 자신도 주님의 말씀을 따르게 해 달라고 기도해야 합니다.",
+          "afterSha256": "0dc05584f36132570d149ded967856b9e49074f7d3f403118bc11480bf459931"
+        },
+        "review": {
+          "method": "agent-close-reading",
+          "units": [
+            {
+              "index": 1,
+              "before": "여러분은 무엇을 맡기는 응답을 하고 있습니까?",
+              "after": "여러분, 주님께 무엇을 맡기고 있습니까?",
+              "decision": "revise",
+              "observation": "주님께 무엇을 맡기는지 직접 질문하여 추상적인 응답이라는 말을 풀었다.",
+              "sentences": [
+                {
+                  "text": "여러분, 주님께 무엇을 맡기고 있습니까?",
+                  "focus": "주님께",
+                  "observation": "주님께 무엇을 맡기는지 직접 질문하여 추상적인 응답이라는 말을 풀었다."
+                }
+              ]
+            },
+            {
+              "index": 2,
+              "before": "그 문제 속의 나도 내어드리는 것입니다.",
+              "after": "나 자신도 주님의 말씀을 따르게 해 달라고 기도해야 합니다.",
+              "decision": "revise",
+              "observation": "주님의 말씀을 따르게 해 달라고 기도하는 실제 말로 바꾸었다.",
+              "sentences": [
+                {
+                  "text": "나 자신도 주님의 말씀을 따르게 해 달라고 기도해야 합니다.",
+                  "focus": "주님의 말씀",
+                  "observation": "주님의 말씀을 따르게 해 달라고 기도하는 실제 말로 바꾸었다."
+                }
+              ]
+            }
+          ]
+        },
+        "mechanical": {
+          "executed": true,
+          "exitCode": 1,
+          "inputSha256": "0dc05584f36132570d149ded967856b9e49074f7d3f403118bc11480bf459931",
+          "command": "known-pattern-check current-script.txt",
+          "toolSha256": "c3a9dacf1e6fe0033c64e83db13445a8828e993ccce8aaf0dcc66957ad053af6",
+          "rulesSha256": "952e99e141cba0f70d883bfebb85b0bf8448623fc4532999322759e42e86c936",
+          "stdoutSha256": "d1ef570a2e12e35ff3a3faefbdb34ed825491021cab5fd5019090e15d587f0bc",
+          "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "scope": "known-patterns-only"
+        },
+        "steps": [
+          {
+            "id": "capture",
+            "status": "completed",
+            "evidenceSha256": "4673cdf9c395e076211aba77014a1eedfe5f0904f2ae0bbedf825c46f6c69e59"
+          },
+          {
+            "id": "review",
+            "status": "completed",
+            "evidenceSha256": "0dc05584f36132570d149ded967856b9e49074f7d3f403118bc11480bf459931"
+          },
+          {
+            "id": "check",
+            "status": "completed",
+            "evidenceSha256": "d1ef570a2e12e35ff3a3faefbdb34ed825491021cab5fd5019090e15d587f0bc"
+          },
+          {
+            "id": "verify",
+            "status": "completed",
+            "evidenceSha256": "0dc05584f36132570d149ded967856b9e49074f7d3f403118bc11480bf459931"
+          }
+        ],
+        "claims": {
+          "semanticQualityCertified": false,
+          "independentReviewPerformed": false,
+          "allAgentsAutomaticallyEnforced": false
+        },
+        "scopePreserved": true
+      },
+      "expected": {
+        "allowed": false,
+        "code": "AS-SOP-001-MECHANICAL-NOT-EXECUTED"
+      }
+    },
+    {
+      "id": "mechanical-promoted-to-semantic",
+      "report": {
+        "schemaVersion": 1,
+        "contractId": "AS-SOP-001",
+        "sop": {
+          "id": "artifact-semantic-review",
+          "sha256": "fd1a9ae4652d6d80484a7fcac002db7f39577922598fedd0dce40c1b316bc6db"
+        },
+        "artifact": {
+          "beforeText": "여러분은 무엇을 맡기는 응답을 하고 있습니까?\n\n그 문제 속의 나도 내어드리는 것입니다.",
+          "beforeSha256": "4673cdf9c395e076211aba77014a1eedfe5f0904f2ae0bbedf825c46f6c69e59",
+          "afterText": "여러분, 주님께 무엇을 맡기고 있습니까?\n\n나 자신도 주님의 말씀을 따르게 해 달라고 기도해야 합니다.",
+          "afterSha256": "0dc05584f36132570d149ded967856b9e49074f7d3f403118bc11480bf459931"
+        },
+        "review": {
+          "method": "agent-close-reading",
+          "units": [
+            {
+              "index": 1,
+              "before": "여러분은 무엇을 맡기는 응답을 하고 있습니까?",
+              "after": "여러분, 주님께 무엇을 맡기고 있습니까?",
+              "decision": "revise",
+              "observation": "주님께 무엇을 맡기는지 직접 질문하여 추상적인 응답이라는 말을 풀었다.",
+              "sentences": [
+                {
+                  "text": "여러분, 주님께 무엇을 맡기고 있습니까?",
+                  "focus": "주님께",
+                  "observation": "주님께 무엇을 맡기는지 직접 질문하여 추상적인 응답이라는 말을 풀었다."
+                }
+              ]
+            },
+            {
+              "index": 2,
+              "before": "그 문제 속의 나도 내어드리는 것입니다.",
+              "after": "나 자신도 주님의 말씀을 따르게 해 달라고 기도해야 합니다.",
+              "decision": "revise",
+              "observation": "주님의 말씀을 따르게 해 달라고 기도하는 실제 말로 바꾸었다.",
+              "sentences": [
+                {
+                  "text": "나 자신도 주님의 말씀을 따르게 해 달라고 기도해야 합니다.",
+                  "focus": "주님의 말씀",
+                  "observation": "주님의 말씀을 따르게 해 달라고 기도하는 실제 말로 바꾸었다."
+                }
+              ]
+            }
+          ]
+        },
+        "mechanical": {
+          "executed": true,
+          "exitCode": 0,
+          "inputSha256": "0dc05584f36132570d149ded967856b9e49074f7d3f403118bc11480bf459931",
+          "command": "known-pattern-check current-script.txt",
+          "toolSha256": "c3a9dacf1e6fe0033c64e83db13445a8828e993ccce8aaf0dcc66957ad053af6",
+          "rulesSha256": "952e99e141cba0f70d883bfebb85b0bf8448623fc4532999322759e42e86c936",
+          "stdoutSha256": "d1ef570a2e12e35ff3a3faefbdb34ed825491021cab5fd5019090e15d587f0bc",
+          "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "scope": "known-patterns-only"
+        },
+        "steps": [
+          {
+            "id": "capture",
+            "status": "completed",
+            "evidenceSha256": "4673cdf9c395e076211aba77014a1eedfe5f0904f2ae0bbedf825c46f6c69e59"
+          },
+          {
+            "id": "review",
+            "status": "completed",
+            "evidenceSha256": "0dc05584f36132570d149ded967856b9e49074f7d3f403118bc11480bf459931"
+          },
+          {
+            "id": "check",
+            "status": "completed",
+            "evidenceSha256": "d1ef570a2e12e35ff3a3faefbdb34ed825491021cab5fd5019090e15d587f0bc"
+          },
+          {
+            "id": "verify",
+            "status": "completed",
+            "evidenceSha256": "0dc05584f36132570d149ded967856b9e49074f7d3f403118bc11480bf459931"
+          }
+        ],
+        "claims": {
+          "semanticQualityCertified": true,
+          "independentReviewPerformed": false,
+          "allAgentsAutomaticallyEnforced": false
+        },
+        "scopePreserved": true
+      },
+      "expected": {
+        "allowed": false,
+        "code": "AS-SOP-001-CLAIM-OVERREACH"
+      }
+    },
+    {
+      "id": "fake-independent-review",
+      "report": {
+        "schemaVersion": 1,
+        "contractId": "AS-SOP-001",
+        "sop": {
+          "id": "artifact-semantic-review",
+          "sha256": "fd1a9ae4652d6d80484a7fcac002db7f39577922598fedd0dce40c1b316bc6db"
+        },
+        "artifact": {
+          "beforeText": "여러분은 무엇을 맡기는 응답을 하고 있습니까?\n\n그 문제 속의 나도 내어드리는 것입니다.",
+          "beforeSha256": "4673cdf9c395e076211aba77014a1eedfe5f0904f2ae0bbedf825c46f6c69e59",
+          "afterText": "여러분, 주님께 무엇을 맡기고 있습니까?\n\n나 자신도 주님의 말씀을 따르게 해 달라고 기도해야 합니다.",
+          "afterSha256": "0dc05584f36132570d149ded967856b9e49074f7d3f403118bc11480bf459931"
+        },
+        "review": {
+          "method": "agent-close-reading",
+          "units": [
+            {
+              "index": 1,
+              "before": "여러분은 무엇을 맡기는 응답을 하고 있습니까?",
+              "after": "여러분, 주님께 무엇을 맡기고 있습니까?",
+              "decision": "revise",
+              "observation": "주님께 무엇을 맡기는지 직접 질문하여 추상적인 응답이라는 말을 풀었다.",
+              "sentences": [
+                {
+                  "text": "여러분, 주님께 무엇을 맡기고 있습니까?",
+                  "focus": "주님께",
+                  "observation": "주님께 무엇을 맡기는지 직접 질문하여 추상적인 응답이라는 말을 풀었다."
+                }
+              ]
+            },
+            {
+              "index": 2,
+              "before": "그 문제 속의 나도 내어드리는 것입니다.",
+              "after": "나 자신도 주님의 말씀을 따르게 해 달라고 기도해야 합니다.",
+              "decision": "revise",
+              "observation": "주님의 말씀을 따르게 해 달라고 기도하는 실제 말로 바꾸었다.",
+              "sentences": [
+                {
+                  "text": "나 자신도 주님의 말씀을 따르게 해 달라고 기도해야 합니다.",
+                  "focus": "주님의 말씀",
+                  "observation": "주님의 말씀을 따르게 해 달라고 기도하는 실제 말로 바꾸었다."
+                }
+              ]
+            }
+          ]
+        },
+        "mechanical": {
+          "executed": true,
+          "exitCode": 0,
+          "inputSha256": "0dc05584f36132570d149ded967856b9e49074f7d3f403118bc11480bf459931",
+          "command": "known-pattern-check current-script.txt",
+          "toolSha256": "c3a9dacf1e6fe0033c64e83db13445a8828e993ccce8aaf0dcc66957ad053af6",
+          "rulesSha256": "952e99e141cba0f70d883bfebb85b0bf8448623fc4532999322759e42e86c936",
+          "stdoutSha256": "d1ef570a2e12e35ff3a3faefbdb34ed825491021cab5fd5019090e15d587f0bc",
+          "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "scope": "known-patterns-only"
+        },
+        "steps": [
+          {
+            "id": "capture",
+            "status": "completed",
+            "evidenceSha256": "4673cdf9c395e076211aba77014a1eedfe5f0904f2ae0bbedf825c46f6c69e59"
+          },
+          {
+            "id": "review",
+            "status": "completed",
+            "evidenceSha256": "0dc05584f36132570d149ded967856b9e49074f7d3f403118bc11480bf459931"
+          },
+          {
+            "id": "check",
+            "status": "completed",
+            "evidenceSha256": "d1ef570a2e12e35ff3a3faefbdb34ed825491021cab5fd5019090e15d587f0bc"
+          },
+          {
+            "id": "verify",
+            "status": "completed",
+            "evidenceSha256": "0dc05584f36132570d149ded967856b9e49074f7d3f403118bc11480bf459931"
+          }
+        ],
+        "claims": {
+          "semanticQualityCertified": false,
+          "independentReviewPerformed": true,
+          "allAgentsAutomaticallyEnforced": false
+        },
+        "scopePreserved": true
+      },
+      "expected": {
+        "allowed": false,
+        "code": "AS-SOP-001-CLAIM-OVERREACH"
+      }
+    },
+    {
+      "id": "all-agents-guarantee",
+      "report": {
+        "schemaVersion": 1,
+        "contractId": "AS-SOP-001",
+        "sop": {
+          "id": "artifact-semantic-review",
+          "sha256": "fd1a9ae4652d6d80484a7fcac002db7f39577922598fedd0dce40c1b316bc6db"
+        },
+        "artifact": {
+          "beforeText": "여러분은 무엇을 맡기는 응답을 하고 있습니까?\n\n그 문제 속의 나도 내어드리는 것입니다.",
+          "beforeSha256": "4673cdf9c395e076211aba77014a1eedfe5f0904f2ae0bbedf825c46f6c69e59",
+          "afterText": "여러분, 주님께 무엇을 맡기고 있습니까?\n\n나 자신도 주님의 말씀을 따르게 해 달라고 기도해야 합니다.",
+          "afterSha256": "0dc05584f36132570d149ded967856b9e49074f7d3f403118bc11480bf459931"
+        },
+        "review": {
+          "method": "agent-close-reading",
+          "units": [
+            {
+              "index": 1,
+              "before": "여러분은 무엇을 맡기는 응답을 하고 있습니까?",
+              "after": "여러분, 주님께 무엇을 맡기고 있습니까?",
+              "decision": "revise",
+              "observation": "주님께 무엇을 맡기는지 직접 질문하여 추상적인 응답이라는 말을 풀었다.",
+              "sentences": [
+                {
+                  "text": "여러분, 주님께 무엇을 맡기고 있습니까?",
+                  "focus": "주님께",
+                  "observation": "주님께 무엇을 맡기는지 직접 질문하여 추상적인 응답이라는 말을 풀었다."
+                }
+              ]
+            },
+            {
+              "index": 2,
+              "before": "그 문제 속의 나도 내어드리는 것입니다.",
+              "after": "나 자신도 주님의 말씀을 따르게 해 달라고 기도해야 합니다.",
+              "decision": "revise",
+              "observation": "주님의 말씀을 따르게 해 달라고 기도하는 실제 말로 바꾸었다.",
+              "sentences": [
+                {
+                  "text": "나 자신도 주님의 말씀을 따르게 해 달라고 기도해야 합니다.",
+                  "focus": "주님의 말씀",
+                  "observation": "주님의 말씀을 따르게 해 달라고 기도하는 실제 말로 바꾸었다."
+                }
+              ]
+            }
+          ]
+        },
+        "mechanical": {
+          "executed": true,
+          "exitCode": 0,
+          "inputSha256": "0dc05584f36132570d149ded967856b9e49074f7d3f403118bc11480bf459931",
+          "command": "known-pattern-check current-script.txt",
+          "toolSha256": "c3a9dacf1e6fe0033c64e83db13445a8828e993ccce8aaf0dcc66957ad053af6",
+          "rulesSha256": "952e99e141cba0f70d883bfebb85b0bf8448623fc4532999322759e42e86c936",
+          "stdoutSha256": "d1ef570a2e12e35ff3a3faefbdb34ed825491021cab5fd5019090e15d587f0bc",
+          "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "scope": "known-patterns-only"
+        },
+        "steps": [
+          {
+            "id": "capture",
+            "status": "completed",
+            "evidenceSha256": "4673cdf9c395e076211aba77014a1eedfe5f0904f2ae0bbedf825c46f6c69e59"
+          },
+          {
+            "id": "review",
+            "status": "completed",
+            "evidenceSha256": "0dc05584f36132570d149ded967856b9e49074f7d3f403118bc11480bf459931"
+          },
+          {
+            "id": "check",
+            "status": "completed",
+            "evidenceSha256": "d1ef570a2e12e35ff3a3faefbdb34ed825491021cab5fd5019090e15d587f0bc"
+          },
+          {
+            "id": "verify",
+            "status": "completed",
+            "evidenceSha256": "0dc05584f36132570d149ded967856b9e49074f7d3f403118bc11480bf459931"
+          }
+        ],
+        "claims": {
+          "semanticQualityCertified": false,
+          "independentReviewPerformed": false,
+          "allAgentsAutomaticallyEnforced": true
+        },
+        "scopePreserved": true
+      },
+      "expected": {
+        "allowed": false,
+        "code": "AS-SOP-001-CLAIM-OVERREACH"
+      }
+    },
+    {
+      "id": "step-skipped",
+      "report": {
+        "schemaVersion": 1,
+        "contractId": "AS-SOP-001",
+        "sop": {
+          "id": "artifact-semantic-review",
+          "sha256": "fd1a9ae4652d6d80484a7fcac002db7f39577922598fedd0dce40c1b316bc6db"
+        },
+        "artifact": {
+          "beforeText": "여러분은 무엇을 맡기는 응답을 하고 있습니까?\n\n그 문제 속의 나도 내어드리는 것입니다.",
+          "beforeSha256": "4673cdf9c395e076211aba77014a1eedfe5f0904f2ae0bbedf825c46f6c69e59",
+          "afterText": "여러분, 주님께 무엇을 맡기고 있습니까?\n\n나 자신도 주님의 말씀을 따르게 해 달라고 기도해야 합니다.",
+          "afterSha256": "0dc05584f36132570d149ded967856b9e49074f7d3f403118bc11480bf459931"
+        },
+        "review": {
+          "method": "agent-close-reading",
+          "units": [
+            {
+              "index": 1,
+              "before": "여러분은 무엇을 맡기는 응답을 하고 있습니까?",
+              "after": "여러분, 주님께 무엇을 맡기고 있습니까?",
+              "decision": "revise",
+              "observation": "주님께 무엇을 맡기는지 직접 질문하여 추상적인 응답이라는 말을 풀었다.",
+              "sentences": [
+                {
+                  "text": "여러분, 주님께 무엇을 맡기고 있습니까?",
+                  "focus": "주님께",
+                  "observation": "주님께 무엇을 맡기는지 직접 질문하여 추상적인 응답이라는 말을 풀었다."
+                }
+              ]
+            },
+            {
+              "index": 2,
+              "before": "그 문제 속의 나도 내어드리는 것입니다.",
+              "after": "나 자신도 주님의 말씀을 따르게 해 달라고 기도해야 합니다.",
+              "decision": "revise",
+              "observation": "주님의 말씀을 따르게 해 달라고 기도하는 실제 말로 바꾸었다.",
+              "sentences": [
+                {
+                  "text": "나 자신도 주님의 말씀을 따르게 해 달라고 기도해야 합니다.",
+                  "focus": "주님의 말씀",
+                  "observation": "주님의 말씀을 따르게 해 달라고 기도하는 실제 말로 바꾸었다."
+                }
+              ]
+            }
+          ]
+        },
+        "mechanical": {
+          "executed": true,
+          "exitCode": 0,
+          "inputSha256": "0dc05584f36132570d149ded967856b9e49074f7d3f403118bc11480bf459931",
+          "command": "known-pattern-check current-script.txt",
+          "toolSha256": "c3a9dacf1e6fe0033c64e83db13445a8828e993ccce8aaf0dcc66957ad053af6",
+          "rulesSha256": "952e99e141cba0f70d883bfebb85b0bf8448623fc4532999322759e42e86c936",
+          "stdoutSha256": "d1ef570a2e12e35ff3a3faefbdb34ed825491021cab5fd5019090e15d587f0bc",
+          "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "scope": "known-patterns-only"
+        },
+        "steps": [
+          {
+            "id": "capture",
+            "status": "completed",
+            "evidenceSha256": "4673cdf9c395e076211aba77014a1eedfe5f0904f2ae0bbedf825c46f6c69e59"
+          },
+          {
+            "id": "review",
+            "status": "completed",
+            "evidenceSha256": "0dc05584f36132570d149ded967856b9e49074f7d3f403118bc11480bf459931"
+          },
+          {
+            "id": "check",
+            "status": "completed",
+            "evidenceSha256": "d1ef570a2e12e35ff3a3faefbdb34ed825491021cab5fd5019090e15d587f0bc"
+          }
+        ],
+        "claims": {
+          "semanticQualityCertified": false,
+          "independentReviewPerformed": false,
+          "allAgentsAutomaticallyEnforced": false
+        },
+        "scopePreserved": true
+      },
+      "expected": {
+        "allowed": false,
+        "code": "AS-SOP-001-STEP-ORDER"
+      }
+    },
+    {
+      "id": "step-reordered",
+      "report": {
+        "schemaVersion": 1,
+        "contractId": "AS-SOP-001",
+        "sop": {
+          "id": "artifact-semantic-review",
+          "sha256": "fd1a9ae4652d6d80484a7fcac002db7f39577922598fedd0dce40c1b316bc6db"
+        },
+        "artifact": {
+          "beforeText": "여러분은 무엇을 맡기는 응답을 하고 있습니까?\n\n그 문제 속의 나도 내어드리는 것입니다.",
+          "beforeSha256": "4673cdf9c395e076211aba77014a1eedfe5f0904f2ae0bbedf825c46f6c69e59",
+          "afterText": "여러분, 주님께 무엇을 맡기고 있습니까?\n\n나 자신도 주님의 말씀을 따르게 해 달라고 기도해야 합니다.",
+          "afterSha256": "0dc05584f36132570d149ded967856b9e49074f7d3f403118bc11480bf459931"
+        },
+        "review": {
+          "method": "agent-close-reading",
+          "units": [
+            {
+              "index": 1,
+              "before": "여러분은 무엇을 맡기는 응답을 하고 있습니까?",
+              "after": "여러분, 주님께 무엇을 맡기고 있습니까?",
+              "decision": "revise",
+              "observation": "주님께 무엇을 맡기는지 직접 질문하여 추상적인 응답이라는 말을 풀었다.",
+              "sentences": [
+                {
+                  "text": "여러분, 주님께 무엇을 맡기고 있습니까?",
+                  "focus": "주님께",
+                  "observation": "주님께 무엇을 맡기는지 직접 질문하여 추상적인 응답이라는 말을 풀었다."
+                }
+              ]
+            },
+            {
+              "index": 2,
+              "before": "그 문제 속의 나도 내어드리는 것입니다.",
+              "after": "나 자신도 주님의 말씀을 따르게 해 달라고 기도해야 합니다.",
+              "decision": "revise",
+              "observation": "주님의 말씀을 따르게 해 달라고 기도하는 실제 말로 바꾸었다.",
+              "sentences": [
+                {
+                  "text": "나 자신도 주님의 말씀을 따르게 해 달라고 기도해야 합니다.",
+                  "focus": "주님의 말씀",
+                  "observation": "주님의 말씀을 따르게 해 달라고 기도하는 실제 말로 바꾸었다."
+                }
+              ]
+            }
+          ]
+        },
+        "mechanical": {
+          "executed": true,
+          "exitCode": 0,
+          "inputSha256": "0dc05584f36132570d149ded967856b9e49074f7d3f403118bc11480bf459931",
+          "command": "known-pattern-check current-script.txt",
+          "toolSha256": "c3a9dacf1e6fe0033c64e83db13445a8828e993ccce8aaf0dcc66957ad053af6",
+          "rulesSha256": "952e99e141cba0f70d883bfebb85b0bf8448623fc4532999322759e42e86c936",
+          "stdoutSha256": "d1ef570a2e12e35ff3a3faefbdb34ed825491021cab5fd5019090e15d587f0bc",
+          "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "scope": "known-patterns-only"
+        },
+        "steps": [
+          {
+            "id": "verify",
+            "status": "completed",
+            "evidenceSha256": "0dc05584f36132570d149ded967856b9e49074f7d3f403118bc11480bf459931"
+          },
+          {
+            "id": "check",
+            "status": "completed",
+            "evidenceSha256": "d1ef570a2e12e35ff3a3faefbdb34ed825491021cab5fd5019090e15d587f0bc"
+          },
+          {
+            "id": "review",
+            "status": "completed",
+            "evidenceSha256": "0dc05584f36132570d149ded967856b9e49074f7d3f403118bc11480bf459931"
+          },
+          {
+            "id": "capture",
+            "status": "completed",
+            "evidenceSha256": "4673cdf9c395e076211aba77014a1eedfe5f0904f2ae0bbedf825c46f6c69e59"
+          }
+        ],
+        "claims": {
+          "semanticQualityCertified": false,
+          "independentReviewPerformed": false,
+          "allAgentsAutomaticallyEnforced": false
+        },
+        "scopePreserved": true
+      },
+      "expected": {
+        "allowed": false,
+        "code": "AS-SOP-001-STEP-ORDER"
+      }
+    },
+    {
+      "id": "step-evidence-stale",
+      "report": {
+        "schemaVersion": 1,
+        "contractId": "AS-SOP-001",
+        "sop": {
+          "id": "artifact-semantic-review",
+          "sha256": "fd1a9ae4652d6d80484a7fcac002db7f39577922598fedd0dce40c1b316bc6db"
+        },
+        "artifact": {
+          "beforeText": "여러분은 무엇을 맡기는 응답을 하고 있습니까?\n\n그 문제 속의 나도 내어드리는 것입니다.",
+          "beforeSha256": "4673cdf9c395e076211aba77014a1eedfe5f0904f2ae0bbedf825c46f6c69e59",
+          "afterText": "여러분, 주님께 무엇을 맡기고 있습니까?\n\n나 자신도 주님의 말씀을 따르게 해 달라고 기도해야 합니다.",
+          "afterSha256": "0dc05584f36132570d149ded967856b9e49074f7d3f403118bc11480bf459931"
+        },
+        "review": {
+          "method": "agent-close-reading",
+          "units": [
+            {
+              "index": 1,
+              "before": "여러분은 무엇을 맡기는 응답을 하고 있습니까?",
+              "after": "여러분, 주님께 무엇을 맡기고 있습니까?",
+              "decision": "revise",
+              "observation": "주님께 무엇을 맡기는지 직접 질문하여 추상적인 응답이라는 말을 풀었다.",
+              "sentences": [
+                {
+                  "text": "여러분, 주님께 무엇을 맡기고 있습니까?",
+                  "focus": "주님께",
+                  "observation": "주님께 무엇을 맡기는지 직접 질문하여 추상적인 응답이라는 말을 풀었다."
+                }
+              ]
+            },
+            {
+              "index": 2,
+              "before": "그 문제 속의 나도 내어드리는 것입니다.",
+              "after": "나 자신도 주님의 말씀을 따르게 해 달라고 기도해야 합니다.",
+              "decision": "revise",
+              "observation": "주님의 말씀을 따르게 해 달라고 기도하는 실제 말로 바꾸었다.",
+              "sentences": [
+                {
+                  "text": "나 자신도 주님의 말씀을 따르게 해 달라고 기도해야 합니다.",
+                  "focus": "주님의 말씀",
+                  "observation": "주님의 말씀을 따르게 해 달라고 기도하는 실제 말로 바꾸었다."
+                }
+              ]
+            }
+          ]
+        },
+        "mechanical": {
+          "executed": true,
+          "exitCode": 0,
+          "inputSha256": "0dc05584f36132570d149ded967856b9e49074f7d3f403118bc11480bf459931",
+          "command": "known-pattern-check current-script.txt",
+          "toolSha256": "c3a9dacf1e6fe0033c64e83db13445a8828e993ccce8aaf0dcc66957ad053af6",
+          "rulesSha256": "952e99e141cba0f70d883bfebb85b0bf8448623fc4532999322759e42e86c936",
+          "stdoutSha256": "d1ef570a2e12e35ff3a3faefbdb34ed825491021cab5fd5019090e15d587f0bc",
+          "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "scope": "known-patterns-only"
+        },
+        "steps": [
+          {
+            "id": "capture",
+            "status": "completed",
+            "evidenceSha256": "4673cdf9c395e076211aba77014a1eedfe5f0904f2ae0bbedf825c46f6c69e59"
+          },
+          {
+            "id": "review",
+            "status": "completed",
+            "evidenceSha256": "0dc05584f36132570d149ded967856b9e49074f7d3f403118bc11480bf459931"
+          },
+          {
+            "id": "check",
+            "status": "completed",
+            "evidenceSha256": "d1ef570a2e12e35ff3a3faefbdb34ed825491021cab5fd5019090e15d587f0bc"
+          },
+          {
+            "id": "verify",
+            "status": "completed",
+            "evidenceSha256": "0000000000000000000000000000000000000000000000000000000000000000"
+          }
+        ],
+        "claims": {
+          "semanticQualityCertified": false,
+          "independentReviewPerformed": false,
+          "allAgentsAutomaticallyEnforced": false
+        },
+        "scopePreserved": true
+      },
+      "expected": {
+        "allowed": false,
+        "code": "AS-SOP-001-STEP-EVIDENCE"
+      }
+    },
+    {
+      "id": "sop-reference-missing",
+      "report": {
+        "schemaVersion": 1,
+        "contractId": "AS-SOP-001",
+        "artifact": {
+          "beforeText": "여러분은 무엇을 맡기는 응답을 하고 있습니까?\n\n그 문제 속의 나도 내어드리는 것입니다.",
+          "beforeSha256": "4673cdf9c395e076211aba77014a1eedfe5f0904f2ae0bbedf825c46f6c69e59",
+          "afterText": "여러분, 주님께 무엇을 맡기고 있습니까?\n\n나 자신도 주님의 말씀을 따르게 해 달라고 기도해야 합니다.",
+          "afterSha256": "0dc05584f36132570d149ded967856b9e49074f7d3f403118bc11480bf459931"
+        },
+        "review": {
+          "method": "agent-close-reading",
+          "units": [
+            {
+              "index": 1,
+              "before": "여러분은 무엇을 맡기는 응답을 하고 있습니까?",
+              "after": "여러분, 주님께 무엇을 맡기고 있습니까?",
+              "decision": "revise",
+              "observation": "주님께 무엇을 맡기는지 직접 질문하여 추상적인 응답이라는 말을 풀었다.",
+              "sentences": [
+                {
+                  "text": "여러분, 주님께 무엇을 맡기고 있습니까?",
+                  "focus": "주님께",
+                  "observation": "주님께 무엇을 맡기는지 직접 질문하여 추상적인 응답이라는 말을 풀었다."
+                }
+              ]
+            },
+            {
+              "index": 2,
+              "before": "그 문제 속의 나도 내어드리는 것입니다.",
+              "after": "나 자신도 주님의 말씀을 따르게 해 달라고 기도해야 합니다.",
+              "decision": "revise",
+              "observation": "주님의 말씀을 따르게 해 달라고 기도하는 실제 말로 바꾸었다.",
+              "sentences": [
+                {
+                  "text": "나 자신도 주님의 말씀을 따르게 해 달라고 기도해야 합니다.",
+                  "focus": "주님의 말씀",
+                  "observation": "주님의 말씀을 따르게 해 달라고 기도하는 실제 말로 바꾸었다."
+                }
+              ]
+            }
+          ]
+        },
+        "mechanical": {
+          "executed": true,
+          "exitCode": 0,
+          "inputSha256": "0dc05584f36132570d149ded967856b9e49074f7d3f403118bc11480bf459931",
+          "command": "known-pattern-check current-script.txt",
+          "toolSha256": "c3a9dacf1e6fe0033c64e83db13445a8828e993ccce8aaf0dcc66957ad053af6",
+          "rulesSha256": "952e99e141cba0f70d883bfebb85b0bf8448623fc4532999322759e42e86c936",
+          "stdoutSha256": "d1ef570a2e12e35ff3a3faefbdb34ed825491021cab5fd5019090e15d587f0bc",
+          "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "scope": "known-patterns-only"
+        },
+        "steps": [
+          {
+            "id": "capture",
+            "status": "completed",
+            "evidenceSha256": "4673cdf9c395e076211aba77014a1eedfe5f0904f2ae0bbedf825c46f6c69e59"
+          },
+          {
+            "id": "review",
+            "status": "completed",
+            "evidenceSha256": "0dc05584f36132570d149ded967856b9e49074f7d3f403118bc11480bf459931"
+          },
+          {
+            "id": "check",
+            "status": "completed",
+            "evidenceSha256": "d1ef570a2e12e35ff3a3faefbdb34ed825491021cab5fd5019090e15d587f0bc"
+          },
+          {
+            "id": "verify",
+            "status": "completed",
+            "evidenceSha256": "0dc05584f36132570d149ded967856b9e49074f7d3f403118bc11480bf459931"
+          }
+        ],
+        "claims": {
+          "semanticQualityCertified": false,
+          "independentReviewPerformed": false,
+          "allAgentsAutomaticallyEnforced": false
+        },
+        "scopePreserved": true
+      },
+      "expected": {
+        "allowed": false,
+        "code": "AS-SOP-001-SOP-REFERENCE"
+      }
+    },
+    {
+      "id": "permission-scope-expanded",
+      "report": {
+        "schemaVersion": 1,
+        "contractId": "AS-SOP-001",
+        "sop": {
+          "id": "artifact-semantic-review",
+          "sha256": "fd1a9ae4652d6d80484a7fcac002db7f39577922598fedd0dce40c1b316bc6db"
+        },
+        "artifact": {
+          "beforeText": "여러분은 무엇을 맡기는 응답을 하고 있습니까?\n\n그 문제 속의 나도 내어드리는 것입니다.",
+          "beforeSha256": "4673cdf9c395e076211aba77014a1eedfe5f0904f2ae0bbedf825c46f6c69e59",
+          "afterText": "여러분, 주님께 무엇을 맡기고 있습니까?\n\n나 자신도 주님의 말씀을 따르게 해 달라고 기도해야 합니다.",
+          "afterSha256": "0dc05584f36132570d149ded967856b9e49074f7d3f403118bc11480bf459931"
+        },
+        "review": {
+          "method": "agent-close-reading",
+          "units": [
+            {
+              "index": 1,
+              "before": "여러분은 무엇을 맡기는 응답을 하고 있습니까?",
+              "after": "여러분, 주님께 무엇을 맡기고 있습니까?",
+              "decision": "revise",
+              "observation": "주님께 무엇을 맡기는지 직접 질문하여 추상적인 응답이라는 말을 풀었다.",
+              "sentences": [
+                {
+                  "text": "여러분, 주님께 무엇을 맡기고 있습니까?",
+                  "focus": "주님께",
+                  "observation": "주님께 무엇을 맡기는지 직접 질문하여 추상적인 응답이라는 말을 풀었다."
+                }
+              ]
+            },
+            {
+              "index": 2,
+              "before": "그 문제 속의 나도 내어드리는 것입니다.",
+              "after": "나 자신도 주님의 말씀을 따르게 해 달라고 기도해야 합니다.",
+              "decision": "revise",
+              "observation": "주님의 말씀을 따르게 해 달라고 기도하는 실제 말로 바꾸었다.",
+              "sentences": [
+                {
+                  "text": "나 자신도 주님의 말씀을 따르게 해 달라고 기도해야 합니다.",
+                  "focus": "주님의 말씀",
+                  "observation": "주님의 말씀을 따르게 해 달라고 기도하는 실제 말로 바꾸었다."
+                }
+              ]
+            }
+          ]
+        },
+        "mechanical": {
+          "executed": true,
+          "exitCode": 0,
+          "inputSha256": "0dc05584f36132570d149ded967856b9e49074f7d3f403118bc11480bf459931",
+          "command": "known-pattern-check current-script.txt",
+          "toolSha256": "c3a9dacf1e6fe0033c64e83db13445a8828e993ccce8aaf0dcc66957ad053af6",
+          "rulesSha256": "952e99e141cba0f70d883bfebb85b0bf8448623fc4532999322759e42e86c936",
+          "stdoutSha256": "d1ef570a2e12e35ff3a3faefbdb34ed825491021cab5fd5019090e15d587f0bc",
+          "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "scope": "known-patterns-only"
+        },
+        "steps": [
+          {
+            "id": "capture",
+            "status": "completed",
+            "evidenceSha256": "4673cdf9c395e076211aba77014a1eedfe5f0904f2ae0bbedf825c46f6c69e59"
+          },
+          {
+            "id": "review",
+            "status": "completed",
+            "evidenceSha256": "0dc05584f36132570d149ded967856b9e49074f7d3f403118bc11480bf459931"
+          },
+          {
+            "id": "check",
+            "status": "completed",
+            "evidenceSha256": "d1ef570a2e12e35ff3a3faefbdb34ed825491021cab5fd5019090e15d587f0bc"
+          },
+          {
+            "id": "verify",
+            "status": "completed",
+            "evidenceSha256": "0dc05584f36132570d149ded967856b9e49074f7d3f403118bc11480bf459931"
+          }
+        ],
+        "claims": {
+          "semanticQualityCertified": false,
+          "independentReviewPerformed": false,
+          "allAgentsAutomaticallyEnforced": false
+        },
+        "scopePreserved": false
+      },
+      "expected": {
+        "allowed": false,
+        "code": "AS-SOP-001-SCOPE-EXPANDED"
+      }
+    }
+  ]
+}

@@ -2,13 +2,13 @@
 
 [English](README.md) | [한국어](README.ko.md) | [日本語](README.ja.md) | [简体中文](README.zh-CN.md)
 
-<!-- AS-PS-001;version=0.6.3;policy=2026.10.05.2;AS-US-001=47/47;status=behavior-verified;limitation=plan-classification-only-no-measured-cost-reduction-or-global-enforcement-claim -->
+<!-- AS-PS-001;version=0.7.0;policy=2026.10.30.1;AS-SOP-001=22/22;status=behavior-verified;limitation=submitted-record-validation-only-no-semantic-certification-or-universal-enforcement -->
 
 > An AI work method that actively discovers tacit knowledge, preferences, corrections, and failures, then shapes them into reusable memories, rules, tools, and verifiers so the system evolves with the user’s way of working.
 
 [Official practical guide](https://agentic-shaping.slogs.dev/) · [dimohy’s background story](https://slogs.dev/@dimohy/vibe-compiler)
 
-Current public version: **v0.6**
+Current public version: **v0.7**
 
 ## Language
 
@@ -17,6 +17,14 @@ Current public version: **v0.6**
 When you first visit the root homepage, it detects your browser language and selects one of English, Korean, Japanese, or Chinese. When you use the language selector, that choice is saved as the default for subsequent visits. If you open a specific language URL directly, that language is respected.
 
 ![An Agentic Shaping scene where an Agent organizes traces of human work into reusable rules and assets](assets/agentic-shaping-hero.jpg)
+
+## Review the actual artifact with an SOP
+
+Preserve the real baseline, review every sentence, run existing checks, then verify evidence. A checker pass does not certify editorial quality.
+
+AS-SOP-001 verifies 22 normal, previous-failure and bypass cases plus the actual consumer route. Validating a submitted record does not prove Agent reading or enforcement in every host.
+
+[SOP execution manual](workflows/review.sop.md) · [한국어](workflows/review.ko.sop.md)
 
 ## Why is it needed?
 
@@ -101,7 +109,7 @@ You do not need to build a massive automation system from the start. Begin by mo
 You can copy and use the content below as-is.
 
 ```text
-Agentic Shaping v0.6
+Agentic Shaping v0.7
 
 Apply Agentic Shaping to this task.
 
@@ -158,6 +166,7 @@ When the user explicitly states that information, a state, or a task is one-off 
    - Distinguish and report the result of the current request, applied past decisions, newly captured and structured reusable assets, validations performed, and remaining limitations.
 
 Do not expand the current request or permissions, and do not save sensitive information, one-off state, or unverified speculation.
+- For recurring quality review, use an SOP: preserve the actual baseline, directly review every sentence, run existing checks, then verify evidence. Stop on omissions, changes or failures; never treat a mechanical pass as semantic or editorial certification.
 ```
 
 ## Try asking this

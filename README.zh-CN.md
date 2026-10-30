@@ -2,13 +2,13 @@
 
 [English](README.md) | [한국어](README.ko.md) | [日本語](README.ja.md) | [简体中文](README.zh-CN.md)
 
-<!-- AS-PS-001;version=0.6.3;policy=2026.10.05.2;AS-US-001=47/47;status=behavior-verified;limitation=plan-classification-only-no-measured-cost-reduction-or-global-enforcement-claim -->
+<!-- AS-PS-001;version=0.7.0;policy=2026.10.30.1;AS-SOP-001=22/22;status=behavior-verified;limitation=submitted-record-validation-only-no-semantic-certification-or-universal-enforcement -->
 
 > 这是让 AI Agent 先发现工作中的隐性知识·偏好·纠正·失败，并将其塑造成可在下一次执行中复用的记忆·规则·工具·验证器，与用户一起按用户的方式进化的工作方法。
 
 [官方实战指南](https://agentic-shaping.slogs.dev/) · [dimohy 的背景故事](https://slogs.dev/@dimohy/vibe-compiler)
 
-当前公开版本：**v0.6**
+当前公开版本：**v0.7**
 
 ## 语言
 
@@ -17,6 +17,14 @@
 首次访问根目录主页时，系统会检测浏览器语言，并从英语、韩语、日语和中文中选择一种语言。用户点击语言选择器后，该选择会保存为后续访问的默认语言。若直接打开特定语言的 URL，则优先使用该语言。
 
 ![Agent 将人的工作痕迹组织成可复用规则与资产的 Agentic Shaping 场景](assets/agentic-shaping-hero.jpg)
+
+## 用SOP核查实际稿件
+
+依次保留真实原稿、逐句审阅、运行现有检查并核实依据。检查通过不代表文稿质量已获认证。
+
+AS-SOP-001验证22个正常、历史失败及绕过案例，并核查实际使用路径。提交记录的验证不能证明Agent实际阅读或所有宿主均自动执行。
+
+[SOP执行手册](workflows/review.sop.md) · [한국어](workflows/review.ko.sop.md)
 
 ## 为什么需要它？
 
@@ -101,7 +109,7 @@ Agentic Shaping 越有效，文档、vibe coding 源代码、配置、日志和�
 可以原样复制下面的内容使用。
 
 ```text
-Agentic Shaping v0.6
+Agentic Shaping v0.7
 
 请将 Agentic Shaping 应用于此任务。
 
@@ -158,6 +166,7 @@ Agentic Shaping v0.6
    - 区分说明当前请求的结果、应用的历史决策、新捕捉并结构化的可复用资产、执行的验证以及剩余限制。
 
 不要扩大当前请求和权限范围，不要保存敏感信息、一次性状态或未经验证的推测。
+- 对重复的质量审阅制定SOP，依次保存真实原稿、逐句直接审阅、运行现有检查并核实依据。出现缺漏、变更或失败时停止，不得将形式检查通过视为语义或文稿质量认证。
 ```
 
 ## 试着这样请求

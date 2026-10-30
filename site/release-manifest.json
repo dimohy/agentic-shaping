@@ -1,18 +1,18 @@
 {
   "schemaVersion": 2,
   "contractId": "AS-PS-001",
-  "version": "0.6.3",
-  "displayVersion": "v0.6",
-  "previousVersion": "0.6.2",
-  "changeLevel": "patch",
-  "releaseDate": "2026-10-10",
-  "policyVersion": "2026.10.05.2",
+  "version": "0.7.0",
+  "displayVersion": "v0.7",
+  "previousVersion": "0.6.3",
+  "changeLevel": "minor",
+  "releaseDate": "2026-10-30",
+  "policyVersion": "2026.10.30.1",
   "feature": {
-    "ruleId": "AS-US-001",
-    "passed": 47,
-    "total": 47,
+    "ruleId": "AS-SOP-001",
+    "passed": 22,
+    "total": 22,
     "status": "behavior-verified",
-    "limitation": "plan-classification-only-no-measured-cost-reduction-or-global-enforcement-claim"
+    "limitation": "submitted-record-validation-only-no-semantic-certification-or-universal-enforcement"
   },
   "authoritativeFiles": [
     "CHANGELOG.md",
@@ -44,7 +44,13 @@
     "evals/unstructured-to-structured-trace.schema.json",
     "evals/unstructured-to-structured-traces.json",
     "evals/verify-unstructured-to-structured.mjs",
-    "case-studies/reviewed-media-inputs.md"
+    "case-studies/reviewed-media-inputs.md",
+    "evals/sop-review-contract.json",
+    "evals/sop-review-cases.json",
+    "evals/sop-review.mjs",
+    "evals/verify-sop-review.mjs",
+    "workflows/review.sop.md",
+    "workflows/review.ko.sop.md"
   ],
   "publicCapabilities": [
     {
@@ -177,6 +183,17 @@
         "evals/unstructured-to-structured-trace.schema.json",
         "evals/unstructured-to-structured-traces.json",
         "evals/verify-unstructured-to-structured.mjs"
+      ]
+    },
+    {
+      "ruleId": "AS-SOP-001",
+      "verifier": "evals/verify-sop-review.mjs",
+      "expectedPasses": 22,
+      "files": [
+        "evals/sop-review-contract.json",
+        "evals/sop-review-cases.json",
+        "evals/sop-review.mjs",
+        "evals/verify-sop-review.mjs"
       ]
     }
   ],

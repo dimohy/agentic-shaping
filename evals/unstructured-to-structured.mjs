@@ -1,5 +1,6 @@
 import { readFileSync } from "node:fs";
 import { fileURLToPath } from "node:url";
+import { evaluateSopReview } from "./sop-review.mjs";
 
 const assetKinds = new Set(["schema", "type", "enum", "manifest", "index", "invariant", "validator", "fixture", "pipeline"]);
 const metrics = new Set(["manualJudgments", "reanalysisUnits", "lateFailures", "retries", "elapsedMs", "contextTokens", "misses"]);
@@ -19,6 +20,12 @@ export function evaluateCostSelection(selection) {
     return fail("AS-US-001-INVALID-COST-SELECTION");
   }
   if (selection.mandatoryChecksPreserved !== true) return fail("AS-US-001-MANDATORY-CHECKS-NOT-PRESERVED");
+  if (selection.reviewWorkflow !== undefined) {
+    const result = evaluateSopReview(selection.reviewWorkflow);
+    if (!result.allowed) return result;
+  }
+  if (selection.deliveryPlan?.qualitySensitive === true && selection.reviewWorkflow === undefined)
+    return fail("AS-SOP-001-REVIEW-REQUIRED");
   const diagnosis = selection.diagnosis;
   if (diagnosis !== undefined) {
     if (!diagnosis || !["sufficient", "insufficient", "unsupported"].includes(diagnosis.structuredOutcome)) {
@@ -149,6 +156,14 @@ export function evaluateUnstructuredToStructured(trace) {
 }
 
 if (process.argv[1] === fileURLToPath(import.meta.url)) {
+  const selectionIndex = process.argv.indexOf("--cost-selection");
+  if (selectionIndex >= 0) {
+    const path = process.argv[selectionIndex + 1];
+    if (!path) { process.stderr.write("AS-US-001 requires --cost-selection <path>\n"); process.exit(64); }
+    const result = evaluateCostSelection(JSON.parse(readFileSync(path === "-" ? 0 : path, "utf8")));
+    process.stdout.write(`${JSON.stringify(result)}\n`);
+    process.exit(result.allowed ? 0 : 2);
+  }
   const traceIndex = process.argv.indexOf("--trace");
   if (traceIndex < 0 || !process.argv[traceIndex + 1]) {
     process.stderr.write("AS-US-001 requires --trace <path>\n");

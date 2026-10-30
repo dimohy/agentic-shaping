@@ -2,13 +2,13 @@
 
 [English](README.md) | [한국어](README.ko.md) | [日本語](README.ja.md) | [简体中文](README.zh-CN.md)
 
-<!-- AS-PS-001;version=0.6.3;policy=2026.10.05.2;AS-US-001=47/47;status=behavior-verified;limitation=plan-classification-only-no-measured-cost-reduction-or-global-enforcement-claim -->
+<!-- AS-PS-001;version=0.7.0;policy=2026.10.30.1;AS-SOP-001=22/22;status=behavior-verified;limitation=submitted-record-validation-only-no-semantic-certification-or-universal-enforcement -->
 
 > AI Agent가 작업 속 암묵지·취향·교정·실패를 먼저 발견하고, 다음 실행에 다시 쓸 수 있는 기억·규칙·도구·검증기로 빚어 사용자의 방식으로 함께 진화하는 작업법입니다.
 
 [공식 실전 가이드](https://agentic-shaping.slogs.dev/) · [dimohy의 배경 이야기](https://slogs.dev/@dimohy/vibe-compiler)
 
-현재 공개 버전: **v0.6**
+현재 공개 버전: **v0.7**
 
 ## 언어
 
@@ -17,6 +17,14 @@
 루트 홈페이지에 처음 방문하면 브라우저 언어를 감지해 영어·한국어·일본어·중국어 중 하나를 선택합니다. 사용자가 언어 선택기를 누르면 그 선택을 이후 방문의 기본값으로 보존합니다. 직접 특정 언어 URL을 연 경우에는 해당 언어를 존중합니다.
 
 ![사람의 작업 흔적을 Agent가 재사용 가능한 규칙과 자산으로 조직하는 Agentic Shaping 장면](assets/agentic-shaping-hero.jpg)
+
+## 실제 원고를 확인하는 SOP
+
+실제 이전 원고 보존 → 문장별 검토 → 기존 검사 실행 → 근거 확인 순서로 진행합니다. 검사기 통과를 문체 품질 보증으로 보고하지 않습니다.
+
+AS-SOP-001: 22개 정상·이전 실패·우회 사례와 실제 소비 경로를 검증합니다. 제출 기록 검사는 Agent의 실제 읽기나 모든 호스트의 자동 준수를 증명하지 않습니다.
+
+[SOP 실행 매뉴얼](workflows/review.sop.md) · [한국어](workflows/review.ko.sop.md)
 
 ## 왜 필요한가요?
 
@@ -101,7 +109,7 @@ Agentic Shaping이 작동할수록 문서, 바이브 코딩 소스, 설정, 로�
 아래 내용을 그대로 복사해 사용할 수 있습니다.
 
 ```text
-Agentic Shaping v0.6
+Agentic Shaping v0.7
 
 이 작업에는 Agentic Shaping을 적용해줘.
 
@@ -158,6 +166,7 @@ Agentic Shaping v0.6
    - 현재 요청의 결과, 적용한 과거 결정, 새로 포착·구조화한 재사용 자산, 실행한 검증, 남은 한계를 구분해 알려준다.
 
 현재 요청과 권한을 넓히지 말고, 민감 정보·일회성 상태·검증되지 않은 추측은 저장하지 마.
+- 반복되는 품질 검토에는 SOP를 정하고 실제 이전 원고 보존, 문장별 직접 검토, 기존 검사 실행, 근거 확인을 순서대로 수행해줘. 누락·변경·실패가 있으면 멈추고, 형식 검사 통과를 의미·문체 품질 보증으로 보고하지 마.
 ```
 
 ## 이렇게 요청해 보세요

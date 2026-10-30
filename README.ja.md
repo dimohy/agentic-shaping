@@ -2,13 +2,13 @@
 
 [English](README.md) | [한국어](README.ko.md) | [日本語](README.ja.md) | [简体中文](README.zh-CN.md)
 
-<!-- AS-PS-001;version=0.6.3;policy=2026.10.05.2;AS-US-001=47/47;status=behavior-verified;limitation=plan-classification-only-no-measured-cost-reduction-or-global-enforcement-claim -->
+<!-- AS-PS-001;version=0.7.0;policy=2026.10.30.1;AS-SOP-001=22/22;status=behavior-verified;limitation=submitted-record-validation-only-no-semantic-certification-or-universal-enforcement -->
 
 > AI Agentが作業中の暗黙知・好み・修正・失敗を先に発見し、次の実行で再利用できる記憶・ルール・ツール・検証器へと磨き上げ、ユーザーのやり方でともに進化する作業法です。
 
 [公式実践ガイド](https://agentic-shaping.slogs.dev/) · [dimohyの背景ストーリー](https://slogs.dev/@dimohy/vibe-compiler)
 
-現在の公開バージョン：**v0.6**
+現在の公開バージョン：**v0.7**
 
 ## 言語
 
@@ -17,6 +17,14 @@
 ルートホームページに初めてアクセスすると、ブラウザの言語を検出し、英語・韓国語・日本語・中国語のいずれかを選択します。ユーザーが言語セレクターを操作すると、その選択を以降の訪問時のデフォルトとして保存します。特定の言語 URL を直接開いた場合は、その言語を優先します。
 
 ![人の作業の痕跡をAgentが再利用可能なルールとアセットとして整理するAgentic Shapingの場面](assets/agentic-shaping-hero.jpg)
+
+## 実際の原稿を確認するSOP
+
+実際の変更前原稿を保存し、各文の検討、既存検査の実行、根拠の確認の順に進めます。検査の通過を文章品質の保証として報告しません。
+
+AS-SOP-001は正常・過去の失敗・迂回の22事例と実際の利用経路を検証します。提出記録の検査はAgentの実際の読解や全ホストでの自動遵守を証明しません。
+
+[SOP実行マニュアル](workflows/review.sop.md) · [한국어](workflows/review.ko.sop.md)
 
 ## なぜ必要ですか？
 
@@ -101,7 +109,7 @@ Agentic Shapingが機能するほど、文書、バイブコーディングの�
 以下の内容をそのままコピーして使用できます。
 
 ```text
-Agentic Shaping v0.6
+Agentic Shaping v0.7
 
 この作業には Agentic Shaping を適用してください。
 
@@ -158,6 +166,7 @@ Agentic Shaping v0.6
    - 現在の依頼の結果、適用した過去の決定、新たに把握・構造化した再利用可能な資産、実行した検証、残る制約を区別して知らせてください。
 
 現在の依頼と権限を拡大せず、機密情報・一回限りの状態・検証されていない推測は保存しないでください。
+- 繰り返す品質レビューにはSOPを定め、実際の変更前原稿の保存、各文の直接検討、既存検査の実行、根拠の確認を順に行ってください。欠落・変更・失敗があれば止まり、形式検査の通過を意味や文章品質の保証として報告しないでください。
 ```
 
 ## このように依頼してみてください

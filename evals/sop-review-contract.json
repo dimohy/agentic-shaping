@@ -1,0 +1,22 @@
+{
+  "ruleId": "AS-SOP-001",
+  "schemaVersion": 1,
+  "stages": [
+    "capture",
+    "review",
+    "check",
+    "verify"
+  ],
+  "unitDefinition": "afterText blank-line paragraphs; every current sentence must have an anchored observation; before rows cover real original source in order",
+  "forbiddenClaims": [
+    "semanticQualityCertified",
+    "independentReviewPerformed",
+    "allAgentsAutomaticallyEnforced"
+  ],
+  "scope": "Validate submitted source snapshots and review/check evidence. No proof of actual Agent reading, local files, execution authenticity, semantic quality or host-wide enforcement.",
+  "sources": [
+    "https://github.com/strands-agents/agent-sop",
+    "https://www.anthropic.com/research/building-effective-agents",
+    "https://arxiv.org/abs/2501.09316"
+  ]
+}

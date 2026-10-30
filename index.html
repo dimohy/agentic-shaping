@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <meta name="publication-contract" content="AS-PS-001;version=0.6.3;policy=2026.10.05.2;AS-US-001=47/47;status=behavior-verified;limitation=plan-classification-only-no-measured-cost-reduction-or-global-enforcement-claim" />
+    <meta name="publication-contract" content="AS-PS-001;version=0.7.0;policy=2026.10.30.1;AS-SOP-001=22/22;status=behavior-verified;limitation=submitted-record-validation-only-no-semantic-certification-or-universal-enforcement" />
     <meta name="site-root" content="./" />
     <link rel="canonical" href="https://agentic-shaping.slogs.dev/" />
     <link rel="alternate" hreflang="en" href="https://agentic-shaping.slogs.dev/" />
@@ -11,7 +11,7 @@
     <link rel="alternate" hreflang="ja" href="https://agentic-shaping.slogs.dev/ja/" />
     <link rel="alternate" hreflang="zh-Hans" href="https://agentic-shaping.slogs.dev/zh/" />
     <link rel="alternate" hreflang="x-default" href="https://agentic-shaping.slogs.dev/" />
-    <meta name="application-version" content="v0.6" />
+    <meta name="application-version" content="v0.7" />
     <title>Agentic Shaping — An AI Work Method That Evolves</title>
     <meta
       name="description"
@@ -135,7 +135,7 @@
             ><button type="button" data-copy="starter">Copy</button>
           </div>
           <pre id="starter">
-Agentic Shaping v0.6
+Agentic Shaping v0.7
 
 Apply Agentic Shaping to this task.
 
@@ -191,7 +191,9 @@ When the user explicitly states that information, a state, or a task is one-off 
 8. Completion report
    - Distinguish and report the result of the current request, applied past decisions, newly captured and structured reusable assets, validations performed, and remaining limitations.
 
-Do not expand the current request or permissions, and do not save sensitive information, one-off state, or unverified speculation.</pre>
+Do not expand the current request or permissions, and do not save sensitive information, one-off state, or unverified speculation.
+- For recurring quality review, use an SOP: preserve the actual baseline, directly review every sentence, run existing checks, then verify evidence. Stop on omissions, changes or failures; never treat a mechanical pass as semantic or editorial certification.
+</pre>
         </div>
         <div class="steps">
           <article>
@@ -546,7 +548,7 @@ Review the task just completed from an Agentic Shaping perspective. Distinguish 
             <div>
               <small>CONFIRMED FINAL POLICY SYNC</small>
               <strong>90% <i>→</i> 100%</strong>
-              <span class="policy-version">HOMEPAGE v0.6 ↔ SLOGS 2026.10.05.2</span>
+              <span class="policy-version">HOMEPAGE v0.7 ↔ SLOGS 2026.10.30.1</span>
               <p>
                 We synchronized the confirmed behavioral contract from the homepage’s final prompt with the Korean and English Slogs LLM Wiki runtime policies. Across five live-policy pair regressions and 10 Luna Max runs, distinctive behaviors improved from 18/20 → 20/20, with 0 prohibited behaviors.
               </p>
@@ -642,6 +644,8 @@ Review the task just completed from an Agentic Shaping perspective. Distinguish 
         </h2>
         <a class="button" href="#start">Go copy the starter prompt ↑</a>
       </section>
+
+<section class="section" id="review-sop"><h2>Review the actual artifact with an SOP</h2><p>Preserve the real baseline, review every sentence, run existing checks, then verify evidence. A checker pass does not certify editorial quality.</p><p>AS-SOP-001 verifies 22 normal, previous-failure and bypass cases plus the actual consumer route. Validating a submitted record does not prove Agent reading or enforcement in every host.</p><a href="https://github.com/dimohy/agentic-shaping/blob/main/workflows/review.sop.md">SOP execution manual</a></section>
     </main>
     <footer>
       <b>AS</b><strong>AGENTIC SHAPING</strong
