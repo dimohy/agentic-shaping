@@ -2,13 +2,13 @@
 
 [English](README.md) | [한국어](README.ko.md) | [日本語](README.ja.md) | [简体中文](README.zh-CN.md)
 
-<!-- AS-PS-001;version=0.7.0;policy=2026.10.30.1;AS-SOP-001=22/22;status=behavior-verified;limitation=submitted-record-validation-only-no-semantic-certification-or-universal-enforcement -->
+<!-- AS-PS-001;version=0.8.0;policy=2026.11.10.3;AS-WF-001=24/24;status=behavior-verified;limitation=tested-runner-only-no-semantic-certification-or-universal-host-enforcement -->
 
 > 这是让 AI Agent 先发现工作中的隐性知识·偏好·纠正·失败，并将其塑造成可在下一次执行中复用的记忆·规则·工具·验证器，与用户一起按用户的方式进化的工作方法。
 
 [官方实战指南](https://agentic-shaping.slogs.dev/) · [dimohy 的背景故事](https://slogs.dev/@dimohy/vibe-compiler)
 
-当前公开版本：**v0.7**
+当前公开版本：**v0.8**
 
 ## 语言
 
@@ -17,6 +17,21 @@
 首次访问根目录主页时，系统会检测浏览器语言，并从英语、韩语、日语和中文中选择一种语言。用户点击语言选择器后，该选择会保存为后续访问的默认语言。若直接打开特定语言的 URL，则优先使用该语言。
 
 ![Agent 将人的工作痕迹组织成可复用规则与资产的 Agentic Shaping 场景](assets/agentic-shaping-hero.jpg)
+
+## 由验证衔接的任务阶段
+
+根据任务选择系统改进、故障恢复、内容制作、调研或简单任务。先确定工作流 ID、版本、选择理由以及必选和可选阶段。
+
+根据实际执行记录显示当前阶段和整体状态。每个阶段的所有检查通过后才能继续。失败时修复该阶段并重新验证，同时遵守尝试次数、时间限制以及取消和恢复条件。
+
+AS-WF-001 通过 24 个使用真实进程的回归案例验证修复循环、阻止后续阶段、输入变更后的重新验证以及中断和恢复。它适用于使用此执行器的路径，不保证所有 Agent 主机自动遵守，也不保证语义或创作品质。
+
+[工作流执行手册](workflows/README.md)
+
+```sh
+node scripts/run-workflow.mjs PLAN.json STATE.json --step define
+node scripts/run-workflow.mjs PLAN.json STATE.json --resume
+```
 
 ## 用SOP核查实际稿件
 
@@ -109,9 +124,11 @@ Agentic Shaping 越有效，文档、vibe coding 源代码、配置、日志和�
 可以原样复制下面的内容使用。
 
 ```text
-Agentic Shaping v0.7
+Agentic Shaping v0.8
 
 请将 Agentic Shaping 应用于此任务。
+- 为当前任务选择工作流，显示其 ID、名称、版本、选择理由以及必选和可选阶段。根据实际执行记录展示当前阶段、整体状态、验证结果和下一步操作。简单任务使用简短流程，并说明省略可选阶段的理由。
+- 当前阶段的所有实际检查通过前，不得标记完成或执行下一阶段。修复失败阶段后重新验证，遵守尝试次数和时间限制；没有新观测时停止重复。保留取消与恢复记录；输入、工具或验证范围变化时，重新验证受影响的后续阶段。
 
 不要只提供说明或建议，始终执行能够完成当前请求的行动；当确认存在可复用价值的信号时，同时执行能够改进后续执行的行动。需要多个步骤时，不要只挑选其中方便的一部分，而要执行完成任务所需的完整路径。
 

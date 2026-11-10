@@ -4,10 +4,22 @@
   "additionalProperties": false,
   "required": ["runId", "project", "policyVersion", "currentTaskComplete", "forbiddenActions", "memories"],
   "properties": {
+    "phase": { "enum": ["before-action", "final"] },
+    "nextAction": {
+      "type": "object", "additionalProperties": false,
+      "required": ["planItemId", "target", "expectedObservation", "stopCondition"],
+      "properties": {
+        "planItemId": {"type":"string","minLength":1},
+        "target": {"type":"string","minLength":1},
+        "expectedObservation": {"type":"string","minLength":1},
+        "stopCondition": {"type":"string","minLength":1}
+      }
+    },
     "runId": { "type": "string", "minLength": 1, "maxLength": 128 },
     "project": { "type": "string", "minLength": 1, "maxLength": 256 },
     "policyVersion": { "type": "string", "minLength": 1, "maxLength": 64 },
     "currentTaskComplete": { "type": "boolean" },
+    "requiredMemoryIds": { "type": "array", "items": { "type": "string", "minLength": 1, "maxLength": 128 }, "uniqueItems": true },
     "forbiddenActions": {
       "type": "array",
       "items": { "type": "string", "minLength": 1, "maxLength": 256 },
@@ -24,7 +36,7 @@
           "scope": { "type": "string", "minLength": 1, "maxLength": 256 },
           "relevant": { "type": "boolean" },
           "sensitive": { "type": "boolean" },
-          "disposition": { "enum": ["applied", "excluded"] },
+          "disposition": { "enum": ["planned", "applied", "excluded"] },
           "planItemId": { "type": ["string", "null"], "minLength": 1, "maxLength": 128 },
           "actionEvidence": {
             "type": "array",

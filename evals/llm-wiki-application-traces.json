@@ -2,6 +2,105 @@
   "schemaVersion": 1,
   "cases": [
     {
+      "id": "pre-action-allows-incomplete-goal-with-current-plan",
+      "trace": {
+        "phase": "before-action",
+        "runId": "pre-action-positive",
+        "project": "example",
+        "policyVersion": "2026.11.10.1",
+        "currentTaskComplete": false,
+        "forbiddenActions": [],
+        "requiredMemoryIds": [
+          "current-correction"
+        ],
+        "nextAction": {
+          "planItemId": "repair",
+          "target": "current-input",
+          "expectedObservation": "corrected-output",
+          "stopCondition": "regression-fails"
+        },
+        "memories": [
+          {
+            "id": "current-correction",
+            "scope": "project/example",
+            "relevant": true,
+            "sensitive": false,
+            "disposition": "planned",
+            "planItemId": "repair",
+            "actionEvidence": [],
+            "verificationEvidence": [],
+            "exclusionReason": null
+          }
+        ]
+      },
+      "expected": {
+        "allowed": true,
+        "code": "pre-action-plan-ready"
+      }
+    },
+    {
+      "id": "pre-action-missing-observation-blocks-launch",
+      "trace": {
+        "phase": "before-action",
+        "currentTaskComplete": false,
+        "forbiddenActions": [],
+        "memories": [],
+        "nextAction": {
+          "planItemId": "repair",
+          "target": "current-input",
+          "stopCondition": "failure"
+        }
+      },
+      "expected": {
+        "allowed": false,
+        "code": "pre-action-contract-incomplete"
+      }
+    },
+    {
+      "id": "pre-action-relevant-memory-not-bound-to-next-action",
+      "trace": {
+        "phase": "before-action",
+        "currentTaskComplete": false,
+        "forbiddenActions": [],
+        "nextAction": {
+          "planItemId": "repair",
+          "target": "current-input",
+          "expectedObservation": "changed-output",
+          "stopCondition": "failure"
+        },
+        "memories": [
+          {
+            "id": "correction",
+            "relevant": true,
+            "sensitive": false,
+            "disposition": "planned",
+            "planItemId": "different-plan",
+            "actionEvidence": [],
+            "verificationEvidence": []
+          }
+        ]
+      },
+      "expected": {
+        "allowed": false,
+        "code": "relevant-memory-unaccounted"
+      }
+    },
+    {
+      "id": "pre-action-cannot-expand-authority",
+      "trace": {
+        "phase": "before-action",
+        "currentTaskComplete": false,
+        "forbiddenActions": [
+          "scope-expansion"
+        ],
+        "memories": []
+      },
+      "expected": {
+        "allowed": false,
+        "code": "forbidden-action"
+      }
+    },
+    {
       "id": "applied-with-plan-artifact-and-verification",
       "trace": {
         "runId": "positive-1",
@@ -17,13 +116,20 @@
             "sensitive": false,
             "disposition": "applied",
             "planItemId": "C80",
-            "actionEvidence": ["selfhost source structure contract"],
-            "verificationEvidence": ["105 files and 1399 declarations verified"],
+            "actionEvidence": [
+              "selfhost source structure contract"
+            ],
+            "verificationEvidence": [
+              "105 files and 1399 declarations verified"
+            ],
             "exclusionReason": null
           }
         ]
       },
-      "expected": { "allowed": true, "code": "application-trace-complete" }
+      "expected": {
+        "allowed": true,
+        "code": "application-trace-complete"
+      }
     },
     {
       "id": "lookup-only-is-not-application",
@@ -47,7 +153,10 @@
           }
         ]
       },
-      "expected": { "allowed": false, "code": "relevant-memory-unaccounted" }
+      "expected": {
+        "allowed": false,
+        "code": "relevant-memory-unaccounted"
+      }
     },
     {
       "id": "relevant-exclusion-requires-reason",
@@ -71,7 +180,10 @@
           }
         ]
       },
-      "expected": { "allowed": false, "code": "relevant-memory-unaccounted" }
+      "expected": {
+        "allowed": false,
+        "code": "relevant-memory-unaccounted"
+      }
     },
     {
       "id": "unrelated-project-memory-cannot-be-applied",
@@ -89,13 +201,20 @@
             "sensitive": false,
             "disposition": "applied",
             "planItemId": "C80",
-            "actionEvidence": ["copied unrelated rule"],
-            "verificationEvidence": ["none"],
+            "actionEvidence": [
+              "copied unrelated rule"
+            ],
+            "verificationEvidence": [
+              "none"
+            ],
             "exclusionReason": null
           }
         ]
       },
-      "expected": { "allowed": false, "code": "irrelevant-memory-applied" }
+      "expected": {
+        "allowed": false,
+        "code": "irrelevant-memory-applied"
+      }
     },
     {
       "id": "sensitive-memory-cannot-be-applied",
@@ -113,13 +232,20 @@
             "sensitive": true,
             "disposition": "applied",
             "planItemId": "publish",
-            "actionEvidence": ["used secret"],
-            "verificationEvidence": ["external request"],
+            "actionEvidence": [
+              "used secret"
+            ],
+            "verificationEvidence": [
+              "external request"
+            ],
             "exclusionReason": null
           }
         ]
       },
-      "expected": { "allowed": false, "code": "sensitive-memory-applied" }
+      "expected": {
+        "allowed": false,
+        "code": "sensitive-memory-applied"
+      }
     },
     {
       "id": "current-task-cannot-be-replaced-by-memory-work",
@@ -131,7 +257,10 @@
         "forbiddenActions": [],
         "memories": []
       },
-      "expected": { "allowed": false, "code": "current-task-incomplete" }
+      "expected": {
+        "allowed": false,
+        "code": "current-task-incomplete"
+      }
     },
     {
       "id": "forbidden-action-is-independent-gate",
@@ -140,10 +269,15 @@
         "project": "Sollang",
         "policyVersion": "2026.08.25.3",
         "currentTaskComplete": true,
-        "forbiddenActions": ["expanded authority"],
+        "forbiddenActions": [
+          "expanded authority"
+        ],
         "memories": []
       },
-      "expected": { "allowed": false, "code": "forbidden-action" }
+      "expected": {
+        "allowed": false,
+        "code": "forbidden-action"
+      }
     }
   ]
 }

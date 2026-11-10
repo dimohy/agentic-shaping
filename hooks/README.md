@@ -23,3 +23,21 @@ Verify the adapter with:
 ```powershell
 node .\evals\verify-codex-wait-hook.mjs
 ```
+
+# Task workflows and LLM Wiki application
+
+Task-specific stage selection, visible progress, real verification and bounded
+repair loops use [AS-WF-001](../workflows/README.md) and
+`scripts/run-workflow.mjs`. It gates successor execution and completion inside
+the real runner; submitted plan validation alone is insufficient.
+
+Before an important action, run the existing
+`node evals/verify-llm-wiki-application.mjs --trace TASK.json` consumer with
+`phase: "before-action"`. Bind required memories using `disposition: "planned"`
+and the next action's `planItemId`, `target`, `expectedObservation` and
+`stopCondition`. A passing plan reports zero applied memories; it is permission
+to continue the declared workflow, not completed application. After execution,
+use the default `final` phase and actual action/verification evidence. Invalid
+task traces return exit 2. The CLI now consumes `--trace` rather than silently
+running the fixture suite. This control checks submitted plans; callers must
+invoke it before acting, and it does not intercept every host command.

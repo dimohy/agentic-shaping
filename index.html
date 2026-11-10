@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <meta name="publication-contract" content="AS-PS-001;version=0.7.0;policy=2026.10.30.1;AS-SOP-001=22/22;status=behavior-verified;limitation=submitted-record-validation-only-no-semantic-certification-or-universal-enforcement" />
+    <meta name="publication-contract" content="AS-PS-001;version=0.8.0;policy=2026.11.10.3;AS-WF-001=24/24;status=behavior-verified;limitation=tested-runner-only-no-semantic-certification-or-universal-host-enforcement" />
     <meta name="site-root" content="./" />
     <link rel="canonical" href="https://agentic-shaping.slogs.dev/" />
     <link rel="alternate" hreflang="en" href="https://agentic-shaping.slogs.dev/" />
@@ -11,7 +11,7 @@
     <link rel="alternate" hreflang="ja" href="https://agentic-shaping.slogs.dev/ja/" />
     <link rel="alternate" hreflang="zh-Hans" href="https://agentic-shaping.slogs.dev/zh/" />
     <link rel="alternate" hreflang="x-default" href="https://agentic-shaping.slogs.dev/" />
-    <meta name="application-version" content="v0.7" />
+    <meta name="application-version" content="v0.8" />
     <title>Agentic Shaping — An AI Work Method That Evolves</title>
     <meta
       name="description"
@@ -135,9 +135,11 @@
             ><button type="button" data-copy="starter">Copy</button>
           </div>
           <pre id="starter">
-Agentic Shaping v0.7
+Agentic Shaping v0.8
 
 Apply Agentic Shaping to this task.
+- Select a workflow for this task and display its ID, name, version, selection reason, and required and optional stages. Show the current stage, overall status, verification results and next action from actual execution records. Use a short workflow for simple tasks and explain omitted optional stages.
+- Do not mark a stage complete or execute its successor until every actual check passes. Repair and reverify failed stages within attempt and time limits; stop repetitions without new observations. Preserve cancellation and resume records, and reverify affected successors when inputs, tools or verification scope change.
 
 Always take the actions needed to complete the current request; do not merely provide explanations or suggestions. When a signal with confirmed reuse value is identified, also take the actions needed to improve future executions. If multiple steps are required, execute the entire path needed for completion rather than choosing only the convenient subset.
 
@@ -409,7 +411,9 @@ Do not expand the current request or permissions, and do not save sensitive info
               ><button type="button" data-copy="work">Copy</button>
             </div>
             <pre id="work">
-Complete this task. First find relevant memories and project rules, then establish success criteria and actual verification. Capture recurring judgments, corrections and failures as improvement candidates, but choose the simplest suitable path among existing-tool reuse, direct model processing and reusable code by total cost and required accuracy. Create new assets only when beneficial; do not create new code or a cost assessment form for every task. Preserve mandatory verification and distinguish verified improvements from effects that have not been measured. When structured checks cannot decide, first read the relevant original material, code and failure output directly to identify the problem and next action.</pre>
+Complete this task. First find relevant memories and project rules, then establish success criteria and actual verification. Capture recurring judgments, corrections and failures as improvement candidates, but choose the simplest suitable path among existing-tool reuse, direct model processing and reusable code by total cost and required accuracy. Create new assets only when beneficial; do not create new code or a cost assessment form for every task. Preserve mandatory verification and distinguish verified improvements from effects that have not been measured. When structured checks cannot decide, first read the relevant original material, code and failure output directly to identify the problem and next action.
+- Select a workflow for this task and display its ID, name, version, selection reason, and required and optional stages. Show the current stage, overall status, verification results and next action from actual execution records. Use a short workflow for simple tasks and explain omitted optional stages.
+- Do not mark a stage complete or execute its successor until every actual check passes. Repair and reverify failed stages within attempt and time limits; stop repetitions without new observations. Preserve cancellation and resume records, and reverify affected successors when inputs, tools or verification scope change.</pre>
           </div>
           <div class="prompt">
             <div>
@@ -417,7 +421,9 @@ Complete this task. First find relevant memories and project rules, then establi
               ><button type="button" data-copy="repair">Copy</button>
             </div>
             <pre id="repair">
-Diagnose this problem through Agentic Shaping. If structured checks cannot identify the cause, first directly read the relevant original material, code and failure output to identify the problem and next action. Compare existing-tool reuse, direct handling and necessary code repair to fix the cause; implement prevention assets only when beneficial. Preserve required verification, then remove duplicate and temporary paths after actual checks.</pre>
+Diagnose this problem through Agentic Shaping. If structured checks cannot identify the cause, first directly read the relevant original material, code and failure output to identify the problem and next action. Compare existing-tool reuse, direct handling and necessary code repair to fix the cause; implement prevention assets only when beneficial. Preserve required verification, then remove duplicate and temporary paths after actual checks.
+- Select a workflow for this task and display its ID, name, version, selection reason, and required and optional stages. Show the current stage, overall status, verification results and next action from actual execution records. Use a short workflow for simple tasks and explain omitted optional stages.
+- Do not mark a stage complete or execute its successor until every actual check passes. Repair and reverify failed stages within attempt and time limits; stop repetitions without new observations. Preserve cancellation and resume records, and reverify affected successors when inputs, tools or verification scope change.</pre>
           </div>
           <div class="prompt">
             <div>
@@ -548,7 +554,7 @@ Review the task just completed from an Agentic Shaping perspective. Distinguish 
             <div>
               <small>CONFIRMED FINAL POLICY SYNC</small>
               <strong>90% <i>→</i> 100%</strong>
-              <span class="policy-version">HOMEPAGE v0.7 ↔ SLOGS 2026.10.30.1</span>
+              <span class="policy-version">HOMEPAGE v0.8 ↔ SLOGS 2026.11.10.3</span>
               <p>
                 We synchronized the confirmed behavioral contract from the homepage’s final prompt with the Korean and English Slogs LLM Wiki runtime policies. Across five live-policy pair regressions and 10 Luna Max runs, distinctive behaviors improved from 18/20 → 20/20, with 0 prohibited behaviors.
               </p>
@@ -645,6 +651,11 @@ Review the task just completed from an Agentic Shaping perspective. Distinguish 
         <a class="button" href="#start">Go copy the starter prompt ↑</a>
       </section>
 
+<section class="section" id="workflow"><h2>Task stages connected by verification</h2>
+<p>Choose system change, incident recovery, content production, research or a simple task to fit the work. Identify the workflow ID, version, selection reason, and required and optional stages first.</p>
+<p>Display the current stage and overall status from actual execution records. Advance only after every stage check passes. On failure, repair that stage and verify again within attempt and time limits, preserving cancellation and resume conditions.</p>
+<p>AS-WF-001 uses 24 regression cases with real processes to verify repair loops, blocked successors, revalidation after input changes, interruption and resume. It applies to paths using this runner and does not guarantee automatic compliance in every Agent host or semantic and creative quality.</p>
+<a href="https://github.com/dimohy/agentic-shaping/blob/main/workflows/README.md">Workflow execution manual</a></section>
 <section class="section" id="review-sop"><h2>Review the actual artifact with an SOP</h2><p>Preserve the real baseline, review every sentence, run existing checks, then verify evidence. A checker pass does not certify editorial quality.</p><p>AS-SOP-001 verifies 22 normal, previous-failure and bypass cases plus the actual consumer route. Validating a submitted record does not prove Agent reading or enforcement in every host.</p><a href="https://github.com/dimohy/agentic-shaping/blob/main/workflows/review.sop.md">SOP execution manual</a></section>
     </main>
     <footer>

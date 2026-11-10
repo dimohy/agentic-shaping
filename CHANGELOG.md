@@ -1,5 +1,22 @@
 # Changelog
 
+## [0.8.0] - 2026-11-10
+
+### What changed for users
+
+- Select a task-specific workflow and show its ID, version, current stage, verification results and next action from durable execution records.
+- Actual stage checks block successors until they pass; failed checks enter bounded repair and reverification, with cancellation and resumable state.
+- Input or tool changes invalidate affected stages and successors; altered logs, forged completion and weakened resume plans are rejected.
+- LLM Wiki application checks now distinguish before-action plans from verified final application; --trace evaluates the supplied task trace.
+- Four-language homepages, READMEs and copyable prompts explain the same workflow. Slogs policy 2026.11.10.3 and its separate procedures remain the policy authority.
+
+### Technical notes
+
+- Compatibility: Preserves v0.7 SOP and existing capability contracts. Optional workflow stages require omission reasons; simple tasks retain a two-stage path.
+- Contracts: AS-WF-001 adds a versioned catalog and real process runner; AS-LW-001 retains final-phase compatibility while adding explicit before-action coverage.
+- Verification: 24 real-process workflow regression cases, 15 LLM Wiki application cases, staged public capability closure and eight generated surfaces.
+- Known limitation: Enforcement covers consumers of this runner. Supplied-record validation cannot certify external execution, semantic quality or automatic compliance in every Agent host. No measured speedup claim.
+
 ## [0.7.0] - 2026-10-30
 
 ### What changed for users

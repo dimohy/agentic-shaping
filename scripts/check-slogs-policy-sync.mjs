@@ -21,34 +21,18 @@ const [version, korean, english] = await Promise.all([
 ]);
 
 if (version !== expectedVersion) throw new Error(`정책 버전 불일치: page=${expectedVersion}, server=${version}`);
-for (const [language, prompt, fragments] of [
-  ["ko", korean, [
-    `Prompt Version: ${expectedVersion}`,
-    "모든 요청 목표축",
-    "정형화의 효과와 반복 진단 비용",
-    "누적 전체 실행 예산",
-    "AS-DC-001",
-    "원래 완료 기준",
-    "정형화 자산·검사·문서가 늘어난 사실",
-    "비용 발생 전 실행 장치로 차단",
-    "기억 저장은 강제 적용 증거가 아니다",
-    "공개는 사용자의 명시 요청에서만",
-  ]],
-  ["en", english, [
-    `Prompt Version: ${expectedVersion}`,
-    "all requested goal axes",
-    "Structured outcomes and repeated diagnostic cost",
-    "cumulative whole-input run budget",
-    "AS-DC-001",
-    "original acceptance criteria",
-    "Growth in assets, checks or documentation",
-    "before incurring cost",
-    "memory writes are not hard-enforcement evidence",
-    "Publish only upon explicit request",
-  ]],
+// Compact core and triggered procedures have separate authority and revision markers.
+// Verify preserved obligations at their actual consumer location, not obsolete headings.
+for (const [language, core, fragments] of [
+  ['ko', korean, ['Prompt Version: '+expectedVersion, 'AS-WF-001', 'AS-DC-001', '실제 검증이 모두 통과', '시도·시간 한도', '원래 산출물·통과 기준·필수 최종 검사', '같은 조건의 측정', '공개 공유는 명시 요청에서만']],
+  ['en', english, ['Prompt Version: '+expectedVersion, 'AS-WF-001', 'AS-DC-001', 'Block completion and successors', 'fixed attempt/time limits', 'original deliverables, acceptance and mandatory final checks', 'comparable measurements', 'publish only when explicitly requested']]
 ]) {
-  for (const fragment of fragments) {
-    if (!prompt.includes(fragment)) throw new Error(`${language} 정책 계약 누락: ${fragment}`);
+  for (const fragment of fragments) if (!core.includes(fragment)) throw new Error(language+' core contract missing: '+fragment);
+  for (const [documentId, required] of [['workflow',['AS-WF-001','AS-LW-001']],['progress',['slogs-progress-report-policy','authoritativeCompleted']],['memory',['MC-COMP-001','captureDoesNotWrite']]]) {
+    const procedure = await get('https://slogs.dev/prompts/slogs-policy/'+documentId+'.'+language+'.md');
+    if (!procedure.startsWith('<!-- Slogs policy procedure: '+documentId+'; revision: ') || !procedure.split('\n')[0].includes('language: '+language)) throw new Error('Procedure identity mismatch: '+documentId+'/'+language);
+    if (!core.includes(documentId)) throw new Error('Core does not route to '+documentId);
+    for (const fragment of required) if (!procedure.includes(fragment)) throw new Error(documentId+'/'+language+' contract missing: '+fragment);
   }
 }
 

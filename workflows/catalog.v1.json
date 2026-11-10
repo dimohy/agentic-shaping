@@ -1,0 +1,11 @@
+{
+  "schemaVersion": 1,
+  "version": "2026.11.10.1",
+  "workflows": [
+    {"id":"system-change","label":"시스템 개선","kinds":["system-change","code-change"],"stages":[{"id":"define","label":"기준 확정","required":true},{"id":"implement","label":"구현","required":true},{"id":"independent-review","label":"독립 검토","required":false},{"id":"verify","label":"회귀 검증","required":true},{"id":"apply","label":"적용·실제 확인","required":true}]},
+    {"id":"incident-recovery","label":"장애 복구","kinds":["incident-recovery"],"stages":[{"id":"diagnose","label":"대상·원인 확인","required":true},{"id":"repair","label":"복구","required":true},{"id":"verify","label":"정상 동작 확인","required":true},{"id":"deliver","label":"영향·결과 확인","required":true}]},
+    {"id":"content-production","label":"콘텐츠 제작","kinds":["content-production"],"stages":[{"id":"brief","label":"요구·자료 확인","required":true},{"id":"draft","label":"초안 제작","required":true},{"id":"review","label":"검토·수정","required":true},{"id":"deliver","label":"산출물 확인","required":true}]},
+    {"id":"research","label":"조사·분석","kinds":["research"],"stages":[{"id":"question","label":"질문·판단 기준","required":true},{"id":"gather","label":"근거 수집","required":true},{"id":"check","label":"근거 대조","required":true},{"id":"synthesize","label":"결론·한계 확인","required":true}]},
+    {"id":"simple-task","label":"간단한 작업","kinds":["simple-task"],"stages":[{"id":"act","label":"처리","required":true},{"id":"verify","label":"결과 확인","required":true}]}
+  ]
+}

@@ -1,18 +1,18 @@
 {
   "schemaVersion": 2,
   "contractId": "AS-PS-001",
-  "version": "0.7.0",
-  "displayVersion": "v0.7",
-  "previousVersion": "0.6.3",
+  "version": "0.8.0",
+  "displayVersion": "v0.8",
+  "previousVersion": "0.7.0",
   "changeLevel": "minor",
-  "releaseDate": "2026-10-30",
-  "policyVersion": "2026.10.30.1",
+  "releaseDate": "2026-11-10",
+  "policyVersion": "2026.11.10.3",
   "feature": {
-    "ruleId": "AS-SOP-001",
-    "passed": 22,
-    "total": 22,
+    "ruleId": "AS-WF-001",
+    "passed": 24,
+    "total": 24,
     "status": "behavior-verified",
-    "limitation": "submitted-record-validation-only-no-semantic-certification-or-universal-enforcement"
+    "limitation": "tested-runner-only-no-semantic-certification-or-universal-host-enforcement"
   },
   "authoritativeFiles": [
     "CHANGELOG.md",
@@ -50,7 +50,20 @@
     "evals/sop-review.mjs",
     "evals/verify-sop-review.mjs",
     "workflows/review.sop.md",
-    "workflows/review.ko.sop.md"
+    "workflows/review.ko.sop.md",
+    "workflows/catalog.v1.json",
+    "workflows/README.md",
+    "evals/workflow-execution-contract.json",
+    "evals/workflow-execution.mjs",
+    "evals/verify-workflow-execution.mjs",
+    "scripts/run-workflow.mjs",
+    "evals/llm-wiki-application-contract.json",
+    "evals/llm-wiki-application-trace.schema.json",
+    "evals/llm-wiki-application-traces.json",
+    "evals/llm-wiki-application.mjs",
+    "evals/verify-llm-wiki-application.mjs",
+    "hooks/README.md",
+    "scripts/check-slogs-policy-sync.mjs"
   ],
   "publicCapabilities": [
     {
@@ -194,6 +207,31 @@
         "evals/sop-review-cases.json",
         "evals/sop-review.mjs",
         "evals/verify-sop-review.mjs"
+      ]
+    },
+    {
+      "ruleId": "AS-WF-001",
+      "verifier": "evals/verify-workflow-execution.mjs",
+      "expectedPasses": 24,
+      "files": [
+        "workflows/catalog.v1.json",
+        "workflows/README.md",
+        "evals/workflow-execution-contract.json",
+        "evals/workflow-execution.mjs",
+        "evals/verify-workflow-execution.mjs",
+        "scripts/run-workflow.mjs"
+      ]
+    },
+    {
+      "ruleId": "AS-LW-001",
+      "verifier": "evals/verify-llm-wiki-application.mjs",
+      "expectedPasses": 15,
+      "files": [
+        "evals/llm-wiki-application-contract.json",
+        "evals/llm-wiki-application-trace.schema.json",
+        "evals/llm-wiki-application-traces.json",
+        "evals/llm-wiki-application.mjs",
+        "evals/verify-llm-wiki-application.mjs"
       ]
     }
   ],

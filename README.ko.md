@@ -2,13 +2,13 @@
 
 [English](README.md) | [한국어](README.ko.md) | [日本語](README.ja.md) | [简体中文](README.zh-CN.md)
 
-<!-- AS-PS-001;version=0.7.0;policy=2026.10.30.1;AS-SOP-001=22/22;status=behavior-verified;limitation=submitted-record-validation-only-no-semantic-certification-or-universal-enforcement -->
+<!-- AS-PS-001;version=0.8.0;policy=2026.11.10.3;AS-WF-001=24/24;status=behavior-verified;limitation=tested-runner-only-no-semantic-certification-or-universal-host-enforcement -->
 
 > AI Agent가 작업 속 암묵지·취향·교정·실패를 먼저 발견하고, 다음 실행에 다시 쓸 수 있는 기억·규칙·도구·검증기로 빚어 사용자의 방식으로 함께 진화하는 작업법입니다.
 
 [공식 실전 가이드](https://agentic-shaping.slogs.dev/) · [dimohy의 배경 이야기](https://slogs.dev/@dimohy/vibe-compiler)
 
-현재 공개 버전: **v0.7**
+현재 공개 버전: **v0.8**
 
 ## 언어
 
@@ -17,6 +17,21 @@
 루트 홈페이지에 처음 방문하면 브라우저 언어를 감지해 영어·한국어·일본어·중국어 중 하나를 선택합니다. 사용자가 언어 선택기를 누르면 그 선택을 이후 방문의 기본값으로 보존합니다. 직접 특정 언어 URL을 연 경우에는 해당 언어를 존중합니다.
 
 ![사람의 작업 흔적을 Agent가 재사용 가능한 규칙과 자산으로 조직하는 Agentic Shaping 장면](assets/agentic-shaping-hero.jpg)
+
+## 검증으로 이어지는 작업 단계
+
+작업에 맞춰 시스템 개선·장애 복구·콘텐츠 제작·조사·간단한 작업 중 하나를 선택합니다. 워크플로우 ID·버전·선택 이유와 필수·선택 단계를 먼저 정합니다.
+
+현재 단계와 전체 상태를 실제 실행 기록에서 표시합니다. 단계별 검사가 모두 통과해야 다음 단계로 넘어갑니다. 실패하면 해당 단계를 수정하고 재검증하며, 시도·시간 한도와 취소·재개 조건을 지킵니다.
+
+AS-WF-001은 실제 프로세스를 실행하는 24개 회귀 사례로 수정 루프·후속 단계 차단·입력 변경 후 재검증·중단과 재개를 확인합니다. 이 실행기를 사용하는 경로에 적용되며 모든 Agent 호스트의 자동 준수나 의미·창의적 품질을 보증하지 않습니다.
+
+[워크플로우 실행 매뉴얼](workflows/README.md)
+
+```sh
+node scripts/run-workflow.mjs PLAN.json STATE.json --step define
+node scripts/run-workflow.mjs PLAN.json STATE.json --resume
+```
 
 ## 실제 원고를 확인하는 SOP
 
@@ -109,9 +124,11 @@ Agentic Shaping이 작동할수록 문서, 바이브 코딩 소스, 설정, 로�
 아래 내용을 그대로 복사해 사용할 수 있습니다.
 
 ```text
-Agentic Shaping v0.7
+Agentic Shaping v0.8
 
 이 작업에는 Agentic Shaping을 적용해줘.
+- 작업에 맞는 워크플로우를 선택하고 ID·이름·버전·선택 이유와 필수·선택 단계를 표시해줘. 현재 단계·전체 상태·검증 결과·다음 행동은 실제 실행 기록으로 보여줘. 간단한 작업은 짧은 절차를 사용하고 선택 단계 생략 이유를 남겨줘.
+- 현재 단계의 실제 검증이 모두 통과하기 전에는 완료 처리하거나 다음 단계를 실행하지 마. 실패한 단계는 수정 후 재검증하고 시도·시간 한도와 새 관측 없는 반복 중단을 지켜줘. 취소·재개 기록을 보존하며 입력·도구·검증 범위가 바뀌면 관련 후속 단계도 재검증해줘.
 
 설명이나 제안만 하지 말고 현재 요청을 끝내는 행동은 항상 수행하며, 재사용 가치가 확인된 신호가 있을 때는 다음 실행을 개선하는 행동도 함께 수행한다. 여러 단계가 필요하면 편한 일부만 고르지 말고 완료에 필요한 전체 경로를 실행한다.
 

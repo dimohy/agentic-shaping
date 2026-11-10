@@ -2,13 +2,13 @@
 
 [English](README.md) | [한국어](README.ko.md) | [日本語](README.ja.md) | [简体中文](README.zh-CN.md)
 
-<!-- AS-PS-001;version=0.7.0;policy=2026.10.30.1;AS-SOP-001=22/22;status=behavior-verified;limitation=submitted-record-validation-only-no-semantic-certification-or-universal-enforcement -->
+<!-- AS-PS-001;version=0.8.0;policy=2026.11.10.3;AS-WF-001=24/24;status=behavior-verified;limitation=tested-runner-only-no-semantic-certification-or-universal-host-enforcement -->
 
 > AI Agentが作業中の暗黙知・好み・修正・失敗を先に発見し、次の実行で再利用できる記憶・ルール・ツール・検証器へと磨き上げ、ユーザーのやり方でともに進化する作業法です。
 
 [公式実践ガイド](https://agentic-shaping.slogs.dev/) · [dimohyの背景ストーリー](https://slogs.dev/@dimohy/vibe-compiler)
 
-現在の公開バージョン：**v0.7**
+現在の公開バージョン: **v0.8**
 
 ## 言語
 
@@ -17,6 +17,21 @@
 ルートホームページに初めてアクセスすると、ブラウザの言語を検出し、英語・韓国語・日本語・中国語のいずれかを選択します。ユーザーが言語セレクターを操作すると、その選択を以降の訪問時のデフォルトとして保存します。特定の言語 URL を直接開いた場合は、その言語を優先します。
 
 ![人の作業の痕跡をAgentが再利用可能なルールとアセットとして整理するAgentic Shapingの場面](assets/agentic-shaping-hero.jpg)
+
+## 検証でつながる作業段階
+
+作業に合わせてシステム改善・障害復旧・コンテンツ制作・調査・簡単な作業から選びます。ワークフローのID・バージョン・選択理由と必須・任意の段階を先に決めます。
+
+実際の実行記録から現在の段階と全体の状態を表示します。各段階の検査がすべて通過してから次へ進みます。失敗時はその段階を修正して再検証し、試行回数・時間の上限と中止・再開条件を守ります。
+
+AS-WF-001は実プロセスを使う24件の回帰ケースで、修正ループ・後続段階の停止・入力変更後の再検証・中断と再開を確認します。この実行器を利用する経路に適用され、すべてのAgentホストの自動遵守や意味・創作上の品質を保証しません。
+
+[ワークフロー実行マニュアル](workflows/README.md)
+
+```sh
+node scripts/run-workflow.mjs PLAN.json STATE.json --step define
+node scripts/run-workflow.mjs PLAN.json STATE.json --resume
+```
 
 ## 実際の原稿を確認するSOP
 
@@ -109,9 +124,11 @@ Agentic Shapingが機能するほど、文書、バイブコーディングの�
 以下の内容をそのままコピーして使用できます。
 
 ```text
-Agentic Shaping v0.7
+Agentic Shaping v0.8
 
 この作業には Agentic Shaping を適用してください。
+- 作業に合うワークフローを選び、ID・名前・バージョン・選択理由と必須・任意の段階を表示して。実行記録から現在の段階・全体の状態・検証結果・次の行動を示して。簡単な作業には短い手順を使い、任意の段階を省く理由を残して。
+- 現在の段階の実際の検証がすべて通過するまで完了扱いや次段階の実行をしないで。失敗した段階は修正して再検証し、試行回数・時間の上限と新しい観測のない反復停止を守って。中止・再開の記録を保ち、入力・ツール・検証範囲が変われば関連する後続段階も再検証して。
 
 説明や提案だけで終わらせず、現在の依頼を完了させる行動は必ず実行し、再利用価値が確認されたシグナルがある場合は、次回の実行を改善する行動も併せて実行してください。複数の段階が必要な場合は、都合のよい一部だけを選ばず、完了に必要な全体の経路を実行してください。
 
