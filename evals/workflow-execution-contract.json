@@ -5,7 +5,33 @@
   "selection": "Choose a catalog workflow by task kind; explain selection and each omitted optional stage. Mandatory stages and order cannot change.",
   "execution": "Only the current stage may launch. Run its real action, then every configured verifier. Failed verification cannot complete a stage or launch a successor.",
   "loop": "Repair and rerun the current stage under fixed attempt and wall-clock limits. Without a repair command return needs-rework for Agent correction. Unchanged failed inputs cannot be blindly retried. Preserve prior successful stages only while their full input fingerprints still match.",
-  "display": "Render workflow id/name/version, current stage and every selected stage from the actual durable state; no manually supplied display text.",
-  "negativeControls": ["missing-required-stage", "wrong-workflow-kind", "unexplained-optional-omission", "out-of-order-launch", "action-without-verification", "failed-verifier-with-successful-action", "failed-stage-marked-complete", "unchanged-retry", "retry-budget-reset-on-resume", "stale-input-reuse", "plan-change-on-resume", "parallel-state-writer", "timeout", "cancelled-child", "forged-display", "unauthorized-scope"],
-  "nonClaims": ["all-host-interception", "semantic-quality-certified", "remote-local-execution-authenticity"]
+  "display": "Render the concrete current task from plan.task.summary before workflow type/id/version, current stage and actual durable state. Reject empty or catalog-category-only summaries. A generic workflow category does not identify a task.",
+  "negativeControls": [
+    "missing-required-stage",
+    "wrong-workflow-kind",
+    "unexplained-optional-omission",
+    "out-of-order-launch",
+    "action-without-verification",
+    "failed-verifier-with-successful-action",
+    "failed-stage-marked-complete",
+    "unchanged-retry",
+    "retry-budget-reset-on-resume",
+    "stale-input-reuse",
+    "plan-change-on-resume",
+    "parallel-state-writer",
+    "timeout",
+    "cancelled-child",
+    "forged-display",
+    "unauthorized-scope",
+    "missing-task-summary",
+    "category-only-task-summary",
+    "task-summary-omitted-from-display",
+    "another-task-title",
+    "summary-markdown-row-injection"
+  ],
+  "nonClaims": [
+    "all-host-interception",
+    "semantic-quality-certified",
+    "remote-local-execution-authenticity"
+  ]
 }

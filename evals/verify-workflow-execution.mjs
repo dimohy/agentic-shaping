@@ -25,15 +25,37 @@ function fixture() {
 }
 async function test(name, run) { await run(); results.push({ name, passed: true }); }
 try {
+  await test('every-display-identifies-the-concrete-task', async () => {
+    const f = fixture(); f.plan.task.summary = 'Sollang 표현식 검증 완료 캐시 234개 정리'; f.save();
+    const displays = [];
+    const s = await runWorkflow(f.planPath, f.statePath, { onDisplay: x => displays.push(x) });
+    assert.equal(s.status, 'completed');
+    assert.ok(displays.length > 2 && displays.every(x => x.startsWith('작업: ' + f.plan.task.summary + '\n워크플로우: ')));
+    assert.equal(readFileSync(f.statePath + '.md', 'utf8'), renderWorkflow(s, f.plan) + '\n');
+    assert.throws(() => renderWorkflow(s), /workflow-task-summary-required/);
+  });
+  await test('category-only-or-empty-task-cannot-launch', async () => {
+    for (const summary of ['', '  ', '간단한 작업', 'simple-task', '시스템 개선']) {
+      const f = fixture(); f.plan.task.summary = summary; f.save();
+      assert.equal(validateWorkflowPlan(f.plan).allowed, false);
+      await assert.rejects(runWorkflow(f.planPath, f.statePath));
+      assert.equal(existsSync(f.marker), false); assert.equal(existsSync(f.statePath), false);
+    }
+  });
+  await test('task-title-cannot-inject-display-rows', async () => {
+    const f = fixture(); f.plan.task.summary = 'Sollang | 캐시\n정리'; f.save();
+    const s = await runWorkflow(f.planPath, f.statePath);
+    assert.ok(renderWorkflow(s, f.plan).startsWith('작업: Sollang \\| 캐시 정리\n'));
+  });
   await test('normal-real-execution-and-display', async () => {
     const f = fixture(), displays = []; const s = await runWorkflow(f.planPath, f.statePath, { onDisplay: text => displays.push(text) });
     assert.equal(s.status, 'completed'); assert.ok(existsSync(f.marker)); assert.ok(displays.some(x => x.includes('검증 중')));
-    assert.equal(renderWorkflow(s).includes('전체 단계 검증 완료'), true);
+    assert.equal(renderWorkflow(s, f.plan).includes('전체 단계 검증 완료'), true);
     if (process.env.AS_WORKFLOW_EVIDENCE_DIR) {
       mkdirSync(process.env.AS_WORKFLOW_EVIDENCE_DIR, { recursive: true });
       writeFileSync(join(process.env.AS_WORKFLOW_EVIDENCE_DIR, 'normal-state.json'), JSON.stringify(s, null, 2));
       writeFileSync(join(process.env.AS_WORKFLOW_EVIDENCE_DIR, 'normal-plan.json'), readFileSync(f.planPath));
-      writeFileSync(join(process.env.AS_WORKFLOW_EVIDENCE_DIR, 'normal-display.md'), renderWorkflow(s));
+      writeFileSync(join(process.env.AS_WORKFLOW_EVIDENCE_DIR, 'normal-display.md'), renderWorkflow(s, f.plan));
     }
   });
   for (const [name, mutate, code] of [

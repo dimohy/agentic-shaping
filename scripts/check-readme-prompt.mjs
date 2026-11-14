@@ -21,7 +21,7 @@ let sharedVersion;
 for (const pair of pairs) {
   const html = readFileSync(resolve(root, pair.htmlPath), "utf8");
   const readme = readFileSync(resolve(root, pair.readmePath), "utf8");
-  const version = html.match(/<meta\s+name="application-version"\s+content="(v\d+\.\d+)"\s*\/>/)?.[1];
+  const version = html.match(/<meta\s+name="application-version"\s+content="(v\d+\.\d+(?:\.\d+)?)"\s*\/>/)?.[1];
   if (!version) throw new Error(`${pair.htmlPath}에서 공개 버전 메타를 찾지 못했습니다.`);
   sharedVersion ??= version;
   if (version !== sharedVersion) throw new Error(`${pair.locale} 공개 버전이 ${sharedVersion}과 다릅니다.`);
@@ -31,7 +31,7 @@ for (const pair of pairs) {
   }
 
   const htmlPrompt = html.match(/<pre id="starter">([\s\S]*?)<\/pre>/)?.[1];
-  const readmePrompt = readme.match(/```text\r?\n(Agentic Shaping v\d+\.\d+[\s\S]*?)\r?\n```/)?.[1];
+  const readmePrompt = readme.match(/```text\r?\n(Agentic Shaping v\d+\.\d+(?:\.\d+)?[\s\S]*?)\r?\n```/)?.[1];
   if (!htmlPrompt || !readmePrompt) throw new Error(`${pair.locale} 공개 적용 프롬프트를 찾지 못했습니다.`);
   if (normalize(decodeHtml(htmlPrompt)) !== normalize(readmePrompt)) {
     throw new Error(`${pair.readmePath}의 적용 프롬프트가 ${pair.htmlPath}과 다릅니다.`);

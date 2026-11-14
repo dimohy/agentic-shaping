@@ -23,7 +23,14 @@ validators; do not write a fresh wrapper for each action. Scope flags never gran
 permissions. Use idempotent actions for stages that may need re-execution; do not
 put irreversible publishing in an unbounded repair loop.
 
-The runner prints workflow identity, current stage and stage results from durable
+Every display starts with the concrete task from the bound `plan.task.summary`,
+in the user's language, naming the target and action. For example, use
+`Sollang 표현식 검증 완료 캐시 234개 정리`; `간단한 작업` only identifies a workflow
+category and is rejected as a task summary. The renderer takes the validated plan
+at every transition, so an old task title is never copied from a previous state.
+Task text is escaped to keep newlines and pipes from injecting table rows.
+
+The runner then prints workflow identity, current stage and stage results from durable
 state and updates `STATE.json.md`. Show that table in the conversation at stage
 transitions, verification failure, rework, interruption, resume and completion.
 Never replace it with manually invented checkmarks. Logs are separate under

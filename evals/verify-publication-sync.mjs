@@ -93,31 +93,6 @@ for (const path of packageFiles) {
   if (tracked.status !== 0) throw new Error(`${path}: public release asset is not tracked by Git`);
 }
 
-const snapshotParent = mkdtempSync(join(tmpdir(), "agentic-shaping-release-"));
-try {
-  const snapshotRoot = join(snapshotParent, "snapshot");
-  const archivePath = join(snapshotParent, "release.tar");
-  mkdirSync(snapshotRoot);
-  const tree = spawnSync("git", ["write-tree"], { cwd: root, encoding: "utf8" });
-  if (tree.status !== 0) throw new Error(`could not write staged Git tree: ${tree.stderr}`);
-  const archive = spawnSync("git", ["archive", "--format=tar", `--output=${archivePath}`, tree.stdout.trim()], { cwd: root, encoding: "utf8" });
-  if (archive.status !== 0) throw new Error(`could not archive staged Git tree: ${archive.stderr}`);
-  const extract = spawnSync("tar", ["-xf", archivePath, "-C", snapshotRoot], { encoding: "utf8" });
-  if (extract.status !== 0) throw new Error(`could not extract staged Git tree: ${extract.stderr}`);
-  for (const capability of release.publicCapabilities) {
-    if (!capability.ruleId || !capability.verifier || !Number.isInteger(capability.expectedPasses)) {
-      throw new Error("site/release-manifest.json: invalid public capability entry");
-    }
-    const run = spawnSync(process.execPath, [join(snapshotRoot, capability.verifier)], { cwd: snapshotRoot, encoding: "utf8" });
-    const output = run.stdout + run.stderr;
-    const expected = `PASS ${capability.expectedPasses}/${capability.expectedPasses}`;
-    if (run.status !== 0 || !output.includes(expected)) {
-      throw new Error(`${capability.ruleId}: staged snapshot verifier failed or reported a different denominator: ${output}`);
-    }
-  }
-} finally {
-  rmSync(snapshotParent, { recursive: true, force: true });
-}
 const expectedMarker = `${release.contractId};version=${release.version};policy=${release.policyVersion};${release.feature.ruleId}=${release.feature.passed}/${release.feature.total};status=${release.feature.status};limitation=${release.feature.limitation}`;
 const surfaceDefinitions = [
   ["homepage", "en", "index.html"], ["homepage", "ko", "ko/index.html"],
@@ -194,5 +169,37 @@ const currentTrace = {
 };
 const current = evaluatePublicationSync(currentTrace);
 if (!current.allowed) throw new Error(`current publication is not synchronized: ${current.code}`);
+
+if (process.argv.includes('--preflight-only')) {
+  process.stdout.write('AS-PS-001 preflight PASS; capability suites were not executed\n');
+  process.exit(0);
+}
+
+process.stdout.write('AS-PS-001 capability suites starting\n');
+const snapshotParent = mkdtempSync(join(tmpdir(), "agentic-shaping-release-"));
+try {
+  const snapshotRoot = join(snapshotParent, "snapshot");
+  const archivePath = join(snapshotParent, "release.tar");
+  mkdirSync(snapshotRoot);
+  const tree = spawnSync("git", ["write-tree"], { cwd: root, encoding: "utf8" });
+  if (tree.status !== 0) throw new Error(`could not write staged Git tree: ${tree.stderr}`);
+  const archive = spawnSync("git", ["archive", "--format=tar", `--output=${archivePath}`, tree.stdout.trim()], { cwd: root, encoding: "utf8" });
+  if (archive.status !== 0) throw new Error(`could not archive staged Git tree: ${archive.stderr}`);
+  const extract = spawnSync("tar", ["-xf", archivePath, "-C", snapshotRoot], { encoding: "utf8" });
+  if (extract.status !== 0) throw new Error(`could not extract staged Git tree: ${extract.stderr}`);
+  for (const capability of release.publicCapabilities) {
+    if (!capability.ruleId || !capability.verifier || !Number.isInteger(capability.expectedPasses)) {
+      throw new Error("site/release-manifest.json: invalid public capability entry");
+    }
+    const run = spawnSync(process.execPath, [join(snapshotRoot, capability.verifier)], { cwd: snapshotRoot, encoding: "utf8" });
+    const output = run.stdout + run.stderr;
+    const expected = `PASS ${capability.expectedPasses}/${capability.expectedPasses}`;
+    if (run.status !== 0 || !output.includes(expected)) {
+      throw new Error(`${capability.ruleId}: staged snapshot verifier failed or reported a different denominator: ${output}`);
+    }
+  }
+} finally {
+  rmSync(snapshotParent, { recursive: true, force: true });
+}
 
 process.stdout.write(`AS-PS-001 publication sync PASS ${passed}/${suite.cases.length}; current ${release.displayVersion} synchronized across 8 surfaces\n`);

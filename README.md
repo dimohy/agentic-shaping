@@ -2,13 +2,13 @@
 
 [English](README.md) | [한국어](README.ko.md) | [日本語](README.ja.md) | [简体中文](README.zh-CN.md)
 
-<!-- AS-PS-001;version=0.8.0;policy=2026.11.10.3;AS-WF-001=24/24;status=behavior-verified;limitation=tested-runner-only-no-semantic-certification-or-universal-host-enforcement -->
+<!-- AS-PS-001;version=0.8.1;policy=2026.11.13.1;AS-WF-001=27/27;status=behavior-verified;limitation=tested-runner-only-no-semantic-certification-or-universal-host-enforcement -->
 
 > An AI work method that actively discovers tacit knowledge, preferences, corrections, and failures, then shapes them into reusable memories, rules, tools, and verifiers so the system evolves with the user’s way of working.
 
 [Official practical guide](https://agentic-shaping.slogs.dev/) · [dimohy’s background story](https://slogs.dev/@dimohy/vibe-compiler)
 
-Current public version: **v0.8**
+Current public version: **v0.8.1**
 
 ## Language
 
@@ -24,7 +24,7 @@ Choose system change, incident recovery, content production, research or a simpl
 
 Display the current stage and overall status from actual execution records. Advance only after every stage check passes. On failure, repair that stage and verify again within attempt and time limits, preserving cancellation and resume conditions.
 
-AS-WF-001 uses 24 regression cases with real processes to verify repair loops, blocked successors, revalidation after input changes, interruption and resume. It applies to paths using this runner and does not guarantee automatic compliance in every Agent host or semantic and creative quality.
+AS-WF-001 uses 27 regression cases with real processes to verify repair loops, blocked successors, revalidation after input changes, interruption and resume. It applies to paths using this runner and does not guarantee automatic compliance in every Agent host or semantic and creative quality.
 
 [Workflow execution manual](workflows/README.md)
 
@@ -124,10 +124,10 @@ You do not need to build a massive automation system from the start. Begin by mo
 You can copy and use the content below as-is.
 
 ```text
-Agentic Shaping v0.8
+Agentic Shaping v0.8.1
 
 Apply Agentic Shaping to this task.
-- Select a workflow for this task and display its ID, name, version, selection reason, and required and optional stages. Show the current stage, overall status, verification results and next action from actual execution records. Use a short workflow for simple tasks and explain omitted optional stages.
+- Select a workflow for this task and display its ID, name, version, selection reason, and required and optional stages. Show the concrete task (target and action) from the current plan.task.summary first, in the user's language, then the current stage, overall status, verification results and next action from actual execution records. A workflow category alone is not a task title; reject missing or substituted titles. Use a short workflow for simple tasks and explain omitted optional stages.
 - Do not mark a stage complete or execute its successor until every actual check passes. Repair and reverify failed stages within attempt and time limits; stop repetitions without new observations. Preserve cancellation and resume records, and reverify affected successors when inputs, tools or verification scope change.
 
 Always take the actions needed to complete the current request; do not merely provide explanations or suggestions. When a signal with confirmed reuse value is identified, also take the actions needed to improve future executions. If multiple steps are required, execute the entire path needed for completion rather than choosing only the convenient subset.

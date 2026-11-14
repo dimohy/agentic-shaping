@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <meta name="publication-contract" content="AS-PS-001;version=0.8.0;policy=2026.11.10.3;AS-WF-001=24/24;status=behavior-verified;limitation=tested-runner-only-no-semantic-certification-or-universal-host-enforcement" />
+    <meta name="publication-contract" content="AS-PS-001;version=0.8.1;policy=2026.11.13.1;AS-WF-001=27/27;status=behavior-verified;limitation=tested-runner-only-no-semantic-certification-or-universal-host-enforcement" />
     <meta name="site-root" content="../" />
     <link rel="canonical" href="https://agentic-shaping.slogs.dev/zh/" />
     <link rel="alternate" hreflang="en" href="https://agentic-shaping.slogs.dev/" />
@@ -11,7 +11,7 @@
     <link rel="alternate" hreflang="ja" href="https://agentic-shaping.slogs.dev/ja/" />
     <link rel="alternate" hreflang="zh-Hans" href="https://agentic-shaping.slogs.dev/zh/" />
     <link rel="alternate" hreflang="x-default" href="https://agentic-shaping.slogs.dev/" />
-    <meta name="application-version" content="v0.8" />
+    <meta name="application-version" content="v0.8.1" />
     <title>Agentic Shaping — 主动发现并持续进化的 AI 工作方法</title>
     <meta
       name="description"
@@ -143,10 +143,10 @@
             ><button type="button" data-copy="starter">复制</button>
           </div>
           <pre id="starter">
-Agentic Shaping v0.8
+Agentic Shaping v0.8.1
 
 请将 Agentic Shaping 应用于此任务。
-- 为当前任务选择工作流，显示其 ID、名称、版本、选择理由以及必选和可选阶段。根据实际执行记录展示当前阶段、整体状态、验证结果和下一步操作。简单任务使用简短流程，并说明省略可选阶段的理由。
+- 为当前任务选择工作流，显示其 ID、名称、版本、选择理由以及必选和可选阶段。先根据当前plan.task.summary，用用户的语言显示包含目标和操作的具体任务名称，再根据实际执行记录展示当前阶段、整体状态、验证结果和下一步操作。不能只用流程类别作为任务名称；拒绝缺失或被替换的任务名称。简单任务使用简短流程，并说明省略可选阶段的理由。
 - 当前阶段的所有实际检查通过前，不得标记完成或执行下一阶段。修复失败阶段后重新验证，遵守尝试次数和时间限制；没有新观测时停止重复。保留取消与恢复记录；输入、工具或验证范围变化时，重新验证受影响的后续阶段。
 
 不要只提供说明或建议，始终执行能够完成当前请求的行动；当确认存在可复用价值的信号时，同时执行能够改进后续执行的行动。需要多个步骤时，不要只挑选其中方便的一部分，而要执行完成任务所需的完整路径。
@@ -434,7 +434,7 @@ Agentic Shaping v0.8
             </div>
             <pre id="work">
 请完成这项工作。先查找相关记忆和项目规则，确定成功条件和实际验证方法。将重复判断、修正和失败捕捉为改进候选，但应根据总成本和所需准确性，在复用现有工具、模型直接处理和可复用代码之间选择最简单的合适路径。只有存在收益时才创建新资产，不要每次都生成新代码或成本评估表。保留必需验证，并区分已经验证的改进与尚未测量的效果。 对于结构化检查无法判断的部分，先直接阅读相关原始资料、代码和失败输出，确认问题及下一步行动。
-- 为当前任务选择工作流，显示其 ID、名称、版本、选择理由以及必选和可选阶段。根据实际执行记录展示当前阶段、整体状态、验证结果和下一步操作。简单任务使用简短流程，并说明省略可选阶段的理由。
+- 为当前任务选择工作流，显示其 ID、名称、版本、选择理由以及必选和可选阶段。先根据当前plan.task.summary，用用户的语言显示包含目标和操作的具体任务名称，再根据实际执行记录展示当前阶段、整体状态、验证结果和下一步操作。不能只用流程类别作为任务名称；拒绝缺失或被替换的任务名称。简单任务使用简短流程，并说明省略可选阶段的理由。
 - 当前阶段的所有实际检查通过前，不得标记完成或执行下一阶段。修复失败阶段后重新验证，遵守尝试次数和时间限制；没有新观测时停止重复。保留取消与恢复记录；输入、工具或验证范围变化时，重新验证受影响的后续阶段。</pre>
           </div>
           <div class="prompt">
@@ -444,7 +444,7 @@ Agentic Shaping v0.8
             </div>
             <pre id="repair">
 从Agentic Shaping角度诊断这个问题。如果结构化检查无法判断原因，先直接阅读相关原始资料、代码和失败输出，确认问题及下一步行动。比较现有工具复用、直接处理和必要的代码修复来解决根因，仅在有益时实现防止复发的资产。保留必要验证，并在实际检查后整理重复和临时路径。
-- 为当前任务选择工作流，显示其 ID、名称、版本、选择理由以及必选和可选阶段。根据实际执行记录展示当前阶段、整体状态、验证结果和下一步操作。简单任务使用简短流程，并说明省略可选阶段的理由。
+- 为当前任务选择工作流，显示其 ID、名称、版本、选择理由以及必选和可选阶段。先根据当前plan.task.summary，用用户的语言显示包含目标和操作的具体任务名称，再根据实际执行记录展示当前阶段、整体状态、验证结果和下一步操作。不能只用流程类别作为任务名称；拒绝缺失或被替换的任务名称。简单任务使用简短流程，并说明省略可选阶段的理由。
 - 当前阶段的所有实际检查通过前，不得标记完成或执行下一阶段。修复失败阶段后重新验证，遵守尝试次数和时间限制；没有新观测时停止重复。保留取消与恢复记录；输入、工具或验证范围变化时，重新验证受影响的后续阶段。</pre>
           </div>
           <div class="prompt">
@@ -584,7 +584,7 @@ Agentic Shaping v0.8
             <div>
               <small>CONFIRMED FINAL POLICY SYNC</small>
               <strong>90% <i>→</i> 100%</strong>
-              <span class="policy-version">HOMEPAGE v0.8 ↔ SLOGS 2026.11.10.3</span>
+              <span class="policy-version">HOMEPAGE v0.8.1 ↔ SLOGS 2026.11.13.1</span>
               <p>
                 已将官网最终提示词中确认的行为契约同步到 Slogs LLM Wiki 的韩语和英语运行时策略。在 5 对在线策略回归和 10 次 Luna Max 执行中，确认独有行为从 18/20 → 20/20，禁止行为为 0 次。
               </p>
@@ -684,7 +684,7 @@ Agentic Shaping v0.8
 <section class="section" id="workflow"><h2>由验证衔接的任务阶段</h2>
 <p>根据任务选择系统改进、故障恢复、内容制作、调研或简单任务。先确定工作流 ID、版本、选择理由以及必选和可选阶段。</p>
 <p>根据实际执行记录显示当前阶段和整体状态。每个阶段的所有检查通过后才能继续。失败时修复该阶段并重新验证，同时遵守尝试次数、时间限制以及取消和恢复条件。</p>
-<p>AS-WF-001 通过 24 个使用真实进程的回归案例验证修复循环、阻止后续阶段、输入变更后的重新验证以及中断和恢复。它适用于使用此执行器的路径，不保证所有 Agent 主机自动遵守，也不保证语义或创作品质。</p>
+<p>AS-WF-001 通过 27 个使用真实进程的回归案例验证修复循环、阻止后续阶段、输入变更后的重新验证以及中断和恢复。它适用于使用此执行器的路径，不保证所有 Agent 主机自动遵守，也不保证语义或创作品质。</p>
 <a href="https://github.com/dimohy/agentic-shaping/blob/main/workflows/README.md">工作流执行手册</a></section>
 <section class="section" id="review-sop"><h2>用SOP核查实际稿件</h2><p>依次保留真实原稿、逐句审阅、运行现有检查并核实依据。检查通过不代表文稿质量已获认证。</p><p>AS-SOP-001验证22个正常、历史失败及绕过案例，并核查实际使用路径。提交记录的验证不能证明Agent实际阅读或所有宿主均自动执行。</p><a href="https://github.com/dimohy/agentic-shaping/blob/main/workflows/review.sop.md">SOP执行手册</a></section>
     </main>

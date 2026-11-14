@@ -27,7 +27,7 @@ export async function runWorkflow(planPath, statePath, options = {}) {
     state.updatedUtc = new Date().toISOString();
     writeFileSync(`${statePath}.tmp`, JSON.stringify(state, null, 2) + '\n');
     renameSync(`${statePath}.tmp`, statePath);
-    const display = renderWorkflow(state);
+    const display = renderWorkflow(state, plan);
     writeFileSync(`${statePath}.md`, display + '\n');
     if (display !== lastDisplay) options.onDisplay?.(display);
     lastDisplay = display;

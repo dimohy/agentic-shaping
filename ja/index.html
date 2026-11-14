@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <meta name="publication-contract" content="AS-PS-001;version=0.8.0;policy=2026.11.10.3;AS-WF-001=24/24;status=behavior-verified;limitation=tested-runner-only-no-semantic-certification-or-universal-host-enforcement" />
+    <meta name="publication-contract" content="AS-PS-001;version=0.8.1;policy=2026.11.13.1;AS-WF-001=27/27;status=behavior-verified;limitation=tested-runner-only-no-semantic-certification-or-universal-host-enforcement" />
     <meta name="site-root" content="../" />
     <link rel="canonical" href="https://agentic-shaping.slogs.dev/ja/" />
     <link rel="alternate" hreflang="en" href="https://agentic-shaping.slogs.dev/" />
@@ -11,7 +11,7 @@
     <link rel="alternate" hreflang="ja" href="https://agentic-shaping.slogs.dev/ja/" />
     <link rel="alternate" hreflang="zh-Hans" href="https://agentic-shaping.slogs.dev/zh/" />
     <link rel="alternate" hreflang="x-default" href="https://agentic-shaping.slogs.dev/" />
-    <meta name="application-version" content="v0.8" />
+    <meta name="application-version" content="v0.8.1" />
     <title>Agentic Shaping — 自ら発見し進化するAIワークメソッド</title>
     <meta
       name="description"
@@ -135,10 +135,10 @@
             ><button type="button" data-copy="starter">コピー</button>
           </div>
           <pre id="starter">
-Agentic Shaping v0.8
+Agentic Shaping v0.8.1
 
 この作業には Agentic Shaping を適用してください。
-- 作業に合うワークフローを選び、ID・名前・バージョン・選択理由と必須・任意の段階を表示して。実行記録から現在の段階・全体の状態・検証結果・次の行動を示して。簡単な作業には短い手順を使い、任意の段階を省く理由を残して。
+- 作業に合うワークフローを選び、ID・名前・バージョン・選択理由と必須・任意の段階を表示して。現在のplan.task.summaryから、対象と実施内容が分かる作業名をユーザーの言語で先頭に表示して。その後に実行記録から現在の段階・全体の状態・検証結果・次の行動を示して。手順の種類だけを作業名にせず、作業名の欠落や差し替えを拒否して。簡単な作業には短い手順を使い、任意の段階を省く理由を残して。
 - 現在の段階の実際の検証がすべて通過するまで完了扱いや次段階の実行をしないで。失敗した段階は修正して再検証し、試行回数・時間の上限と新しい観測のない反復停止を守って。中止・再開の記録を保ち、入力・ツール・検証範囲が変われば関連する後続段階も再検証して。
 
 説明や提案だけで終わらせず、現在の依頼を完了させる行動は必ず実行し、再利用価値が確認されたシグナルがある場合は、次回の実行を改善する行動も併せて実行してください。複数の段階が必要な場合は、都合のよい一部だけを選ばず、完了に必要な全体の経路を実行してください。
@@ -416,7 +416,7 @@ Agentic Shaping v0.8
             </div>
             <pre id="work">
 この作業を完了してください。まず関連する記憶とプロジェクトルールを確認し、成功条件と実際の検証方法を定めてください。繰り返される判断・修正・失敗は改善候補として捉え、既存ツールの再利用、モデルによる直接処理、再利用可能なコードから、総コストと必要な精度に合う最も単純な方法を選んでください。利点がある場合にだけ新しい資産を作り、毎回新しいコードやコスト評価票を作らないでください。必須検証を維持し、確認済みの改善と未測定の効果を区別して報告してください。 構造化された検査で判断できない部分は、まず関連する原資料・コード・失敗出力を直接読み、問題と次の行動を確認して。
-- 作業に合うワークフローを選び、ID・名前・バージョン・選択理由と必須・任意の段階を表示して。実行記録から現在の段階・全体の状態・検証結果・次の行動を示して。簡単な作業には短い手順を使い、任意の段階を省く理由を残して。
+- 作業に合うワークフローを選び、ID・名前・バージョン・選択理由と必須・任意の段階を表示して。現在のplan.task.summaryから、対象と実施内容が分かる作業名をユーザーの言語で先頭に表示して。その後に実行記録から現在の段階・全体の状態・検証結果・次の行動を示して。手順の種類だけを作業名にせず、作業名の欠落や差し替えを拒否して。簡単な作業には短い手順を使い、任意の段階を省く理由を残して。
 - 現在の段階の実際の検証がすべて通過するまで完了扱いや次段階の実行をしないで。失敗した段階は修正して再検証し、試行回数・時間の上限と新しい観測のない反復停止を守って。中止・再開の記録を保ち、入力・ツール・検証範囲が変われば関連する後続段階も再検証して。</pre>
           </div>
           <div class="prompt">
@@ -426,7 +426,7 @@ Agentic Shaping v0.8
             </div>
             <pre id="repair">
 Agentic Shapingの観点でこの問題を診断して。構造化された検査で原因を判別できなければ、まず関連する原資料・コード・失敗出力を直接読み、問題と次の行動を確認して。既存ツールの再利用・直接処理・必要なコード修正を比較して原因を直し、再発防止の資産は利点がある場合だけ実装して。必須の検証を維持し、実際の確認後に重複・一時的な経路を整理して。
-- 作業に合うワークフローを選び、ID・名前・バージョン・選択理由と必須・任意の段階を表示して。実行記録から現在の段階・全体の状態・検証結果・次の行動を示して。簡単な作業には短い手順を使い、任意の段階を省く理由を残して。
+- 作業に合うワークフローを選び、ID・名前・バージョン・選択理由と必須・任意の段階を表示して。現在のplan.task.summaryから、対象と実施内容が分かる作業名をユーザーの言語で先頭に表示して。その後に実行記録から現在の段階・全体の状態・検証結果・次の行動を示して。手順の種類だけを作業名にせず、作業名の欠落や差し替えを拒否して。簡単な作業には短い手順を使い、任意の段階を省く理由を残して。
 - 現在の段階の実際の検証がすべて通過するまで完了扱いや次段階の実行をしないで。失敗した段階は修正して再検証し、試行回数・時間の上限と新しい観測のない反復停止を守って。中止・再開の記録を保ち、入力・ツール・検証範囲が変われば関連する後続段階も再検証して。</pre>
           </div>
           <div class="prompt">
@@ -581,7 +581,7 @@ Agentic Shapingの観点でこの問題を診断して。構造化された検�
             <div>
               <small>CONFIRMED FINAL POLICY SYNC</small>
               <strong>90% <i>→</i> 100%</strong>
-              <span class="policy-version">HOMEPAGE v0.8 ↔ SLOGS 2026.11.10.3</span>
+              <span class="policy-version">HOMEPAGE v0.8.1 ↔ SLOGS 2026.11.13.1</span>
               <p>
                 ホームページ最終プロンプトの確認済み行動契約を、Slogs LLM Wikiの韓国語・英語
                 ランタイムポリシーに同期しました。ライブポリシー5組の回帰・10回のLuna Max
@@ -699,7 +699,7 @@ Agentic Shapingの観点でこの問題を診断して。構造化された検�
 <section class="section" id="workflow"><h2>検証でつながる作業段階</h2>
 <p>作業に合わせてシステム改善・障害復旧・コンテンツ制作・調査・簡単な作業から選びます。ワークフローのID・バージョン・選択理由と必須・任意の段階を先に決めます。</p>
 <p>実際の実行記録から現在の段階と全体の状態を表示します。各段階の検査がすべて通過してから次へ進みます。失敗時はその段階を修正して再検証し、試行回数・時間の上限と中止・再開条件を守ります。</p>
-<p>AS-WF-001は実プロセスを使う24件の回帰ケースで、修正ループ・後続段階の停止・入力変更後の再検証・中断と再開を確認します。この実行器を利用する経路に適用され、すべてのAgentホストの自動遵守や意味・創作上の品質を保証しません。</p>
+<p>AS-WF-001は実プロセスを使う27件の回帰ケースで、修正ループ・後続段階の停止・入力変更後の再検証・中断と再開を確認します。この実行器を利用する経路に適用され、すべてのAgentホストの自動遵守や意味・創作上の品質を保証しません。</p>
 <a href="https://github.com/dimohy/agentic-shaping/blob/main/workflows/README.md">ワークフロー実行マニュアル</a></section>
 <section class="section" id="review-sop"><h2>実際の原稿を確認するSOP</h2><p>実際の変更前原稿を保存し、各文の検討、既存検査の実行、根拠の確認の順に進めます。検査の通過を文章品質の保証として報告しません。</p><p>AS-SOP-001は正常・過去の失敗・迂回の22事例と実際の利用経路を検証します。提出記録の検査はAgentの実際の読解や全ホストでの自動遵守を証明しません。</p><a href="https://github.com/dimohy/agentic-shaping/blob/main/workflows/review.sop.md">SOP実行マニュアル</a></section>
     </main>

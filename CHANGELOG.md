@@ -1,5 +1,21 @@
 # Changelog
 
+## [0.8.1] - 2026-11-14
+
+### What changed for users
+
+- Workflow displays now start with the concrete task, including its target and action, before the workflow category and stage table.
+- Empty or category-only task summaries are rejected. Slogs MCP also rejects a display with a missing or substituted task title.
+- Four-language guides and copyable prompts require the task summary from the current bound plan at every transition.
+- Cheap publication checks reject incomplete version and changelog metadata before capability suites run.
+
+### Technical notes
+
+- Compatibility: Existing plans keep task.summary and historical execution records. The renderer now receives the validated plan; no task title is inferred from a workflow category.
+- Contracts: The display reads bound plan.task.summary and rejects category-only summaries; existing completion, scope and authority checks remain. Publication preflight preserves the same checks and cannot claim capability-suite completion.
+- Verification: AS-WF-001 real-process regression27/27, including task-title coverage, rejected category-only plans and escaped display text. Slogs MCP deployment20261114092721 and workflow procedure2026.11.14.1 passed live positive and negative controls; core policy remains2026.11.13.1.
+- Known limitation: Validation covers the supported runner and submitted MCP records, not universal host enforcement or semantic quality.
+
 ## [0.8.0] - 2026-11-10
 
 ### What changed for users

@@ -7,12 +7,15 @@ export const catalogBytes = readFileSync(new URL('../workflows/catalog.v1.json',
 export const workflowCatalog = JSON.parse(catalogBytes);
 const text = value => typeof value === 'string' && value.trim().length > 0;
 const fail = code => ({ allowed: false, code });
+const specificTaskSummary = value => text(value) && !workflowCatalog.workflows.some(workflow =>
+  [workflow.id, workflow.label, ...workflow.kinds].some(category => category.toLowerCase() === value.trim().toLowerCase()));
 
 export function validateWorkflowPlan(plan) {
   if (!plan || plan.schemaVersion !== 1 || !/^[a-zA-Z0-9_-]{1,80}$/.test(plan.runId ?? '')
       || plan.scopeAuthorized !== true || !text(plan.task?.summary) || !text(plan.selectionReason)) return fail('workflow-plan-invalid');
   const chosen = workflowCatalog.workflows.find(x => x.id === plan.workflowId);
   if (!chosen || !chosen.kinds.includes(plan.task.kind)) return fail('workflow-kind-mismatch');
+  if (!specificTaskSummary(plan.task.summary)) return fail('workflow-task-summary-required');
   if (!Array.isArray(plan.stages) || !Array.isArray(plan.omittedStages)) return fail('workflow-stages-invalid');
   const selected = plan.stages.map(x => x.id);
   if (new Set(selected).size !== selected.length) return fail('workflow-stage-duplicate');
@@ -85,9 +88,10 @@ export function validateWorkflowState(plan, state, verifyLocalLogs = false) {
 const labels = { pending: '대기', running: '실행 중', verifying: '검증 중', 'needs-rework': '수정 필요',
   retrying: '수정·재검증', blocked: '중단', cancelled: '취소', completed: '검증 완료' };
 const cell = value => String(value).replaceAll('|', '\\|').replace(/[\r\n]+/g, ' ');
-export function renderWorkflow(state) {
+export function renderWorkflow(state, plan) {
+  if (!specificTaskSummary(plan?.task?.summary)) throw Error('workflow-task-summary-required');
   const current = state.stages.find(x => x.status !== 'completed');
-  return `워크플로우: ${cell(state.workflowLabel)} (${state.workflowId}@${state.workflowVersion})\n`
+  return `작업: ${cell(plan.task.summary)}\n워크플로우: ${cell(state.workflowLabel)} (${state.workflowId}@${state.workflowVersion})\n`
     + `현재 단계: ${current ? `${state.stages.indexOf(current) + 1}/${state.stages.length} ${cell(current.label)}` : '전체 단계 검증 완료'}\n\n`
     + '| 단계 | 상태 | 검증·다음 행동 |\n| --- | --- | --- |\n'
     + state.stages.map((x, i) => `| ${i + 1}. ${cell(x.label)} | ${labels[x.status] ?? cell(x.status)} | ${cell(x.note ?? '실행 전')} |`).join('\n');
