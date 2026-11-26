@@ -1,9 +1,9 @@
 const locale = document.body.dataset.locale || "en";
 const messages = {
-  en: { copy: "Copy", copied: "Copied", version: "Current public version", language: "Language" },
-  ko: { copy: "복사", copied: "복사됨", version: "현재 공개 버전", language: "언어" },
-  ja: { copy: "コピー", copied: "コピー済み", version: "現在の公開バージョン", language: "言語" },
-  zh: { copy: "复制", copied: "已复制", version: "当前公开版本", language: "语言" },
+  en: { copy: "Copy", copied: "Copied", language: "Language" },
+  ko: { copy: "복사", copied: "복사됨", language: "언어" },
+  ja: { copy: "コピー", copied: "コピー済み", language: "言語" },
+  zh: { copy: "复制", copied: "已复制", language: "语言" },
 };
 const text = messages[locale] || messages.en;
 const routes = { en: "", ko: "ko/", ja: "ja/", zh: "zh/" };
@@ -51,16 +51,6 @@ document.querySelectorAll("[data-language]").forEach(link => {
 
 const bar = document.querySelector("#progressBar"),
   toast = document.querySelector("#toast");
-const siteVersion = document.querySelector(
-  'meta[name="application-version"]',
-)?.content;
-if (!/^v\d+\.\d+$/.test(siteVersion ?? "")) {
-  throw new Error("A valid Agentic Shaping public version was not found.");
-}
-document.querySelectorAll("[data-site-version]").forEach((element) => {
-  element.textContent = siteVersion;
-  element.setAttribute("aria-label", `${text.version} ${siteVersion}`);
-});
 addEventListener(
   "scroll",
   () => {

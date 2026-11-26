@@ -1,5 +1,21 @@
 # Changelog
 
+## [0.8.2] - 2026-11-27
+
+### What changed for users
+
+- The first screen and section content are visible as soon as the HTML and CSS load.
+- The header and footer display the public version even if the page script does not run.
+- The four homepages show the live Slogs policy version, 2026.11.20.1.
+- The README labels the earlier Slogs policy version used in the comparison experiment.
+
+### Technical notes
+
+- Compatibility: Existing URLs, language selections, and prompt interactions keep their normal behavior.
+- Contracts: The release manifest supplies the HTML metadata, labels, prompt, and README versions. Reveal animation changes position only.
+- Verification: The publication checks compare all four homepages and READMEs. Browser checks cover the first viewport with and without the site script.
+- Known limitation: Very narrow screens keep the compact header layout. The footer still displays the version.
+
 ## [0.8.1] - 2026-11-14
 
 ### What changed for users

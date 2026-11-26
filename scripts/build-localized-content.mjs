@@ -11,8 +11,8 @@ const release = JSON.parse(readFileSync(join(siteDir, "release-manifest.json"), 
 const applyRelease = source => source.replaceAll("{{PUBLIC_VERSION}}", release.displayVersion)
   .replaceAll('{{POLICY_VERSION}}', release.policyVersion);
 const readSource = path => readFileSync(path, "utf8").replace(/\r\n?/g, "\n");
-const htmlSource = applyRelease(readSource(join(siteDir, "index.ko.source.html")));
-const readmeSource = applyRelease(readSource(join(siteDir, "README.ko.source.md")));
+const htmlSource = readSource(join(siteDir, "index.ko.source.html"));
+const readmeSource = readSource(join(siteDir, "README.ko.source.md"));
 const stylesSource = readFileSync(join(root, "styles.css"), "utf8");
 const scriptSource = readFileSync(join(root, "script.js"), "utf8");
 const digest = content => createHash("sha256").update(content).digest("hex");
@@ -94,7 +94,7 @@ const translate = async (items, locale) => {
     writeFileSync(schemaPath, JSON.stringify(schema));
     for (const [batchIndex, current] of batches.entries()) {
       const outputPath = join(temp, `output-${batchIndex}.json`);
-      const prompt = `Translate every item from Korean into ${locale.name}. Return exactly one translation for every id.\n\nRules:\n- Preserve Agentic Shaping, Slogs LLM Wiki, GPT-5.6 Luna, Codex CLI, URLs, code spans, file paths, version strings, action IDs, and Markdown/HTML entities.\n- Keep Markdown structure, list markers, table pipes, emphasis, and links unchanged for markdown-line items. For code-line items, translate only natural-language prose while preserving indentation, identifiers, punctuation, and code tokens.\n- Use natural public technical-documentation language, not literal word order.\n- Do not add explanations.\n\nItems:\n${JSON.stringify(current)}`;
+      const prompt = `Translate every item from Korean into ${locale.name}. Return exactly one translation for every id.\n\nRules:\n- Preserve {{PUBLIC_VERSION}} and {{POLICY_VERSION}} exactly. Preserve Agentic Shaping, Slogs LLM Wiki, GPT-5.6 Luna, Codex CLI, URLs, code spans, file paths, version strings, action IDs, and Markdown/HTML entities.\n- Keep Markdown structure, list markers, table pipes, emphasis, and links unchanged for markdown-line items. For code-line items, translate only natural-language prose while preserving indentation, identifiers, punctuation, and code tokens.\n- Use natural public technical-documentation language, not literal word order.\n- Do not add explanations.\n\nItems:\n${JSON.stringify(current)}`;
       const proc = await runCodex(["exec", "--ephemeral", "--ignore-user-config", "--strict-config", "--skip-git-repo-check", "--sandbox", "read-only", "-m", "gpt-5.6-luna", "-c", 'model_reasoning_effort="high"', "--output-schema", schemaPath, "-o", outputPath, prompt], temp);
       if (proc.status !== 0) throw new Error(`${locale.code} batch ${batchIndex + 1} failed: ${proc.stderr.slice(-4000)}`);
       const response = JSON.parse(readFileSync(outputPath, "utf8"));
@@ -132,7 +132,7 @@ const languageLinks = `<div class="language-switcher" data-language-switcher rol
         </div>`;
 
 const buildHtml = (locale, catalog) => {
-  let output = locale.code === "ko" ? htmlSource : replaceCatalog(htmlSource, catalog);
+  let output = applyRelease(locale.code === "ko" ? htmlSource : replaceCatalog(htmlSource, catalog));
   output = output.replace('<html lang="ko">', `<html lang="${locale.htmlLang}">`);
   output = output.replace("<body>", `<body data-locale="${locale.code === "zh-CN" ? "zh" : locale.code}">`);
   output = output.replace('<meta name="viewport" content="width=device-width,initial-scale=1" />', `<meta name="viewport" content="width=device-width,initial-scale=1" />\n    <meta name="publication-contract" content="${release.contractId};version=${release.version};policy=${release.policyVersion};${release.feature.ruleId}=${release.feature.passed}/${release.feature.total};status=${release.feature.status};limitation=${release.feature.limitation}" />\n    <meta name="site-root" content="${locale.rootHref}" />\n    <link rel="alternate" hreflang="en" href="https://agentic-shaping.slogs.dev/" />\n    <link rel="alternate" hreflang="ko" href="https://agentic-shaping.slogs.dev/ko/" />\n    <link rel="alternate" hreflang="ja" href="https://agentic-shaping.slogs.dev/ja/" />\n    <link rel="alternate" hreflang="zh-Hans" href="https://agentic-shaping.slogs.dev/zh/" />\n    <link rel="alternate" hreflang="x-default" href="https://agentic-shaping.slogs.dev/" />`);
@@ -177,7 +177,7 @@ for (const locale of [locales[0], koreanLocale, locales[1], locales[2]]) {
 
 const readmeLinks = "[English](README.md) | [한국어](README.ko.md) | [日本語](README.ja.md) | [简体中文](README.zh-CN.md)";
 const buildReadme = catalog => {
-  let output = catalog ? replaceCatalog(readmeSource, catalog) : readmeSource;
+  let output = applyRelease(catalog ? replaceCatalog(readmeSource, catalog) : readmeSource);
   return output.replace("# Agentic Shaping", `# Agentic Shaping\n\n${readmeLinks}\n\n<!-- ${release.contractId};version=${release.version};policy=${release.policyVersion};${release.feature.ruleId}=${release.feature.passed}/${release.feature.total};status=${release.feature.status};limitation=${release.feature.limitation} -->`);
 };
 emit(join(root, "README.md"), buildReadme(catalogs.en));

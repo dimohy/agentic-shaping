@@ -2,13 +2,13 @@
 
 [English](README.md) | [한국어](README.ko.md) | [日本語](README.ja.md) | [简体中文](README.zh-CN.md)
 
-<!-- AS-PS-001;version=0.8.1;policy=2026.11.13.1;AS-WF-001=27/27;status=behavior-verified;limitation=tested-runner-only-no-semantic-certification-or-universal-host-enforcement -->
+<!-- AS-PS-001;version=0.8.2;policy=2026.11.20.1;AS-WF-001=27/27;status=behavior-verified;limitation=tested-runner-only-no-semantic-certification-or-universal-host-enforcement -->
 
 > AI Agentが作業中の暗黙知・好み・修正・失敗を先に発見し、次の実行で再利用できる記憶・ルール・ツール・検証器へと磨き上げ、ユーザーのやり方でともに進化する作業法です。
 
 [公式実践ガイド](https://agentic-shaping.slogs.dev/) · [dimohyの背景ストーリー](https://slogs.dev/@dimohy/vibe-compiler)
 
-現在の公開バージョン: **v0.8.1**
+現在の公開バージョン: **v0.8.2**
 
 ## 言語
 
@@ -124,7 +124,7 @@ Agentic Shapingが機能するほど、文書、バイブコーディングの�
 以下の内容をそのままコピーして使用できます。
 
 ```text
-Agentic Shaping v0.8.1
+Agentic Shaping v0.8.2
 
 この作業には Agentic Shaping を適用してください。
 - 作業に合うワークフローを選び、ID・名前・バージョン・選択理由と必須・任意の段階を表示して。現在のplan.task.summaryから、対象と実施内容が分かる作業名をユーザーの言語で先頭に表示して。その後に実行記録から現在の段階・全体の状態・検証結果・次の行動を示して。手順の種類だけを作業名にせず、作業名の欠落や差し替えを拒否して。簡単な作業には短い手順を使い、任意の段階を省く理由を残して。
@@ -273,7 +273,7 @@ Agentic Shaping v0.8.1
 
 `AS-PS-001`は重要なポリシー・評価変更の公開同期を担います。単一の権威あるバージョンでポリシー・評価、4言語のホームページ、4言語のREADME、`CHANGELOG.md`を併せて更新し、バージョン・数値・契約・生成結果に不一致があれば、pushとデプロイの前に失敗します。文言・互換性バグの修正は`patch`、後方互換性のある機能追加は`minor`、既存の公開契約を破る変更は`major`です。今回のスキル発見・Slogs候補連携は後方互換性のある機能追加であるため、`0.2.0 → 0.3.0`として記録しました。
 
-確認済みの最終プロンプト行動契約は、Slogs LLM Wikiの韓国語・英語ランタイムポリシーにも同期しました。現在のポリシーバージョンは`2026.09.04.2`であり、以下を明示的に実行します。
+現在の Slogs LLM Wiki ポリシーのバージョンは `2026.11.20.1` です。以下は、韓国語版と英語版のポリシー `2026.09.04.2` を使用した比較実験で確認した基準です。
 
 - 現在の結果の完成、機密情報・権限・形式・範囲の保護、durableシグナルに基づく次回実行の改善を独立して確認
 - 明示的な一回限りのタスクでは、無理に記憶・グローバルルール・再利用可能な資産を作成しない

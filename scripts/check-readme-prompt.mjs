@@ -26,8 +26,14 @@ for (const pair of pairs) {
   sharedVersion ??= version;
   if (version !== sharedVersion) throw new Error(`${pair.locale} 공개 버전이 ${sharedVersion}과 다릅니다.`);
   if (!readme.includes(`**${version}**`)) throw new Error(`${pair.readmePath} 공개 버전이 ${version}과 다릅니다.`);
-  if ((html.match(/data-site-version/g) ?? []).length < 2) {
-    throw new Error(`${pair.htmlPath}의 헤더와 푸터에 공개 버전 표시가 모두 필요합니다.`);
+  for (const section of ["header", "footer"]) {
+    const start = html.indexOf(`<${section}>`);
+    const end = html.indexOf(`</${section}>`);
+    const markup = html.slice(start, end);
+    const versions = [...markup.matchAll(/<span class="site-version" data-site-version>([^<]*)<\/span\s*>/g)];
+    if (versions.length !== 1 || versions[0][1] !== version) {
+      throw new Error(`${pair.htmlPath}의 ${section} HTML에 공개 버전 ${version}이 필요합니다.`);
+    }
   }
 
   const htmlPrompt = html.match(/<pre id="starter">([\s\S]*?)<\/pre>/)?.[1];

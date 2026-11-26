@@ -2,13 +2,13 @@
 
 [English](README.md) | [한국어](README.ko.md) | [日本語](README.ja.md) | [简体中文](README.zh-CN.md)
 
-<!-- AS-PS-001;version=0.8.1;policy=2026.11.13.1;AS-WF-001=27/27;status=behavior-verified;limitation=tested-runner-only-no-semantic-certification-or-universal-host-enforcement -->
+<!-- AS-PS-001;version=0.8.2;policy=2026.11.20.1;AS-WF-001=27/27;status=behavior-verified;limitation=tested-runner-only-no-semantic-certification-or-universal-host-enforcement -->
 
 > An AI work method that actively discovers tacit knowledge, preferences, corrections, and failures, then shapes them into reusable memories, rules, tools, and verifiers so the system evolves with the user’s way of working.
 
 [Official practical guide](https://agentic-shaping.slogs.dev/) · [dimohy’s background story](https://slogs.dev/@dimohy/vibe-compiler)
 
-Current public version: **v0.8.1**
+Current public version: **v0.8.2**
 
 ## Language
 
@@ -124,7 +124,7 @@ You do not need to build a massive automation system from the start. Begin by mo
 You can copy and use the content below as-is.
 
 ```text
-Agentic Shaping v0.8.1
+Agentic Shaping v0.8.2
 
 Apply Agentic Shaping to this task.
 - Select a workflow for this task and display its ID, name, version, selection reason, and required and optional stages. Show the concrete task (target and action) from the current plan.task.summary first, in the user's language, then the current stage, overall status, verification results and next action from actual execution records. A workflow category alone is not a task title; reject missing or substituted titles. Use a short workflow for simple tasks and explain omitted optional stages.
@@ -273,7 +273,7 @@ When collaboration targets are incorrectly routed to the memory path, provide th
 
 `AS-PS-001` handles public synchronization of important policy and evaluation changes. It updates the policy and evaluations, homepages in four languages, READMEs in four languages, and `CHANGELOG.md` together under a single authoritative version, failing before push and deployment if versions, numbers, contracts, or generated results diverge. Wording and compatibility bug fixes are `patch`, backward-compatible feature additions are `minor`, and changes that break existing public contracts are `major`. This skill discovery and Slogs candidate integration is a backward-compatible feature addition, so it was recorded as `0.2.0 → 0.3.0`.
 
-The confirmed final prompt behavior contract has also been synchronized with the Korean and English runtime policies for Slogs LLM Wiki. The current policy version is `2026.09.04.2`, and it explicitly performs the following.
+The current Slogs LLM Wiki policy version is `2026.11.20.1`. The criteria below come from the comparison experiment using Korean and English policy version `2026.09.04.2`.
 
 - Independently verify current-result completion, protection of sensitive information·permissions·format·scope, and durable-signal-based improvement for the next run
 - Do not create forced memories·global rules·reusable assets for explicitly one-off tasks

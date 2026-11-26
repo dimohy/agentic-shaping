@@ -2,13 +2,13 @@
 
 [English](README.md) | [한국어](README.ko.md) | [日本語](README.ja.md) | [简体中文](README.zh-CN.md)
 
-<!-- AS-PS-001;version=0.8.1;policy=2026.11.13.1;AS-WF-001=27/27;status=behavior-verified;limitation=tested-runner-only-no-semantic-certification-or-universal-host-enforcement -->
+<!-- AS-PS-001;version=0.8.2;policy=2026.11.20.1;AS-WF-001=27/27;status=behavior-verified;limitation=tested-runner-only-no-semantic-certification-or-universal-host-enforcement -->
 
 > 这是让 AI Agent 先发现工作中的隐性知识·偏好·纠正·失败，并将其塑造成可在下一次执行中复用的记忆·规则·工具·验证器，与用户一起按用户的方式进化的工作方法。
 
 [官方实战指南](https://agentic-shaping.slogs.dev/) · [dimohy 的背景故事](https://slogs.dev/@dimohy/vibe-compiler)
 
-当前公开版本：**v0.8.1**
+当前公开版本：**v0.8.2**
 
 ## 语言
 
@@ -124,7 +124,7 @@ Agentic Shaping 越有效，文档、vibe coding 源代码、配置、日志和�
 可以原样复制下面的内容使用。
 
 ```text
-Agentic Shaping v0.8.1
+Agentic Shaping v0.8.2
 
 请将 Agentic Shaping 应用于此任务。
 - 为当前任务选择工作流，显示其 ID、名称、版本、选择理由以及必选和可选阶段。先根据当前plan.task.summary，用用户的语言显示包含目标和操作的具体任务名称，再根据实际执行记录展示当前阶段、整体状态、验证结果和下一步操作。不能只用流程类别作为任务名称；拒绝缺失或被替换的任务名称。简单任务使用简短流程，并说明省略可选阶段的理由。
@@ -273,7 +273,7 @@ Agentic Shaping v0.8.1
 
 `AS-PS-001` 负责重要政策·评估变更的公开同步。在单一权威版本中同时更新政策·评估、4 种语言的主页、4 种语言的 README 和 `CHANGELOG.md`；如果版本·数值·契约·生成结果不一致，会在 push 和部署前失败。文字·兼容性 bug 修复为 `patch`，向后兼容的功能添加为 `minor`，破坏现有公开契约的变更为 `major`。本次技能发现·Slogs 候选关联属于向后兼容的功能添加，因此记录为 `0.2.0 → 0.3.0`。
 
-已确认的最终提示词行为契约也已同步到 Slogs LLM Wiki 的韩语·英语运行时政策中。当前政策版本为 `2026.09.04.2`，并明确执行以下内容。
+Slogs LLM Wiki 当前的策略版本为 `2026.11.20.1`。以下标准来自使用韩语和英语版策略 `2026.09.04.2` 进行的对照实验。
 
 - 独立确认当前结果已完成、敏感信息·权限·格式·范围受到保护，以及基于 durable 信号改进下一次执行
 - 对明确的一次性任务，不强行创建记忆·全局规则·可复用资产

@@ -830,14 +830,18 @@ footer p {
   opacity: 1;
   transform: translate(-50%, 0);
 }
-.reveal {
-  opacity: 0;
-  transform: translateY(16px);
-  transition: 0.5s;
-}
-.reveal.visible {
-  opacity: 1;
-  transform: none;
+@media (prefers-reduced-motion: no-preference) {
+  .reveal.visible {
+    animation: reveal-in 0.5s ease-out;
+  }
+  @keyframes reveal-in {
+    from {
+      transform: translateY(12px);
+    }
+    to {
+      transform: none;
+    }
+  }
 }
 @media (max-width: 1280px) {
   nav > div:not(.language-switcher) {
