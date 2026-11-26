@@ -2,13 +2,13 @@
 
 [English](README.md) | [한국어](README.ko.md) | [日本語](README.ja.md) | [简体中文](README.zh-CN.md)
 
-<!-- AS-PS-001;version=0.8.3;policy=2026.11.20.1;AS-WF-001=27/27;status=behavior-verified;limitation=tested-runner-only-no-semantic-certification-or-universal-host-enforcement -->
+<!-- AS-PS-001;version=0.8.4;policy=2026.11.20.1;AS-WF-001=27/27;status=behavior-verified;limitation=tested-runner-only-no-semantic-certification-or-universal-host-enforcement -->
 
 > AI Agent가 작업 속 암묵지·취향·교정·실패를 먼저 발견하고, 다음 실행에 다시 쓸 수 있는 기억·규칙·도구·검증기로 빚어 사용자의 방식으로 함께 진화하는 작업법입니다.
 
 [공식 실전 가이드](https://agentic-shaping.slogs.dev/) · [dimohy의 배경 이야기](https://slogs.dev/@dimohy/vibe-compiler)
 
-현재 공개 버전: **v0.8.3**
+현재 공개 버전: **v0.8.4**
 
 ## 언어
 
@@ -124,7 +124,7 @@ Agentic Shaping이 작동할수록 문서, 바이브 코딩 소스, 설정, 로�
 아래 내용을 그대로 복사해 사용할 수 있습니다.
 
 ```text
-Agentic Shaping v0.8.3
+Agentic Shaping v0.8.4
 
 이 작업에는 Agentic Shaping을 적용해줘.
 - 작업에 맞는 워크플로우를 선택하고 ID·이름·버전·선택 이유와 필수·선택 단계를 표시해줘. 현재 계획의 plan.task.summary에서 대상과 수행 내용이 드러나는 작업명을 사용자 언어로 첫 줄에 표시해줘. 그다음 현재 단계·전체 상태·검증 결과·다음 행동을 실제 실행 기록으로 보여줘. 간단한 작업 같은 절차 유형만 작업명으로 쓰지 말고 작업명이 빠지거나 바뀐 표는 거부해줘. 간단한 작업은 짧은 절차를 사용하고 선택 단계 생략 이유를 남겨줘.
@@ -226,7 +226,6 @@ Agentic Shaping v0.8.3
 
 이 저장소의 `evals/`는 공개 프롬프트를 적용하지 않은 기본군과 적용군에 같은 과제를 주되, 일반 작업 품질과 Agentic Shaping 고유 발동을 분리해 비교합니다.
 
-- 최신 실제 파일 실행 비교: GPT-6.1 Terra High, 3개 짝·6회 실행. 기능 미적용군 24/24, 적용군 24/24. 원본 결함을 잡은 회귀 테스트는 3/3 대 3/3. [과제와 재현 방법](evals/terra-paired/README.md)
 - Agentic Shaping 차별 평가: 26개 짝 시나리오, GPT-5.6 Luna Max 52회 실행
 - 고유 행동 완전 통과: 기본군 16/26(61.5%), 적용군 25/26(96.2%)
 - 고유 행동 세부 기준: 기본군 82/105(78.1%), 적용군 104/105(99.0%)

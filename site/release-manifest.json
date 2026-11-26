@@ -1,9 +1,9 @@
 {
   "schemaVersion": 2,
   "contractId": "AS-PS-001",
-  "version": "0.8.3",
-  "displayVersion": "v0.8.3",
-  "previousVersion": "0.8.2",
+  "version": "0.8.4",
+  "displayVersion": "v0.8.4",
+  "previousVersion": "0.8.3",
   "changeLevel": "patch",
   "releaseDate": "2026-11-27",
   "policyVersion": "2026.11.20.1",
@@ -63,14 +63,7 @@
     "evals/llm-wiki-application.mjs",
     "evals/verify-llm-wiki-application.mjs",
     "hooks/README.md",
-    "scripts/check-slogs-policy-sync.mjs",
-    "evals/terra-paired/README.md",
-    "evals/terra-paired/frozen.json",
-    "evals/terra-paired/grade.mjs",
-    "evals/terra-paired/replay.mjs",
-    "evals/terra-paired/results.json",
-    "evals/terra-paired/starter-v0.8.2.txt",
-    "evals/terra-paired/tasks.json"
+    "scripts/check-slogs-policy-sync.mjs"
   ],
   "publicCapabilities": [
     {

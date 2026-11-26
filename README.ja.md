@@ -2,13 +2,13 @@
 
 [English](README.md) | [한국어](README.ko.md) | [日本語](README.ja.md) | [简体中文](README.zh-CN.md)
 
-<!-- AS-PS-001;version=0.8.3;policy=2026.11.20.1;AS-WF-001=27/27;status=behavior-verified;limitation=tested-runner-only-no-semantic-certification-or-universal-host-enforcement -->
+<!-- AS-PS-001;version=0.8.4;policy=2026.11.20.1;AS-WF-001=27/27;status=behavior-verified;limitation=tested-runner-only-no-semantic-certification-or-universal-host-enforcement -->
 
 > AI Agentが作業中の暗黙知・好み・修正・失敗を先に発見し、次の実行で再利用できる記憶・ルール・ツール・検証器へと磨き上げ、ユーザーのやり方でともに進化する作業法です。
 
 [公式実践ガイド](https://agentic-shaping.slogs.dev/) · [dimohyの背景ストーリー](https://slogs.dev/@dimohy/vibe-compiler)
 
-現在の公開バージョン: **v0.8.3**
+現在の公開バージョン: **v0.8.4**
 
 ## 言語
 
@@ -124,7 +124,7 @@ Agentic Shapingが機能するほど、文書、バイブコーディングの�
 以下の内容をそのままコピーして使用できます。
 
 ```text
-Agentic Shaping v0.8.3
+Agentic Shaping v0.8.4
 
 この作業には Agentic Shaping を適用してください。
 - 作業に合うワークフローを選び、ID・名前・バージョン・選択理由と必須・任意の段階を表示して。現在のplan.task.summaryから、対象と実施内容が分かる作業名をユーザーの言語で先頭に表示して。その後に実行記録から現在の段階・全体の状態・検証結果・次の行動を示して。手順の種類だけを作業名にせず、作業名の欠落や差し替えを拒否して。簡単な作業には短い手順を使い、任意の段階を省く理由を残して。
@@ -226,7 +226,6 @@ Agentic Shaping v0.8.3
 
 このリポジトリの `evals/` では、公開プロンプトを適用していないベースライン群と適用群に同じタスクを与え、一般的な作業品質とAgentic Shaping固有の発動を分けて比較します。
 
-- 最新の実ファイル比較: GPT-6.1 Terra High、3組・6回。機能検査は未適用 24/24、適用 24/24。回帰テストで元の不具合を検出した課題は 3/3 対 3/3。[課題と再現方法](evals/terra-paired/README.md)
 - Agentic Shaping差別化評価: 26組のペアシナリオ、GPT-5.6 Luna Max 52回実行
 - 固有行動の完全達成: ベースライン群16/26(61.5%)、適用群25/26(96.2%)
 - 固有行動の詳細基準: ベースライン群82/105(78.1%)、適用群104/105(99.0%)

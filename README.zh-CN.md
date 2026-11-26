@@ -2,13 +2,13 @@
 
 [English](README.md) | [한국어](README.ko.md) | [日本語](README.ja.md) | [简体中文](README.zh-CN.md)
 
-<!-- AS-PS-001;version=0.8.3;policy=2026.11.20.1;AS-WF-001=27/27;status=behavior-verified;limitation=tested-runner-only-no-semantic-certification-or-universal-host-enforcement -->
+<!-- AS-PS-001;version=0.8.4;policy=2026.11.20.1;AS-WF-001=27/27;status=behavior-verified;limitation=tested-runner-only-no-semantic-certification-or-universal-host-enforcement -->
 
 > 这是让 AI Agent 先发现工作中的隐性知识·偏好·纠正·失败，并将其塑造成可在下一次执行中复用的记忆·规则·工具·验证器，与用户一起按用户的方式进化的工作方法。
 
 [官方实战指南](https://agentic-shaping.slogs.dev/) · [dimohy 的背景故事](https://slogs.dev/@dimohy/vibe-compiler)
 
-当前公开版本：**v0.8.3**
+当前公开版本：**v0.8.4**
 
 ## 语言
 
@@ -124,7 +124,7 @@ Agentic Shaping 越有效，文档、vibe coding 源代码、配置、日志和�
 可以原样复制下面的内容使用。
 
 ```text
-Agentic Shaping v0.8.3
+Agentic Shaping v0.8.4
 
 请将 Agentic Shaping 应用于此任务。
 - 为当前任务选择工作流，显示其 ID、名称、版本、选择理由以及必选和可选阶段。先根据当前plan.task.summary，用用户的语言显示包含目标和操作的具体任务名称，再根据实际执行记录展示当前阶段、整体状态、验证结果和下一步操作。不能只用流程类别作为任务名称；拒绝缺失或被替换的任务名称。简单任务使用简短流程，并说明省略可选阶段的理由。
@@ -226,7 +226,6 @@ Agentic Shaping v0.8.3
 
 本仓库的 `evals/` 会向未应用公开提示词的基线组和应用组提供相同任务，并将常规任务质量与 Agentic Shaping 的独有触发效果分开比较。
 
-- 最新实际文件对照: GPT-6.1 Terra High，3 对任务、6 次运行。功能检查: 未应用 24/24、应用 24/24。回归测试检出原始缺陷的任务: 3/3 比 3/3。[任务与复现方法](evals/terra-paired/README.md)
 - Agentic Shaping 差异化评估：26 个配对场景，GPT-5.6 Luna Max 执行 52 次
 - 独有行为完全通过：基线组 16/26(61.5%)，应用组 25/26(96.2%)
 - 独有行为细分标准：基线组 82/105(78.1%)，应用组 104/105(99.0%)
