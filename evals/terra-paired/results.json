@@ -1,0 +1,494 @@
+{
+  "manifestSha256": "d7288e96924cb4bd17f269dad170332b24af945a21bd589e4bd7bf9cb681cefd",
+  "promptSha256": "1b92890b036659bc53fce4679603f4d300b576274ca4ce9cfab0b49b2171c716",
+  "model": "gpt-6.1-terra",
+  "reasoningEffort": "high",
+  "codexCli": "0.159.2",
+  "node": "26.13.1",
+  "runStatus": "finished",
+  "comparable": true,
+  "startedAtUtc": "2026-11-26T20:51:02.399Z",
+  "finishedAtUtc": "2026-11-26T20:58:27.300Z",
+  "rows": [
+    {
+      "caseId": "localized-publish",
+      "arm": "baseline",
+      "index": 1,
+      "status": "finished",
+      "exitCode": 0,
+      "startedAtUtc": "2026-11-26T20:51:02.405Z",
+      "elapsedMs": 82261,
+      "implementationSha256": "a117f1e8bb4cfd499962f6915566b7cfda48e7d9f874cdaceb53c57b767f74da",
+      "changed": true,
+      "functionality": {
+        "checks": [
+          {
+            "id": "valid-four-locales",
+            "passed": true
+          },
+          {
+            "id": "multi-digit-version",
+            "passed": true
+          },
+          {
+            "id": "missing-literal-version",
+            "passed": true
+          },
+          {
+            "id": "disagreement-and-duplicate",
+            "passed": true
+          },
+          {
+            "id": "asset-content-mismatch",
+            "passed": true
+          },
+          {
+            "id": "asset-url-and-availability",
+            "passed": true
+          },
+          {
+            "id": "locale-and-version-shape",
+            "passed": true
+          },
+          {
+            "id": "nested-relative-normalization",
+            "passed": true
+          }
+        ],
+        "passed": 8,
+        "total": 8
+      },
+      "regression": {
+        "passed": true,
+        "tests": [
+          "release.test.mjs"
+        ],
+        "solutionExit": 0,
+        "solutionTestCount": 4,
+        "seedExit": 1,
+        "seedFailures": 2
+      },
+      "process": {
+        "turnCompleted": true,
+        "usage": {
+          "input_tokens": 121456,
+          "cached_input_tokens": 109824,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 3694,
+          "reasoning_output_tokens": 445
+        },
+        "executedCommands": 6,
+        "successfulCommands": 5,
+        "hostWriteRejected": false,
+        "eventsSha256": "189d30a63c407fccf835d7acc0a10d1f885f8e8a508c3dd832daafa3be8c4632"
+      }
+    },
+    {
+      "caseId": "localized-publish",
+      "arm": "shaped",
+      "index": 2,
+      "status": "finished",
+      "exitCode": 0,
+      "startedAtUtc": "2026-11-26T20:52:24.670Z",
+      "elapsedMs": 92799,
+      "implementationSha256": "be4a5d51c4d8e3fcc77ac41e589960f59781aced2bbb08eda98db78fcaef6315",
+      "changed": true,
+      "functionality": {
+        "checks": [
+          {
+            "id": "valid-four-locales",
+            "passed": true
+          },
+          {
+            "id": "multi-digit-version",
+            "passed": true
+          },
+          {
+            "id": "missing-literal-version",
+            "passed": true
+          },
+          {
+            "id": "disagreement-and-duplicate",
+            "passed": true
+          },
+          {
+            "id": "asset-content-mismatch",
+            "passed": true
+          },
+          {
+            "id": "asset-url-and-availability",
+            "passed": true
+          },
+          {
+            "id": "locale-and-version-shape",
+            "passed": true
+          },
+          {
+            "id": "nested-relative-normalization",
+            "passed": true
+          }
+        ],
+        "passed": 8,
+        "total": 8
+      },
+      "regression": {
+        "passed": true,
+        "tests": [
+          "release.test.mjs"
+        ],
+        "solutionExit": 0,
+        "solutionTestCount": 1,
+        "seedExit": 1,
+        "seedFailures": 1
+      },
+      "process": {
+        "turnCompleted": true,
+        "usage": {
+          "input_tokens": 139875,
+          "cached_input_tokens": 133120,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 4445,
+          "reasoning_output_tokens": 980
+        },
+        "executedCommands": 5,
+        "successfulCommands": 5,
+        "hostWriteRejected": false,
+        "eventsSha256": "6c966ae0ed45d4217d514cff554d4fef356d9e337bb15e8e57b2fa358fbeae62"
+      }
+    },
+    {
+      "caseId": "payment-replay",
+      "arm": "shaped",
+      "index": 3,
+      "status": "finished",
+      "exitCode": 0,
+      "startedAtUtc": "2026-11-26T20:53:57.474Z",
+      "elapsedMs": 79497,
+      "implementationSha256": "dee9f6d15c89075e7a37113145839f4c8a7c47508d73f1e88b5be56ce527f336",
+      "changed": true,
+      "functionality": {
+        "checks": [
+          {
+            "id": "out-of-order-and-dependent-balance",
+            "passed": true
+          },
+          {
+            "id": "replay-with-reordered-properties",
+            "passed": true
+          },
+          {
+            "id": "replayed-and-new-duplicates",
+            "passed": true
+          },
+          {
+            "id": "known-id-changed-payload",
+            "passed": true
+          },
+          {
+            "id": "sequence-collision-and-gap",
+            "passed": true
+          },
+          {
+            "id": "malformed-replay-and-account",
+            "passed": true
+          },
+          {
+            "id": "insufficient-funds-rolls-back",
+            "passed": true
+          },
+          {
+            "id": "safe-integer-overflow-rolls-back",
+            "passed": true
+          }
+        ],
+        "passed": 8,
+        "total": 8
+      },
+      "regression": {
+        "passed": true,
+        "tests": [
+          "ledger.test.mjs"
+        ],
+        "solutionExit": 0,
+        "solutionTestCount": 1,
+        "seedExit": 1,
+        "seedFailures": 1
+      },
+      "process": {
+        "turnCompleted": true,
+        "usage": {
+          "input_tokens": 157151,
+          "cached_input_tokens": 150144,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 3601,
+          "reasoning_output_tokens": 514
+        },
+        "executedCommands": 7,
+        "successfulCommands": 7,
+        "hostWriteRejected": false,
+        "eventsSha256": "7dda719801e0bd07e48d3ab629a212c3bccafd47c60d75ba82d6adf25d04d0b5"
+      }
+    },
+    {
+      "caseId": "payment-replay",
+      "arm": "baseline",
+      "index": 4,
+      "status": "finished",
+      "exitCode": 0,
+      "startedAtUtc": "2026-11-26T20:55:16.975Z",
+      "elapsedMs": 54833,
+      "implementationSha256": "8b0149acd8b6af583a85b39014cd05468cb8698b339938556cc6c8ffce4f7703",
+      "changed": true,
+      "functionality": {
+        "checks": [
+          {
+            "id": "out-of-order-and-dependent-balance",
+            "passed": true
+          },
+          {
+            "id": "replay-with-reordered-properties",
+            "passed": true
+          },
+          {
+            "id": "replayed-and-new-duplicates",
+            "passed": true
+          },
+          {
+            "id": "known-id-changed-payload",
+            "passed": true
+          },
+          {
+            "id": "sequence-collision-and-gap",
+            "passed": true
+          },
+          {
+            "id": "malformed-replay-and-account",
+            "passed": true
+          },
+          {
+            "id": "insufficient-funds-rolls-back",
+            "passed": true
+          },
+          {
+            "id": "safe-integer-overflow-rolls-back",
+            "passed": true
+          }
+        ],
+        "passed": 8,
+        "total": 8
+      },
+      "regression": {
+        "passed": true,
+        "tests": [
+          "ledger.test.mjs"
+        ],
+        "solutionExit": 0,
+        "solutionTestCount": 1,
+        "seedExit": 1,
+        "seedFailures": 1
+      },
+      "process": {
+        "turnCompleted": true,
+        "usage": {
+          "input_tokens": 82282,
+          "cached_input_tokens": 78592,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 2479,
+          "reasoning_output_tokens": 383
+        },
+        "executedCommands": 4,
+        "successfulCommands": 4,
+        "hostWriteRejected": false,
+        "eventsSha256": "83697f9ff589634d22a4b8d24dc2641ef086ba268b7f8c75e9957ede26f0f1ad"
+      }
+    },
+    {
+      "caseId": "build-plan",
+      "arm": "baseline",
+      "index": 5,
+      "status": "finished",
+      "exitCode": 0,
+      "startedAtUtc": "2026-11-26T20:56:11.811Z",
+      "elapsedMs": 60198,
+      "implementationSha256": "60fc513026b566abbd4205d4f2fa542cea71202666f46de2b8dcc7bbe277c8ef",
+      "changed": true,
+      "functionality": {
+        "checks": [
+          {
+            "id": "transitive-closure-and-fingerprints",
+            "passed": true
+          },
+          {
+            "id": "unchanged-closure-cached",
+            "passed": true
+          },
+          {
+            "id": "transitive-invalidation",
+            "passed": true
+          },
+          {
+            "id": "input-and-target-order-independent",
+            "passed": true
+          },
+          {
+            "id": "lexically-first-ready",
+            "passed": true
+          },
+          {
+            "id": "unreachable-cycle-and-missing-link",
+            "passed": true
+          },
+          {
+            "id": "invalid-entry-and-target",
+            "passed": true
+          },
+          {
+            "id": "empty-targets-still-validate",
+            "passed": true
+          }
+        ],
+        "passed": 8,
+        "total": 8
+      },
+      "regression": {
+        "passed": true,
+        "tests": [
+          "plan.test.mjs"
+        ],
+        "solutionExit": 0,
+        "solutionTestCount": 3,
+        "seedExit": 1,
+        "seedFailures": 3
+      },
+      "process": {
+        "turnCompleted": true,
+        "usage": {
+          "input_tokens": 116634,
+          "cached_input_tokens": 106368,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 2712,
+          "reasoning_output_tokens": 194
+        },
+        "executedCommands": 6,
+        "successfulCommands": 5,
+        "hostWriteRejected": false,
+        "eventsSha256": "3d55ed6f4a7af695d3986f203442d00256594a44a52d3c57a7da6a294cad20ec"
+      }
+    },
+    {
+      "caseId": "build-plan",
+      "arm": "shaped",
+      "index": 6,
+      "status": "finished",
+      "exitCode": 0,
+      "startedAtUtc": "2026-11-26T20:57:12.014Z",
+      "elapsedMs": 75286,
+      "implementationSha256": "eb3455233f79308eb2f993237af7bb50dd497bfa5e43f6585aef8ba6479792de",
+      "changed": true,
+      "functionality": {
+        "checks": [
+          {
+            "id": "transitive-closure-and-fingerprints",
+            "passed": true
+          },
+          {
+            "id": "unchanged-closure-cached",
+            "passed": true
+          },
+          {
+            "id": "transitive-invalidation",
+            "passed": true
+          },
+          {
+            "id": "input-and-target-order-independent",
+            "passed": true
+          },
+          {
+            "id": "lexically-first-ready",
+            "passed": true
+          },
+          {
+            "id": "unreachable-cycle-and-missing-link",
+            "passed": true
+          },
+          {
+            "id": "invalid-entry-and-target",
+            "passed": true
+          },
+          {
+            "id": "empty-targets-still-validate",
+            "passed": true
+          }
+        ],
+        "passed": 8,
+        "total": 8
+      },
+      "regression": {
+        "passed": true,
+        "tests": [
+          "plan.test.mjs"
+        ],
+        "solutionExit": 0,
+        "solutionTestCount": 4,
+        "seedExit": 1,
+        "seedFailures": 4
+      },
+      "process": {
+        "turnCompleted": true,
+        "usage": {
+          "input_tokens": 136517,
+          "cached_input_tokens": 129408,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 3501,
+          "reasoning_output_tokens": 356
+        },
+        "executedCommands": 6,
+        "successfulCommands": 5,
+        "hostWriteRejected": false,
+        "eventsSha256": "ff7af9f4a3b4d44b1fea17b64bf6823fc7856c7f33932840b5a9fc23e9690d09"
+      }
+    }
+  ],
+  "summary": {
+    "cases": [
+      {
+        "caseId": "localized-publish",
+        "baseline": 8,
+        "shaped": 8,
+        "total": 8,
+        "baselineRegression": true,
+        "shapedRegression": true
+      },
+      {
+        "caseId": "payment-replay",
+        "baseline": 8,
+        "shaped": 8,
+        "total": 8,
+        "baselineRegression": true,
+        "shapedRegression": true
+      },
+      {
+        "caseId": "build-plan",
+        "baseline": 8,
+        "shaped": 8,
+        "total": 8,
+        "baselineRegression": true,
+        "shapedRegression": true
+      }
+    ],
+    "totals": {
+      "baseline": 24,
+      "shaped": 24,
+      "total": 24
+    },
+    "behavior": {
+      "baseline": 3,
+      "shaped": 3
+    },
+    "pairs": {
+      "wins": 0,
+      "ties": 3,
+      "losses": 0
+    }
+  }
+}

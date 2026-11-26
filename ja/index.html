@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <meta name="publication-contract" content="AS-PS-001;version=0.8.2;policy=2026.11.20.1;AS-WF-001=27/27;status=behavior-verified;limitation=tested-runner-only-no-semantic-certification-or-universal-host-enforcement" />
+    <meta name="publication-contract" content="AS-PS-001;version=0.8.3;policy=2026.11.20.1;AS-WF-001=27/27;status=behavior-verified;limitation=tested-runner-only-no-semantic-certification-or-universal-host-enforcement" />
     <meta name="site-root" content="../" />
     <link rel="canonical" href="https://agentic-shaping.slogs.dev/ja/" />
     <link rel="alternate" hreflang="en" href="https://agentic-shaping.slogs.dev/" />
@@ -11,7 +11,7 @@
     <link rel="alternate" hreflang="ja" href="https://agentic-shaping.slogs.dev/ja/" />
     <link rel="alternate" hreflang="zh-Hans" href="https://agentic-shaping.slogs.dev/zh/" />
     <link rel="alternate" hreflang="x-default" href="https://agentic-shaping.slogs.dev/" />
-    <meta name="application-version" content="v0.8.2" />
+    <meta name="application-version" content="v0.8.3" />
     <title>Agentic Shaping — 自ら発見し進化するAIワークメソッド</title>
     <meta
       name="description"
@@ -27,7 +27,7 @@
       href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Noto+Sans+JP:wght@400;500;600;700;800;900&family=Noto+Sans+KR:wght@400;500;600;700;800;900&family=Noto+Sans+SC:wght@400;500;600;700;800;900&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="../site-assets/styles.fe8823006d26.css" />
+    <link rel="stylesheet" href="../site-assets/styles.47088961f92a.css" />
   </head>
   <body data-locale="ja">
     <div class="progress"><span id="progressBar"></span></div>
@@ -35,7 +35,7 @@
       <nav>
         <a class="brand" href="#top"
           ><b>AS</b><span>AGENTIC SHAPING</span
-          ><span class="site-version" data-site-version>v0.8.2</span
+          ><span class="site-version" data-site-version>v0.8.3</span
         ></a>
         <div>
           <a href="#start">5分で始める</a><a href="#loop">仕組み</a
@@ -135,7 +135,7 @@
             ><button type="button" data-copy="starter">コピー</button>
           </div>
           <pre id="starter">
-Agentic Shaping v0.8.2
+Agentic Shaping v0.8.3
 
 この作業には Agentic Shaping を適用してください。
 - 作業に合うワークフローを選び、ID・名前・バージョン・選択理由と必須・任意の段階を表示して。現在のplan.task.summaryから、対象と実施内容が分かる作業名をユーザーの言語で先頭に表示して。その後に実行記録から現在の段階・全体の状態・検証結果・次の行動を示して。手順の種類だけを作業名にせず、作業名の欠落や差し替えを拒否して。簡単な作業には短い手順を使い、任意の段階を省く理由を残して。
@@ -512,6 +512,25 @@ Agentic Shapingの観点でこの問題を診断して。構造化された検�
             実行の改善が実際に追加されるかを採点しました。
           </p>
         </div>
+        <section id="terra-validation">
+          <h3>GPT-6.1 Terraによる実コード比較</h3>
+          <p>同じ3つの課題を各条件で1回ずつ実行しました。未適用群には課題だけを、適用群にはAgentic Shaping v0.8.2の公開プロンプトも与えました。両群がGPT-6.1 Terra Highを使用し、分離した作業領域で実ファイルを修正しました。</p>
+          <div class="eval-grid">
+            <article><small>機能検査</small><strong>24/24 <i>↔</i> 24/24</strong><p>左が未適用群、右が適用群です。課題ごとに実行前に固定した8つの機能検査を行いました。</p></article>
+            <article><small>元の不具合を検出した回帰テスト</small><strong>3/3 <i>↔</i> 3/3</strong><p>モデルが書いたテストが修正版ですべて通り、元のコードで少なくとも1つ失敗した課題を数えました。</p></article>
+            <article><small>課題別の機能スコア</small>
+              <ul>
+                <li>多言語リリース検証 <b>8/8 ↔ 8/8</b></li>
+                <li>取引の再処理 <b>8/8 ↔ 8/8</b></li>
+                <li>差分ビルド計画 <b>8/8 ↔ 8/8</b></li>
+              </ul>
+            </article>
+          </div>
+          <p>機能得点では、適用群が上回った課題は0件、同点は3件、下回った課題は0件でした。</p>
+          <p>どちらの条件でも個人の作業メモリは使っていません。この結果は、このモデル設定と3つの課題での観測です。</p>
+          <p><a href="../evals/terra-paired/results.json">検査ごとの結果</a> · <a href="../evals/terra-paired/README.md">課題と再現方法</a></p>
+        </section>
+        <h3>以前の検証 · GPT-5.6 Luna Max</h3>
         <div class="eval-grid">
           <article class="activation-result">
             <small>AGENTIC SHAPING ACTIVATION · 26 PAIRED SCENARIOS · 52 AGENT RUNS</small>
@@ -581,7 +600,7 @@ Agentic Shapingの観点でこの問題を診断して。構造化された検�
             <div>
               <small>CONFIRMED FINAL POLICY SYNC</small>
               <strong>90% <i>→</i> 100%</strong>
-              <span class="policy-version">HOMEPAGE v0.8.2 ↔ SLOGS 2026.11.20.1</span>
+              <span class="policy-version">HOMEPAGE v0.8.3 ↔ SLOGS 2026.11.20.1</span>
               <p>
                 ホームページ最終プロンプトの確認済み行動契約を、Slogs LLM Wikiの韓国語・英語
                 ランタイムポリシーに同期しました。ライブポリシー5組の回帰・10回のLuna Max
@@ -705,7 +724,7 @@ Agentic Shapingの観点でこの問題を診断して。構造化された検�
     </main>
     <footer>
       <b>AS</b><strong>AGENTIC SHAPING</strong
-      ><span class="site-version" data-site-version>v0.8.2</span>
+      ><span class="site-version" data-site-version>v0.8.3</span>
       <p>Agentが先に発見し、私のやり方で進化します。</p>
       <a href="https://github.com/dimohy/agentic-shaping">GitHub ↗</a>
     </footer>

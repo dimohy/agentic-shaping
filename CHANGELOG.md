@@ -1,5 +1,21 @@
 # Changelog
 
+## [0.8.3] - 2026-11-27
+
+### What changed for users
+
+- Added the GPT-6.1 Terra comparison to all four public guides.
+- Compared three paired programming tasks using the public starter prompt as the only intervention.
+- Published functional outcomes and original-defect regression detection separately.
+- Included the tasks, candidate code and an executable replay of the recorded scores.
+
+### Technical notes
+
+- Compatibility: Historical Luna results remain available with their original runtime and results.
+- Contracts: Each paired run is graded against the same immutable checks. Regression detection is a separate measure.
+- Verification: The repository includes all six candidate outputs, task fixtures, grader and replay command.
+- Known limitation: Three tasks with one run per condition give a descriptive comparison for GPT-6.1 Terra High.
+
 ## [0.8.2] - 2026-11-27
 
 ### What changed for users

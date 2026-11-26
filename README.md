@@ -2,13 +2,13 @@
 
 [English](README.md) | [한국어](README.ko.md) | [日本語](README.ja.md) | [简体中文](README.zh-CN.md)
 
-<!-- AS-PS-001;version=0.8.2;policy=2026.11.20.1;AS-WF-001=27/27;status=behavior-verified;limitation=tested-runner-only-no-semantic-certification-or-universal-host-enforcement -->
+<!-- AS-PS-001;version=0.8.3;policy=2026.11.20.1;AS-WF-001=27/27;status=behavior-verified;limitation=tested-runner-only-no-semantic-certification-or-universal-host-enforcement -->
 
 > An AI work method that actively discovers tacit knowledge, preferences, corrections, and failures, then shapes them into reusable memories, rules, tools, and verifiers so the system evolves with the user’s way of working.
 
 [Official practical guide](https://agentic-shaping.slogs.dev/) · [dimohy’s background story](https://slogs.dev/@dimohy/vibe-compiler)
 
-Current public version: **v0.8.2**
+Current public version: **v0.8.3**
 
 ## Language
 
@@ -124,7 +124,7 @@ You do not need to build a massive automation system from the start. Begin by mo
 You can copy and use the content below as-is.
 
 ```text
-Agentic Shaping v0.8.2
+Agentic Shaping v0.8.3
 
 Apply Agentic Shaping to this task.
 - Select a workflow for this task and display its ID, name, version, selection reason, and required and optional stages. Show the concrete task (target and action) from the current plan.task.summary first, in the user's language, then the current stage, overall status, verification results and next action from actual execution records. A workflow category alone is not a task title; reject missing or substituted titles. Use a short workflow for simple tasks and explain omitted optional stages.
@@ -226,6 +226,7 @@ Agentic Shaping is not working merely because the prompt contains plausible-soun
 
 This repository's `evals/` gives the same tasks to a baseline group that does not apply the public prompt and to an applied group, comparing them separately on general task quality and Agentic Shaping-specific activation.
 
+- Latest real-file comparison: GPT-6.1 Terra High, 3 paired tasks and 6 runs. Functionality: baseline 24/24, shaped 24/24. Regression tests caught the original defect in 3/3 vs. 3/3 tasks. [Tasks and replay](evals/terra-paired/README.md)
 - Agentic Shaping differential evaluation: 26 paired scenarios, 52 runs with GPT-5.6 Luna Max
 - Complete pass on distinctive behavior: baseline group 16/26(61.5%), applied group 25/26(96.2%)
 - Distinctive behavior detailed criteria: baseline group 82/105(78.1%), applied group 104/105(99.0%)

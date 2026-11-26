@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <meta name="publication-contract" content="AS-PS-001;version=0.8.2;policy=2026.11.20.1;AS-WF-001=27/27;status=behavior-verified;limitation=tested-runner-only-no-semantic-certification-or-universal-host-enforcement" />
+    <meta name="publication-contract" content="AS-PS-001;version=0.8.3;policy=2026.11.20.1;AS-WF-001=27/27;status=behavior-verified;limitation=tested-runner-only-no-semantic-certification-or-universal-host-enforcement" />
     <meta name="site-root" content="../" />
     <link rel="canonical" href="https://agentic-shaping.slogs.dev/zh/" />
     <link rel="alternate" hreflang="en" href="https://agentic-shaping.slogs.dev/" />
@@ -11,7 +11,7 @@
     <link rel="alternate" hreflang="ja" href="https://agentic-shaping.slogs.dev/ja/" />
     <link rel="alternate" hreflang="zh-Hans" href="https://agentic-shaping.slogs.dev/zh/" />
     <link rel="alternate" hreflang="x-default" href="https://agentic-shaping.slogs.dev/" />
-    <meta name="application-version" content="v0.8.2" />
+    <meta name="application-version" content="v0.8.3" />
     <title>Agentic Shaping — 主动发现并持续进化的 AI 工作方法</title>
     <meta
       name="description"
@@ -27,7 +27,7 @@
       href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Noto+Sans+JP:wght@400;500;600;700;800;900&family=Noto+Sans+KR:wght@400;500;600;700;800;900&family=Noto+Sans+SC:wght@400;500;600;700;800;900&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="../site-assets/styles.fe8823006d26.css" />
+    <link rel="stylesheet" href="../site-assets/styles.47088961f92a.css" />
   </head>
   <body data-locale="zh">
     <div class="progress"><span id="progressBar"></span></div>
@@ -35,7 +35,7 @@
       <nav>
         <a class="brand" href="#top"
           ><b>AS</b><span>AGENTIC SHAPING</span
-          ><span class="site-version" data-site-version>v0.8.2</span
+          ><span class="site-version" data-site-version>v0.8.3</span
         ></a>
         <div>
           <a href="#start">5 分钟开始</a><a href="#loop">工作原理</a
@@ -143,7 +143,7 @@
             ><button type="button" data-copy="starter">复制</button>
           </div>
           <pre id="starter">
-Agentic Shaping v0.8.2
+Agentic Shaping v0.8.3
 
 请将 Agentic Shaping 应用于此任务。
 - 为当前任务选择工作流，显示其 ID、名称、版本、选择理由以及必选和可选阶段。先根据当前plan.task.summary，用用户的语言显示包含目标和操作的具体任务名称，再根据实际执行记录展示当前阶段、整体状态、验证结果和下一步操作。不能只用流程类别作为任务名称；拒绝缺失或被替换的任务名称。简单任务使用简短流程，并说明省略可选阶段的理由。
@@ -527,6 +527,25 @@ Agentic Shaping v0.8.2
             我们没有把一般工作能力与 Agentic Shaping 的触发混在一起。向两组提供相同的当前任务，仅在实验组中加入准确的公开提示词。保持当前任务完成和安全由独立门控保障，同时评估是否实际增加了信号捕捉、结构化以及对下一次执行的改进。
           </p>
         </div>
+        <section id="terra-validation">
+          <h3>使用 GPT-6.1 Terra 对比实际代码</h3>
+          <p>三项相同的任务在两种条件下各运行一次。未应用组只收到任务，应用组还收到 Agentic Shaping v0.8.2 的公开提示词。两组均使用 GPT-6.1 Terra High，在隔离工作区修改实际文件。</p>
+          <div class="eval-grid">
+            <article><small>功能检查</small><strong>24/24 <i>↔</i> 24/24</strong><p>左侧为未应用组，右侧为应用组。每项任务都执行了八项事先固定的功能检查。</p></article>
+            <article><small>检出原始缺陷的回归测试</small><strong>3/3 <i>↔</i> 3/3</strong><p>仅在模型编写的测试全部通过修复版、且至少一项在原代码上失败时计入该任务。</p></article>
+            <article><small>各任务的功能得分</small>
+              <ul>
+                <li>多语言发布验证 <b>8/8 ↔ 8/8</b></li>
+                <li>原子交易重放 <b>8/8 ↔ 8/8</b></li>
+                <li>增量构建计划 <b>8/8 ↔ 8/8</b></li>
+              </ul>
+            </article>
+          </div>
+          <p>按功能得分，应用组领先 0 项、持平 3 项、落后 0 项。</p>
+          <p>两组均未使用个人工作记忆。结果仅反映这三项任务和该模型设置下的观测。</p>
+          <p><a href="../evals/terra-paired/results.json">逐项检查结果</a> · <a href="../evals/terra-paired/README.md">任务与复现方法</a></p>
+        </section>
+        <h3>较早的验证 · GPT-5.6 Luna Max</h3>
         <div class="eval-grid">
           <article class="activation-result">
             <small>AGENTIC SHAPING ACTIVATION · 26 PAIRED SCENARIOS · 52 AGENT RUNS</small>
@@ -584,7 +603,7 @@ Agentic Shaping v0.8.2
             <div>
               <small>CONFIRMED FINAL POLICY SYNC</small>
               <strong>90% <i>→</i> 100%</strong>
-              <span class="policy-version">HOMEPAGE v0.8.2 ↔ SLOGS 2026.11.20.1</span>
+              <span class="policy-version">HOMEPAGE v0.8.3 ↔ SLOGS 2026.11.20.1</span>
               <p>
                 已将官网最终提示词中确认的行为契约同步到 Slogs LLM Wiki 的韩语和英语运行时策略。在 5 对在线策略回归和 10 次 Luna Max 执行中，确认独有行为从 18/20 → 20/20，禁止行为为 0 次。
               </p>
@@ -690,7 +709,7 @@ Agentic Shaping v0.8.2
     </main>
     <footer>
       <b>AS</b><strong>AGENTIC SHAPING</strong
-      ><span class="site-version" data-site-version>v0.8.2</span>
+      ><span class="site-version" data-site-version>v0.8.3</span>
       <p>Agent 先发现，并按我的方式进化。</p>
       <a href="https://github.com/dimohy/agentic-shaping">GitHub ↗</a>
     </footer>
